@@ -1,0 +1,50 @@
+{
+  "query_id": "ab6c3fb9-b6c7-48da-8b6b-ca3b340f87ba",
+  "question": "What is the production promotion gate?",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 42,
+        "total_tokens": 816,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "reason": "search for definition in handbook",
+        "source_id": null
+      },
+      "reasoning": "search for definition in handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 816,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 42,
+  "failure_injection": "malformed",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.955783227000211,
+  "token_accounting": "provider_usage"
+}

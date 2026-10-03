@@ -1,0 +1,93 @@
+{
+  "query_id": "4cbdad8e-d1f5-4b7f-9a99-d9dc59cec75e",
+  "question": "For the production checklist: Should I use the better one?",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 779,
+        "completion_tokens": 46,
+        "total_tokens": 825,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist better one",
+        "reason": "search for production checklist guidance",
+        "source_id": null
+      },
+      "reasoning": "search for production checklist guidance",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12732140565850297
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.09394228044206161
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.0698856594812837
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Yes. For a production model change, follow the release policy: evaluate on a frozen holdout, promote only when F1 improves by at least 0.005 and ROC\\u2011AUC drops by no more than 0.01, keep the previous version for rollback, and obtain approval from the project owner.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1144,
+        "completion_tokens": 182,
+        "total_tokens": 1326,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need production checklist better one? Likely refers to release policy. Use that.",
+        "tool_calls": [
+          {
+            "id": "fc_4f91089f-f6ad-4be4-984c-e84a48f873c1",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Yes. For a production model change, follow the release policy: evaluate on a frozen holdout, promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01, keep the previous version for rollback, and obtain approval from the project owner.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2151,
+  "usage_complete": true,
+  "prompt_tokens": 1923,
+  "completion_tokens": 228,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "Yes. For a production model change, follow the release policy: evaluate on a frozen holdout, promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01, keep the previous version for rollback, and obtain approval from the project owner.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 15.691608670000278,
+  "token_accounting": "provider_usage"
+}

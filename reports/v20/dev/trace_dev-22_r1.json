@@ -1,0 +1,49 @@
+{
+  "query_id": "4316e5be-ae33-4b24-9551-11bd8056dcd0",
+  "question": "Deploy it there.",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify what you would like to deploy and the target environment?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 79,
+        "total_tokens": 850,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User says \"Deploy it there.\" Need context: likely referring to MLOps handbook. Need to clarify what \"it\" and \"there\". So ask clarifying question.",
+        "tool_calls": [
+          {
+            "id": "fc_2df0f9da-ba48-454b-9d39-fe02a316ddc6",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify what you would like to deploy and the target environment?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 850,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 79,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify what you would like to deploy and the target environment?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.075842829995963,
+  "token_accounting": "provider_usage"
+}

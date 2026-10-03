@@ -1,0 +1,13 @@
+{
+  "original_run_id": "c5bead56e8c2465bad245322ce9f299c",
+  "original_status": "FAILED",
+  "agent_samples": 159,
+  "failure_stage": "native_judge",
+  "failure_type": "RateLimitError",
+  "recovery": "Resume all unchanged agent checkpoints; retain original successes and provider failures; complete remaining native judge inputs at 20-second pacing. No individual agent sample is replaced.",
+  "recovery_failed_run_ids": [
+    "8f2deabdf79b4f41be42cdcdd985911c"
+  ],
+  "latest_judge_allocation": "supplied key index 3",
+  "judge_interval_seconds": 20
+}

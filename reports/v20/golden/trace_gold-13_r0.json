@@ -1,0 +1,120 @@
+{
+  "query_id": "0e030a4d-2fe0-48ab-839d-e0ddc4d1dbcd",
+  "question": "For the production checklist: Change the limit.",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 48,
+        "total_tokens": 824,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist change limit",
+        "reason": "search for handbook info",
+        "source_id": null
+      },
+      "reasoning": "search for handbook info",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12732140565850297
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.1156146717363971
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.10482848922192554
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1150,
+        "completion_tokens": 65,
+        "total_tokens": 1215,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "limit production checklist",
+        "reason": "search for limit in production checklist",
+        "source_id": "release-policy"
+      },
+      "reasoning": "search for limit in production checklist",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.18831089849302363
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"In the production checklist, the limit for model promotion is set by the release policy: a model may only be promoted when its F1 score improves by **at least 0.005** and its ROC\\u2011AUC drops by **no more than 0.01** on a frozen holdout. These thresholds are the limits that must be met before a release can proceed.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1299,
+        "completion_tokens": 245,
+        "total_tokens": 1544,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need answer: \"For the production checklist: Change the limit.\" Likely refers to limit in release policy? Maybe limit on F1 improvement? The policy says improve by at least 0.005. So change limit means adjust that threshold. Provide answer: change limit to X? But question ambiguous. Probably ask to change the limit in production checklist. So answer: set limit to 0.005 improvement and 0.01 drop. Provide source.",
+        "tool_calls": [
+          {
+            "id": "fc_3ef9a0b9-e4cd-49c9-bf21-264a9c0405e0",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"In the production checklist, the limit for model promotion is set by the release policy: a model may only be promoted when its F1 score improves by **at least 0.005** and its ROC\u2011AUC drops by **no more than 0.01** on a frozen holdout. These thresholds are the limits that must be met before a release can proceed.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 3583,
+  "usage_complete": true,
+  "prompt_tokens": 3225,
+  "completion_tokens": 358,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "In the production checklist, the limit for model promotion is set by the release policy: a model may only be promoted when its F1 score improves by **at least 0.005** and its ROC\u2011AUC drops by **no more than 0.01** on a frozen holdout. These thresholds are the limits that must be met before a release can proceed.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 30.35674884600303,
+  "token_accounting": "provider_usage"
+}

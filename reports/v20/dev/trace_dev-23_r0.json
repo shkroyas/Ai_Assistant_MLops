@@ -1,0 +1,49 @@
+{
+  "query_id": "d342a667-b756-4b2c-85ae-6366741b20f6",
+  "question": "Change the limit.",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you clarify which limit you would like to change and in what context?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 63,
+        "total_tokens": 834,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User says \"Change the limit.\" unclear. Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_6cd0601e-35b9-48fd-8eef-89353ac3cf26",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you clarify which limit you would like to change and in what context?\",\"reason\":\"User request ambiguous\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 834,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 63,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify which limit you would like to change and in what context?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.033566512996913,
+  "token_accounting": "provider_usage"
+}
