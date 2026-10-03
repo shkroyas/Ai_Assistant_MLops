@@ -16,7 +16,7 @@ from assistant_mlops.retrieval import Corpus
 
 async def main():
     load_dotenv()
-    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db"))
+    mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     production = yaml.safe_load(Path("configs/production.yaml").read_text())
     if not production.get("run_id"):
         raise RuntimeError("Nightly evaluation requires an established production run")

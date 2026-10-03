@@ -12,11 +12,13 @@ class ChatProvider:
     """Gemini's compatible API or a vLLM endpoint. Never silently uses a mock."""
 
     def __init__(self, base_url=None, key=None, model=None, transport=None):
-        self.base_url = base_url or os.getenv(
-            "AGENT_BASE_URL", "https://generativelanguage.googleapis.com/v1beta/openai"
+        self.base_url = (
+            base_url
+            or os.getenv("AGENT_BASE_URL")
+            or "https://generativelanguage.googleapis.com/v1beta/openai"
         )
         self.key = key if key is not None else os.getenv("AGENT_API_KEY", "")
-        self.model = model or os.getenv("AGENT_MODEL", "gemini-2.5-flash")
+        self.model = model or os.getenv("AGENT_MODEL") or "gemini-2.5-flash"
         self.client = httpx.AsyncClient(timeout=40, transport=transport)
         self.fallback_url = os.getenv("FALLBACK_BASE_URL")
 
@@ -32,7 +34,7 @@ class ChatProvider:
                 (
                     self.fallback_url,
                     os.getenv("FALLBACK_API_KEY", ""),
-                    os.getenv("FALLBACK_MODEL", "Qwen/Qwen2.5-7B-Instruct"),
+                    (os.getenv("FALLBACK_MODEL") or "Qwen/Qwen2.5-7B-Instruct"),
                 )
             )
         for base, key, model in endpoints:

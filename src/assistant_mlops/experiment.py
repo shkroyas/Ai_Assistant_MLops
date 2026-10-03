@@ -23,6 +23,8 @@ async def run(config_path, with_judge=False, diagnosis=None):
     config = yaml.safe_load(Path(config_path).read_text())
     if not os.getenv("AGENT_API_KEY"):
         raise RuntimeError("Set AGENT_API_KEY in .env; experiments must use a real provider")
+    if with_judge and not (os.getenv("GEMINI_API_KEY") or os.getenv("JUDGE_API_KEY")):
+        raise RuntimeError("Configure the judge key before starting paid agent evaluations")
     if config["version"] != "v1" and not diagnosis:
         raise ValueError(
             "Revisions require --diagnosis pointing to a real previous failure diagnosis"
@@ -44,7 +46,7 @@ async def run(config_path, with_judge=False, diagnosis=None):
             raise ValueError("Prompt header must cite the actual motivating development trace")
         if not trace_path.is_file() or not evidence.get("change") or not evidence.get("failure"):
             raise ValueError("Diagnosis must cite an existing trace, failure, and one changed axis")
-    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db"))
+    mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     mlflow.set_experiment("assistant-configurations")
     provider = ChatProvider()
     corpus = Corpus()
@@ -118,7 +120,7 @@ async def run(config_path, with_judge=False, diagnosis=None):
 
 def compare():
     load_dotenv()
-    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db"))
+    mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     runs = mlflow.search_runs(experiment_names=["assistant-configurations"])
     columns = [
         c for c in runs if c == "run_id" or c.startswith(("params.", "metrics.", "tags.gate"))
@@ -142,7 +144,7 @@ def compare():
 
 def promote(run_id):
     load_dotenv()
-    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI", "sqlite:///mlflow.db"))
+    mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     run = mlflow.get_run(run_id)
     existing = yaml.safe_load(Path("configs/production.yaml").read_text())
     baseline = mlflow.get_run(existing["run_id"]).data.metrics if existing.get("run_id") else None

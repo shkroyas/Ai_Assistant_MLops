@@ -64,7 +64,7 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 **Skill vs. Agent:** a skill could describe policy interpretation, but cannot replace adaptive evidence collection and sufficiency decisions; search and read_source remain bounded tools, and no extra agent was added.
 
-**Token and cost:** traces aggregate upstream prompt/completion/total tokens per request. Set INPUT_USD_PER_MILLION and OUTPUT_USD_PER_MILLION from your billing plan to log estimated cost; prices are not hardcoded. Unknown usage blocks promotion. Cached requests report zero new model tokens. No coordination cost is asserted because there is only one agent.
+**Token and cost:** traces aggregate upstream prompt/completion/total tokens per request. Set INPUT_USD_PER_MILLION and OUTPUT_USD_PER_MILLION from your billing plan to log estimated cost; prices are not hardcoded. Unknown total usage blocks promotion. If input/output counts are missing, estimated dollar cost is null and cost_usage_coverage reports the gap; a false zero-cost estimate is never logged. Cached requests report zero new model tokens. No coordination cost is asserted because there is only one agent.
 
 **Failure injection:** timeout, unavailable retrieval, and malformed retrieval are injected persistently. The trace records evidence_valid=false. The model can recognize the failure and abstain/clarify; application validation also rejects answered responses after any tool failure, and the iteration budget guarantees termination. Protocol tests exercise these paths; live failure-injection behavior remains to be measured.
 
@@ -78,7 +78,7 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 Datasets are authored before experiments: 35 dev cases, 18 golden regression cases, and 15 proposed calibration labels, seven deliberately wrong. Corpus facts, not agent output, are the source of truth. Golden paraphrases overlap dev facts; this measures regression, not independent generalization. Review proposed labels yourself before claiming human agreement (datasets/README.md).
 
-Run v1 first:
+Start the tracking service with `docker compose up -d --build backend mlflow`; the .env template points host experiments at http://localhost:5000 so they appear in the same Docker MLflow UI. For a file-only workflow, explicitly set MLFLOW_TRACKING_URI=sqlite:///mlflow.db and start a local MLflow viewer against that database. Run v1 first:
 
 ```bash
 uv run python -m assistant_mlops.experiment run --config configs/v1.yaml --judge
@@ -97,7 +97,7 @@ uv run python -m assistant_mlops.experiment compare
 uv run python -m assistant_mlops.experiment promote --run-id ACTUAL_RUN_ID
 ```
 
-Only explicit promotion changes configs/production.yaml. Reject experiments remain in tracking/history. Production has no initial run ID because no live model has been evaluated yet. reports/mlflow_comparison.md is generated from actual MLflow state, not invented tables. The eventual README winner/trade-off discussion must cite those measured values.
+Only explicit promotion changes configs/production.yaml. After promotion, set ASSISTANT_CONFIG=configs/vN.yaml to the promoted version in .env and recreate the backend; it deliberately loads one immutable configuration per process. Reject experiments remain in tracking/history. Production has no initial run ID because no live model has been evaluated yet. reports/mlflow_comparison.md is generated from actual MLflow state, not invented tables. The eventual README winner/trade-off discussion must cite those measured values.
 
 ## W17 c. Monitoring & Regression Strategy (Evidently AI)
 
@@ -153,4 +153,4 @@ Static PASS means implementation files exist, not a completed live submission. F
 
 ## Verified local services
 
-The Docker UI is currently running at http://localhost:18501 and API at http://localhost:8000/docs. The MLflow UI is http://localhost:5000. `uv run python scripts/smoke_api.py --ui-url http://localhost:18501` verifies UI/backend health and safe abstention without credentials; reports/deployment_smoke.json is infrastructure evidence only. After updating .env credentials, recreate backend with `docker compose up -d --force-recreate backend`; startup loads the new values.
+The Docker UI is currently running at http://localhost:18501 and API at http://localhost:8000/docs. The MLflow UI is http://localhost:5000. `uv run python scripts/smoke_api.py --ui-url http://localhost:18501` verifies UI/backend health and safe abstention without credentials; reports/deployment_smoke.json is infrastructure evidence only. After updating .env credentials, recreate backend with `docker compose up -d --build --force-recreate backend`; startup loads the new values.
