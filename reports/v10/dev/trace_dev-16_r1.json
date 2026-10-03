@@ -1,0 +1,55 @@
+{
+  "query_id": "a4ffc337-c2fd-4b85-8702-785bba96bcd3",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v10",
+  "steps": [
+    {
+      "step": 1,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='status abstain', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "status abstain",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 674,
+        "completion_tokens": 4,
+        "total_tokens": 678,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"abstain\",\n  \"answer\": \"The company annual revenue is not specified in the available MLOps handbook or related policies.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 781,
+        "completion_tokens": 40,
+        "total_tokens": 821,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1499,
+  "usage_complete": true,
+  "prompt_tokens": 1455,
+  "completion_tokens": 44,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The company annual revenue is not specified in the available MLOps handbook or related policies.",
+    "sources": []
+  },
+  "iterations": 2,
+  "latency_seconds": 0.9904007559998718,
+  "token_accounting": "provider_usage"
+}

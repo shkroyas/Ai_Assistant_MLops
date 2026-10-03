@@ -1,0 +1,120 @@
+{
+  "query_id": "907c4ea4-741b-4c5a-b729-f001275baa1f",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v10",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 687,
+        "completion_tokens": 46,
+        "total_tokens": 733,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model accuracy and F1 score criteria",
+        "reason": "Determine if the old memo contains criteria for model accuracy and F1 score."
+      },
+      "reasoning": "Determine if the old memo contains criteria for model accuracy and F1 score.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.20403742071634837
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.1686150338214874
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.16724841085573008
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1113,
+        "completion_tokens": 42,
+        "total_tokens": 1155,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "legacy-policy",
+        "reason": "Review the legacy release memo for criteria on model accuracy and F1 score."
+      },
+      "reasoning": "Review the legacy release memo for criteria on model accuracy and F1 score.",
+      "valid": true,
+      "result": {
+        "source_id": "legacy-policy",
+        "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='The old memo from the le...apply the old rule.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "The old memo from the legacy release process only considered accuracy, promoting models with an accuracy exceeding 0.80. However, this memo is superseded by the current `release-policy`, which mandates the use of F1 and ROC-AUC scores on a frozen holdout set for model validation.\n\nGiven that the model has an accuracy of 0.82 but a worse F1 score, the old memo is not sufficient for making a decision according to the current policy. The model should be evaluated based on the F1 and ROC-AUC scores as per the `release-policy`.\n\n{\"status\":\"answered\",\"answer\":\"The old memo is not sufficient because it only considers accuracy, while the current `release-policy` mandates the use of F1 and ROC-AUC scores on a frozen holdout set for model validation.\",\"sources\":[{\"source_id\":\"legacy-policy\",\"quote\":\"This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1253,
+        "completion_tokens": 233,
+        "total_tokens": 1486,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The old memo is not sufficient because it only considers accuracy, while the current `release-policy` mandates the use of F1 and ROC-AUC scores on a frozen holdout set for model validation.\",\"sources\":[{\"source_id\":\"legacy-policy\",\"quote\":\"This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"}]}",
+      "usage": {
+        "prompt_tokens": 1589,
+        "completion_tokens": 115,
+        "total_tokens": 1704,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 5078,
+  "usage_complete": true,
+  "prompt_tokens": 4642,
+  "completion_tokens": 436,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The old memo is not sufficient because it only considers accuracy, while the current `release-policy` mandates the use of F1 and ROC-AUC scores on a frozen holdout set for model validation.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 9.017346653003187,
+  "token_accounting": "provider_usage"
+}
