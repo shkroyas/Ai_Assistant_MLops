@@ -23,6 +23,7 @@ async def main():
     baseline = mlflow.get_run(production["run_id"]).data.metrics
     config = yaml.safe_load(Path(f"configs/{production['version']}.yaml").read_text())
     provider, corpus = provider_for_config(config), Corpus()
+    provider.fallback_url = None
     try:
         agent = Agent(corpus, provider, config)
         rows, metrics = await evaluate(agent, load_cases("datasets/golden_v1.jsonl"), repeats=1)

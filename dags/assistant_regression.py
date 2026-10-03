@@ -8,6 +8,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from urllib.request import Request, urlopen
 
+import yaml
+
 from airflow import DAG
 from airflow.exceptions import AirflowFailException
 from airflow.operators.python import BranchPythonOperator, PythonOperator
@@ -16,12 +18,27 @@ ROOT = Path(os.getenv("PROJECT_DIR", "/opt/project"))
 
 
 def health_branch():
-    url = os.getenv("AGENT_BASE_URL", "").rstrip("/") + "/models"
     try:
+        production = yaml.safe_load((ROOT / "configs/production.yaml").read_text())
+        selected = (
+            f"configs/{production['version']}.yaml"
+            if production.get("version")
+            else os.getenv("ASSISTANT_CONFIG", "configs/v1.yaml")
+        )
+        config = yaml.safe_load((ROOT / selected).read_text())
+        groq = config.get("provider") == "groq"
+        base = "https://api.groq.com/openai/v1" if groq else os.getenv("AGENT_BASE_URL", "")
+        prefix = "GROQ" if groq else "AGENT"
+        key = os.getenv(prefix + "_API_KEY", "")
+        model = config.get("model") or os.getenv(prefix + "_MODEL")
+        url = base.rstrip("/") + "/models"
         headers = runpy.run_path(str(ROOT / "src/assistant_mlops/auth.py"))["endpoint_headers"]
-        request = Request(url, headers=headers("AGENT", os.getenv("AGENT_API_KEY", "")))
+        request = Request(url, headers=headers(prefix, key))
         with urlopen(request, timeout=15) as response:
             if response.status != 200:
+                return "infrastructure_failure"
+            listed = json.loads(response.read()).get("data", [])
+            if model and not any(item.get("id") == model for item in listed):
                 return "infrastructure_failure"
         return "regression"
     except Exception:
