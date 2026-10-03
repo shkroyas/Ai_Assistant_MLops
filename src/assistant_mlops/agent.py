@@ -1,5 +1,6 @@
 import asyncio
 import json
+import re
 import time
 import uuid
 from pathlib import Path
@@ -44,6 +45,26 @@ TOOLS = [
         },
     },
 ]
+
+
+def parse_final(content, normalize=False):
+    """Remove only recognized presentation wrappers; never repair answer values."""
+    if not normalize:
+        return Answer.model_validate_json(content), False
+    original = content
+    content = content.strip()
+    if content.startswith("```json\n") and content.endswith("\n```"):
+        content = content[len("```json\n") : -len("\n```")]
+    if content.startswith("<tool_call>\n") and content.endswith("\n</tool_call>"):
+        content = content[len("<tool_call>\n") : -len("\n</tool_call>")]
+    match = re.fullmatch(r"(answered|abstain|clarify)\s*:?\s*\n(\{[\s\S]*\})", content, re.I)
+    wrapper_status = None
+    if match:
+        wrapper_status, content = match.group(1).lower(), match.group(2)
+    result = Answer.model_validate_json(content)
+    if wrapper_status and result.status != wrapper_status:
+        raise ValueError("Presentation status disagrees with JSON status")
+    return result, content != original
 
 
 class Agent:
@@ -103,7 +124,10 @@ class Agent:
             calls = message.get("tool_calls") or []
             if not calls:
                 try:
-                    candidate = Answer.model_validate_json(message.get("content") or "{}")
+                    candidate, normalized = parse_final(
+                        message.get("content") or "{}",
+                        normalize=self.config.get("final_json_mode") == "normalize_wrapper",
+                    )
                     for citation in candidate.sources:
                         # Quotes must have appeared in actual tool output, not merely in the corpus.
                         seen = evidence.get(citation.source_id, "")
@@ -111,6 +135,15 @@ class Agent:
                             raise ValueError("Citation not present in retrieved evidence")
                     if had_tool_error and candidate.status == "answered":
                         raise ValueError("Tool failure: abstain or clarify instead of guessing")
+                    if normalized:
+                        trace["steps"].append(
+                            {
+                                "step": iteration,
+                                "event": "normalized_final_wrapper",
+                                "reasoning": "Removed a recognized presentation wrapper; answer values unchanged",
+                                "raw_response": message,
+                            }
+                        )
                     answer = candidate
                     trace["termination"] = candidate.status
                     trace["steps"].append(

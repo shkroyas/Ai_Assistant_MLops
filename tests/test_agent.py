@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-from assistant_mlops.agent import Agent
+from assistant_mlops.agent import Agent, parse_final
 from assistant_mlops.gate import gate
 from assistant_mlops.harness import assess, load_cases
 from assistant_mlops.retrieval import Corpus
@@ -187,3 +187,35 @@ async def test_specific_feedback_preserves_clarification_without_retrieval(corpu
     assert trace["answer"]["status"] == "clarify"
     assert trace["iterations"] == 2
     assert all(step["event"] != "tool_call" for step in trace["steps"])
+
+
+@pytest.mark.parametrize(
+    "wrapper", ["clarify\n{}", "```json\n{}\n```", "<tool_call>\n{}\n</tool_call>"]
+)
+def test_final_wrapper_normalization_preserves_values(wrapper):
+    payload = '{"status":"clarify","answer":"Which options?","sources":[]}'
+    result, changed = parse_final(wrapper.format(payload), normalize=True)
+    assert result.status == "clarify" and result.answer == "Which options?"
+    assert changed
+    with pytest.raises(ValueError):
+        parse_final(wrapper.format(payload))
+
+
+@pytest.mark.parametrize(
+    "content",
+    [
+        'answered\n{"status":"clarify","answer":"Which options?","sources":[]}',
+        'Untrusted prose {"status":"clarify","answer":"Which options?","sources":[]}',
+        '{"status":"clarify","answer":"Which options?","sources":[]} {}',
+    ],
+)
+def test_final_wrapper_normalization_rejects_ambiguous_or_mismatched_output(content):
+    with pytest.raises(ValueError):
+        parse_final(content, normalize=True)
+
+
+def test_tool_wrapper_cannot_turn_function_arguments_into_an_answer():
+    with pytest.raises(ValueError):
+        parse_final(
+            '<tool_call>\n{"name":"search","arguments":{"query":"x"}}\n</tool_call>', normalize=True
+        )
