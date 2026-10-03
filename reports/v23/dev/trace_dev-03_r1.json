@@ -1,0 +1,27 @@
+{
+  "query_id": "a9eec11d-0b1e-4852-a61a-07bcd7df5424",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v23",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 45.32756029599841,
+  "token_accounting": "incomplete"
+}

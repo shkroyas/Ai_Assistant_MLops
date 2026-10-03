@@ -1,0 +1,27 @@
+{
+  "query_id": "079d6c26-dc49-49eb-9743-00a5331c40da",
+  "question": "Deploy it there.",
+  "prompt_version": "v23",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 303.55992149700614,
+  "token_accounting": "incomplete"
+}

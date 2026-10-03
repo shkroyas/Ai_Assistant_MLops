@@ -1,0 +1,11 @@
+{
+  "trace_path": "reports/v22/dev/trace_dev-15_r0.json",
+  "failure": "The backend/UI/tracking-ports development question ended provider_unavailable with zero accepted-response usage in the first native generation. The 20B cohort later encountered extensive daily quota failures.",
+  "change": "Change the provider/model family to available Gemini 2.5 Flash through its native OpenAI-compatible function-calling endpoint. Retain the prompt, tools, retrieval, temperature/top_p, repetitions and scoring. Disable Gemini thinking using its documented none setting to fit the existing completion budget; disable the Groq-only name-repair option. These are provider-specific compatibility settings, not prompt or label changes.",
+  "supporting_evidence": [
+    "reports/gemini_flash_native_smoke.json",
+    "reports/gemini_flash_lite_availability.json"
+  ],
+  "source": "https://ai.google.dev/gemini-api/docs/openai",
+  "allocation": "Use supplied Gemini reserve keys 2\u20135, with global 15-second request pacing so multiple keys do not multiply project-level RPM. Native judge uses separately calibrated Groq GPT-OSS-120B, an independent model family. No quota capacity is inferred from small probes."
+}
