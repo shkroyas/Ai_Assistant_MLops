@@ -77,6 +77,62 @@ async def test_nullable_search_schema_matches_unfiltered_runtime(corpus):
 
 
 @pytest.mark.asyncio
+async def test_native_final_answer_validates_real_retrieved_quote(corpus):
+    hit = corpus.search("retry limit", top_k=3)[0]
+    provider = ScriptedProvider(
+        [
+            call("search", {"query": "retry limit", "reason": "Find handbook guidance"}),
+            call(
+                "json",
+                {
+                    "status": "answered",
+                    "answer": "Fixture grounded answer",
+                    "sources": [{"source_id": hit["source_id"], "quote": hit["text"][:60]}],
+                },
+            ),
+        ]
+    )
+    config = yaml.safe_load(Path("configs/v15.yaml").read_text())
+    config["native_final_answer"] = True
+    trace = await Agent(corpus, provider, config).run("What is the retry limit?")
+    assert trace["termination"] == "answered" and trace["iterations"] == 2
+    assert trace["steps"][-1]["native_final_answer"]
+    assert trace["steps"][-1]["raw_response"]["tool_calls"][0]["function"]["name"] == "json"
+
+
+@pytest.mark.asyncio
+async def test_native_final_rejects_fabricated_evidence_and_repairs_protocol(corpus):
+    class ProtocolCheckingProvider(ScriptedProvider):
+        async def complete(self, messages, *args):
+            if len(messages) > 2:
+                assert messages[-3]["role"] == "assistant"
+                assert messages[-3]["tool_calls"][0]["id"] == "call-1"
+                assert messages[-2]["role"] == "tool"
+                assert messages[-2]["tool_call_id"] == "call-1"
+                assert "Citation not present" in messages[-2]["content"]
+            return await super().complete(messages, *args)
+
+    provider = ProtocolCheckingProvider(
+        [
+            call(
+                "json",
+                {
+                    "status": "answered",
+                    "answer": "Unverified fixture claim",
+                    "sources": [{"source_id": "security", "quote": "Invented quotation"}],
+                },
+            ),
+            call("json", {"status": "abstain", "answer": "Evidence is unavailable", "sources": []}),
+        ]
+    )
+    config = yaml.safe_load(Path("configs/v15.yaml").read_text())
+    config["native_final_answer"] = True
+    trace = await Agent(corpus, provider, config).run("What is the retry limit?")
+    assert trace["answer"]["status"] == "abstain"
+    assert trace["steps"][0]["event"] == "invalid_answer"
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize("failure", ["timeout", "malformed", "unavailable"])
 async def test_fail_fast_retrieval_never_requests_another_completion(corpus, failure):
     # A second model call would exhaust this fixture and fail the test.

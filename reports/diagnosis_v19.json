@@ -1,0 +1,12 @@
+{
+  "trace_path": "reports/v18/dev/trace_dev-08_r0.json",
+  "failure": "The compound approval/holdout question ended provider_unavailable during repeated development evaluation despite a successful three-call diagnostic replay. The exact remaining transient failure is not reproduced, so its cause is not asserted.",
+  "change": "Change only GPT-OSS reasoning effort from its documented medium default to low, retaining the 1200-token completion ceiling and all prompt, tool, citation, retrieval, repeat and gate settings. Hypothesis: less internal reasoning overhead may improve native finalization reliability and cost. A bounded development probe confirms low is accepted and reduces reported reasoning tokens; the full run must establish quality.",
+  "axis": "provider.reasoning_effort",
+  "supporting_evidence": [
+    "reports/provider_120b_generation_diagnostic.json",
+    "reports/provider_120b_cross_source_diagnostic.json"
+  ],
+  "source": "https://console.groq.com/docs/api-reference",
+  "operational_quota_allocation": "Use four supplied available buckets (indices 1, 3, 4, 5), excluding the heavily used second bucket from the agent pool. Keep slot count, pacing and per-process token guard unchanged. Judge remains on its configured supplied key; no allowance is increased."
+}

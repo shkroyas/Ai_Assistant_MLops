@@ -80,6 +80,48 @@ class Agent:
                 "type": ["string", "null"],
                 "description": "Omit or use null for an unfiltered search; otherwise use a discovered source ID.",
             }
+        if config.get("native_final_answer", False):
+            self.tools.append(
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "json",
+                        "description": "Submit the final structured answer after checking evidence, or submit a clarification or abstention.",
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "enum": ["answered", "abstain", "clarify"],
+                                },
+                                "answer": {"type": "string", "minLength": 1},
+                                "sources": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "source_id": {"type": "string"},
+                                            "quote": {"type": "string", "minLength": 1},
+                                        },
+                                        "required": ["source_id", "quote"],
+                                        "additionalProperties": False,
+                                    },
+                                },
+                                "reason": {"type": "string"},
+                            },
+                            "required": ["status", "answer", "sources"],
+                            "additionalProperties": False,
+                        },
+                    },
+                }
+            )
+            self.prompt += (
+                "\nYou may submit your final answer with the registered json tool. "
+                "It accepts exactly the status, answer and sources fields above, "
+                "plus an optional reason. Only this final submission may omit reason; "
+                "retrieval tool calls still require it. Submit json alone after retrieving "
+                "necessary evidence, never in the same turn as a retrieval call."
+            )
 
     async def run(self, question, failure=None):
         started = time.perf_counter()
@@ -129,10 +171,24 @@ class Agent:
             trace["prompt_tokens"] += usage.get("prompt_tokens") or 0
             trace["completion_tokens"] += usage.get("completion_tokens") or 0
             calls = message.get("tool_calls") or []
-            if not calls:
+            native_final = bool(
+                self.config.get("native_final_answer", False)
+                and len(calls) == 1
+                and calls[0]["function"]["name"] == "json"
+            )
+            content = message.get("content") or "{}"
+            if not calls or native_final:
                 try:
+                    if native_final:
+                        values = json.loads(calls[0]["function"]["arguments"])
+                        if not isinstance(values, dict):
+                            raise ValueError("Final submission must be a JSON object")
+                        if "reason" in values and not isinstance(values["reason"], str):
+                            raise ValueError("Final reason must be a string")
+                        values.pop("reason", None)
+                        content = json.dumps(values)
                     candidate, normalized = parse_final(
-                        message.get("content") or "{}",
+                        content,
                         normalize=self.config.get("final_json_mode") == "normalize_wrapper",
                     )
                     for citation in candidate.sources:
@@ -157,12 +213,17 @@ class Agent:
                         {
                             "step": iteration,
                             "event": "finish",
-                            "reasoning": message.get("content"),
+                            "reasoning": content,
                             "usage": usage,
+                            **(
+                                {"raw_response": message, "native_final_answer": True}
+                                if native_final
+                                else {}
+                            ),
                         }
                     )
                     break
-                except (ValidationError, ValueError) as exc:
+                except (ValidationError, ValueError, AttributeError) as exc:
                     trace["steps"].append(
                         {
                             "step": iteration,
@@ -172,9 +233,23 @@ class Agent:
                             "usage": usage,
                         }
                     )
-                    messages.append(
-                        {"role": "assistant", "content": message.get("content") or "{}"}
-                    )
+                    if native_final:
+                        messages.extend(
+                            [
+                                {
+                                    "role": "assistant",
+                                    "content": message.get("content"),
+                                    "tool_calls": calls,
+                                },
+                                {
+                                    "role": "tool",
+                                    "tool_call_id": calls[0]["id"],
+                                    "content": json.dumps({"accepted": False, "error": str(exc)}),
+                                },
+                            ]
+                        )
+                    else:
+                        messages.append({"role": "assistant", "content": content})
                     feedback = "Output failed validation. Cite exact retrieved quotes; if insufficient, abstain."
                     if self.config.get("validation_feedback") == "specific":
                         feedback = (
@@ -191,6 +266,8 @@ class Agent:
                             feedback += (
                                 " A retrieval tool failed; use abstain rather than answered."
                             )
+                    if self.config.get("native_final_answer", False):
+                        feedback += " You may submit those fields using the registered json tool."
                     messages.append({"role": "user", "content": feedback})
                     continue
             if len(calls) > 4:

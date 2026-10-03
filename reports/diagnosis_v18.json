@@ -1,0 +1,8 @@
+{
+  "trace_path": "reports/v17/dev/trace_dev-29_r2.json",
+  "failure": "A remaining native tool-generation failure is reproduced with a public development question: the model attempted to call an unregistered json function carrying a valid abstention object. Groq rejected that function before the application received an answer. Other development queries also had intermittent provider rejections.",
+  "change": "Register an explicit json final-answer tool with the same structured status/answer/sources contract and optional reason. Apply the unchanged Pydantic status, exact retrieved-quotation and failed-retrieval safety checks to native submissions; invalid submissions receive a protocol-correct rejection for repair. Keep model, retrieval, normal-query budget, frozen cases and all gates unchanged.",
+  "axis": "output_protocol.native_final_answer",
+  "supporting_evidence": "reports/provider_120b_remaining_rejections.json",
+  "operational_quota_allocation": "Keep four pool slots and identical pacing/caps; allocate supplied key 5 to the baseline/judge and supplied keys 1\u20134 to this agent run, including the least-used available GPT-OSS-120B bucket. No quota allowance is increased."
+}

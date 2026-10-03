@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from assistant_mlops.agent import Agent
 from assistant_mlops.harness import evaluate, load_cases, write_report
 from assistant_mlops.provider import provider_for_config
+from assistant_mlops.production import production_baseline
 from assistant_mlops.regression import deterministic_report
 from assistant_mlops.retrieval import Corpus
 
@@ -20,7 +21,7 @@ async def main():
     production = yaml.safe_load(Path("configs/production.yaml").read_text())
     if not production.get("run_id"):
         raise RuntimeError("Nightly evaluation requires an established production run")
-    baseline = mlflow.get_run(production["run_id"]).data.metrics
+    baseline, baseline_source = production_baseline(production)
     config = yaml.safe_load(Path(f"configs/{production['version']}.yaml").read_text())
     provider, corpus = provider_for_config(config), Corpus()
     provider.fallback_url = None
@@ -43,6 +44,7 @@ async def main():
                     "production_run_id": production["run_id"],
                     "production_version": production["version"],
                     "model": provider.model,
+                    "production_baseline_source": baseline_source,
                 }
             )
             mlflow.log_metrics({**metrics, "pct_tests_passed": passed, "degraded": int(degraded)})

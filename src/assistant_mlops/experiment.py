@@ -14,6 +14,7 @@ from assistant_mlops.agent import Agent
 from assistant_mlops.gate import gate
 from assistant_mlops.harness import evaluate, load_cases, write_report
 from assistant_mlops.provider import provider_for_config
+from assistant_mlops.production import production_baseline
 from assistant_mlops.regression import calibrate, deterministic_report, judge
 from assistant_mlops.retrieval import Corpus
 
@@ -46,6 +47,8 @@ async def run(config_path, with_judge=False, diagnosis=None):
             raise ValueError("Diagnosis must cite an existing trace, failure, and one changed axis")
     mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     mlflow.set_experiment("assistant-configurations")
+    production = yaml.safe_load(Path("configs/production.yaml").read_text())
+    baseline, baseline_source = production_baseline(production)
     provider = provider_for_config(config)
     if not provider.configured:
         await provider.close()
@@ -58,12 +61,18 @@ async def run(config_path, with_judge=False, diagnosis=None):
     try:
         with mlflow.start_run(run_name=config["version"]) as active:
             mlflow.set_tag("execution_type", "live_provider")
+            runtime = directory / "runtime"
+            runtime.mkdir(parents=True, exist_ok=True)
+            (runtime / "system_prompt.txt").write_text(agent.prompt)
+            (runtime / "tools.json").write_text(json.dumps(agent.tools, indent=2))
+            mlflow.log_artifacts(str(runtime), "runtime")
             mlflow.log_params(
                 {
                     **config,
                     "model": provider.model,
                     "provider_fallback_enabled": False,
                     "evaluation_concurrency": 4,
+                    "production_baseline_source": baseline_source,
                     "judge_provider": os.getenv("JUDGE_PROVIDER", "gemini")
                     if with_judge
                     else "none",
@@ -125,11 +134,6 @@ async def run(config_path, with_judge=False, diagnosis=None):
                             child.set_inputs(step.get("args") or {"step": step["step"]})
                             child.set_outputs(step.get("result") or step.get("reasoning"))
                     root.set_outputs(row["trace"]["answer"])
-            production_file = Path("configs/production.yaml")
-            production = yaml.safe_load(production_file.read_text())
-            baseline = None
-            if production.get("run_id"):
-                baseline = mlflow.get_run(production["run_id"]).data.metrics
             result = gate(metrics, baseline)
             result.update({"run_id": active.info.run_id, "version": config["version"]})
             (directory / "gate.json").write_text(json.dumps(result, indent=2))
@@ -176,7 +180,7 @@ def promote(run_id):
     mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     run = mlflow.get_run(run_id)
     existing = yaml.safe_load(Path("configs/production.yaml").read_text())
-    baseline = mlflow.get_run(existing["run_id"]).data.metrics if existing.get("run_id") else None
+    baseline, _ = production_baseline(existing)
     verdict = gate(run.data.metrics, baseline)
     if verdict["verdict"] != "PROMOTE":
         raise RuntimeError("Gate rejected this run: " + json.dumps(verdict["checks"]))
