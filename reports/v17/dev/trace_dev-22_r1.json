@@ -1,0 +1,34 @@
+{
+  "query_id": "81fcecf1-8174-4cca-905c-9946318fd153",
+  "question": "Deploy it there.",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you please specify what you would like to deploy and the target environment or location? For example, are you referring to a model, a service, or a specific component from the MLOps handbook, and where should it be deployed?\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 608,
+        "completion_tokens": 159,
+        "total_tokens": 767,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 767,
+  "usage_complete": true,
+  "prompt_tokens": 608,
+  "completion_tokens": 159,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what you would like to deploy and the target environment or location? For example, are you referring to a model, a service, or a specific component from the MLOps handbook, and where should it be deployed?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.533186070002557,
+  "token_accounting": "provider_usage"
+}

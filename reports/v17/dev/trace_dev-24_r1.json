@@ -1,0 +1,34 @@
+{
+  "query_id": "7e50948b-84d4-4390-a362-52a91b300848",
+  "question": "Release that version.",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you specify which version you would like to release (e.g., version number, project name, target environment) and any relevant release parameters?\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 608,
+        "completion_tokens": 154,
+        "total_tokens": 762,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 762,
+  "usage_complete": true,
+  "prompt_tokens": 608,
+  "completion_tokens": 154,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which version you would like to release (e.g., version number, project name, target environment) and any relevant release parameters?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.54405099300493,
+  "token_accounting": "provider_usage"
+}

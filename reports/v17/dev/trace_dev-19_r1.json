@@ -1,0 +1,34 @@
+{
+  "query_id": "c071d88f-d518-4f68-b1c8-7adb8291cfd7",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"abstain\",\n  \"answer\": \"I\u2019m sorry, but I can\u2019t provide that information.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 612,
+        "completion_tokens": 186,
+        "total_tokens": 798,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 798,
+  "usage_complete": true,
+  "prompt_tokens": 612,
+  "completion_tokens": 186,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.54116706399509,
+  "token_accounting": "provider_usage"
+}

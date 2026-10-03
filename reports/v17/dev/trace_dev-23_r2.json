@@ -1,0 +1,34 @@
+{
+  "query_id": "23adcf44-e0cc-4d14-bb99-365ddb20e18a",
+  "question": "Change the limit.",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you please specify which limit you would like to change (e.g., a resource limit, a quota, a timeout, etc.) and the context or system it applies to?\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 608,
+        "completion_tokens": 135,
+        "total_tokens": 743,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 743,
+  "usage_complete": true,
+  "prompt_tokens": 608,
+  "completion_tokens": 135,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which limit you would like to change (e.g., a resource limit, a quota, a timeout, etc.) and the context or system it applies to?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.43999204699503,
+  "token_accounting": "provider_usage"
+}

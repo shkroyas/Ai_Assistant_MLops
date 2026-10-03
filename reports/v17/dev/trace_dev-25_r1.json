@@ -1,0 +1,34 @@
+{
+  "query_id": "596c24ca-97dc-4996-bb95-acb8773bde4e",
+  "question": "Fix the pipeline.",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you please specify which pipeline you are referring to (e.g., data ingestion, model training, deployment) and describe the specific problems or errors you are encountering so I can provide a targeted fix?\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 608,
+        "completion_tokens": 173,
+        "total_tokens": 781,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 781,
+  "usage_complete": true,
+  "prompt_tokens": 608,
+  "completion_tokens": 173,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which pipeline you are referring to (e.g., data ingestion, model training, deployment) and describe the specific problems or errors you are encountering so I can provide a targeted fix?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.495677070997772,
+  "token_accounting": "provider_usage"
+}

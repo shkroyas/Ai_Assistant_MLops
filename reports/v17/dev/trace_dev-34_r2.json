@@ -1,0 +1,50 @@
+{
+  "query_id": "8170cec4-923e-4735-b450-7f1aae6aa66a",
+  "question": "What drift triggers challenger training?",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 610,
+        "completion_tokens": 88,
+        "total_tokens": 698,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift triggers challenger training",
+        "reason": "Find handbook section describing drift conditions that trigger challenger training",
+        "source_id": null
+      },
+      "reasoning": "Find handbook section describing drift conditions that trigger challenger training",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 698,
+  "usage_complete": true,
+  "prompt_tokens": 610,
+  "completion_tokens": 88,
+  "failure_injection": "timeout",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.903789734002203,
+  "token_accounting": "provider_usage"
+}
