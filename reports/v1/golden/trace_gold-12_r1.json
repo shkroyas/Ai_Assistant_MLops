@@ -1,0 +1,34 @@
+{
+  "query_id": "59a69708-b7ec-4422-9280-2d4eb59dc015",
+  "question": "For the production checklist: Should I use the better one?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you please specify what 'better one' you are referring to in the context of the production checklist?\", \"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 459,
+        "completion_tokens": 34,
+        "total_tokens": 493,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 493,
+  "usage_complete": true,
+  "prompt_tokens": 459,
+  "completion_tokens": 34,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what 'better one' you are referring to in the context of the production checklist?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7091410440007166,
+  "token_accounting": "provider_usage"
+}

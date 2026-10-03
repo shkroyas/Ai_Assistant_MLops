@@ -1,0 +1,175 @@
+{
+  "query_id": "6c619739-9f21-4cc4-ba56-60011c547d49",
+  "question": "For the production checklist: Where must API keys be kept?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 459,
+        "completion_tokens": 51,
+        "total_tokens": 510,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "where must api keys be kept in production checklist",
+        "source_id": "release-policy",
+        "reason": "Finding the policy on storing API keys in production checklist."
+      },
+      "reasoning": "Finding the policy on storing API keys in production checklist.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.1634014776893364
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain. The search did ...oject owner.\"}]}```json', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain. The search did not provide information on where API keys must be kept in the production checklist.\n\n{\"status\":\"abstain\",\"answer\":\"Abstain. The search did not provide information on where API keys must be kept in the production checklist.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}]}```json",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 652,
+        "completion_tokens": 150,
+        "total_tokens": 802,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain. The search did ... the project owner.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain. The search did not provide information on where API keys must be kept in the production checklist.\n\n{\"status\":\"abstain\",\"answer\":\"Abstain. The search did not provide information on where API keys must be kept in the production checklist.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 827,
+        "completion_tokens": 148,
+        "total_tokens": 975,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain. The search did ... the project owner.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain. The search did not provide information on where API keys must be kept in the production checklist.\n\n{\"status\":\"abstain\",\"answer\":\"Abstain. The search did not provide information on where API keys must be kept in the production checklist.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1000,
+        "completion_tokens": 148,
+        "total_tokens": 1148,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain. The search did ... the project owner.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain. The search did not provide information on where API keys must be kept in the production checklist.\n\n{\"status\":\"abstain\",\"answer\":\"Abstain. The search did not provide information on where API keys must be kept in the production checklist.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1173,
+        "completion_tokens": 148,
+        "total_tokens": 1321,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain. The search did ... the project owner.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain. The search did not provide information on where API keys must be kept in the production checklist.\n\n{\"status\":\"abstain\",\"answer\":\"Abstain. The search did not provide information on where API keys must be kept in the production checklist.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1346,
+        "completion_tokens": 148,
+        "total_tokens": 1494,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain. The search did ... the project owner.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain. The search did not provide information on where API keys must be kept in the production checklist.\n\n{\"status\":\"abstain\",\"answer\":\"Abstain. The search did not provide information on where API keys must be kept in the production checklist.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1519,
+        "completion_tokens": 148,
+        "total_tokens": 1667,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 7917,
+  "usage_complete": true,
+  "prompt_tokens": 6976,
+  "completion_tokens": 941,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 19.186986614997295,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,192 @@
+{
+  "query_id": "a4a854fe-fb68-47c4-b7af-9b055cdf26be",
+  "question": "What is the live GPU tunnel hostname?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 455,
+        "completion_tokens": 41,
+        "total_tokens": 496,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "live GPU tunnel hostname",
+        "source_id": "gpu-serving",
+        "reason": "Finding the live GPU tunnel hostname"
+      },
+      "reasoning": "Finding the live GPU tunnel hostname",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.08671100380229782
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 663,
+        "completion_tokens": 52,
+        "total_tokens": 715,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "live GPU tunnel hostname",
+        "source_id": "gpu-serving",
+        "reason": "No direct mention of live GPU tunnel hostname in the current source."
+      },
+      "reasoning": "No direct mention of live GPU tunnel hostname in the current source.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.08671100380229782
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 882,
+        "completion_tokens": 49,
+        "total_tokens": 931,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "live GPU tunnel hostname",
+        "source_id": "service-catalog",
+        "reason": "Trying another source for live GPU tunnel hostname."
+      },
+      "reasoning": "Trying another source for live GPU tunnel hostname.",
+      "valid": true,
+      "result": []
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 949,
+        "completion_tokens": 51,
+        "total_tokens": 1000,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "live GPU tunnel hostname",
+        "source_id": "drift-runbook",
+        "reason": "Trying yet another source for live GPU tunnel hostname."
+      },
+      "reasoning": "Trying yet another source for live GPU tunnel hostname.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.06506000607604188
+        }
+      ]
+    },
+    {
+      "step": 5,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1145,
+        "completion_tokens": 4,
+        "total_tokens": 1149,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1174,
+        "completion_tokens": 49,
+        "total_tokens": 1223,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "live GPU tunnel hostname",
+        "source_id": "experiment-policy",
+        "reason": "Trying one more source for live GPU tunnel hostname."
+      },
+      "reasoning": "Trying one more source for live GPU tunnel hostname.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "experiment-policy",
+          "offset": 0,
+          "text": "# Experiment policy \u2014 example company handbook\nThe golden evaluation set is held out from prompt tuning. Development queries guide revisions. Run each query three times to estimate sampling spread. Log prompt version, retrieval top_k, temperature, tokens, latency, and the full raw tool trajectory. Calibration labels are manually reviewed rather than generated by the assistant.\n",
+          "score": 0.09832102877152914
+        }
+      ]
+    },
+    {
+      "step": 7,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1356,
+        "completion_tokens": 4,
+        "total_tokens": 1360,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 6874,
+  "usage_complete": true,
+  "prompt_tokens": 6624,
+  "completion_tokens": 250,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 5.3328302720001375,
+  "token_accounting": "provider_usage"
+}

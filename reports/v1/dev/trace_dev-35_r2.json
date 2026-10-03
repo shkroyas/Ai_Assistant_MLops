@@ -1,0 +1,183 @@
+{
+  "query_id": "4ff536c1-c21c-4c62-b3c3-5865aa39b8ea",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 457,
+        "completion_tokens": 47,
+        "total_tokens": 504,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "gpu-serving",
+        "reason": "Finding the planned model for 24 GB GPU"
+      },
+      "reasoning": "Finding the planned model for 24 GB GPU",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 537,
+        "completion_tokens": 51,
+        "total_tokens": 588,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "experiment-policy",
+        "reason": "Trying another source to find the planned model for 24 GB GPU"
+      },
+      "reasoning": "Trying another source to find the planned model for 24 GB GPU",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 621,
+        "completion_tokens": 52,
+        "total_tokens": 673,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "release-policy",
+        "reason": "Trying yet another source to find the planned model for 24 GB GPU"
+      },
+      "reasoning": "Trying yet another source to find the planned model for 24 GB GPU",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 706,
+        "completion_tokens": 55,
+        "total_tokens": 761,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "drift-runbook",
+        "reason": "Exploring one more source to find the planned model for 24 GB GPU"
+      },
+      "reasoning": "Exploring one more source to find the planned model for 24 GB GPU",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 794,
+        "completion_tokens": 54,
+        "total_tokens": 848,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "security",
+        "reason": "One last attempt to find the planned model for 24 GB GPU in a relevant source"
+      },
+      "reasoning": "One last attempt to find the planned model for 24 GB GPU in a relevant source",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 881,
+        "completion_tokens": 57,
+        "total_tokens": 938,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "reliability",
+        "reason": "Searching one more time in a related source to find the planned model for 24 GB GPU"
+      },
+      "reasoning": "Searching one more time in a related source to find the planned model for 24 GB GPU",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 971,
+        "completion_tokens": 55,
+        "total_tokens": 1026,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "service-catalog",
+        "reason": "Final attempt to find the planned model for 24 GB GPU in the service catalog"
+      },
+      "reasoning": "Final attempt to find the planned model for 24 GB GPU in the service catalog",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 5338,
+  "usage_complete": true,
+  "prompt_tokens": 4967,
+  "completion_tokens": 371,
+  "failure_injection": "malformed",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 7.591705053000624,
+  "token_accounting": "provider_usage"
+}

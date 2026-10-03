@@ -1,0 +1,181 @@
+{
+  "query_id": "096e986a-3e9a-424d-a256-ba5125fbdefe",
+  "question": "What drift triggers challenger training?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 453,
+        "completion_tokens": 49,
+        "total_tokens": 502,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift trigger",
+        "source_id": "drift-runbook",
+        "reason": "Find the specific drift conditions that trigger challenger training."
+      },
+      "reasoning": "Find the specific drift conditions that trigger challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 534,
+        "completion_tokens": 50,
+        "total_tokens": 584,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift trigger",
+        "source_id": "experiment-policy",
+        "reason": "Alternative source to find the specific drift conditions that trigger challenger training."
+      },
+      "reasoning": "Alternative source to find the specific drift conditions that trigger challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 616,
+        "completion_tokens": 51,
+        "total_tokens": 667,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift trigger",
+        "source_id": "release-policy",
+        "reason": "Further alternative source to find the specific drift conditions that trigger challenger training."
+      },
+      "reasoning": "Further alternative source to find the specific drift conditions that trigger challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 699,
+        "completion_tokens": 53,
+        "total_tokens": 752,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift trigger",
+        "source_id": "service-catalog",
+        "reason": "Exploring service catalog for any relevant information on drift triggers for challenger training."
+      },
+      "reasoning": "Exploring service catalog for any relevant information on drift triggers for challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 784,
+        "completion_tokens": 50,
+        "total_tokens": 834,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift trigger",
+        "source_id": "reliability",
+        "reason": "Checking reliability policies for details on drift triggers for challenger training."
+      },
+      "reasoning": "Checking reliability policies for details on drift triggers for challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 866,
+        "completion_tokens": 49,
+        "total_tokens": 915,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift trigger",
+        "source_id": "security",
+        "reason": "Reviewing security policies for insights into drift triggers for challenger training."
+      },
+      "reasoning": "Reviewing security policies for insights into drift triggers for challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "invalid_answer",
+      "reasoning": "6 validation errors for Answer\nsources.0.quote\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_too_short\nsources.1.quote\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_too_short\nsources.2.quote\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_too_short\nsources.3.quote\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_too_short\nsources.4.quote\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_too_short\nsources.5.quote\n  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/string_too_short",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient evidence to determine the specific drift triggers for challenger training.\",\"sources\":[{\"source_id\":\"drift-runbook\",\"quote\":\"\"},{\"source_id\":\"experiment-policy\",\"quote\":\"\"},{\"source_id\":\"release-policy\",\"quote\":\"\"},{\"source_id\":\"service-catalog\",\"quote\":\"\"},{\"source_id\":\"reliability\",\"quote\":\"\"},{\"source_id\":\"security\",\"quote\":\"\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 947,
+        "completion_tokens": 83,
+        "total_tokens": 1030,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 5284,
+  "usage_complete": true,
+  "prompt_tokens": 4899,
+  "completion_tokens": 385,
+  "failure_injection": "timeout",
+  "tool_errors": 6,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 7.9667731410008855,
+  "token_accounting": "provider_usage"
+}
