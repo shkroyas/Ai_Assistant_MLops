@@ -4,6 +4,67 @@ import pytest
 from assistant_mlops.provider import ChatProvider, ProviderError
 
 
+@pytest.mark.parametrize("body,expected", [
+    ([{"error": {"message": "Please retry in 54m25.5s.", "details": [
+        {"retryDelay": "3265s"}
+    ]}}], 3265.5),
+    ({"error": {"message": "Please try again in 1h2m3s."}}, 3723),
+])
+def test_quota_cooldown_honors_full_structured_server_delay(body, expected):
+    from assistant_mlops.provider import quota_cooldown
+
+    assert quota_cooldown(httpx.Response(429, json=body)) == expected
+
+
+@pytest.mark.asyncio
+async def test_gemini_pool_is_scoped_and_globally_paced(monkeypatch):
+    import asyncio
+    import json
+
+    from assistant_mlops.provider import provider_for_config
+
+    monkeypatch.setenv("GEMINI_API_KEY", "gemini-active")
+    monkeypatch.setenv("GEMINI_API_KEYS", "gemini-active,gemini-one,gemini-two")
+    monkeypatch.setenv("GROQ_API_KEYS", "groq-one,groq-two")
+    clock, observed = [0.0], []
+    monkeypatch.setattr("assistant_mlops.provider.monotonic", lambda: clock[0])
+
+    async def sleep(delay):
+        clock[0] += delay
+
+    async def handler(request):
+        body = json.loads(request.content)
+        assert request.url.host == "generativelanguage.googleapis.com"
+        assert request.headers["Authorization"] in {"Bearer gemini-one", "Bearer gemini-two"}
+        assert body["reasoning_effort"] == "none"
+        assert body["model"] == "gemini-2.5-flash"
+        observed.append(clock[0])
+        return httpx.Response(
+            200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 5}}
+        )
+
+    monkeypatch.setattr("assistant_mlops.provider.asyncio.sleep", sleep)
+    provider = provider_for_config(
+        {
+            "provider": "gemini",
+            "model": "gemini-2.5-flash",
+            "reasoning_effort": "none",
+            "key_pool": "reserves",
+            "request_interval_seconds": 15,
+        }
+    )
+    await provider.client.aclose()
+    provider.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    provider.fallback_url = None
+    try:
+        assert provider.quota_pool.keys == ["gemini-one", "gemini-two"]
+        await asyncio.gather(*(provider.complete([], []) for _ in range(4)))
+        assert observed == [0.0, 15.0, 30.0, 45.0]
+        assert sum(provider.quota_pool.used) == 20
+    finally:
+        await provider.close()
+
+
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
     ("native_name", "expected_name", "repaired"),
@@ -95,17 +156,20 @@ def test_invalid_reasoning_configuration_fails_before_opening_client():
 
 
 @pytest.mark.asyncio
-async def test_depleted_primary_pool_uses_scoped_same_endpoint_fallback(monkeypatch):
+@pytest.mark.parametrize("fallback_model", ["openai/gpt-oss-20b", "openai/gpt-oss-120b"])
+async def test_depleted_primary_pool_uses_scoped_same_endpoint_fallback(
+    monkeypatch, fallback_model
+):
     import json
 
     monkeypatch.setenv("FALLBACK_BASE_URL", "https://api.groq.com/openai/v1")
-    monkeypatch.setenv("FALLBACK_MODEL", "openai/gpt-oss-20b")
+    monkeypatch.setenv("FALLBACK_MODEL", fallback_model)
     monkeypatch.setenv("FALLBACK_API_KEY", "fixture-fallback")
     monkeypatch.delenv("FALLBACK_PROXY_TOKEN", raising=False)
     monkeypatch.delenv("FALLBACK_PROXY_COOKIE", raising=False)
 
     async def handler(request):
-        assert json.loads(request.content)["model"] == "openai/gpt-oss-20b"
+        assert json.loads(request.content)["model"] == fallback_model
         assert request.headers["Authorization"] == "Bearer fixture-fallback"
         return httpx.Response(
             200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 5}}
@@ -122,7 +186,7 @@ async def test_depleted_primary_pool_uses_scoped_same_endpoint_fallback(monkeypa
     )
     provider.quota_pool.used[0] = 9
     _, usage = await provider.complete([], [])
-    assert usage["fallback"] and usage["model"] == "openai/gpt-oss-20b"
+    assert usage["fallback"] and usage["model"] == fallback_model
     assert provider.quota_pool.used == [9]
     await provider.close()
 

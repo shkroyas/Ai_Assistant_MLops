@@ -1,0 +1,12 @@
+{
+  "class": "RateLimitError",
+  "daily_tokens": true,
+  "minute_tokens": false,
+  "daily_requests": false,
+  "counts": [
+    "Limit 200000",
+    "Used 199508",
+    "Requested 498"
+  ],
+  "retry_after": null
+}

@@ -1,5 +1,6 @@
 import asyncio
 import os
+import re
 from time import monotonic
 from urllib.parse import urlsplit
 
@@ -10,6 +11,33 @@ from assistant_mlops.auth import endpoint_headers
 
 class ProviderError(RuntimeError):
     pass
+
+
+def quota_cooldown(response):
+    """Honor server cooldowns in headers and structured provider error bodies."""
+    try:
+        delay = float(response.headers.get("Retry-After", 0))
+    except (TypeError, ValueError):
+        delay = 0
+    try:
+        payload = response.json()
+        errors = payload if isinstance(payload, list) else [payload]
+        for item in errors:
+            error = item.get("error", {}) if isinstance(item, dict) else {}
+            if not isinstance(error, dict):
+                continue
+            match = re.search(r"(?:try again|retry) in ([\d.hms ]+)", error.get("message", ""), re.I)
+            if match:
+                delay = max(delay, sum(
+                    float(number) * {"h": 3600, "m": 60, "s": 1}[unit]
+                    for number, unit in re.findall(r"([\d.]+)([hms])", match[1])
+                ))
+            for detail in error.get("details", []):
+                if isinstance(detail, dict) and "retryDelay" in detail:
+                    delay = max(delay, float(str(detail["retryDelay"]).removesuffix("s")))
+    except (ValueError, TypeError, AttributeError):
+        pass
+    return delay if delay > 0 else 60
 
 
 class QuotaKeyPool:
@@ -90,11 +118,20 @@ class ChatProvider:
         )
         self.key = key if key is not None else os.getenv("AGENT_API_KEY", "")
         self.model = model or os.getenv("AGENT_MODEL") or "gemini-2.5-flash"
-        if reasoning_effort is not None and (
-            reasoning_effort not in {"low", "medium", "high"}
-            or not self.model.startswith("openai/gpt-oss-")
-        ):
-            raise ValueError("Explicit reasoning effort requires GPT-OSS and low/medium/high")
+        groq_reasoning = self.model.startswith("openai/gpt-oss-") and reasoning_effort in {
+            "low",
+            "medium",
+            "high",
+        }
+        gemini_reasoning = (
+            urlsplit(self.base_url).hostname == "generativelanguage.googleapis.com"
+            and self.model.startswith("gemini-2.5-flash")
+            and reasoning_effort in {"none", "low", "medium", "high"}
+        )
+        if reasoning_effort is not None and not (groq_reasoning or gemini_reasoning):
+            raise ValueError(
+                "Explicit reasoning effort requires GPT-OSS or official Gemini 2.5 Flash"
+            )
         self.reasoning_effort = reasoning_effort
         if application_tool_validation and (
             urlsplit(self.base_url).hostname != "api.groq.com"
@@ -113,12 +150,16 @@ class ChatProvider:
         self._last_request = None
         self.quota_pool = None
         if key_pool:
-            if urlsplit(self.base_url).hostname != "api.groq.com" or "Cookie" in self.headers:
+            if (
+                urlsplit(self.base_url).hostname
+                not in {"api.groq.com", "generativelanguage.googleapis.com"}
+                or "Cookie" in self.headers
+            ):
                 raise ValueError(
-                    "Quota pools require the official Groq endpoint without proxy cookies"
+                    "Quota pools require official Groq or Gemini endpoints without proxy cookies"
                 )
             if not 1 <= daily_token_budget <= 200000:
-                raise ValueError("Daily pool budget must fit the verified 200000-token allowance")
+                raise ValueError("Daily pool guard must be between 1 and 200000 reported tokens")
             self.quota_pool = QuotaKeyPool(key_pool, request_interval_seconds, daily_token_budget)
 
     async def close(self):
@@ -136,19 +177,26 @@ class ChatProvider:
                     (os.getenv("FALLBACK_MODEL") or "Qwen/Qwen2.5-7B-Instruct"),
                 )
             )
-        for base, headers, model in endpoints:
+        for endpoint_index, (base, headers, model) in enumerate(endpoints):
+            primary_endpoint = self.configured and endpoint_index == 0
+            host = urlsplit(base).hostname
+            namespace = "GEMINI" if host == "generativelanguage.googleapis.com" else "GROQ"
             keys = [headers.get("Authorization", "")]
-            if urlsplit(base).hostname == "api.groq.com" and "Cookie" not in headers:
+            if (
+                host in {"api.groq.com", "generativelanguage.googleapis.com"}
+                and "Cookie" not in headers
+            ):
                 keys += [
                     "Bearer " + key.strip()
-                    for key in os.getenv("GROQ_API_KEYS", "").split(",")
+                    for key in os.getenv(namespace + "_API_KEYS", "").split(",")
                     if key.strip()
                 ]
             pool = (
                 self.quota_pool
-                if base == self.base_url
+                if primary_endpoint
+                and base == self.base_url
                 and model == self.model
-                and urlsplit(base).hostname == "api.groq.com"
+                and host in {"api.groq.com", "generativelanguage.googleapis.com"}
                 and "Cookie" not in headers
                 else None
             )
@@ -162,7 +210,9 @@ class ChatProvider:
                     if pool:
                         lease, leased_key = await pool.acquire()
                         headers["Authorization"] = "Bearer " + leased_key
-                    if self.request_interval_seconds and not pool:
+                    if self.request_interval_seconds and (
+                        not pool or host == "generativelanguage.googleapis.com"
+                    ):
                         async with self._pacing_lock:
                             if self._last_request is not None:
                                 delay = self.request_interval_seconds - (
@@ -188,7 +238,13 @@ class ChatProvider:
                             "max_tokens": 1200,
                             **(
                                 {"reasoning_effort": self.reasoning_effort}
-                                if self.reasoning_effort and model.startswith("openai/gpt-oss-")
+                                if self.reasoning_effort
+                                and (
+                                    model.startswith("openai/gpt-oss-")
+                                    and self.reasoning_effort in {"low", "medium", "high"}
+                                    or host == "generativelanguage.googleapis.com"
+                                    and model.startswith("gemini-2.5-flash")
+                                )
                                 else {}
                             ),
                         },
@@ -197,10 +253,7 @@ class ChatProvider:
                         if response.status_code in {401, 403}:
                             pool.block(lease, float("inf"))
                         else:
-                            try:
-                                delay = float(response.headers.get("Retry-After", 60))
-                            except ValueError:
-                                delay = 60
+                            delay = quota_cooldown(response)
                             pool.block(lease, max(pool.interval, delay))
                         continue
                     if response.status_code in {401, 403} and key_index + 1 < len(keys):
@@ -256,7 +309,7 @@ class ChatProvider:
                         "completion_tokens": usage.get("completion_tokens"),
                         "total_tokens": usage.get("total_tokens"),
                         "model": model,
-                        "fallback": (base, model) != (self.base_url, self.model),
+                        "fallback": not primary_endpoint,
                         **({"tool_name_normalizations": normalizations} if normalizations else {}),
                     }
                 except ProviderError:
@@ -286,23 +339,28 @@ def provider_for_config(config):
             model=config.get("model"),
             request_interval_seconds=config.get("request_interval_seconds", 0),
         )
-    if config["provider"] != "groq":
+    if config["provider"] not in {"groq", "gemini"}:
         raise ValueError("Unsupported experiment provider")
+    namespace = "GEMINI" if config["provider"] == "gemini" else "GROQ"
     pool = None
     if config.get("key_pool") == "reserves":
-        active = os.getenv("GROQ_API_KEY", "")
+        active = os.getenv(namespace + "_API_KEY", "")
         pool = [
             key.strip()
-            for key in os.getenv("GROQ_API_KEYS", "").split(",")
+            for key in os.getenv(namespace + "_API_KEYS", "").split(",")
             if key.strip() and key.strip() != active
         ]
         if not pool:
             raise ValueError("No independently available reserve keys configured")
     return ChatProvider(
-        base_url="https://api.groq.com/openai/v1",
-        key=pool[0] if pool else os.getenv("GROQ_API_KEY", ""),
-        model=config.get("model") or os.getenv("GROQ_MODEL") or "openai/gpt-oss-20b",
-        auth_prefix="GROQ",
+        base_url="https://generativelanguage.googleapis.com/v1beta/openai"
+        if namespace == "GEMINI"
+        else "https://api.groq.com/openai/v1",
+        key=pool[0] if pool else os.getenv(namespace + "_API_KEY", ""),
+        model=config.get("model")
+        or os.getenv(namespace + "_MODEL")
+        or ("gemini-2.5-flash" if namespace == "GEMINI" else "openai/gpt-oss-20b"),
+        auth_prefix=namespace,
         request_interval_seconds=config.get("request_interval_seconds", 0),
         key_pool=pool,
         daily_token_budget=config.get("daily_token_budget", 180000),

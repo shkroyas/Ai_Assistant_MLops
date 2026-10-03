@@ -152,6 +152,7 @@ def health():
     return {
         "status": "ready",
         "provider_model": app.state.agent.provider.model,
+        "configuration_version": app.state.agent.config["version"],
         "query_timeout_seconds": app.state.query_timeout,
         "baseline_model": app.state.baseline_provider.model,
         "live_provider_configured": app.state.agent.provider.configured,
