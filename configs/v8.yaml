@@ -1,0 +1,7 @@
+version: v8
+prompt: prompts/prompt_v8.md
+max_iterations: 4
+top_k: 3
+temperature: 0.1
+top_p: 0.9
+repeats: 3

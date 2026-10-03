@@ -1,0 +1,34 @@
+{
+  "query_id": "f8c8c8c9-b9d7-4864-88ba-253c53f26086",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The available evidence does not establish the specific method for storing credentials.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1234,
+        "completion_tokens": 26,
+        "total_tokens": 1260,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1260,
+  "usage_complete": true,
+  "prompt_tokens": 1234,
+  "completion_tokens": 26,
+  "failure_injection": "unavailable",
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The available evidence does not establish the specific method for storing credentials.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5544067749979149,
+  "token_accounting": "provider_usage"
+}

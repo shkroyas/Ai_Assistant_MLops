@@ -1,0 +1,136 @@
+{
+  "query_id": "6fa7d698-04ea-43f2-a726-70c6f3a2d5c0",
+  "question": "What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1239,
+        "completion_tokens": 46,
+        "total_tokens": 1285,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "what follows significant drift and what specifically permits promotion",
+        "source_id": "",
+        "reason": "initial search for policies regarding drift and promotion criteria"
+      },
+      "reasoning": "initial search for policies regarding drift and promotion criteria",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.23693955039266884
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.15456232425243768
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.10604746611023061
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1663,
+        "completion_tokens": 51,
+        "total_tokens": 1714,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training and evaluation process",
+        "source_id": "drift-runbook",
+        "reason": "refining search to find specific steps after significant drift detection"
+      },
+      "reasoning": "refining search to find specific steps after significant drift detection",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.20082136243581772
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1859,
+        "completion_tokens": 52,
+        "total_tokens": 1911,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "promotion criteria including F1 score and ROC-AUC",
+        "source_id": "release-policy",
+        "reason": "searching for specific promotion criteria mentioned in the release policy"
+      },
+      "reasoning": "searching for specific promotion criteria mentioned in the release policy",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.2826755046343475
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"After significant drift, the model undergoes challenger training and evaluation, not immediate promotion. Promotion is permitted only when the F1 score improves by at least 0.005 and the ROC-AUC does not drop by more than 0.01, based on evaluation on a frozen holdout set.\",\"sources\":[{\"source_id\":\"drift-runbook\",\"quote\":\"Drift triggers challenger training and evaluation, not immediate promotion.\"},{\"source_id\":\"release-policy\",\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\"}]}",
+      "usage": {
+        "prompt_tokens": 2053,
+        "completion_tokens": 146,
+        "total_tokens": 2199,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 7109,
+  "usage_complete": true,
+  "prompt_tokens": 6814,
+  "completion_tokens": 295,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "After significant drift, the model undergoes challenger training and evaluation, not immediate promotion. Promotion is permitted only when the F1 score improves by at least 0.005 and the ROC-AUC does not drop by more than 0.01, based on evaluation on a frozen holdout set.",
+    "sources": [
+      {
+        "source_id": "drift-runbook",
+        "quote": "Drift triggers challenger training and evaluation, not immediate promotion."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 6.430317962000117,
+  "token_accounting": "provider_usage"
+}

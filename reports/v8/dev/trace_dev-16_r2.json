@@ -1,0 +1,34 @@
+{
+  "query_id": "93759799-04e7-47f3-8b59-5ecb3b8d6b86",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The available evidence does not establish that fact.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1235,
+        "completion_tokens": 22,
+        "total_tokens": 1257,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1257,
+  "usage_complete": true,
+  "prompt_tokens": 1235,
+  "completion_tokens": 22,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The available evidence does not establish that fact.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.4816665469988948,
+  "token_accounting": "provider_usage"
+}

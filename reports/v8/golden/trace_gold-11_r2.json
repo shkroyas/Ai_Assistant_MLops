@@ -1,0 +1,34 @@
+{
+  "query_id": "a7298810-c4d2-49ef-8b7d-2efcd2094b60",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The available evidence does not establish that fact.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1242,
+        "completion_tokens": 22,
+        "total_tokens": 1264,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1264,
+  "usage_complete": true,
+  "prompt_tokens": 1242,
+  "completion_tokens": 22,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The available evidence does not establish that fact.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.4787547089981672,
+  "token_accounting": "provider_usage"
+}
