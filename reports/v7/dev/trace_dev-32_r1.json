@@ -1,0 +1,114 @@
+{
+  "query_id": "cee2f4e5-c18b-435f-ad7f-e34223dd20f1",
+  "question": "What is the production promotion gate?",
+  "prompt_version": "v7",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1144,
+        "completion_tokens": 35,
+        "total_tokens": 1179,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "",
+        "reason": "initial search for definition"
+      },
+      "reasoning": "initial search for definition",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1212,
+        "completion_tokens": 35,
+        "total_tokens": 1247,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "",
+        "reason": "retrieving definition"
+      },
+      "reasoning": "retrieving definition",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1280,
+        "completion_tokens": 38,
+        "total_tokens": 1318,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "",
+        "reason": "attempting to find the definition again"
+      },
+      "reasoning": "attempting to find the definition again",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1351,
+        "completion_tokens": 37,
+        "total_tokens": 1388,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "",
+        "reason": "final attempt to locate the definition"
+      },
+      "reasoning": "final attempt to locate the definition",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 5132,
+  "usage_complete": true,
+  "prompt_tokens": 4987,
+  "completion_tokens": 145,
+  "failure_injection": "malformed",
+  "tool_errors": 4,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 3.0623983920013416,
+  "token_accounting": "provider_usage"
+}
