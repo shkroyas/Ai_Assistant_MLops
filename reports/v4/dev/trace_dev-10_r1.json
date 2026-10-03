@@ -1,0 +1,34 @@
+{
+  "query_id": "5fa3e5e4-edac-4ab8-8196-9bb2544cb664",
+  "question": "What happens on a search timeout, and does drift alone justify production changes?",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Please specify the context or document where a search timeout occurs and provide more details on how drift alone justifies production changes.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 779,
+        "completion_tokens": 36,
+        "total_tokens": 815,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 815,
+  "usage_complete": true,
+  "prompt_tokens": 779,
+  "completion_tokens": 36,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Please specify the context or document where a search timeout occurs and provide more details on how drift alone justifies production changes.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7509477120001975,
+  "token_accounting": "provider_usage"
+}

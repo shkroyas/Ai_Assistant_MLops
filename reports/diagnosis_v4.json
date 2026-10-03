@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v3/dev/trace_dev-21_r0.json",
+  "failure": "Repeated invalid final outputs consume the seven-iteration budget on an ambiguous development case.",
+  "change": "Lower max_iterations from 7 to 4 only; keep the v3 prompt and provider fixed to measure cost versus quality.",
+  "axis": "config.max_iterations"
+}

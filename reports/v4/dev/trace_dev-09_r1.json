@@ -1,0 +1,34 @@
+{
+  "query_id": "f6dd95c7-65f1-406f-b9f4-971645c92452",
+  "question": "Which port hosts the assistant UI and where should its API key go?",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Which assistant UI are you referring to? Is it the MLOps knowledge assistant or another system's UI?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 778,
+        "completion_tokens": 35,
+        "total_tokens": 813,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 813,
+  "usage_complete": true,
+  "prompt_tokens": 778,
+  "completion_tokens": 35,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Which assistant UI are you referring to? Is it the MLOps knowledge assistant or another system's UI?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7474565770025947,
+  "token_accounting": "provider_usage"
+}

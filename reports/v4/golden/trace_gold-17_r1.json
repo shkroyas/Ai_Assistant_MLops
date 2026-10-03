@@ -1,0 +1,114 @@
+{
+  "query_id": "246bfd02-6f0d-48c9-ac66-1e47de9e3cfa",
+  "question": "For the production checklist: What is the production promotion gate?",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 40,
+        "total_tokens": 816,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "",
+        "reason": "Initial search for the definition of production promotion gate"
+      },
+      "reasoning": "Initial search for the definition of production promotion gate",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 849,
+        "completion_tokens": 42,
+        "total_tokens": 891,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate definition",
+        "source_id": "",
+        "reason": "Refined search for the definition of production promotion gate"
+      },
+      "reasoning": "Refined search for the definition of production promotion gate",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 924,
+        "completion_tokens": 47,
+        "total_tokens": 971,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "definition of production promotion gate in MLOps",
+        "source_id": "",
+        "reason": "Further refined search for the definition of production promotion gate"
+      },
+      "reasoning": "Further refined search for the definition of production promotion gate",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1004,
+        "completion_tokens": 47,
+        "total_tokens": 1051,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "MLOps production promotion gate",
+        "source_id": "",
+        "reason": "Search for the definition of production promotion gate in MLOps context"
+      },
+      "reasoning": "Search for the definition of production promotion gate in MLOps context",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 3729,
+  "usage_complete": true,
+  "prompt_tokens": 3553,
+  "completion_tokens": 176,
+  "failure_injection": "malformed",
+  "tool_errors": 4,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 3.6757649009996385,
+  "token_accounting": "provider_usage"
+}

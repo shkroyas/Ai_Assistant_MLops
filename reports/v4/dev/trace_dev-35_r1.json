@@ -1,0 +1,34 @@
+{
+  "query_id": "191b1640-191a-49a5-b996-59a0ae8feed8",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Which model version or variant is planned for 24 GB of GPU memory?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 29,
+        "total_tokens": 803,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 803,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 29,
+  "failure_injection": "malformed",
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Which model version or variant is planned for 24 GB of GPU memory?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6081840820006619,
+  "token_accounting": "provider_usage"
+}

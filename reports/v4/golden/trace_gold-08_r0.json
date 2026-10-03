@@ -1,0 +1,34 @@
+{
+  "query_id": "0ad7bbc4-dadb-4bc0-b745-ab3b0e3695c5",
+  "question": "For the production checklist: The 2024 memo says promote on accuracy. Which document overrides it?",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Which document are you referring to in the production checklist context?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 786,
+        "completion_tokens": 25,
+        "total_tokens": 811,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 811,
+  "usage_complete": true,
+  "prompt_tokens": 786,
+  "completion_tokens": 25,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Which document are you referring to in the production checklist context?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5343757669979823,
+  "token_accounting": "provider_usage"
+}

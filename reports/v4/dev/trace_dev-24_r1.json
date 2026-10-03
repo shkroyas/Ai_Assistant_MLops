@@ -1,0 +1,34 @@
+{
+  "query_id": "f80da3a4-dfd3-49b8-8f13-a5351e90f423",
+  "question": "Release that version.",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Which version should be released?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 768,
+        "completion_tokens": 19,
+        "total_tokens": 787,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 787,
+  "usage_complete": true,
+  "prompt_tokens": 768,
+  "completion_tokens": 19,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Which version should be released?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.4318120039970381,
+  "token_accounting": "provider_usage"
+}
