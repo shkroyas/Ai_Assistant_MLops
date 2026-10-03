@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-10-03T12:47:54.735791+00:00",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "models_http_status": 200,
+  "model_listed": true,
+  "greeting": "Hello in Nepali is \"नमस्ते\" (namaste).",
+  "greeting_usage": {
+    "prompt_tokens": 34,
+    "completion_tokens": 18,
+    "total_tokens": 52,
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "fallback": false
+  },
+  "native_tool_calls": [
+    {
+      "id": "chatcmpl-tool-b1dd153b887c8e11",
+      "type": "function",
+      "function": {
+        "name": "search",
+        "arguments": "{\"query\": \"drift policy\", \"reason\": \"Finding information about the drift policy\"}"
+      }
+    }
+  ],
+  "tool_usage": {
+    "prompt_tokens": 303,
+    "completion_tokens": 32,
+    "total_tokens": 335,
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "fallback": false
+  },
+  "status": "passed"
+}

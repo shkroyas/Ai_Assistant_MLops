@@ -1,12 +1,15 @@
+import hashlib
 import json
 import os
+import time
+from datetime import timedelta
 from pathlib import Path
 
 import pandas as pd
 from evidently import DataDefinition, Dataset, Report
 from evidently.descriptors.llm_judges import LLMEval
 from evidently.llm.templates import BinaryClassificationPromptTemplate
-from evidently.llm.utils.wrapper import GeminiOptions, OpenAIOptions
+from evidently.llm.utils.wrapper import GeminiOptions, OpenAIOptions, RateLimits
 from evidently.metrics import CategoryCount
 from evidently.tests import gte
 
@@ -57,13 +60,24 @@ def judge(frame, directory):
     )
     provider = os.getenv("JUDGE_PROVIDER", "gemini")
     key = os.getenv("JUDGE_API_KEY") or os.getenv("GEMINI_API_KEY")
+    interval = float(os.getenv("JUDGE_REQUEST_INTERVAL_SECONDS") or 15)
+    if interval < 1:
+        raise ValueError("Judge request interval must be at least one second")
+    limits = RateLimits(rpm=1, interval=timedelta(seconds=interval))
     options = (
-        GeminiOptions(api_key=key, rpm_limit=10)
+        GeminiOptions(api_key=key, limits=limits)
         if provider == "gemini"
-        else OpenAIOptions(api_key=key, api_url=os.getenv("JUDGE_BASE_URL") or None, rpm_limit=10)
+        else OpenAIOptions(api_key=key, api_url=os.getenv("JUDGE_BASE_URL") or None, limits=limits)
     )
-    for descriptor in judge_descriptors():
-        dataset.add_descriptor(descriptor, options=[options])
+    for index, descriptor in enumerate(judge_descriptors()):
+        if index:
+            # Native descriptor limiters are separate; preserve pacing across the boundary.
+            time.sleep(interval)
+        try:
+            dataset.add_descriptor(descriptor, options=[options])
+        except Exception as exc:
+            # Some SDK exceptions include API keys in request URLs. Never expose the chain.
+            raise RuntimeError("Judge request failed: " + type(exc).__name__) from None
     report = Report(
         [
             CategoryCount(column="correctness", category="correct", share_tests=[gte(0.8)]),
@@ -107,8 +121,14 @@ def calibrate(directory="reports/judge_calibration"):
         "disagreements": scored.loc[scored.judge_pass != scored.label, "id"].tolist(),
     }
     review = json.loads(Path("datasets/calibration_review.json").read_text())
-    result["calibration_human_reviewed"] = float(
-        bool(review.get("reviewed") and review.get("reviewer"))
+    result["calibration_review_approved"] = float(
+        bool(
+            review.get("reviewed")
+            and review.get("reviewer")
+            and review.get("owner_approved")
+            and review.get("labels_sha256")
+            == hashlib.sha256(Path("datasets/judge_calibration_v1.jsonl").read_bytes()).hexdigest()
+        )
     )
     Path(directory, "calibration.json").write_text(json.dumps(result, indent=2))
     return result

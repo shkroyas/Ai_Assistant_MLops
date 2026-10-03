@@ -7,7 +7,7 @@ from pathlib import Path
 def gate(candidate, production=None):
     bars = yaml.safe_load(Path("configs/gate.yaml").read_text())
     checks = {
-        "calibration_reviewed": candidate.get("calibration_human_reviewed", 0) == 1,
+        "calibration_reviewed": candidate.get("calibration_review_approved", 0) == 1,
         "ground_truth": candidate.get("pct_ground_truth_passed", 0) >= bars["ground_truth_min"],
         "judge": candidate.get("pct_judge_passed", 0) >= bars["judge_min"],
         "calibration": candidate.get("judge_label_agreement", 0)

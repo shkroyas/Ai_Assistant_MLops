@@ -33,6 +33,15 @@ async def lifespan(app):
     corpus = Corpus(path=os.getenv("QDRANT_PATH") or None)
     provider = ChatProvider()
     app.state.agent = Agent(corpus, provider, config)
+    app.state.baseline_provider = provider
+    if os.getenv("GROQ_API_KEY"):
+        app.state.baseline_provider = ChatProvider(
+            base_url="https://api.groq.com/openai/v1",
+            key=os.environ["GROQ_API_KEY"],
+            model=os.getenv("GROQ_MODEL") or "openai/gpt-oss-20b",
+            auth_prefix="GROQ",
+        )
+        app.state.baseline_provider.fallback_url = None
     app.state.semaphore = asyncio.Semaphore(4)
     app.state.cache = OrderedDict()
     app.state.inflight = {}
@@ -48,6 +57,8 @@ async def lifespan(app):
         ).encode()
     ).hexdigest()
     yield
+    if app.state.baseline_provider is not provider:
+        await app.state.baseline_provider.close()
     await provider.close()
     corpus.client.close()
 
@@ -124,7 +135,8 @@ def health():
     return {
         "status": "ready",
         "provider_model": app.state.agent.provider.model,
-        "live_provider_configured": bool(app.state.agent.provider.key),
+        "baseline_model": app.state.baseline_provider.model,
+        "live_provider_configured": app.state.agent.provider.configured,
     }
 
 
@@ -148,7 +160,7 @@ async def rag(query: Query, request: Request):
             answer_once(
                 query.question,
                 app.state.agent.corpus,
-                app.state.agent.provider,
+                app.state.baseline_provider,
                 app.state.agent.config["top_k"],
             ),
             timeout=180,

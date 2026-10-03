@@ -1,0 +1,34 @@
+{
+  "health": {
+    "status": "ready",
+    "provider_model": "Qwen/Qwen2.5-7B-Instruct",
+    "baseline_model": "openai/gpt-oss-20b",
+    "live_provider_configured": true
+  },
+  "rag": {
+    "status": "answered",
+    "answer": "Up to three provider attempts are allowed, using an exponential backoff retry strategy.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+      }
+    ],
+    "mode": "single_pass",
+    "tokens": 738,
+    "token_accounting": "provider_usage"
+  },
+  "ask": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": [],
+    "query_id": "3e384617-25cf-4b9f-b3b2-52cf1902175e",
+    "iterations": 7,
+    "tokens": 5162,
+    "token_accounting": "provider_usage",
+    "tokens_consumed_this_request": 5162,
+    "shared_computation": false,
+    "cache_hit": false,
+    "termination": "max_iterations"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "Live provider-role smoke checks, not full evaluation or calibration",
+  "groq_baseline": {
+    "status": "answered",
+    "answer": "Up to three provider attempts are allowed, using an exponential backoff retry strategy.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+      }
+    ],
+    "mode": "single_pass",
+    "tokens": 746,
+    "token_accounting": "provider_usage"
+  },
+  "groq_native_tools": [
+    {
+      "id": "fc_45eb9014-c8f2-4e56-96b3-f319db232a2d",
+      "type": "function",
+      "function": {
+        "name": "search",
+        "arguments": "{\"query\":\"drift policy\",\"reason\":\"Searching for drift policy\",\"source_id\":\"news\"}"
+      }
+    }
+  ],
+  "groq_usage": {
+    "prompt_tokens": 196,
+    "completion_tokens": 51,
+    "total_tokens": 247,
+    "model": "openai/gpt-oss-20b",
+    "fallback": false
+  },
+  "gemini_judge_verdicts": [
+    true,
+    false
+  ],
+  "passed": true
+}

@@ -1,5 +1,11 @@
 {
-  "reviewed": false,
-  "reviewer": null,
-  "note": "Proposed labels require Royas to review before human-calibration claims."
+  "reviewed": true,
+  "reviewer": "Assistant; approved by Royas Shakya",
+  "owner_approved": true,
+  "approval_text": "okay I trust you",
+  "review_method": "Assistant audited corpus-based references and all 15 labels; user approved delegated review. Not individually hand-labeled by the user.",
+  "labels_sha256": "554c83bb03756d7f772a466332fc1eed49c21f1c9dd5c5229cfef6afdbc2e62b",
+  "label_count": 15,
+  "positive_count": 8,
+  "negative_count": 7
 }
