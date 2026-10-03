@@ -1,0 +1,93 @@
+{
+  "query_id": "cb540296-75ee-46fb-8746-fdd967cd33fd",
+  "question": "For the production checklist: Should I use the better one?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 779,
+        "completion_tokens": 46,
+        "total_tokens": 825,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist better one",
+        "reason": "search for production checklist guidance",
+        "source_id": null
+      },
+      "reasoning": "search for production checklist guidance",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12732140565850297
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.09394228044206161
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.0698856594812837
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The handbook\\u2019s release policy is the definitive guide for production model changes. It requires that any model promotion be based on a frozen holdout evaluation: the new model must improve F1 by at least 0.005 and not degrade ROC\\u2011AUC by more than 0.01. A drift alert alone is not sufficient to authorize promotion, and the previous production version must be retained for rollback. The project owner is the release approver. Therefore, use the checklist that follows these criteria rather than a generic or informal one.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1144,
+        "completion_tokens": 227,
+        "total_tokens": 1371,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need answer: production checklist better one? Likely refer to release-policy. Provide guidance.",
+        "tool_calls": [
+          {
+            "id": "fc_8dbeed47-3d09-4560-bc2a-61a204f07c71",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The handbook\u2019s release policy is the definitive guide for production model changes. It requires that any model promotion be based on a frozen holdout evaluation: the new model must improve F1 by at least 0.005 and not degrade ROC\u2011AUC by more than 0.01. A drift alert alone is not sufficient to authorize promotion, and the previous production version must be retained for rollback. The project owner is the release approver. Therefore, use the checklist that follows these criteria rather than a generic or informal one.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2196,
+  "usage_complete": true,
+  "prompt_tokens": 1923,
+  "completion_tokens": 273,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The handbook\u2019s release policy is the definitive guide for production model changes. It requires that any model promotion be based on a frozen holdout evaluation: the new model must improve F1 by at least 0.005 and not degrade ROC\u2011AUC by more than 0.01. A drift alert alone is not sufficient to authorize promotion, and the previous production version must be retained for rollback. The project owner is the release approver. Therefore, use the checklist that follows these criteria rather than a generic or informal one.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 29.090975322003942,
+  "token_accounting": "provider_usage"
+}

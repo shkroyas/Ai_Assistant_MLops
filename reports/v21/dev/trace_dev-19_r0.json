@@ -1,0 +1,34 @@
+{
+  "query_id": "ac513c20-841c-483d-84e2-acb43ff81be6",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you please specify which project owner you are referring to?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 103,
+        "total_tokens": 878,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 878,
+  "usage_complete": true,
+  "prompt_tokens": 775,
+  "completion_tokens": 103,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which project owner you are referring to?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.251788610999938,
+  "token_accounting": "provider_usage"
+}

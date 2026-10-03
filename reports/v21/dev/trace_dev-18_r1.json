@@ -1,0 +1,49 @@
+{
+  "query_id": "e4df606b-ddd4-40cc-a941-9dc614ec551c",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I need more information to answer that question.\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 61,
+        "total_tokens": 837,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_d14af0c2-400a-4bf1-b50d-7232bd73a0fa",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I need more information to answer that question.\",\"reason\":\"The user asks about a specific billing amount, but no provider or account details are provided.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 837,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 61,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "I need more information to answer that question.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.106949934997829,
+  "token_accounting": "provider_usage"
+}

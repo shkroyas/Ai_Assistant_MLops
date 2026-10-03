@@ -1,0 +1,20 @@
+{
+  "task_completion_rate": 0.819047619047619,
+  "tool_call_correctness": 0.9893617021276596,
+  "tool_argument_validity": 0.9893617021276596,
+  "trajectory_length_mean": 1.7619047619047619,
+  "tokens_per_query_mean": 1902.3809523809523,
+  "usage_complete": 0.0,
+  "latency_mean": 25.89953636608573,
+  "completion_spread": 0.05714285714285705,
+  "hard_failure_rate": 0.009523809523809525,
+  "failure_injection_safe": 1,
+  "golden_provider_failure_rate": 0.0,
+  "pct_ground_truth_passed": 0.8148148148148148,
+  "pct_tests_passed": 0.6481481481481481,
+  "pct_judge_passed": 0.6666666666666666,
+  "judge_truth_agreement": 0.8148148148148148,
+  "judge_label_agreement": 1.0,
+  "judge_false_pass_rate": 0.0,
+  "calibration_review_approved": 1.0
+}

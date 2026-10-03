@@ -1,0 +1,226 @@
+{
+  "query_id": "dd9f58ad-8979-4811-a995-04900d1257ba",
+  "question": "For the production checklist: What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 783,
+        "completion_tokens": 53,
+        "total_tokens": 836,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist significant drift promotion",
+        "reason": "search for production checklist drift promotion",
+        "source_id": null
+      },
+      "reasoning": "search for production checklist drift promotion",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.28688765317201614
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.19650211930274963
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.12326671679814656
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have info. Need answer: what follows significant drift, and what specifically permits promotion. Use sources.",
+        "tool_calls": [
+          {
+            "id": "fc_8079de1b-78be-402c-9f03-238b3be3f119",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"After a significant drift is detected, the runbook requires that a challenger model be trained and evaluated against a control batch before any promotion can occur. Promotion to production is only permitted when the frozen holdout evaluation shows an F1 score improvement of at least 0.005 and the ROC\u2011AUC has not dropped by more than 0.01; a drift alert alone does not authorize promotion.\",\"sources\":[{\"quote\":\"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1135,
+        "completion_tokens": 223,
+        "total_tokens": 1358,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need to provide answer with citations that match evidence. The earlier answer had quotes that are present. But citation error maybe because quotes not exact? Need to match exact substring. Let's check drift-runbook text: \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\" Our quote matches. release-policy: \"Promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\" matches. So maybe need to include exact quotes. Ensure no extra spaces. Provide JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_4b1def82-9c0a-4aad-8d6e-2065dd5ac623",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"After a significant drift is detected, the runbook requires that a challenger model be trained and evaluated against a control batch before any promotion can occur. Promotion to production is only permitted when the frozen holdout evaluation shows an F1 score improvement of at least 0.005 and the ROC\u2011AUC has not dropped by more than 0.01; a drift alert alone does not authorize promotion.\",\"sources\":[{\"quote\":\"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1459,
+        "completion_tokens": 340,
+        "total_tokens": 1799,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need to ensure quotes match exactly. Let's re-read retrieved text. For drift-runbook quote: \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\" That matches. For release-policy: \"Promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\" Good. Ensure quotes exactly.",
+        "tool_calls": [
+          {
+            "id": "fc_bce82dee-bcbc-48dc-8c90-cdd33f791de7",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"After a significant drift is detected, the runbook requires that a challenger model be trained and evaluated against a control batch before any promotion can occur. Promotion to production is only permitted when the frozen holdout evaluation shows an F1 score improvement of at least 0.005 and the ROC\u2011AUC has not dropped by more than 0.01; a drift alert alone does not authorize promotion.\",\"sources\":[{\"quote\":\"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1783,
+        "completion_tokens": 306,
+        "total_tokens": 2089,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need to provide citations that match exactly. The quotes must be contiguous from source. Let's check source texts. For drift-runbook: text snippet: \"# Drift runbook \u2014 example company handbook\\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\"\n\nWe need contiguous quote that includes \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\" That is contiguous. Good.\n\nFor release-policy: \"# Release policy \u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"\n\nWe need contiguous quote: \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\" That is contiguous.\n\nThus provide those quotes.",
+        "tool_calls": [
+          {
+            "id": "fc_f5edde7f-9e85-497a-9d4d-7820a2c49380",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"After a significant drift is detected, the runbook requires that a challenger model be trained and evaluated against a control batch before any promotion can occur. Promotion to production is only permitted when the frozen holdout evaluation shows an F1 score improvement of at least 0.005 and the ROC\u2011AUC has not dropped by more than 0.01; a drift alert alone does not authorize promotion.\",\"sources\":[{\"quote\":\"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC\u2011AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 2107,
+        "completion_tokens": 475,
+        "total_tokens": 2582,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 2431,
+        "completion_tokens": 59,
+        "total_tokens": 2490,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Retrieve drift-runbook for exact quote",
+        "source_id": "drift-runbook"
+      },
+      "reasoning": "Retrieve drift-runbook for exact quote",
+      "valid": true,
+      "result": {
+        "source_id": "drift-runbook",
+        "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n"
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 2409,
+        "completion_tokens": 53,
+        "total_tokens": 2462,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "release policy promotion F1 0.005 ROC\u2011AUC 0.01",
+        "reason": "search release policy details",
+        "source_id": null
+      },
+      "reasoning": "search release policy details",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.34790831339611994
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.2496102936622931
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.11935248532522194
+        }
+      ]
+    }
+  ],
+  "tokens": 13616,
+  "usage_complete": true,
+  "prompt_tokens": 12107,
+  "completion_tokens": 1509,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 104.2208992540036,
+  "token_accounting": "provider_usage"
+}
