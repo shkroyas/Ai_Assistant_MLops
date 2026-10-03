@@ -1,0 +1,49 @@
+{
+  "query_id": "e44f62bf-5ff3-44ac-b431-effb8fee2815",
+  "question": "Change the limit.",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which limit you want to change and in which context (e.g., GPU serving limit, experiment concurrency, release rollout limit, etc.)?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 75,
+        "total_tokens": 846,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User vague. Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_6bcc8b28-294c-4ac9-9231-ff7e1d9965e6",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which limit you want to change and in which context (e.g., GPU serving limit, experiment concurrency, release rollout limit, etc.)?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 846,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 75,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which limit you want to change and in which context (e.g., GPU serving limit, experiment concurrency, release rollout limit, etc.)?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.346733436999784,
+  "token_accounting": "provider_usage"
+}

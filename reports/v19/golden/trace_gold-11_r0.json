@@ -1,0 +1,49 @@
+{
+  "query_id": "c19b0c0c-ff5c-416c-8cd2-554d608433ae",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I cannot provide that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 781,
+        "completion_tokens": 66,
+        "total_tokens": 847,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks personal record. Must respond with clarify? It's personal info not in handbook. Should abstain.",
+        "tool_calls": [
+          {
+            "id": "fc_9a1047d5-a863-4677-8bab-c19ca14618ec",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I cannot provide that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 847,
+  "usage_complete": true,
+  "prompt_tokens": 781,
+  "completion_tokens": 66,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I cannot provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 12.442526399994676,
+  "token_accounting": "provider_usage"
+}

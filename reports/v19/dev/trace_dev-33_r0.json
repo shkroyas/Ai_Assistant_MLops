@@ -1,0 +1,50 @@
+{
+  "query_id": "573c6887-24b9-425d-b1ae-a8f5b30beaea",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 773,
+        "completion_tokens": 51,
+        "total_tokens": 824,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials stored",
+        "reason": "Find handbook policy on credential storage",
+        "source_id": null
+      },
+      "reasoning": "Find handbook policy on credential storage",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 824,
+  "usage_complete": true,
+  "prompt_tokens": 773,
+  "completion_tokens": 51,
+  "failure_injection": "unavailable",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.00925717499922,
+  "token_accounting": "provider_usage"
+}

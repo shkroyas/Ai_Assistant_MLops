@@ -1,0 +1,49 @@
+{
+  "query_id": "1174b9eb-79c4-42d7-9b3a-6be4247d2983",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t provide that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 68,
+        "total_tokens": 842,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks company annual revenue, which is likely not in handbook. Should abstain.",
+        "tool_calls": [
+          {
+            "id": "fc_b4b48d6f-00e7-40d5-aab3-c8923507ce95",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t provide that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 842,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 68,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 12.646143853002286,
+  "token_accounting": "provider_usage"
+}
