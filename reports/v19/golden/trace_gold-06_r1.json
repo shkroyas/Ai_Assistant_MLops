@@ -1,0 +1,27 @@
+{
+  "query_id": "afc6b6f0-c9df-4708-bea1-a81667ba97a0",
+  "question": "For the production checklist: Who approves releases, and should golden questions guide prompt revisions?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 3.7260004319250584e-05,
+  "token_accounting": "incomplete"
+}

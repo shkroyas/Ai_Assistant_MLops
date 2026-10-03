@@ -1,0 +1,49 @@
+{
+  "query_id": "d756b953-12c1-4c00-870f-d1578b605d42",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t provide that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 64,
+        "total_tokens": 839,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks for phone number, personal data. Must abstain.",
+        "tool_calls": [
+          {
+            "id": "fc_201f76d3-81bb-420d-b076-d09469fd7bdb",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t provide that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 839,
+  "usage_complete": true,
+  "prompt_tokens": 775,
+  "completion_tokens": 64,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.631762430995877,
+  "token_accounting": "provider_usage"
+}

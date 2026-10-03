@@ -1,0 +1,50 @@
+{
+  "query_id": "641a32d6-8b79-4ce1-a0a1-4613d65fc9db",
+  "question": "For the production checklist: What is the retry limit?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 778,
+        "completion_tokens": 54,
+        "total_tokens": 832,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "reason": "Find retry limit in production checklist",
+        "source_id": null
+      },
+      "reasoning": "Find retry limit in production checklist",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 832,
+  "usage_complete": true,
+  "prompt_tokens": 778,
+  "completion_tokens": 54,
+  "failure_injection": "timeout",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.041058631999476,
+  "token_accounting": "provider_usage"
+}

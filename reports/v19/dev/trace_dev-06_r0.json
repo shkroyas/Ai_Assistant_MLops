@@ -1,0 +1,97 @@
+{
+  "query_id": "cc4ec39b-089b-47e5-b49d-588a32af5c84",
+  "question": "What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 778,
+        "completion_tokens": 61,
+        "total_tokens": 839,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "significant drift promotion what follows significant drift permits promotion",
+        "reason": "find handbook section on drift and promotion",
+        "source_id": null
+      },
+      "reasoning": "find handbook section on drift and promotion",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.34426518380641935
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.15158734917640684
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.11094004511833191
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Significant drift (defined as an absolute mean MonthlyCharges shift\\u202f>\\u202f$15 or churn\\u2011rate shift\\u202f>\\u202f0.05) does not itself trigger a model promotion. Instead, it initiates a challenger\\u2011training and evaluation cycle, after which a control batch is evaluated before any alerts are trusted. Promotion to production is only allowed when the challenger model is evaluated on a frozen holdout set and meets the release criteria: its F1 score must improve by at least\\u202f0.005 and its ROC\\u2011AUC must not drop by more than\\u202f0.01. The previous production version must be retained for rollback, and the project owner acts as the release approver.\", \"sources\": [{\"quote\": \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\", \"source_id\": \"drift-runbook\"}, {\"quote\": \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1136,
+        "completion_tokens": 345,
+        "total_tokens": 1481,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have drift-runbook defines significant drift and says triggers challenger training, not promotion. Release-policy defines promotion criteria. Answer: after significant drift, challenger training and evaluation; promotion permitted when evaluation meets criteria: F1 improvement >=0.005 and ROC-AUC drop <=0.01, plus frozen holdout evaluation. Provide answer with sources.",
+        "tool_calls": [
+          {
+            "id": "fc_2c985e87-9edb-4271-9ce0-c8f7d56a75e6",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Significant drift (defined as an absolute mean MonthlyCharges shift\u202f\\u003e\u202f$15 or churn\u2011rate shift\u202f\\u003e\u202f0.05) does not itself trigger a model promotion. Instead, it initiates a challenger\u2011training and evaluation cycle, after which a control batch is evaluated before any alerts are trusted. Promotion to production is only allowed when the challenger model is evaluated on a frozen holdout set and meets the release criteria: its F1 score must improve by at least\u202f0.005 and its ROC\u2011AUC must not drop by more than\u202f0.01. The previous production version must be retained for rollback, and the project owner acts as the release approver.\",\"sources\":[{\"quote\":\"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2320,
+  "usage_complete": true,
+  "prompt_tokens": 1914,
+  "completion_tokens": 406,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "Significant drift (defined as an absolute mean MonthlyCharges shift\u202f>\u202f$15 or churn\u2011rate shift\u202f>\u202f0.05) does not itself trigger a model promotion. Instead, it initiates a challenger\u2011training and evaluation cycle, after which a control batch is evaluated before any alerts are trusted. Promotion to production is only allowed when the challenger model is evaluated on a frozen holdout set and meets the release criteria: its F1 score must improve by at least\u202f0.005 and its ROC\u2011AUC must not drop by more than\u202f0.01. The previous production version must be retained for rollback, and the project owner acts as the release approver.",
+    "sources": [
+      {
+        "source_id": "drift-runbook",
+        "quote": "Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 30.334893707004085,
+  "token_accounting": "provider_usage"
+}

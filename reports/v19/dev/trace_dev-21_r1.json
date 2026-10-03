@@ -1,0 +1,49 @@
+{
+  "query_id": "ed1d9389-f7fa-4aaa-a44d-5f2e89f1f13d",
+  "question": "Should I use the better one?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you clarify which specific options or tools you are comparing, so I can advise whether the better one should be used?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 68,
+        "total_tokens": 842,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User vague. Need clarification.",
+        "tool_calls": [
+          {
+            "id": "fc_88a3b1c5-9118-48ef-8f6a-2dcdf027733b",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you clarify which specific options or tools you are comparing, so I can advise whether the better one should be used?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 842,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 68,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify which specific options or tools you are comparing, so I can advise whether the better one should be used?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.400142072998278,
+  "token_accounting": "provider_usage"
+}

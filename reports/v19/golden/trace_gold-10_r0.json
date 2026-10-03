@@ -1,0 +1,49 @@
+{
+  "query_id": "c05f357c-1654-49a7-980d-39a6230e799d",
+  "question": "For the production checklist: What is the company annual revenue?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I cannot provide the company's annual revenue as it is not covered in the MLOps handbook and I have no personal records of that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 779,
+        "completion_tokens": 81,
+        "total_tokens": 860,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks company annual revenue, not in handbook. Should abstain.",
+        "tool_calls": [
+          {
+            "id": "fc_ff00092d-e19f-4205-9617-48f551effb58",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I cannot provide the company's annual revenue as it is not covered in the MLOps handbook and I have no personal records of that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 860,
+  "usage_complete": true,
+  "prompt_tokens": 779,
+  "completion_tokens": 81,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I cannot provide the company's annual revenue as it is not covered in the MLOps handbook and I have no personal records of that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.879986430998542,
+  "token_accounting": "provider_usage"
+}

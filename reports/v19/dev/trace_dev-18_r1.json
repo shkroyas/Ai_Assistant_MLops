@@ -1,0 +1,49 @@
+{
+  "query_id": "4223fdef-802f-4471-b8fa-396fce772c42",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t provide that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 60,
+        "total_tokens": 836,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks personal records. Must abstain.",
+        "tool_calls": [
+          {
+            "id": "fc_bb8590fa-13f6-4839-a96a-147348401fee",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t provide that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 836,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 60,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.209743745996093,
+  "token_accounting": "provider_usage"
+}

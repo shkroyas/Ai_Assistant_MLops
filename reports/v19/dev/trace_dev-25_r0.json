@@ -1,0 +1,49 @@
+{
+  "query_id": "60a17783-08f4-46cf-bf48-70bec87c2bf1",
+  "question": "Fix the pipeline.",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which pipeline and what issues need fixing? Please provide details such as the pipeline name, stage, and error messages.\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 70,
+        "total_tokens": 841,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User vague. Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_fa29cea4-926f-437e-84ff-810dddf48c94",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which pipeline and what issues need fixing? Please provide details such as the pipeline name, stage, and error messages.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 841,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 70,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which pipeline and what issues need fixing? Please provide details such as the pipeline name, stage, and error messages.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.192160674996558,
+  "token_accounting": "provider_usage"
+}

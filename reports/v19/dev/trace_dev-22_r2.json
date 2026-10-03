@@ -1,0 +1,49 @@
+{
+  "query_id": "f1918e72-ef35-486e-8dc2-f1e858ec9faa",
+  "question": "Deploy it there.",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you clarify what you would like to deploy and the target environment?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 73,
+        "total_tokens": 844,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User says \"Deploy it there.\" Need clarification: what is \"it\"? ambiguous. Must ask clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_6900a726-1990-4e9d-9a98-7322582902b3",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you clarify what you would like to deploy and the target environment?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 844,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 73,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify what you would like to deploy and the target environment?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.37135202799982,
+  "token_accounting": "provider_usage"
+}

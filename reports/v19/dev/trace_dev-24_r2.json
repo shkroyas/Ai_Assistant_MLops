@@ -1,0 +1,49 @@
+{
+  "query_id": "f93379cb-662d-488c-b15a-8ca417e72061",
+  "question": "Release that version.",
+  "prompt_version": "v19",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which version you would like to release and any relevant details (e.g., service name, target environment)?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 75,
+        "total_tokens": 846,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User says \"Release that version.\" ambiguous. Need clarification.",
+        "tool_calls": [
+          {
+            "id": "fc_fb2b8773-9f11-4f3e-9836-84e6b50fe86f",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which version you would like to release and any relevant details (e.g., service name, target environment)?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 846,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 75,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which version you would like to release and any relevant details (e.g., service name, target environment)?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.974554970998724,
+  "token_accounting": "provider_usage"
+}
