@@ -1,0 +1,11 @@
+# Optional semantic retrieval and bounded review
+
+The default is the existing normalized 512-dimensional lexical hashing encoder. A configuration can explicitly select `embedding_model` and `embedding_revision` to use a pinned SentenceTransformer on CPU. The revision must be an immutable 40-character commit SHA. It downloads the public model into ignored `.models/`, normalizes vectors, disables remote code and credential forwarding, and bounds PyTorch CPU threads to one. The existing locked dependencies already include sentence-transformers and CPU PyTorch.
+
+The evaluated public model is `sentence-transformers/all-MiniLM-L6-v2` at the exact revision in `reports/semantic_embedding_model.json`. Its actual development retrieval probes returned both required sources in all four multi-part questions; lexical retrieval missed complementary sources. This is retrieval evidence, not a full agent benchmark. Corpus identity includes model/revision so persistent Qdrant collections and API caches cannot reuse vectors or answers from another embedding mode. API, experiment and nightly paths select the same configured encoder.
+
+`review_final_answer: true` optionally asks the same agent to review one validated draft within the existing iteration limit. Drafts, raw native messages and every accepted-response token remain in the trace. No draft is treated as source evidence. `review_scope: answered` limits review to factual answers: a development preflight showed reviewing an already-safe refusal could turn it into clarification. Failure-injected retrieval still stops immediately. If review exhausts the iteration budget, the agent abstains rather than accepting an unreviewed draft.
+
+Development-only preflights remain distinct from complete 159-sample cohorts. v26–v30 preflight results include incorrect claims, omissions and regressions; none establishes overall qualification or permits promotion. Frozen references, deterministic checks and native judge criteria remain unchanged. Model-directed retrieval and source validation continue to apply; no response is populated from evaluation labels.
+
+Implementation API: https://www.sbert.net/docs/package_reference/sentence_transformer/model.html. Public model card: https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2.

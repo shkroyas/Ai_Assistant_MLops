@@ -1,0 +1,61 @@
+{
+  "model": {
+    "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "purpose": "Optional semantic retrieval evaluated on development data before full cohort"
+  },
+  "rows": [
+    {
+      "id": "dev-07",
+      "query": "How is a GPU endpoint authenticated and what is suitable for 12 GB?",
+      "returned_sources": [
+        "gpu-serving",
+        "security",
+        "legacy-policy"
+      ],
+      "required_sources": [
+        "security",
+        "gpu-serving"
+      ]
+    },
+    {
+      "id": "dev-08",
+      "query": "Who approves releases, and should golden questions guide prompt revisions?",
+      "returned_sources": [
+        "release-policy",
+        "experiment-policy",
+        "legacy-policy"
+      ],
+      "required_sources": [
+        "release-policy",
+        "experiment-policy"
+      ]
+    },
+    {
+      "id": "dev-10",
+      "query": "What happens on a search timeout, and does drift alone justify production changes?",
+      "returned_sources": [
+        "drift-runbook",
+        "release-policy",
+        "reliability"
+      ],
+      "required_sources": [
+        "reliability",
+        "release-policy"
+      ]
+    },
+    {
+      "id": "dev-13",
+      "query": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+      "returned_sources": [
+        "legacy-policy",
+        "release-policy",
+        "drift-runbook"
+      ],
+      "required_sources": [
+        "legacy-policy",
+        "release-policy"
+      ]
+    }
+  ]
+}

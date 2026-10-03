@@ -23,7 +23,11 @@ async def main():
         raise RuntimeError("Nightly evaluation requires an established production run")
     baseline, baseline_source = production_baseline(production)
     config = yaml.safe_load(Path(f"configs/{production['version']}.yaml").read_text())
-    provider, corpus = provider_for_config(config), Corpus()
+    provider = provider_for_config(config)
+    corpus = Corpus(
+        embedding_model=config.get("embedding_model"),
+        embedding_revision=config.get("embedding_revision"),
+    )
     provider.fallback_url = None
     try:
         agent = Agent(corpus, provider, config)

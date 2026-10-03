@@ -150,6 +150,7 @@ class Agent:
         messages.append({"role": "user", "content": question})
         answer = None
         had_tool_error = False
+        reviewed_draft = False
         for iteration in range(1, self.config["max_iterations"] + 1):
             try:
                 message, usage = await self.provider.complete(
@@ -198,6 +199,65 @@ class Agent:
                             raise ValueError("Citation not present in retrieved evidence")
                     if had_tool_error and candidate.status == "answered":
                         raise ValueError("Tool failure: abstain or clarify instead of guessing")
+                    if (
+                        self.config.get("review_final_answer", False)
+                        and not reviewed_draft
+                        and (
+                            self.config.get("review_scope", "all") != "answered"
+                            or candidate.status == "answered"
+                        )
+                    ):
+                        reviewed_draft = True
+                        trace["steps"].append(
+                            {
+                                "step": iteration,
+                                "event": "draft_answer",
+                                "draft": candidate.model_dump(),
+                                "raw_response": message,
+                                "usage": usage,
+                                "reasoning": "One bounded self-review before final acceptance",
+                            }
+                        )
+                        review = (
+                            "Review your draft against the actual retrieved evidence and every part "
+                            "of the original question. The draft is not evidence. Correct contradictions, "
+                            "missing conditions, unsupported facts and status mistakes. For policy "
+                            "conflicts, state whether a rule was superseded and give the applicable "
+                            "current criteria supported by evidence. "
+                            "Cite every source supporting a separate claim, including earlier searches. "
+                            "Check claims about which data may guide changes against source wording. "
+                            "Retrieve missing "
+                            "evidence if necessary. Then submit the verified complete final JSON."
+                        )
+                        if native_final:
+                            messages.extend(
+                                [
+                                    {
+                                        "role": "assistant",
+                                        "content": message.get("content"),
+                                        "tool_calls": calls,
+                                    },
+                                    {
+                                        "role": "tool",
+                                        "tool_call_id": calls[0]["id"],
+                                        "content": json.dumps(
+                                            {
+                                                "accepted": False,
+                                                "review_required": True,
+                                                "instruction": review,
+                                            }
+                                        ),
+                                    },
+                                ]
+                            )
+                        else:
+                            messages.extend(
+                                [
+                                    {"role": "assistant", "content": content},
+                                    {"role": "user", "content": review},
+                                ]
+                            )
+                        continue
                     if normalized:
                         trace["steps"].append(
                             {
