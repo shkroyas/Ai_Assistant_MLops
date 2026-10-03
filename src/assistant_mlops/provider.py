@@ -1,5 +1,6 @@
 import asyncio
 import os
+from time import monotonic
 from urllib.parse import urlsplit
 
 import httpx
@@ -14,7 +15,15 @@ class ProviderError(RuntimeError):
 class ChatProvider:
     """OpenAI-compatible providers, including authenticated Jupyter-proxied vLLM."""
 
-    def __init__(self, base_url=None, key=None, model=None, transport=None, auth_prefix="AGENT"):
+    def __init__(
+        self,
+        base_url=None,
+        key=None,
+        model=None,
+        transport=None,
+        auth_prefix="AGENT",
+        request_interval_seconds=0,
+    ):
         self.base_url = (
             base_url
             or os.getenv("AGENT_BASE_URL")
@@ -26,6 +35,11 @@ class ChatProvider:
         self.fallback_url = os.getenv("FALLBACK_BASE_URL")
         self.headers = endpoint_headers(auth_prefix, self.key)
         self.configured = bool(self.key or os.getenv(f"{auth_prefix}_PROXY_TOKEN"))
+        if not 0 <= request_interval_seconds <= 60:
+            raise ValueError("Request pacing interval must be between zero and sixty seconds")
+        self.request_interval_seconds = request_interval_seconds
+        self._pacing_lock = asyncio.Lock()
+        self._last_request = None
 
     async def close(self):
         await self.client.aclose()
@@ -56,6 +70,15 @@ class ChatProvider:
                 headers = {**headers, "Authorization": keys[key_index]}
                 attempt = transient_attempt
                 try:
+                    if self.request_interval_seconds:
+                        async with self._pacing_lock:
+                            if self._last_request is not None:
+                                delay = self.request_interval_seconds - (
+                                    monotonic() - self._last_request
+                                )
+                                if delay > 0:
+                                    await asyncio.sleep(delay)
+                            self._last_request = monotonic()
                     response = await self.client.post(
                         base.rstrip("/") + "/chat/completions",
                         headers=headers,
@@ -120,3 +143,21 @@ class ChatProvider:
                     else:
                         break
         raise ProviderError("All configured model providers failed")
+
+
+def provider_for_config(config):
+    """Choose a recorded provider/model while keeping credentials in the environment."""
+    if config.get("provider", "agent") == "agent":
+        return ChatProvider(
+            model=config.get("model"),
+            request_interval_seconds=config.get("request_interval_seconds", 0),
+        )
+    if config["provider"] != "groq":
+        raise ValueError("Unsupported experiment provider")
+    return ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key=os.getenv("GROQ_API_KEY", ""),
+        model=config.get("model") or os.getenv("GROQ_MODEL") or "openai/gpt-oss-20b",
+        auth_prefix="GROQ",
+        request_interval_seconds=config.get("request_interval_seconds", 0),
+    )

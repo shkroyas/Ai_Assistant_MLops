@@ -14,7 +14,7 @@ from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from assistant_mlops.agent import Agent
-from assistant_mlops.provider import ChatProvider
+from assistant_mlops.provider import ChatProvider, provider_for_config
 from assistant_mlops.retrieval import Corpus
 from assistant_mlops.rag import answer_once
 from assistant_mlops.schemas import Query
@@ -31,7 +31,7 @@ async def lifespan(app):
     selected = os.getenv("ASSISTANT_CONFIG", "configs/v1.yaml")
     config = yaml.safe_load(Path(selected).read_text())
     corpus = Corpus(path=os.getenv("QDRANT_PATH") or None)
-    provider = ChatProvider()
+    provider = provider_for_config(config)
     app.state.agent = Agent(corpus, provider, config)
     app.state.baseline_provider = provider
     if os.getenv("GROQ_API_KEY"):

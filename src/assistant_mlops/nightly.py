@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 from assistant_mlops.agent import Agent
 from assistant_mlops.harness import evaluate, load_cases, write_report
-from assistant_mlops.provider import ChatProvider
+from assistant_mlops.provider import provider_for_config
 from assistant_mlops.regression import deterministic_report
 from assistant_mlops.retrieval import Corpus
 
@@ -22,7 +22,7 @@ async def main():
         raise RuntimeError("Nightly evaluation requires an established production run")
     baseline = mlflow.get_run(production["run_id"]).data.metrics
     config = yaml.safe_load(Path(f"configs/{production['version']}.yaml").read_text())
-    provider, corpus = ChatProvider(), Corpus()
+    provider, corpus = provider_for_config(config), Corpus()
     try:
         agent = Agent(corpus, provider, config)
         rows, metrics = await evaluate(agent, load_cases("datasets/golden_v1.jsonl"), repeats=1)

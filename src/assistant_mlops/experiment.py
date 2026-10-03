@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 from assistant_mlops.agent import Agent
 from assistant_mlops.gate import gate
 from assistant_mlops.harness import evaluate, load_cases, write_report
-from assistant_mlops.provider import ChatProvider
+from assistant_mlops.provider import provider_for_config
 from assistant_mlops.regression import calibrate, deterministic_report, judge
 from assistant_mlops.retrieval import Corpus
 
@@ -48,7 +48,7 @@ async def run(config_path, with_judge=False, diagnosis=None):
             raise ValueError("Diagnosis must cite an existing trace, failure, and one changed axis")
     mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     mlflow.set_experiment("assistant-configurations")
-    provider = ChatProvider()
+    provider = provider_for_config(config)
     # Prompt comparisons must not silently switch models when the GPU fails.
     provider.fallback_url = None
     corpus = Corpus()
