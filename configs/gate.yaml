@@ -1,0 +1,9 @@
+ground_truth_min: 0.85
+judge_min: 0.80
+judge_label_agreement_min: 0.80
+judge_truth_agreement_min: 0.75
+completion_drop: 0.05
+tool_correctness_min: 0.90
+hard_failure_max: 0.05
+token_ratio_max: 1.30
+step_ratio_max: 1.25
