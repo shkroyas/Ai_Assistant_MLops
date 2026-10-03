@@ -1,0 +1,34 @@
+{
+  "query_id": "50b58b03-1b40-483f-bb14-102242a9555a",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"abstain\",\n  \"answer\": \"I\u2019m sorry, but I can\u2019t provide that information.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 618,
+        "completion_tokens": 119,
+        "total_tokens": 737,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 737,
+  "usage_complete": true,
+  "prompt_tokens": 618,
+  "completion_tokens": 119,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.334373033998418,
+  "token_accounting": "provider_usage"
+}

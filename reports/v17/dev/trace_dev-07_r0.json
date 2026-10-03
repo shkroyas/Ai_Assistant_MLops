@@ -1,0 +1,121 @@
+{
+  "query_id": "132dbde2-2844-4716-a958-e1e966a70a6d",
+  "question": "How is a GPU endpoint authenticated and what is suitable for 12 GB?",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 619,
+        "completion_tokens": 95,
+        "total_tokens": 714,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "GPU endpoint authentication 12 GB suitable",
+        "reason": "Find authentication method for GPU endpoint and recommendation for 12 GB GPU",
+        "source_id": null
+      },
+      "reasoning": "Find authentication method for GPU endpoint and recommendation for 12 GB GPU",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.20751435555277808
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.18164975702388536
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.10156734549146085
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1013,
+        "completion_tokens": 74,
+        "total_tokens": 1087,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "GPU endpoint authentication",
+        "reason": "Find how GPU endpoint is authenticated",
+        "source_id": null
+      },
+      "reasoning": "Find how GPU endpoint is authenticated",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.23094011198088576
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.08268982743716129
+        },
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.07698003732696192
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\n  \"status\":\"answered\",\n  \"answer\":\"The GPU model endpoint is secured with a bearer\u2011token authentication scheme \u2013 you must include a valid token (typically an API key) in the Authorization header when calling the endpoint. For a GPU with only 12\u202fGB of memory, the handbook recommends using an AWQ\u2011quantized model (e.g., an AWQ\u2011quantized version of the planned model) instead of the full\u2011precision 24\u202fGB model.\",\n  \"sources\":[\n    {\n      \"source_id\":\"security\",\n      \"quote\":\"The GPU model endpoint requires a bearer token.\"\n    },\n    {\n      \"source_id\":\"gpu-serving\",\n      \"quote\":\"For a 12 GB slot use an AWQ quantized model.\"\n    }\n  ]\n}",
+      "usage": {
+        "prompt_tokens": 1358,
+        "completion_tokens": 334,
+        "total_tokens": 1692,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 3493,
+  "usage_complete": true,
+  "prompt_tokens": 2990,
+  "completion_tokens": 503,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The GPU model endpoint is secured with a bearer\u2011token authentication scheme \u2013 you must include a valid token (typically an API key) in the Authorization header when calling the endpoint. For a GPU with only 12\u202fGB of memory, the handbook recommends using an AWQ\u2011quantized model (e.g., an AWQ\u2011quantized version of the planned model) instead of the full\u2011precision 24\u202fGB model.",
+    "sources": [
+      {
+        "source_id": "security",
+        "quote": "The GPU model endpoint requires a bearer token."
+      },
+      {
+        "source_id": "gpu-serving",
+        "quote": "For a 12 GB slot use an AWQ quantized model."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 43.85609779900551,
+  "token_accounting": "provider_usage"
+}

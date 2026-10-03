@@ -1,0 +1,34 @@
+{
+  "query_id": "850a3a61-e144-430d-921d-ab2e9f1c519b",
+  "question": "Should I use the better one?",
+  "prompt_version": "v17",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you clarify which specific tool, model, or process you are referring to when you ask whether you should use \\\"the better one\\\"? Please provide the options or context you are considering.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 611,
+        "completion_tokens": 142,
+        "total_tokens": 753,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 753,
+  "usage_complete": true,
+  "prompt_tokens": 611,
+  "completion_tokens": 142,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify which specific tool, model, or process you are referring to when you ask whether you should use \"the better one\"? Please provide the options or context you are considering.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.44840383099654,
+  "token_accounting": "provider_usage"
+}
