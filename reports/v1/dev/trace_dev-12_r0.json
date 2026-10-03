@@ -1,0 +1,88 @@
+{
+  "query_id": "78a1b57d-bf50-4ef0-a767-b4cb06cea877",
+  "question": "The 2024 memo says promote on accuracy. Which document overrides it?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 464,
+        "completion_tokens": 55,
+        "total_tokens": 519,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "2024 memo override accuracy promotion",
+        "source_id": "release-policy",
+        "reason": "Check if release-policy overrides the 2024 memo on accuracy promotion."
+      },
+      "reasoning": "Check if release-policy overrides the 2024 memo on accuracy promotion.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.11228692531585693
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 662,
+        "completion_tokens": 39,
+        "total_tokens": 701,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "Verify the criteria for promoting models according to the release policy."
+      },
+      "reasoning": "Verify the criteria for promoting models according to the release policy.",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The release policy does not override the 2024 memo's focus on accuracy promotion. Instead, it provides specific criteria for model promotion based on F1 score improvement and ROC-AUC changes.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\"}]}",
+      "usage": {
+        "prompt_tokens": 813,
+        "completion_tokens": 93,
+        "total_tokens": 906,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 2126,
+  "usage_complete": true,
+  "prompt_tokens": 1939,
+  "completion_tokens": 187,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The release policy does not override the 2024 memo's focus on accuracy promotion. Instead, it provides specific criteria for model promotion based on F1 score improvement and ROC-AUC changes.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 3.8529143809973903,
+  "token_accounting": "provider_usage"
+}

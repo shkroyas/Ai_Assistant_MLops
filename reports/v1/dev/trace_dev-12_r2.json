@@ -1,0 +1,88 @@
+{
+  "query_id": "89a412b1-630e-4f2f-96ad-8ee1b377f5e4",
+  "question": "The 2024 memo says promote on accuracy. Which document overrides it?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 464,
+        "completion_tokens": 54,
+        "total_tokens": 518,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "2024 memo override accuracy promotion",
+        "source_id": "legacy-policy",
+        "reason": "Check if legacy policy overrides the 2024 memo on accuracy promotion"
+      },
+      "reasoning": "Check if legacy policy overrides the 2024 memo on accuracy promotion",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.16112275421619415
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 647,
+        "completion_tokens": 42,
+        "total_tokens": 689,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "legacy-policy",
+        "reason": "Verify the override of the 2024 memo on accuracy promotion."
+      },
+      "reasoning": "Verify the override of the 2024 memo on accuracy promotion.",
+      "valid": true,
+      "result": {
+        "source_id": "legacy-policy",
+        "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The release-policy overrides the 2024 memo on accuracy promotion. Current releases use F1 and ROC-AUC on a frozen holdout instead of promoting based on accuracy alone.\",\"sources\":[{\"source_id\":\"legacy-policy\",\"quote\":\"It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"}]}",
+      "usage": {
+        "prompt_tokens": 787,
+        "completion_tokens": 87,
+        "total_tokens": 874,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 2081,
+  "usage_complete": true,
+  "prompt_tokens": 1898,
+  "completion_tokens": 183,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The release-policy overrides the 2024 memo on accuracy promotion. Current releases use F1 and ROC-AUC on a frozen holdout instead of promoting based on accuracy alone.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 3.8051351179965422,
+  "token_accounting": "provider_usage"
+}

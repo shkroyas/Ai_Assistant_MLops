@@ -1,0 +1,34 @@
+{
+  "query_id": "914fbf4d-d092-46db-898c-e0d022e60a3e",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"The project owner's phone number is not provided in the available sources.\"}",
+      "usage": {
+        "prompt_tokens": 455,
+        "completion_tokens": 24,
+        "total_tokens": 479,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 479,
+  "usage_complete": true,
+  "prompt_tokens": 455,
+  "completion_tokens": 24,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "The project owner's phone number is not provided in the available sources.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5152595399995334,
+  "token_accounting": "provider_usage"
+}

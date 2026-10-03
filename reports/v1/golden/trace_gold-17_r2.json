@@ -1,0 +1,183 @@
+{
+  "query_id": "762bcd8d-c185-48f2-882f-4341ce31be24",
+  "question": "For the production checklist: What is the production promotion gate?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 459,
+        "completion_tokens": 44,
+        "total_tokens": 503,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "release-policy",
+        "reason": "Finding definition of production promotion gate in release policy."
+      },
+      "reasoning": "Finding definition of production promotion gate in release policy.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 536,
+        "completion_tokens": 44,
+        "total_tokens": 580,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "experiment-policy",
+        "reason": "Trying alternative source for definition of production promotion gate."
+      },
+      "reasoning": "Trying alternative source for definition of production promotion gate.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 613,
+        "completion_tokens": 47,
+        "total_tokens": 660,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "drift-runbook",
+        "reason": "Exploring drift runbook for production promotion gate definition."
+      },
+      "reasoning": "Exploring drift runbook for production promotion gate definition.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 693,
+        "completion_tokens": 44,
+        "total_tokens": 737,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "service-catalog",
+        "reason": "Checking service catalog for production promotion gate information."
+      },
+      "reasoning": "Checking service catalog for production promotion gate information.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 770,
+        "completion_tokens": 44,
+        "total_tokens": 814,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "legacy-policy",
+        "reason": "Reviewing legacy policy for production promotion gate details."
+      },
+      "reasoning": "Reviewing legacy policy for production promotion gate details.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 847,
+        "completion_tokens": 44,
+        "total_tokens": 891,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "reliability",
+        "reason": "Examining reliability guidelines for production promotion gate."
+      },
+      "reasoning": "Examining reliability guidelines for production promotion gate.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 924,
+        "completion_tokens": 41,
+        "total_tokens": 965,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "source_id": "security",
+        "reason": "Checking security policies for production promotion gate."
+      },
+      "reasoning": "Checking security policies for production promotion gate.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 5150,
+  "usage_complete": true,
+  "prompt_tokens": 4842,
+  "completion_tokens": 308,
+  "failure_injection": "malformed",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.376568640000187,
+  "token_accounting": "provider_usage"
+}

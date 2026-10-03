@@ -1,0 +1,9 @@
+{
+  "judge_label_agreement": 1.0,
+  "judge_false_pass_rate": 0.0,
+  "disagreements": [],
+  "calibration_review_approved": 1.0,
+  "identity_sha256": "b675a13f5fa3d59bce94226e5bc0b13280cf55282181688ae666de9dc3aa1688",
+  "judge_provider": "groq",
+  "judge_model": "openai/gpt-oss-20b"
+}

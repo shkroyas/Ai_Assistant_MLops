@@ -1,0 +1,34 @@
+{
+  "query_id": "76ab3c4f-107a-4f94-a159-962f8cdb5e80",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you please provide more details on which provider and the context of the production checklist you are referring to?\", \"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 461,
+        "completion_tokens": 34,
+        "total_tokens": 495,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 495,
+  "usage_complete": true,
+  "prompt_tokens": 461,
+  "completion_tokens": 34,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please provide more details on which provider and the context of the production checklist you are referring to?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7121000759980234,
+  "token_accounting": "provider_usage"
+}

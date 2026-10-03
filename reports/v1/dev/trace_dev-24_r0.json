@@ -1,0 +1,169 @@
+{
+  "query_id": "ca7079a4-b32f-42d7-9d17-fa36908e85a7",
+  "question": "Release that version.",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to proceed with a release.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 451,
+        "completion_tokens": 42,
+        "total_tokens": 493,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to cite exact quotes regarding validation failures.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 518,
+        "completion_tokens": 44,
+        "total_tokens": 562,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to cite exact quotes regarding validation failures.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 587,
+        "completion_tokens": 44,
+        "total_tokens": 631,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to cite exact quotes regarding validation failures.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 656,
+        "completion_tokens": 44,
+        "total_tokens": 700,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to cite exact quotes regarding validation failures.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 725,
+        "completion_tokens": 44,
+        "total_tokens": 769,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to cite exact quotes regarding validation failures.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 794,
+        "completion_tokens": 44,
+        "total_tokens": 838,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"abstain\",\"answer\":\"Insufficient information to cite exact quotes regarding validation failures.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Releases must be based on thorough testing and validation.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 863,
+        "completion_tokens": 44,
+        "total_tokens": 907,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 4900,
+  "usage_complete": true,
+  "prompt_tokens": 4594,
+  "completion_tokens": 306,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.3684287819996825,
+  "token_accounting": "provider_usage"
+}

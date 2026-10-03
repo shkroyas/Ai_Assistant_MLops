@@ -1,0 +1,183 @@
+{
+  "query_id": "dd158fc3-3500-4090-aea7-c9a7ecb3fd50",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 458,
+        "completion_tokens": 45,
+        "total_tokens": 503,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "release-policy",
+        "reason": "Find the policy on credential storage for production checklist."
+      },
+      "reasoning": "Find the policy on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 535,
+        "completion_tokens": 46,
+        "total_tokens": 581,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "legacy-policy",
+        "reason": "Find an alternative policy on credential storage for production checklist."
+      },
+      "reasoning": "Find an alternative policy on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 613,
+        "completion_tokens": 44,
+        "total_tokens": 657,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "security",
+        "reason": "Find security guidelines on credential storage for production checklist."
+      },
+      "reasoning": "Find security guidelines on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 689,
+        "completion_tokens": 48,
+        "total_tokens": 737,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "drift-runbook",
+        "reason": "Find runbook recommendations on credential storage for production checklist."
+      },
+      "reasoning": "Find runbook recommendations on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 769,
+        "completion_tokens": 45,
+        "total_tokens": 814,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "experiment-policy",
+        "reason": "Find experimental policy on credential storage for production checklist."
+      },
+      "reasoning": "Find experimental policy on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 846,
+        "completion_tokens": 46,
+        "total_tokens": 892,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "reliability",
+        "reason": "Find reliability guidelines on credential storage for production checklist."
+      },
+      "reasoning": "Find reliability guidelines on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 924,
+        "completion_tokens": 47,
+        "total_tokens": 971,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "source_id": "service-catalog",
+        "reason": "Find service catalog policies on credential storage for production checklist."
+      },
+      "reasoning": "Find service catalog policies on credential storage for production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 5155,
+  "usage_complete": true,
+  "prompt_tokens": 4834,
+  "completion_tokens": 321,
+  "failure_injection": "unavailable",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.576913720000448,
+  "token_accounting": "provider_usage"
+}

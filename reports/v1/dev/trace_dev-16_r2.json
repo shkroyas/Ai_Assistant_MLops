@@ -1,0 +1,34 @@
+{
+  "query_id": "1c05e903-79eb-4e7f-be51-8d41fd828360",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The information about the company's annual revenue is not available in the provided sources.\"}",
+      "usage": {
+        "prompt_tokens": 454,
+        "completion_tokens": 27,
+        "total_tokens": 481,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 481,
+  "usage_complete": true,
+  "prompt_tokens": 454,
+  "completion_tokens": 27,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The information about the company's annual revenue is not available in the provided sources.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5703503179975087,
+  "token_accounting": "provider_usage"
+}

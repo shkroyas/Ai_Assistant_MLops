@@ -1,0 +1,88 @@
+{
+  "query_id": "337764a7-a0ac-4636-ab90-1461dfc1ddb2",
+  "question": "Where must API keys be kept?",
+  "prompt_version": "v1",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 454,
+        "completion_tokens": 42,
+        "total_tokens": 496,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "where must api keys be kept",
+        "source_id": "security",
+        "reason": "find policy on storing API keys"
+      },
+      "reasoning": "find policy on storing API keys",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.2787473514262168
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 621,
+        "completion_tokens": 34,
+        "total_tokens": 655,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "security",
+        "reason": "determine specific storage location for API keys"
+      },
+      "reasoning": "determine specific storage location for API keys",
+      "valid": true,
+      "result": {
+        "source_id": "security",
+        "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"API keys must be kept in a local git-ignored .env file or a cloud secret manager.\",\"sources\":[{\"source_id\":\"security\",\"quote\":\"API keys belong in a local git-ignored .env file or cloud secret manager.\"}]}",
+      "usage": {
+        "prompt_tokens": 750,
+        "completion_tokens": 56,
+        "total_tokens": 806,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1957,
+  "usage_complete": true,
+  "prompt_tokens": 1825,
+  "completion_tokens": 132,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "API keys must be kept in a local git-ignored .env file or a cloud secret manager.",
+    "sources": [
+      {
+        "source_id": "security",
+        "quote": "API keys belong in a local git-ignored .env file or cloud secret manager."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 2.774419551999017,
+  "token_accounting": "provider_usage"
+}
