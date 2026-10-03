@@ -1,0 +1,198 @@
+{
+  "query_id": "366595e6-3cc5-457d-9327-06ae0df04ce6",
+  "question": "For the production checklist: What is the production promotion gate?",
+  "prompt_version": "v9",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 679,
+        "completion_tokens": 184,
+        "total_tokens": 863,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "reason": "Finding the definition of the production promotion gate in the MLOps handbook"
+      },
+      "reasoning": "Finding the definition of the production promotion gate in the MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 679,
+        "completion_tokens": 184,
+        "total_tokens": 863,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate in release-policy",
+        "reason": "Specifically looking for the production promotion gate in the release-policy document"
+      },
+      "reasoning": "Specifically looking for the production promotion gate in the release-policy document",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 818,
+        "completion_tokens": 90,
+        "total_tokens": 908,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "definition of production promotion gate in MLOps handbook",
+        "reason": "Retrieving the definition of the production promotion gate from the MLOps handbook"
+      },
+      "reasoning": "Retrieving the definition of the production promotion gate from the MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 818,
+        "completion_tokens": 90,
+        "total_tokens": 908,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate in release-policy",
+        "reason": "Specifically looking for the production promotion gate in the release-policy document"
+      },
+      "reasoning": "Specifically looking for the production promotion gate in the release-policy document",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 965,
+        "completion_tokens": 84,
+        "total_tokens": 1049,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate in experiment-policy",
+        "reason": "Checking the experiment-policy document for information on the production promotion gate"
+      },
+      "reasoning": "Checking the experiment-policy document for information on the production promotion gate",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 965,
+        "completion_tokens": 84,
+        "total_tokens": 1049,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate in service-catalog",
+        "reason": "Checking the service-catalog document for information on the production promotion gate"
+      },
+      "reasoning": "Checking the service-catalog document for information on the production promotion gate",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1106,
+        "completion_tokens": 89,
+        "total_tokens": 1195,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "definition of production promotion gate in MLOps handbook",
+        "reason": "Retrieving the definition of the production promotion gate from the MLOps handbook"
+      },
+      "reasoning": "Retrieving the definition of the production promotion gate from the MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1106,
+        "completion_tokens": 89,
+        "total_tokens": 1195,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate in legacy-policy",
+        "reason": "Checking the legacy-policy document for information on the production promotion gate"
+      },
+      "reasoning": "Checking the legacy-policy document for information on the production promotion gate",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 4015,
+  "usage_complete": true,
+  "prompt_tokens": 3568,
+  "completion_tokens": 447,
+  "failure_injection": "malformed",
+  "tool_errors": 8,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 9.194957603998773,
+  "token_accounting": "provider_usage"
+}

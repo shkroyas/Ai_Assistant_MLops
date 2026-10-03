@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v8/dev/trace_dev-01_r0.json",
+  "failure": "A clear handbook question received unnecessary clarification without retrieval; repeated protocol additions failed to enforce the retrieval decision.",
+  "change": "Replace the accumulated prompt with a concise decision protocol, explicitly defaulting factual questions to the handbook context.",
+  "axis": "prompt.decision_protocol_simplification"
+}

@@ -1,0 +1,110 @@
+{
+  "query_id": "9b3c93cc-0ec5-43a9-9d78-cd3731bcec56",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v9",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 673,
+        "completion_tokens": 83,
+        "total_tokens": 756,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to store credentials",
+        "reason": "Find guidelines on storing credentials"
+      },
+      "reasoning": "Find guidelines on storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 737,
+        "completion_tokens": 34,
+        "total_tokens": 771,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "best practices for storing credentials",
+        "reason": "Find best practices for storing credentials"
+      },
+      "reasoning": "Find best practices for storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 803,
+        "completion_tokens": 44,
+        "total_tokens": 847,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "example-company MLOps handbook storage of credentials",
+        "reason": "Find specific guidelines in the MLOps handbook for storing credentials"
+      },
+      "reasoning": "Find specific guidelines in the MLOps handbook for storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 879,
+        "completion_tokens": 42,
+        "total_tokens": 921,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "MLOps handbook storage of credentials",
+        "reason": "Find specific guidelines in the MLOps handbook for storing credentials"
+      },
+      "reasoning": "Find specific guidelines in the MLOps handbook for storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 3295,
+  "usage_complete": true,
+  "prompt_tokens": 3092,
+  "completion_tokens": 203,
+  "failure_injection": "unavailable",
+  "tool_errors": 4,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 4.191191894999065,
+  "token_accounting": "provider_usage"
+}

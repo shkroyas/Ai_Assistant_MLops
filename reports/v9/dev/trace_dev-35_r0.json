@@ -1,0 +1,110 @@
+{
+  "query_id": "0018c4a1-d78c-488a-a7c5-b6a3b5c3acfa",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v9",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 677,
+        "completion_tokens": 89,
+        "total_tokens": 766,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model 24 GB",
+        "reason": "Finding the model planned for 24 GB capacity"
+      },
+      "reasoning": "Finding the model planned for 24 GB capacity",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 748,
+        "completion_tokens": 40,
+        "total_tokens": 788,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model with 24 GB memory",
+        "reason": "Finding the model planned for 24 GB memory"
+      },
+      "reasoning": "Finding the model planned for 24 GB memory",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 821,
+        "completion_tokens": 38,
+        "total_tokens": 859,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model 24GB",
+        "reason": "Finding the model planned for 24 GB capacity"
+      },
+      "reasoning": "Finding the model planned for 24 GB capacity",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 892,
+        "completion_tokens": 39,
+        "total_tokens": 931,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model with 24 GB",
+        "reason": "Finding the model planned for 24 GB capacity"
+      },
+      "reasoning": "Finding the model planned for 24 GB capacity",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 3344,
+  "usage_complete": true,
+  "prompt_tokens": 3138,
+  "completion_tokens": 206,
+  "failure_injection": "malformed",
+  "tool_errors": 4,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 4.236916964997363,
+  "token_accounting": "provider_usage"
+}
