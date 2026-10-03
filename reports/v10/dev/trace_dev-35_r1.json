@@ -1,0 +1,110 @@
+{
+  "query_id": "bba32560-5d99-4f7a-bc2d-89821bdc8089",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v10",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 677,
+        "completion_tokens": 93,
+        "total_tokens": 770,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model planned for 24 GB",
+        "reason": "Finding the model planned for 24 GB of GPU memory"
+      },
+      "reasoning": "Finding the model planned for 24 GB of GPU memory",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 752,
+        "completion_tokens": 43,
+        "total_tokens": 795,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model planned for 24 GB GPU",
+        "reason": "Finding the model planned for 24 GB of GPU memory"
+      },
+      "reasoning": "Finding the model planned for 24 GB of GPU memory",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 828,
+        "completion_tokens": 41,
+        "total_tokens": 869,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model 24 GB GPU",
+        "reason": "Finding the model associated with 24 GB of GPU memory"
+      },
+      "reasoning": "Finding the model associated with 24 GB of GPU memory",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 902,
+        "completion_tokens": 42,
+        "total_tokens": 944,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model with 24 GB GPU",
+        "reason": "Finding the model associated with 24 GB of GPU memory"
+      },
+      "reasoning": "Finding the model associated with 24 GB of GPU memory",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 3378,
+  "usage_complete": true,
+  "prompt_tokens": 3159,
+  "completion_tokens": 219,
+  "failure_injection": "malformed",
+  "tool_errors": 4,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 6.083631004999916,
+  "token_accounting": "provider_usage"
+}

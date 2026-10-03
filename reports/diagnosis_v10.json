@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v9/dev/trace_dev-21_r0.json",
+  "failure": "Generic citation-repair feedback caused an ambiguous query to search for output-validation policy, instead of repairing its intended clarification JSON.",
+  "change": "Enable status-preserving, error-specific validation feedback. Keep prompt, model, retrieval and budget fixed.",
+  "axis": "config.validation_feedback"
+}
