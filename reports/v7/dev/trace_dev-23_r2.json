@@ -1,0 +1,34 @@
+{
+  "query_id": "a93f6761-ad11-4087-b095-609026b2c098",
+  "question": "Change the limit.",
+  "prompt_version": "v7",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"What specific limit would you like to change and to what value?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1141,
+        "completion_tokens": 26,
+        "total_tokens": 1167,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1167,
+  "usage_complete": true,
+  "prompt_tokens": 1141,
+  "completion_tokens": 26,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "What specific limit would you like to change and to what value?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5596846790031123,
+  "token_accounting": "provider_usage"
+}

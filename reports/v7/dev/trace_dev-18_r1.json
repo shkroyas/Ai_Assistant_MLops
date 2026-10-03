@@ -1,0 +1,34 @@
+{
+  "query_id": "60384e17-2f56-4982-912a-2cc87d10dea2",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v7",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The available evidence does not establish that fact.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1146,
+        "completion_tokens": 22,
+        "total_tokens": 1168,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1168,
+  "usage_complete": true,
+  "prompt_tokens": 1146,
+  "completion_tokens": 22,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The available evidence does not establish that fact.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.47501134499907494,
+  "token_accounting": "provider_usage"
+}

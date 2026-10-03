@@ -1,0 +1,7 @@
+{
+  "trace_path": "reports/v6/dev/trace_dev-01_r0.json",
+  "failure": "A clear single-document development question regressed to clarification despite generic handbook policy being available.",
+  "change": "Replace the two-source minimum with evidence-based citation coverage: one document can support multiple clauses; cite additional documents only when needed, retaining explicit historical/current authority reasoning.",
+  "axis": "prompt.citation_coverage_policy",
+  "hypothesis": "The stronger citation-count instruction may have made the model over-cautious; replacing quantity with coverage is tested as a single axis."
+}
