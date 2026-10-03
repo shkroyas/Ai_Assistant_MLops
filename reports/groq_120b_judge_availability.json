@@ -1,0 +1,92 @@
+[
+  {
+    "key_index": 1,
+    "http_status": 200,
+    "error_code": null,
+    "quota_counts": [],
+    "usage": {
+      "queue_time": 0.21589055,
+      "prompt_tokens": 104,
+      "prompt_time": 0.031028137,
+      "completion_tokens": 73,
+      "completion_time": 0.152073287,
+      "total_tokens": 177,
+      "total_time": 0.183101424,
+      "completion_tokens_details": {
+        "reasoning_tokens": 62
+      }
+    }
+  },
+  {
+    "key_index": 2,
+    "http_status": 200,
+    "error_code": null,
+    "quota_counts": [],
+    "usage": {
+      "queue_time": 0.049014905,
+      "prompt_tokens": 104,
+      "prompt_time": 0.003885674,
+      "completion_tokens": 21,
+      "completion_time": 0.044272974,
+      "total_tokens": 125,
+      "total_time": 0.048158648,
+      "completion_tokens_details": {
+        "reasoning_tokens": 10
+      }
+    }
+  },
+  {
+    "key_index": 3,
+    "http_status": 200,
+    "error_code": null,
+    "quota_counts": [],
+    "usage": {
+      "queue_time": 0.333886512,
+      "prompt_tokens": 104,
+      "prompt_time": 0.006177994,
+      "completion_tokens": 49,
+      "completion_time": 0.102173214,
+      "total_tokens": 153,
+      "total_time": 0.108351208,
+      "completion_tokens_details": {
+        "reasoning_tokens": 38
+      }
+    }
+  },
+  {
+    "key_index": 4,
+    "http_status": 200,
+    "error_code": null,
+    "quota_counts": [],
+    "usage": {
+      "queue_time": 0.400235046,
+      "prompt_tokens": 104,
+      "prompt_time": 0.030832079,
+      "completion_tokens": 19,
+      "completion_time": 0.040196568,
+      "total_tokens": 123,
+      "total_time": 0.071028647,
+      "completion_tokens_details": {
+        "reasoning_tokens": 8
+      }
+    }
+  },
+  {
+    "key_index": 5,
+    "http_status": 200,
+    "error_code": null,
+    "quota_counts": [],
+    "usage": {
+      "queue_time": 0.356922605,
+      "prompt_tokens": 104,
+      "prompt_time": 0.02685527,
+      "completion_tokens": 53,
+      "completion_time": 0.110762401,
+      "total_tokens": 157,
+      "total_time": 0.137617671,
+      "completion_tokens_details": {
+        "reasoning_tokens": 42
+      }
+    }
+  }
+]

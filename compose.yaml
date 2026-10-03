@@ -5,6 +5,7 @@ services:
     build: .
     env_file: .env
     ports: ["127.0.0.1:8000:8000"]
+    volumes: ["./configs:/app/configs:ro"]
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 10s

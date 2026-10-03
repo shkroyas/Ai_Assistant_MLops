@@ -13,6 +13,11 @@ import matplotlib.pyplot as plt
 
 def summarize():
     rows = []
+    tracking = {}
+    comparison = Path("reports/mlflow_comparison.csv")
+    if comparison.exists():
+        with comparison.open() as file:
+            tracking = {row["run_id"]: row for row in csv.DictReader(file)}
     for directory in sorted(
         (p for p in Path("reports").glob("v*") if p.is_dir() and p.name[1:].isdigit()),
         key=lambda p: int(p.name[1:]),
@@ -31,6 +36,9 @@ def summarize():
                 "version": directory.name,
                 "model": config.get("model", "Qwen/Qwen2.5-7B-Instruct"),
                 "run_id": decision["run_id"],
+                "judge_model": tracking.get(decision["run_id"], {}).get(
+                    "params.judge_model", "unrecorded"
+                ),
                 "development_completion": metrics["task_completion_rate"],
                 "golden_truth_pass": metrics["pct_ground_truth_passed"],
                 "judge_pass": metrics["pct_judge_passed"],
@@ -51,7 +59,9 @@ def summarize():
         "",
         "35 development and 18 frozen golden questions, each repeated three times. "
         "The CSV records the selected agent model per configuration; "
-        "independent judge: Groq GPT-OSS-20B. "
+        "The CSV also records each judge model from its actual MLflow parameters. "
+        "GPT-OSS agents and judges share a family, and equal model names share weights; "
+        "separate calls are not independent-model validation. "
         "Only versions with completed native judge reports are shown. "
         "All MLflow runs, including interrupted and agent-only phases, remain in mlflow_comparison.csv.",
         "",

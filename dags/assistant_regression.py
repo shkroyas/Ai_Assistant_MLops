@@ -26,9 +26,11 @@ def health_branch():
             else os.getenv("ASSISTANT_CONFIG", "configs/v1.yaml")
         )
         config = yaml.safe_load((ROOT / selected).read_text())
-        groq = config.get("provider") == "groq"
-        base = "https://api.groq.com/openai/v1" if groq else os.getenv("AGENT_BASE_URL", "")
-        prefix = "GROQ" if groq else "AGENT"
+        provider = config.get("provider")
+        base, prefix = {
+            "groq": ("https://api.groq.com/openai/v1", "GROQ"),
+            "gemini": ("https://generativelanguage.googleapis.com/v1beta/openai", "GEMINI"),
+        }.get(provider, (os.getenv("AGENT_BASE_URL", ""), "AGENT"))
         key = os.getenv(prefix + "_API_KEY", "")
         model = config.get("model") or os.getenv(prefix + "_MODEL")
         url = base.rstrip("/") + "/models"

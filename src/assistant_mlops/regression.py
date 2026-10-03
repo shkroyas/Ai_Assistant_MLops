@@ -1,10 +1,14 @@
+import asyncio
 import hashlib
 import json
 import os
+import re
 import time
+import uuid
 from datetime import timedelta
 from pathlib import Path
 from typing import ClassVar
+from urllib.parse import urlsplit
 
 import pandas as pd
 from evidently import DataDefinition, Dataset, Report
@@ -21,13 +25,16 @@ from evidently.llm.utils.wrapper import (
 )
 from evidently.metrics import CategoryCount
 from evidently.tests import gte
+from pydantic import SecretStr
+
+from assistant_mlops.provider import QuotaKeyPool
 
 
 class GroqJudgeOptions(LLMOptions):
     __provider_name__: ClassVar[str] = "groq"
 
     def get_additional_kwargs(self):
-        return {"max_completion_tokens": 512, "reasoning_effort": "low"}
+        return {"max_completion_tokens": 512, "reasoning_effort": "low", "num_retries": 0}
 
 
 @llm_provider("groq", None)
@@ -39,7 +46,11 @@ class GroqJudgeWrapper(LiteLLMWrapper):
             {
                 "model": self.model,
                 "messages": [message.dict() for message in messages],
-                "options": self.options.get_additional_kwargs(),
+                "options": {
+                    key: value
+                    for key, value in self.options.get_additional_kwargs().items()
+                    if key != "num_retries"
+                },
             },
             sort_keys=True,
         )
@@ -48,9 +59,66 @@ class GroqJudgeWrapper(LiteLLMWrapper):
         return directory / (hashlib.sha256(identity.encode()).hexdigest() + ".json")
 
     async def complete(self, messages, seed=None):
-        result = await super().complete(messages, seed)
+        if not hasattr(self, "_judge_lock"):
+            self._judge_lock = asyncio.Lock()
+        async with self._judge_lock:
+            return await self._complete(messages, seed)
+
+    async def _complete(self, messages, seed=None):
+        supplied = [
+            key.strip() for key in os.getenv("JUDGE_API_KEYS", "").split(",") if key.strip()
+        ]
+        if supplied:
+            if self.options.api_url and urlsplit(self.options.api_url).hostname != "api.groq.com":
+                raise ValueError("Judge reserve keys require the official Groq endpoint")
+            if not hasattr(self, "_judge_pool"):
+                self._initial_options = self.options
+                self._initial_key = self.options.get_api_key()
+                keys = [key for key in [self._initial_key, *supplied] if key]
+                self._judge_pool = QuotaKeyPool(
+                    keys, float(os.getenv("JUDGE_REQUEST_INTERVAL_SECONDS") or 15), 180000
+                )
+            pool = self._judge_pool
+            for attempt in range(len(pool.keys)):
+                slot, key = await pool.acquire()
+                try:
+                    self.options = self._initial_options.copy(update={"api_key": SecretStr(key)})
+                    result = await super().complete(messages, seed)
+                    pool.used[slot] += result.input_tokens + result.output_tokens
+                    break
+                except Exception as exc:
+                    status = getattr(exc, "status_code", None)
+                    if status in {401, 403}:
+                        pool.block(slot, float("inf"))
+                    elif status == 429:
+                        headers = getattr(getattr(exc, "response", None), "headers", {})
+                        try:
+                            delay = float(headers.get("retry-after", 0))
+                        except (TypeError, ValueError):
+                            delay = 0
+                        match = re.search(r"try again in ([\d.hms ]+)", str(exc), re.I)
+                        if match:
+                            delay = max(
+                                delay,
+                                sum(
+                                    float(number) * {"h": 3600, "m": 60, "s": 1}[unit]
+                                    for number, unit in re.findall(r"([\d.]+)([hms])", match[1])
+                                ),
+                            )
+                        pool.block(slot, max(pool.interval, delay or 60))
+                    else:
+                        raise
+                    if attempt == len(pool.keys) - 1:
+                        raise RuntimeError(
+                            "All supplied native judge buckets unavailable"
+                        ) from None
+                finally:
+                    self.options = self._initial_options
+                    await pool.release(slot)
+        else:
+            result = await super().complete(messages, seed)
         path = self.cache_path(messages)
-        temporary = path.with_suffix(".tmp")
+        temporary = path.with_suffix("." + uuid.uuid4().hex + ".tmp")
         temporary.write_text(
             json.dumps(
                 {

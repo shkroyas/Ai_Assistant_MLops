@@ -9,6 +9,48 @@ from assistant_mlops.regression import GroqJudgeOptions, GroqJudgeWrapper
 
 
 @pytest.mark.asyncio
+async def test_native_judge_rotates_quota_failure_and_restores_key(monkeypatch, tmp_path):
+    monkeypatch.setenv("JUDGE_API_KEYS", "first,second")
+    monkeypatch.setenv("JUDGE_CACHE_PATH", str(tmp_path))
+    monkeypatch.setenv("JUDGE_REQUEST_INTERVAL_SECONDS", "1")
+    calls = []
+
+    class Limited(Exception):
+        status_code = 429
+
+    async def complete(self, messages, seed=None):
+        key = self.options.get_api_key()
+        calls.append(key)
+        if key == "first":
+            raise Limited("Please try again in 1h2m3s")
+        return LLMResult('{"passed": true}', 50, 10)
+
+    monkeypatch.setattr(LiteLLMWrapper, "complete", complete)
+    wrapper = GroqJudgeWrapper(
+        "openai/gpt-oss-120b", Options.from_list([GroqJudgeOptions(api_key="first")])
+    )
+    result = await wrapper.complete([LLMMessage(role="user", content="question")])
+    assert calls == ["first", "second"]
+    assert result.input_tokens == 50 and result.output_tokens == 10
+    assert wrapper.options.get_api_key() == "first"
+    assert wrapper._judge_pool.used == [0, 60]
+    import time
+
+    assert wrapper._judge_pool.ready[0] - time.monotonic() > 3720
+
+
+@pytest.mark.asyncio
+async def test_native_judge_never_sends_reserve_keys_to_other_host(monkeypatch):
+    monkeypatch.setenv("JUDGE_API_KEYS", "reserve")
+    wrapper = GroqJudgeWrapper(
+        "model",
+        Options.from_list([GroqJudgeOptions(api_key="first", api_url="https://other.example/v1")]),
+    )
+    with pytest.raises(ValueError, match="official Groq"):
+        await wrapper.complete([LLMMessage(role="user", content="question")])
+
+
+@pytest.mark.asyncio
 async def test_judge_reuses_identical_inputs_but_invalidates_changed_prompt(monkeypatch, tmp_path):
     monkeypatch.setenv("JUDGE_CACHE_PATH", str(tmp_path))
     calls = []
