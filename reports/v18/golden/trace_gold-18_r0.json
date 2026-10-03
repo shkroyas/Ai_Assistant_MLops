@@ -1,0 +1,50 @@
+{
+  "query_id": "0abca1ef-f21b-45df-89e6-39fa5965c73d",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 778,
+        "completion_tokens": 75,
+        "total_tokens": 853,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credentials stored",
+        "reason": "Find handbook guidance on storing credentials in production checklist",
+        "source_id": null
+      },
+      "reasoning": "Find handbook guidance on storing credentials in production checklist",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 853,
+  "usage_complete": true,
+  "prompt_tokens": 778,
+  "completion_tokens": 75,
+  "failure_injection": "unavailable",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.14096098200389,
+  "token_accounting": "provider_usage"
+}

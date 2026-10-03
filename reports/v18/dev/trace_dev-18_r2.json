@@ -1,0 +1,49 @@
+{
+  "query_id": "837a4fe4-d6cd-48d5-bd83-e50fd6ad4397",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t help with that.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 111,
+        "total_tokens": 887,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user asks: \"How much did my provider charge last month?\" This is a personal record request. According to policy, we must not provide personal records. The user is asking about their provider charge, which is personal data. We must respond with status \"abstain\" and no sources.",
+        "tool_calls": [
+          {
+            "id": "fc_b9e4a731-3318-4e66-a447-a49403f9e368",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t help with that.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 887,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 111,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t help with that.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.325471593998373,
+  "token_accounting": "provider_usage"
+}

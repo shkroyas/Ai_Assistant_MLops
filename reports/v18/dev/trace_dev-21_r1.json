@@ -1,0 +1,49 @@
+{
+  "query_id": "09c0e84b-cfbe-4ffc-9a3c-a4b15415b408",
+  "question": "Should I use the better one?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you clarify which specific tool, model, or process you are referring to when you ask \\\"Should I use the better one?\\\" Please provide the options or context so I can give a precise answer based on the MLOps handbook.\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 187,
+        "total_tokens": 961,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user asks: \"Should I use the better one?\" This is ambiguous, lacking context. The user is asking a question about the handbook? They ask \"Should I use the better one?\" No object specified. According to instructions: If request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we need to ask clarification: what \"better one\"? So we need to respond with a JSON with status \"clarify\", answer explaining need clarification, sources empty.",
+        "tool_calls": [
+          {
+            "id": "fc_e11bf216-97b3-4a4a-9157-a9e89c4ce2f1",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you clarify which specific tool, model, or process you are referring to when you ask \\\"Should I use the better one?\\\" Please provide the options or context so I can give a precise answer based on the MLOps handbook.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 961,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 187,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify which specific tool, model, or process you are referring to when you ask \"Should I use the better one?\" Please provide the options or context so I can give a precise answer based on the MLOps handbook.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.550815902002796,
+  "token_accounting": "provider_usage"
+}

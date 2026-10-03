@@ -1,0 +1,49 @@
+{
+  "query_id": "033d9847-06ce-4386-9e85-1e09e71a32f7",
+  "question": "Release that version.",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify which version you would like to release, including the project name and version number, and any relevant release details?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 194,
+        "total_tokens": 965,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Release that version.\" This is ambiguous. They likely refer to releasing a version of something, maybe a software version. The request lacks object or options needed to understand it. We need to ask clarifying question. According to instructions: If request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we need to respond with a JSON with status \"clarify\", answer explaining need clarification, sources empty.\n\nThus produce JSON with status clarify, answer: \"Could you specify which version you would like to release and any relevant details (e.g., project name, version number)?\" No sources.\n\n",
+        "tool_calls": [
+          {
+            "id": "fc_125e1298-4ec9-4c35-b1b2-b79cf78c3417",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify which version you would like to release, including the project name and version number, and any relevant release details?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 965,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 194,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which version you would like to release, including the project name and version number, and any relevant release details?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.55729158000031,
+  "token_accounting": "provider_usage"
+}

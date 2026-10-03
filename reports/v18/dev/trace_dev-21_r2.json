@@ -1,0 +1,49 @@
+{
+  "query_id": "4040404a-e421-4771-9d2c-9f4b7c85193c",
+  "question": "Should I use the better one?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you clarify what specific options or tools you are referring to when you ask \\\"Should I use the better one?\\\" Providing the context or the items you are comparing will help me give a precise answer.\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 151,
+        "total_tokens": 925,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user asks: \"Should I use the better one?\" This is ambiguous, lacking context. We need to ask clarifying question. According to instructions, if request lacks object or options needed, ask clarifying question using status clarify. So we need to respond with a JSON object with status \"clarify\", answer explaining we need more info, sources empty.\n\n",
+        "tool_calls": [
+          {
+            "id": "fc_1e067b51-f6ca-4ec6-91ed-d7ceff5a11ba",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you clarify what specific options or tools you are referring to when you ask \\\"Should I use the better one?\\\" Providing the context or the items you are comparing will help me give a precise answer.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 925,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 151,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify what specific options or tools you are referring to when you ask \"Should I use the better one?\" Providing the context or the items you are comparing will help me give a precise answer.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.0080414940021,
+  "token_accounting": "provider_usage"
+}
