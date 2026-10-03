@@ -5,6 +5,68 @@ from assistant_mlops.provider import ChatProvider, ProviderError
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("native_name", "expected_name", "repaired"),
+    [
+        ("json<|channel|>commentary", "json", True),
+        ("shell<|channel|>commentary", "shell<|channel|>commentary", False),
+        ("json<|channel|>analysis", "json<|channel|>analysis", False),
+    ],
+)
+async def test_native_channel_repair_is_exact_and_advertised(native_name, expected_name, repaired):
+    import json
+
+    async def handler(request):
+        assert json.loads(request.content)["disable_tool_validation"] is True
+        return httpx.Response(
+            200,
+            json={
+                "choices": [
+                    {
+                        "message": {
+                            "tool_calls": [
+                                {
+                                    "id": "call-1",
+                                    "function": {"name": native_name, "arguments": "{}"},
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "usage": {"prompt_tokens": 8, "completion_tokens": 2, "total_tokens": 10},
+            },
+        )
+
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="fixture",
+        model="openai/gpt-oss-20b",
+        auth_prefix="GROQ",
+        application_tool_validation=True,
+        transport=httpx.MockTransport(handler),
+    )
+    provider.fallback_url = None
+    try:
+        message, usage = await provider.complete([], [{"function": {"name": "json"}}])
+        assert message["tool_calls"][0]["function"]["name"] == expected_name
+        assert usage["total_tokens"] == 10
+        assert bool(usage.get("tool_name_normalizations")) is repaired
+        if repaired:
+            assert usage["tool_name_normalizations"][0]["original"] == native_name
+    finally:
+        await provider.close()
+
+
+def test_application_validation_is_scoped_to_official_groq():
+    with pytest.raises(ValueError, match="official Groq"):
+        ChatProvider(
+            base_url="https://example.com/v1",
+            model="openai/gpt-oss-20b",
+            application_tool_validation=True,
+        )
+
+
+@pytest.mark.asyncio
 async def test_explicit_reasoning_effort_is_sent_to_supported_model():
     async def handler(request):
         import json
