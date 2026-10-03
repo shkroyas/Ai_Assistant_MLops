@@ -1,0 +1,93 @@
+{
+  "query_id": "d41a2a2f-8964-4183-8d20-849ee0dd4db9",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 45,
+        "total_tokens": 820,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model requests execute concurrently",
+        "reason": "search handbook for concurrency limit",
+        "source_id": null
+      },
+      "reasoning": "search handbook for concurrency limit",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.26024002430416754
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.10961761839681433
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.09549105424387723
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The handbook specifies that the application admits at most four concurrent model requests.\", \"sources\": [{\"quote\": \"The application admits at most four concurrent model requests.\", \"source_id\": \"reliability\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1121,
+        "completion_tokens": 76,
+        "total_tokens": 1197,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have answer: 4 concurrent model requests. Provide source.",
+        "tool_calls": [
+          {
+            "id": "fc_e319e683-0f36-43f0-9f97-e29241c3634f",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The handbook specifies that the application admits at most four concurrent model requests.\",\"sources\":[{\"quote\":\"The application admits at most four concurrent model requests.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2017,
+  "usage_complete": true,
+  "prompt_tokens": 1896,
+  "completion_tokens": 121,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The handbook specifies that the application admits at most four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 30.064078750998306,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,49 @@
+{
+  "query_id": "11c3ef85-88c9-460f-b1dc-ca0679e05e72",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I need to confirm which provider you are referring to and the billing period you mean. Could you specify the provider name and the month in question?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 73,
+        "total_tokens": 849,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_6a979a35-58e3-4b67-87e2-37df233d2671",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I need to confirm which provider you are referring to and the billing period you mean. Could you specify the provider name and the month in question?\",\"reason\":\"User did not specify provider or month.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 849,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 73,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "I need to confirm which provider you are referring to and the billing period you mean. Could you specify the provider name and the month in question?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.22438941099972,
+  "token_accounting": "provider_usage"
+}

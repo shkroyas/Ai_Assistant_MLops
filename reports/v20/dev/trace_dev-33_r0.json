@@ -1,0 +1,50 @@
+{
+  "query_id": "35d2f9e3-706b-475d-959d-cf3e30fee649",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 773,
+        "completion_tokens": 47,
+        "total_tokens": 820,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials stored MLOps handbook",
+        "reason": "search for credential storage policy",
+        "source_id": null
+      },
+      "reasoning": "search for credential storage policy",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 820,
+  "usage_complete": true,
+  "prompt_tokens": 773,
+  "completion_tokens": 47,
+  "failure_injection": "unavailable",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.299490304998471,
+  "token_accounting": "provider_usage"
+}

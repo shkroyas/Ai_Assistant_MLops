@@ -1,0 +1,7 @@
+{
+  "trace_path": "reports/v19/dev/trace_dev-17_r0.json",
+  "failure": "The previous development run spent 10174 tokens clarifying an unavailable GPU hostname instead of abstaining; its mean demand was 2055 tokens/query.",
+  "change": "Change only the agent model from GPT-OSS 120B to GPT-OSS 20B to test reduced token demand with preserved quality. Prompt, native tools, reasoning effort, repetitions, and gate are unchanged.",
+  "allocation": "Agent uses supplied reserve key indices 2\u20135. Judge uses key index 1. Agent and judge share GPT-OSS 20B weights; this limitation is explicit.",
+  "development_smoke": "reports/provider_candidate_20b_smoke.json"
+}

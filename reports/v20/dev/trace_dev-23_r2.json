@@ -1,0 +1,49 @@
+{
+  "query_id": "d3f459e3-667e-40d7-9e2a-fdf29ef19f42",
+  "question": "Change the limit.",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which limit you would like to change and in what context (e.g., resource quota, experiment parameter, etc.)?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 69,
+        "total_tokens": 840,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User says \"Change the limit.\" unclear. Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_32df66ec-5b5e-433d-a91c-89bceacd88aa",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which limit you would like to change and in what context (e.g., resource quota, experiment parameter, etc.)?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 840,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 69,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which limit you would like to change and in what context (e.g., resource quota, experiment parameter, etc.)?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.593256703003135,
+  "token_accounting": "provider_usage"
+}

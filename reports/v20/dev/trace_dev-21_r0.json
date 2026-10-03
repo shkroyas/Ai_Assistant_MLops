@@ -1,0 +1,49 @@
+{
+  "query_id": "321ad530-46bb-4372-9669-1186970f4855",
+  "question": "Should I use the better one?",
+  "prompt_version": "v20",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I need a bit more context to give you the best recommendation. Could you let me know what options you\\u2019re comparing and what you\\u2019re trying to achieve?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 84,
+        "total_tokens": 858,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks \"Should I use the better one?\" ambiguous. Need clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_6d9ddd40-fbb5-4728-b671-30aeeb78f653",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I need a bit more context to give you the best recommendation. Could you let me know what options you\u2019re comparing and what you\u2019re trying to achieve?\",\"reason\":\"Clarify the user's intent\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 858,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 84,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "I need a bit more context to give you the best recommendation. Could you let me know what options you\u2019re comparing and what you\u2019re trying to achieve?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.891604964999715,
+  "token_accounting": "provider_usage"
+}
