@@ -1,0 +1,49 @@
+{
+  "query_id": "6e9325a2-3cec-46d2-8bbc-fbc9b0dad995",
+  "question": "Change the limit.",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify which limit you would like to change and in what context (e.g., GPU usage limit, experiment quota, data retention period, etc.)?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 131,
+        "total_tokens": 902,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says: \"Change the limit.\" This is ambiguous. They refer to the example-company MLOps handbook. They want to change a limit. Which limit? We need to clarify. According to policy, if the request lacks the object or options needed to understand it, ask a clarifying question using status clarify. So we should respond with a clarification.",
+        "tool_calls": [
+          {
+            "id": "fc_cc7891f4-8f3b-4661-adcf-f2dc08f2d50b",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify which limit you would like to change and in what context (e.g., GPU usage limit, experiment quota, data retention period, etc.)?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 902,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 131,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which limit you would like to change and in what context (e.g., GPU usage limit, experiment quota, data retention period, etc.)?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.099981182996999,
+  "token_accounting": "provider_usage"
+}

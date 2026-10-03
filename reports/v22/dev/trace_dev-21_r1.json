@@ -1,0 +1,49 @@
+{
+  "query_id": "6ccdbe51-f514-4297-80a9-698363edca67",
+  "question": "Should I use the better one?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify which two options or items you are comparing so I can give you the best recommendation from the MLOps handbook?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 160,
+        "total_tokens": 934,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says: \"Should I use the better one?\" This is ambiguous. They refer to \"the better one\" but no context. The user is asking about the example-company MLOps handbook. They might be asking about which of two options to use. We need to clarify. According to instructions: If request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we should respond with a clarification. The answer must be JSON with status \"clarify\". Provide explanation. No sources needed.",
+        "tool_calls": [
+          {
+            "id": "fc_f4592f2b-b1e5-4fb2-af0c-37a98cbc1c61",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify which two options or items you are comparing so I can give you the best recommendation from the MLOps handbook?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 934,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 160,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which two options or items you are comparing so I can give you the best recommendation from the MLOps handbook?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.611457594997773,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,10 @@
+{
+  "trace_path": "reports/v21/dev/trace_dev-19_r2.json",
+  "failure": "The missing-owner-phone development question failed before obtaining a valid model response. Other low-effort development samples answered an ambiguous release command instead of clarifying and failed the GPU model/precision contract. The original single provider failure is not attributed to an unproven cause.",
+  "change": "Change only GPT-OSS reasoning effort from low to medium. Keep model, prompt, native protocol repair, tools, retrieval, sampling, repetition and promotion criteria fixed. Hypothesis: additional reasoning improves abstention/clarification decisions and native response reliability.",
+  "supporting_evidence": [
+    "reports/provider_22_medium_smoke.json"
+  ],
+  "development_smoke": "Four development-only medium probes passed, including two missing-phone repetitions, an ambiguous release command, and the GPU model/precision case; all had reported usage and no HTTP errors.",
+  "judge_allocation": "Supplied key index 4, independently from the daily-exhausted first credential. The agent still uses the original four reserve credentials; the same-model judge limitation remains."
+}

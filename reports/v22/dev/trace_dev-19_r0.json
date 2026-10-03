@@ -1,0 +1,49 @@
+{
+  "query_id": "16dbfe98-abc9-40fc-ba39-0cec8d661a02",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t provide that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 138,
+        "total_tokens": 913,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks: \"What is the project owner phone number?\" This is a personal record request. The policy says: \"You answer questions about the example-company MLOps handbook. The user is asking about this handbook unless they explicitly ask for personal records.\" The user is asking for personal record: phone number of project owner. That is personal data. The policy says we must not provide personal records. So we must respond with status abstain. Provide explanation. No sources needed.",
+        "tool_calls": [
+          {
+            "id": "fc_ca593bd7-dd55-4399-8457-36c18f746ab9",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t provide that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 913,
+  "usage_complete": true,
+  "prompt_tokens": 775,
+  "completion_tokens": 138,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 13.719953662002808,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,97 @@
+{
+  "query_id": "141b577b-4ae6-4f8d-a6a4-8697b01191e4",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 786,
+        "completion_tokens": 183,
+        "total_tokens": 969,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "old memo model accuracy 0.82 F1",
+        "reason": "Searching for memo about model evaluation metrics",
+        "source_id": null
+      },
+      "reasoning": "Searching for memo about model evaluation metrics",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.20403742071634837
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12695918186432606
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.11241002254765828
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"No. The legacy memo that says a model can be promoted when accuracy exceeds 0.80 has been superseded by the current release policy.  The current policy requires that a model be evaluated on a frozen hold\\u2011out and that it improves F1 by at least 0.005 (and does not degrade ROC\\u2011AUC by more than 0.01).  Accuracy alone, especially if F1 is worse, does not satisfy the present promotion criteria.\", \"sources\": [{\"quote\": \"# Legacy release memo \\u2014 superseded\\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\", \"source_id\": \"legacy-policy\"}, {\"quote\": \"# Release policy \\u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1159,
+        "completion_tokens": 647,
+        "total_tokens": 1806,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have a user question: \"A model has accuracy 0.82 and worse F1. Is the old memo enough?\" They refer to \"old memo\" presumably the legacy release memo. They want to know if that memo is enough to promote the model. We need to answer based on handbook. The search returned legacy-policy and release-policy. The legacy-policy says old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n\nThus the answer: No, the old memo is not enough; you need to meet current release policy: F1 improvement at least 0.005 and ROC-AUC drop no more than 0.01. Also accuracy alone is not sufficient. So answer: No, old memo is superseded; you need to meet current policy.\n\nWe need to provide sources: legacy-policy and release-policy. Provide quotes. Let's capture quotes.\n\nFrom legacy-policy: \"# Legacy release memo \u2014 superseded This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"\n\nFrom release-policy: \"# Release policy \u2014 example company handbook Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"\n\nThus answer: No, old memo insufficient. Must meet current policy. Provide explanation.\n\nLet's craft JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_58597bb2-ecb3-4921-9c83-6f2041d62e3c",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"No. The legacy memo that says a model can be promoted when accuracy exceeds 0.80 has been superseded by the current release policy.  The current policy requires that a model be evaluated on a frozen hold\u2011out and that it improves F1 by at least 0.005 (and does not degrade ROC\u2011AUC by more than 0.01).  Accuracy alone, especially if F1 is worse, does not satisfy the present promotion criteria.\",\"sources\":[{\"quote\":\"# Legacy release memo \u2014 superseded\\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\",\"source_id\":\"legacy-policy\"},{\"quote\":\"# Release policy \u2014 example company handbook\\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2775,
+  "usage_complete": true,
+  "prompt_tokens": 1945,
+  "completion_tokens": 830,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "No. The legacy memo that says a model can be promoted when accuracy exceeds 0.80 has been superseded by the current release policy.  The current policy requires that a model be evaluated on a frozen hold\u2011out and that it improves F1 by at least 0.005 (and does not degrade ROC\u2011AUC by more than 0.01).  Accuracy alone, especially if F1 is worse, does not satisfy the present promotion criteria.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 30.51915474099951,
+  "token_accounting": "provider_usage"
+}

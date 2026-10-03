@@ -1,0 +1,27 @@
+{
+  "query_id": "9a09e43d-c496-47c5-9c55-2f9016070713",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.6730005629360676e-05,
+  "token_accounting": "incomplete"
+}

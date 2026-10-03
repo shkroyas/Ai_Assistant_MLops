@@ -1,0 +1,27 @@
+{
+  "query_id": "9a3008bc-d1b7-4492-b68f-758bb4fbe476",
+  "question": "What drift triggers challenger training?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": "timeout",
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.383500395808369e-05,
+  "token_accounting": "incomplete"
+}

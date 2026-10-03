@@ -1,0 +1,93 @@
+{
+  "query_id": "bc74e6bd-45b2-414f-bbe8-de339d78fe16",
+  "question": "What model and precision are planned for a 24 GB GPU?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 780,
+        "completion_tokens": 103,
+        "total_tokens": 883,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "24 GB GPU model precision planned",
+        "reason": "Searching for GPU model and precision for 24 GB GPU in the handbook",
+        "source_id": null
+      },
+      "reasoning": "Searching for GPU model and precision for 24 GB GPU in the handbook",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.2305715061697534
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.1393736757131084
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12695918186432606
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"For a 24\\u202fGB GPU the handbook specifies that the primary model to be deployed is Qwen2.5\\u20117B\\u2011Instruct, served with vLLM using BF16 precision.\", \"sources\": [{\"quote\": \"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\", \"source_id\": \"gpu-serving\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1166,
+        "completion_tokens": 164,
+        "total_tokens": 1330,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have the answer: The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. So answer: Qwen2.5-7B-Instruct, BF16 precision. Provide source.",
+        "tool_calls": [
+          {
+            "id": "fc_4950cecc-8b77-4e8b-a5d4-bc46a751c4fe",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"For a 24\u202fGB GPU the handbook specifies that the primary model to be deployed is Qwen2.5\u20117B\u2011Instruct, served with vLLM using BF16 precision.\",\"sources\":[{\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\",\"source_id\":\"gpu-serving\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2213,
+  "usage_complete": true,
+  "prompt_tokens": 1946,
+  "completion_tokens": 267,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "For a 24\u202fGB GPU the handbook specifies that the primary model to be deployed is Qwen2.5\u20117B\u2011Instruct, served with vLLM using BF16 precision.",
+    "sources": [
+      {
+        "source_id": "gpu-serving",
+        "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 30.213744724002026,
+  "token_accounting": "provider_usage"
+}

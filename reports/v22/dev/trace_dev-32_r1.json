@@ -1,0 +1,50 @@
+{
+  "query_id": "5850eb25-a895-4cb7-b8ef-660d406a2205",
+  "question": "What is the production promotion gate?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 88,
+        "total_tokens": 862,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "reason": "Searching for definition of production promotion gate in MLOps handbook",
+        "source_id": null
+      },
+      "reasoning": "Searching for definition of production promotion gate in MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 862,
+  "usage_complete": true,
+  "prompt_tokens": 774,
+  "completion_tokens": 88,
+  "failure_injection": "malformed",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.919141006997961,
+  "token_accounting": "provider_usage"
+}

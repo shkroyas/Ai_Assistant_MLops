@@ -1,0 +1,49 @@
+{
+  "query_id": "fc37b4bc-d939-44ee-8bc8-9246a4b846ca",
+  "question": "Fix the pipeline.",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which pipeline you are referring to and what issues you are encountering?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 137,
+        "total_tokens": 908,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Fix the pipeline.\" We need to interpret what pipeline? The context: \"example-company MLOps handbook.\" The user likely wants to fix a pipeline described in the handbook. We need to ask clarifying question? The instruction: If request lacks object or options needed to understand it, ask clarifying question using status clarify. The user says \"Fix the pipeline.\" That is ambiguous. We need to clarify what pipeline. So we should respond with status clarify.",
+        "tool_calls": [
+          {
+            "id": "fc_6c052ef9-0a55-4fc5-a2e6-8f87bc392ef3",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which pipeline you are referring to and what issues you are encountering?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 908,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 137,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which pipeline you are referring to and what issues you are encountering?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.993061064000358,
+  "token_accounting": "provider_usage"
+}
