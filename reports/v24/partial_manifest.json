@@ -1,0 +1,29 @@
+{
+  "run_id": "d284131e53324caab8598aec69214beb",
+  "status": "KILLED",
+  "completion": "No completed native judge/gate; cannot qualify.",
+  "phases": {
+    "dev": {
+      "samples": 105,
+      "terminations": {
+        "provider_unavailable": 67,
+        "clarify": 5,
+        "retrieval_failure": 5,
+        "answered": 18,
+        "abstain": 9,
+        "max_iterations": 1
+      },
+      "tokens": 89820
+    },
+    "golden": {
+      "samples": 52,
+      "terminations": {
+        "provider_unavailable": 51,
+        "answered": 1
+      },
+      "tokens": 2624
+    }
+  },
+  "reason": "Original agent samples encountered remaining daily quota exhaustion. Interrupted; no successful or failed sample replaced.",
+  "availability_probe_limitation": "All keys accepted tiny probes, which did not establish enough daily tokens for this cohort."
+}

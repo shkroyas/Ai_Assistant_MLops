@@ -1,0 +1,27 @@
+{
+  "query_id": "c7d84c29-1fef-42ff-a2f8-aaf5d69e7866",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": "malformed",
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.7471003704704344e-05,
+  "token_accounting": "incomplete"
+}

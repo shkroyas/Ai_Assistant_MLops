@@ -1,0 +1,27 @@
+{
+  "query_id": "e9e6ff81-3da1-4a2a-bd75-2b1aab3846d1",
+  "question": "For the production checklist: Change the limit.",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.3915003112051636e-05,
+  "token_accounting": "incomplete"
+}

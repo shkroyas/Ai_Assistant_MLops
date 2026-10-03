@@ -1,0 +1,27 @@
+{
+  "query_id": "a4335eeb-22d6-43d9-bd29-5a271101fc37",
+  "question": "For the production checklist: Can the owner ignore the frozen holdout because the legacy memo lacks one?",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.9164999432396144e-05,
+  "token_accounting": "incomplete"
+}

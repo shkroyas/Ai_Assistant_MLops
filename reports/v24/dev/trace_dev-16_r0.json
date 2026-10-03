@@ -1,0 +1,88 @@
+{
+  "query_id": "2ebf4786-c765-4e24-96d8-ef31398bd6d2",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 774,
+        "completion_tokens": 224,
+        "total_tokens": 998,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "annual revenue",
+        "reason": "Check if any source contains company annual revenue information",
+        "source_id": null
+      },
+      "reasoning": "Check if any source contains company annual revenue information",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.10762440277062923
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.04969040042629148
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.04415108205662594
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m unable to provide the company's annual revenue because the handbook does not contain that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 1173,
+        "completion_tokens": 132,
+        "total_tokens": 1305,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The search returned no relevant info about annual revenue. Likely not in handbook. The user asks for company annual revenue, which is likely not in MLOps handbook. No source contains that. So we must abstain because we lack evidence. According to policy, if facts remain unsupported after search, we must abstain. Provide status abstain with explanation, no sources.",
+        "tool_calls": [
+          {
+            "id": "fc_9d0fdf1e-4f44-4de5-bdd2-fe1ef0036d81",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m unable to provide the company's annual revenue because the handbook does not contain that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2303,
+  "usage_complete": true,
+  "prompt_tokens": 1947,
+  "completion_tokens": 356,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m unable to provide the company's annual revenue because the handbook does not contain that information.",
+    "sources": []
+  },
+  "iterations": 2,
+  "latency_seconds": 49.379783791999216,
+  "token_accounting": "provider_usage"
+}
