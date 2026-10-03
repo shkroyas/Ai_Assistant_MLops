@@ -1,0 +1,34 @@
+{
+  "query_id": "6fe6b161-68da-4a86-a8b6-130e9aaae01d",
+  "question": "How many provider attempts and what retry strategy are allowed?",
+  "prompt_version": "v6",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Please specify the context or service for which you need the number of provider attempts and retry strategy.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1156,
+        "completion_tokens": 31,
+        "total_tokens": 1187,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1187,
+  "usage_complete": true,
+  "prompt_tokens": 1156,
+  "completion_tokens": 31,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Please specify the context or service for which you need the number of provider attempts and retry strategy.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.9014251080006943,
+  "token_accounting": "provider_usage"
+}
