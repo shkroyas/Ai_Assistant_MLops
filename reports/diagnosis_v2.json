@@ -1,0 +1,11 @@
+{
+  "trace_path": "reports/v1/dev/trace_dev-01_r0.json",
+  "failure": "Qwen returned prose Clarify/Abstain instead of required JSON; repeated validation failures exhausted seven iterations.",
+  "change": "Make the final-output contract explicit with JSON examples for all three statuses; keep tools, retrieval, model, temperature and budgets fixed.",
+  "axis": "prompt.final_output_contract",
+  "observed_events": [
+    "tool_call",
+    "invalid_answer",
+    "max_iterations"
+  ]
+}

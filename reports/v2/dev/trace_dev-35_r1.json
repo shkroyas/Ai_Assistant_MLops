@@ -1,0 +1,183 @@
+{
+  "query_id": "3bff73d6-dca9-48cb-b9ac-42079f69b5b8",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 671,
+        "completion_tokens": 46,
+        "total_tokens": 717,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "release-policy",
+        "reason": "Find policy related to 24 GB models"
+      },
+      "reasoning": "Find policy related to 24 GB models",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 750,
+        "completion_tokens": 48,
+        "total_tokens": 798,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "legacy-policy",
+        "reason": "Try another relevant source for 24 GB model information"
+      },
+      "reasoning": "Try another relevant source for 24 GB model information",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 831,
+        "completion_tokens": 49,
+        "total_tokens": 880,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "experiment-policy",
+        "reason": "Attempt one more source to find 24 GB model details"
+      },
+      "reasoning": "Attempt one more source to find 24 GB model details",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 913,
+        "completion_tokens": 43,
+        "total_tokens": 956,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "",
+        "reason": "Search without specifying a source to broaden the scope"
+      },
+      "reasoning": "Search without specifying a source to broaden the scope",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 989,
+        "completion_tokens": 49,
+        "total_tokens": 1038,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "",
+        "reason": "Broaden the search to find any relevant information about 24 GB models"
+      },
+      "reasoning": "Broaden the search to find any relevant information about 24 GB models",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1071,
+        "completion_tokens": 49,
+        "total_tokens": 1120,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "",
+        "reason": "Expand the search to include all available sources for 24 GB model details"
+      },
+      "reasoning": "Expand the search to include all available sources for 24 GB model details",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1153,
+        "completion_tokens": 50,
+        "total_tokens": 1203,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "",
+        "reason": "Perform a general search across all sources to identify the model for 24 GB"
+      },
+      "reasoning": "Perform a general search across all sources to identify the model for 24 GB",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6712,
+  "usage_complete": true,
+  "prompt_tokens": 6378,
+  "completion_tokens": 334,
+  "failure_injection": "malformed",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.990981885999645,
+  "token_accounting": "provider_usage"
+}

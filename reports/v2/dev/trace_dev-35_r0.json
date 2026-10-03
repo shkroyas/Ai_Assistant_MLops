@@ -1,0 +1,183 @@
+{
+  "query_id": "521cc677-4c22-47c3-83d8-249e42cf709a",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 671,
+        "completion_tokens": 47,
+        "total_tokens": 718,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "release-policy",
+        "reason": "Finding the model configuration for 24 GB GPUs"
+      },
+      "reasoning": "Finding the model configuration for 24 GB GPUs",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 751,
+        "completion_tokens": 51,
+        "total_tokens": 802,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "legacy-policy",
+        "reason": "Trying an alternative source for the model configuration on 24 GB GPUs"
+      },
+      "reasoning": "Trying an alternative source for the model configuration on 24 GB GPUs",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 835,
+        "completion_tokens": 49,
+        "total_tokens": 884,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "experiment-policy",
+        "reason": "Exploring experiment policy for 24 GB GPU model configuration"
+      },
+      "reasoning": "Exploring experiment policy for 24 GB GPU model configuration",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 917,
+        "completion_tokens": 49,
+        "total_tokens": 966,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "service-catalog",
+        "reason": "Checking service catalog for 24 GB GPU model configuration"
+      },
+      "reasoning": "Checking service catalog for 24 GB GPU model configuration",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 999,
+        "completion_tokens": 52,
+        "total_tokens": 1051,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "drift-runbook",
+        "reason": "Reviewing drift runbook for 24 GB GPU model configuration"
+      },
+      "reasoning": "Reviewing drift runbook for 24 GB GPU model configuration",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1084,
+        "completion_tokens": 50,
+        "total_tokens": 1134,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "reliability",
+        "reason": "Examining reliability policies for 24 GB GPU model configuration"
+      },
+      "reasoning": "Examining reliability policies for 24 GB GPU model configuration",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1167,
+        "completion_tokens": 47,
+        "total_tokens": 1214,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "security",
+        "reason": "Checking security policies for 24 GB GPU model configuration"
+      },
+      "reasoning": "Checking security policies for 24 GB GPU model configuration",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6769,
+  "usage_complete": true,
+  "prompt_tokens": 6424,
+  "completion_tokens": 345,
+  "failure_injection": "malformed",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 7.269223366001825,
+  "token_accounting": "provider_usage"
+}

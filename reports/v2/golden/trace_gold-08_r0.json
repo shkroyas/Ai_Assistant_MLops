@@ -1,0 +1,115 @@
+{
+  "query_id": "4efabb2a-056c-4a33-ad79-b97faa37e2b4",
+  "question": "For the production checklist: The 2024 memo says promote on accuracy. Which document overrides it?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 683,
+        "completion_tokens": 62,
+        "total_tokens": 745,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "2024 memo override accuracy promotion production checklist",
+        "source_id": "release-policy",
+        "reason": "Identify any document overriding the 2024 memo's accuracy promotion directive for the production checklist."
+      },
+      "reasoning": "Identify any document overriding the 2024 memo's accuracy promotion directive for the production checklist.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.18685673851870047
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 63,
+        "total_tokens": 951,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "override 2024 memo accuracy promotion production checklist",
+        "source_id": "legacy-policy",
+        "reason": "Check if there's a conflicting policy in legacy documents that might override the 2024 memo."
+      },
+      "reasoning": "Check if there's a conflicting policy in legacy documents that might override the 2024 memo.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.10724978805608672
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1080,
+        "completion_tokens": 42,
+        "total_tokens": 1122,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "legacy-policy",
+        "reason": "Review the superseded legacy policy to understand its implications on the production checklist."
+      },
+      "reasoning": "Review the superseded legacy policy to understand its implications on the production checklist.",
+      "valid": true,
+      "result": {
+        "source_id": "legacy-policy",
+        "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The legacy policy is superseded by the release-policy, which promotes models based on F1 and ROC-AUC improvements rather than raw accuracy.\",\"sources\":[{\"source_id\":\"legacy-policy\",\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout.\"}]}",
+      "usage": {
+        "prompt_tokens": 1220,
+        "completion_tokens": 91,
+        "total_tokens": 1311,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 4129,
+  "usage_complete": true,
+  "prompt_tokens": 3871,
+  "completion_tokens": 258,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The legacy policy is superseded by the release-policy, which promotes models based on F1 and ROC-AUC improvements rather than raw accuracy.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 5.390605633001542,
+  "token_accounting": "provider_usage"
+}

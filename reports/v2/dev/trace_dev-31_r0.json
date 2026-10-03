@@ -1,0 +1,34 @@
+{
+  "query_id": "0322e985-936a-4cc7-a9ac-a165e20fd618",
+  "question": "What is the retry limit?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you specify which service or process you are referring to?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 667,
+        "completion_tokens": 25,
+        "total_tokens": 692,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 692,
+  "usage_complete": true,
+  "prompt_tokens": 667,
+  "completion_tokens": 25,
+  "failure_injection": "timeout",
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which service or process you are referring to?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5657190319980145,
+  "token_accounting": "provider_usage"
+}

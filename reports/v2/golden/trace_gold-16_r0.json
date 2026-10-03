@@ -1,0 +1,183 @@
+{
+  "query_id": "6ea3842a-7e18-44f6-b337-3bebc285d935",
+  "question": "For the production checklist: What is the retry limit?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 672,
+        "completion_tokens": 45,
+        "total_tokens": 717,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "release-policy",
+        "reason": "Check the release policy for the production checklist details."
+      },
+      "reasoning": "Check the release policy for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 749,
+        "completion_tokens": 45,
+        "total_tokens": 794,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "legacy-policy",
+        "reason": "Fallback to legacy policy for the production checklist details."
+      },
+      "reasoning": "Fallback to legacy policy for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 826,
+        "completion_tokens": 44,
+        "total_tokens": 870,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "experiment-policy",
+        "reason": "Try experiment policy for the production checklist details."
+      },
+      "reasoning": "Try experiment policy for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 902,
+        "completion_tokens": 45,
+        "total_tokens": 947,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "service-catalog",
+        "reason": "Check service catalog for the production checklist details."
+      },
+      "reasoning": "Check service catalog for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 979,
+        "completion_tokens": 47,
+        "total_tokens": 1026,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "drift-runbook",
+        "reason": "Review drift runbook for the production checklist details."
+      },
+      "reasoning": "Review drift runbook for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1058,
+        "completion_tokens": 46,
+        "total_tokens": 1104,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "reliability",
+        "reason": "Examine reliability guidelines for the production checklist details."
+      },
+      "reasoning": "Examine reliability guidelines for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1136,
+        "completion_tokens": 43,
+        "total_tokens": 1179,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "source_id": "security",
+        "reason": "Check security policies for the production checklist details."
+      },
+      "reasoning": "Check security policies for the production checklist details.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6637,
+  "usage_complete": true,
+  "prompt_tokens": 6322,
+  "completion_tokens": 315,
+  "failure_injection": "timeout",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.614325155002007,
+  "token_accounting": "provider_usage"
+}
