@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v10/dev/trace_dev-21_r0.json",
+  "failure": "Status-preserving repair still reaches the four-iteration limit on a development clarification query.",
+  "change": "Increase max_iterations from four to seven only, retaining the concise prompt and specific feedback mode.",
+  "axis": "config.max_iterations"
+}

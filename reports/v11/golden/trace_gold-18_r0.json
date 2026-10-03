@@ -1,0 +1,176 @@
+{
+  "query_id": "83b046a6-94db-4e76-a8f8-eb0b4f44f175",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v11",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 678,
+        "completion_tokens": 41,
+        "total_tokens": 719,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credentials storage",
+        "reason": "Finding the guidelines on how credentials should be stored in the production checklist."
+      },
+      "reasoning": "Finding the guidelines on how credentials should be stored in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 751,
+        "completion_tokens": 42,
+        "total_tokens": 793,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to securely store credentials in production",
+        "reason": "Finding best practices for storing credentials securely in a production environment."
+      },
+      "reasoning": "Finding best practices for storing credentials securely in a production environment.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 825,
+        "completion_tokens": 35,
+        "total_tokens": 860,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "secure credential storage practices",
+        "reason": "Finding general secure practices for storing credentials."
+      },
+      "reasoning": "Finding general secure practices for storing credentials.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 892,
+        "completion_tokens": 40,
+        "total_tokens": 932,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "MLOps secure credential storage",
+        "reason": "Finding specific MLOps guidelines for secure credential storage."
+      },
+      "reasoning": "Finding specific MLOps guidelines for secure credential storage.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 964,
+        "completion_tokens": 41,
+        "total_tokens": 1005,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "MLOps secure credential storage practices",
+        "reason": "Finding specific MLOps guidelines for secure credential storage."
+      },
+      "reasoning": "Finding specific MLOps guidelines for secure credential storage.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1037,
+        "completion_tokens": 41,
+        "total_tokens": 1078,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "MLOps secure credential storage policies",
+        "reason": "Finding specific MLOps policies for secure credential storage."
+      },
+      "reasoning": "Finding specific MLOps policies for secure credential storage.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1110,
+        "completion_tokens": 41,
+        "total_tokens": 1151,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "MLOps secure credential storage guidelines",
+        "reason": "Finding specific MLOps guidelines for secure credential storage."
+      },
+      "reasoning": "Finding specific MLOps guidelines for secure credential storage.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6538,
+  "usage_complete": true,
+  "prompt_tokens": 6257,
+  "completion_tokens": 281,
+  "failure_injection": "unavailable",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.045063738001772,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,176 @@
+{
+  "query_id": "cf01a335-0485-4fbe-8361-69047599185f",
+  "question": "What drift triggers challenger training?",
+  "prompt_version": "v11",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 673,
+        "completion_tokens": 89,
+        "total_tokens": 762,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift triggers challenger training",
+        "reason": "Finding the criteria for triggering challenger training due to drift"
+      },
+      "reasoning": "Finding the criteria for triggering challenger training due to drift",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 743,
+        "completion_tokens": 44,
+        "total_tokens": 787,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "criteria for drift to trigger challenger training",
+        "reason": "Reattempting to find the criteria for triggering challenger training due to drift"
+      },
+      "reasoning": "Reattempting to find the criteria for triggering challenger training due to drift",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 819,
+        "completion_tokens": 43,
+        "total_tokens": 862,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift detection and challenger training trigger",
+        "reason": "Further attempt to identify the conditions under which drift detection triggers challenger training"
+      },
+      "reasoning": "Further attempt to identify the conditions under which drift detection triggers challenger training",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 894,
+        "completion_tokens": 44,
+        "total_tokens": 938,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training triggered by drift",
+        "reason": "Searching for the specific conditions that trigger challenger training in response to drift detection"
+      },
+      "reasoning": "Searching for the specific conditions that trigger challenger training in response to drift detection",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 970,
+        "completion_tokens": 43,
+        "total_tokens": 1013,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training initiated by drift",
+        "reason": "Locating the specific conditions that initiate challenger training when drift is detected"
+      },
+      "reasoning": "Locating the specific conditions that initiate challenger training when drift is detected",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1045,
+        "completion_tokens": 44,
+        "total_tokens": 1089,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training criteria for drift",
+        "reason": "Retrieving the specific criteria that trigger challenger training in response to drift detection"
+      },
+      "reasoning": "Retrieving the specific criteria that trigger challenger training in response to drift detection",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1121,
+        "completion_tokens": 41,
+        "total_tokens": 1162,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift detection criteria for challenger training",
+        "reason": "Finding the specific criteria for drift detection that trigger challenger training"
+      },
+      "reasoning": "Finding the specific criteria for drift detection that trigger challenger training",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6613,
+  "usage_complete": true,
+  "prompt_tokens": 6265,
+  "completion_tokens": 348,
+  "failure_injection": "timeout",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 7.257556038002804,
+  "token_accounting": "provider_usage"
+}

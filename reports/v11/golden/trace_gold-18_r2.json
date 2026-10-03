@@ -1,0 +1,176 @@
+{
+  "query_id": "aad07541-e578-42b6-834a-40267ac2f1fe",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v11",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 678,
+        "completion_tokens": 41,
+        "total_tokens": 719,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credentials storage",
+        "reason": "Finding the guidelines on how credentials should be stored in the production checklist."
+      },
+      "reasoning": "Finding the guidelines on how credentials should be stored in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 751,
+        "completion_tokens": 42,
+        "total_tokens": 793,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to securely store credentials in production",
+        "reason": "Finding best practices for storing credentials securely in a production environment."
+      },
+      "reasoning": "Finding best practices for storing credentials securely in a production environment.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 825,
+        "completion_tokens": 40,
+        "total_tokens": 865,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "securely store credentials production",
+        "reason": "Locating information on secure credential storage practices for production environments."
+      },
+      "reasoning": "Locating information on secure credential storage practices for production environments.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 897,
+        "completion_tokens": 39,
+        "total_tokens": 936,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credential storage production checklist",
+        "reason": "Locating specific guidelines for storing credentials in the production checklist."
+      },
+      "reasoning": "Locating specific guidelines for storing credentials in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 968,
+        "completion_tokens": 44,
+        "total_tokens": 1012,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to manage and store credentials in production",
+        "reason": "Finding best practices for managing and storing credentials in a production environment."
+      },
+      "reasoning": "Finding best practices for managing and storing credentials in a production environment.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1044,
+        "completion_tokens": 41,
+        "total_tokens": 1085,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential management",
+        "reason": "Locating specific guidelines for managing and storing credentials in the production checklist."
+      },
+      "reasoning": "Locating specific guidelines for managing and storing credentials in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1117,
+        "completion_tokens": 39,
+        "total_tokens": 1156,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credential storage",
+        "reason": "Locating specific guidelines for storing credentials in the production checklist."
+      },
+      "reasoning": "Locating specific guidelines for storing credentials in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6566,
+  "usage_complete": true,
+  "prompt_tokens": 6280,
+  "completion_tokens": 286,
+  "failure_injection": "unavailable",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.051508147000277,
+  "token_accounting": "provider_usage"
+}
