@@ -81,6 +81,7 @@ class ChatProvider:
         key_pool=None,
         daily_token_budget=180000,
         reasoning_effort=None,
+        application_tool_validation=False,
     ):
         self.base_url = (
             base_url
@@ -95,6 +96,12 @@ class ChatProvider:
         ):
             raise ValueError("Explicit reasoning effort requires GPT-OSS and low/medium/high")
         self.reasoning_effort = reasoning_effort
+        if application_tool_validation and (
+            urlsplit(self.base_url).hostname != "api.groq.com"
+            or not self.model.startswith("openai/gpt-oss-")
+        ):
+            raise ValueError("Application tool validation requires official Groq GPT-OSS")
+        self.application_tool_validation = application_tool_validation
         self.client = httpx.AsyncClient(timeout=40, transport=transport)
         self.fallback_url = os.getenv("FALLBACK_BASE_URL")
         self.headers = endpoint_headers(auth_prefix, self.key)
@@ -171,6 +178,11 @@ class ChatProvider:
                             "model": model,
                             "messages": messages,
                             **({"tools": tools} if tools else {}),
+                            **(
+                                {"disable_tool_validation": True}
+                                if tools and self.application_tool_validation
+                                else {}
+                            ),
                             "temperature": temperature,
                             "top_p": top_p,
                             "max_tokens": 1200,
@@ -224,6 +236,18 @@ class ChatProvider:
                         ):
                             raise ValueError("Malformed tool-call fields")
                     usage = payload.get("usage", {})
+                    normalizations = []
+                    if self.application_tool_validation:
+                        advertised = {tool["function"]["name"] for tool in tools}
+                        for call in calls:
+                            original = call["function"]["name"]
+                            suffix = "<|channel|>commentary"
+                            canonical = original.removesuffix(suffix)
+                            if original.endswith(suffix) and canonical in advertised:
+                                call["function"]["name"] = canonical
+                                normalizations.append(
+                                    {"id": call["id"], "original": original, "canonical": canonical}
+                                )
                     if pool:
                         pool.used[lease] += usage.get("total_tokens") or 0
                     # Do not invent usage when the upstream endpoint omits it.
@@ -233,6 +257,7 @@ class ChatProvider:
                         "total_tokens": usage.get("total_tokens"),
                         "model": model,
                         "fallback": (base, model) != (self.base_url, self.model),
+                        **({"tool_name_normalizations": normalizations} if normalizations else {}),
                     }
                 except ProviderError:
                     # A depleted primary pool must not prevent an independently
@@ -282,4 +307,5 @@ def provider_for_config(config):
         key_pool=pool,
         daily_token_budget=config.get("daily_token_budget", 180000),
         reasoning_effort=config.get("reasoning_effort"),
+        application_tool_validation=config.get("application_tool_validation", False),
     )

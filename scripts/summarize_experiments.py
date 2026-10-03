@@ -88,9 +88,7 @@ def summarize():
     axes[0].plot(
         versions, [100 * row["golden_truth_pass"] for row in rows], "o-", label="Golden truth"
     )
-    axes[0].plot(
-        versions, [100 * row["judge_pass"] for row in rows], "s-", label="Independent judge"
-    )
+    axes[0].plot(versions, [100 * row["judge_pass"] for row in rows], "s-", label="Judge pass")
     axes[0].axhline(85, color="gray", linestyle="--", label="Truth floor 85%")
     axes[0].axhline(80, color="gray", linestyle=":", label="Judge floor 80%")
     axes[0].set(ylim=(0, 100), ylabel="Pass rate (%)", title="Held-out quality")

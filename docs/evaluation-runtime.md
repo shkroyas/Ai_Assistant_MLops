@@ -21,3 +21,9 @@ The v14 run completed all 159 recorded queries and native judging, but its pool 
 ## October 4 continuation
 
 v15 made 159 actual attempts but exhausted Qwen daily quota during development; all held-out attempts recorded provider-unavailable failures. The corrected cross-phase gate rejected it. v16 used verified available GPT-OSS-120B quota, then was stopped after 70 development samples when native tool generation repeatedly failed schema validation; it is KILLED, not a completed benchmark. The five diagnostic replays return `tool_use_failed` for an optional null search filter. v17 enables a schema that matches the existing runtime null/unfiltered behavior, preserves every other configuration field, and evaluates all cases fresh. New checkpoints include advertised tool schemas in their identity. Old checkpoints whose schema identity is missing cannot be silently reused after this harness change.
+
+## Native protocol boundary
+
+The 20B development replays in `reports/provider_20b_development_diagnostic.json` reproduce HTTP 400 `tool_use_failed` for `json<|channel|>commentary`. The opt-in `application_tool_validation` mode asks the official Groq API to return tool calls without server name validation. The adapter strips only the exact observed `<|channel|>commentary` suffix when the remaining name is already advertised. Unknown names and other suffixes are left unchanged for application rejection. Original and canonical names are recorded with the full actual provider usage. Argument, status, retrieved-quotation and failed-retrieval validation remain unchanged. No rejected HTTP generation is assigned guessed usage.
+
+Groq documents this request option in its [API reference](https://console.groq.com/docs/api-reference). This changes the protocol-validation boundary, not the quality gate. It is scoped to the official Groq GPT-OSS endpoint and disabled in historical configurations.

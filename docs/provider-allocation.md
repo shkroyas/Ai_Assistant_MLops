@@ -9,7 +9,7 @@ This allocation follows the W15–W17 implementation plan and the user's request
 | Runtime fallback | Groq `openai/gpt-oss-20b` | Endpoint failures still obey the answer/citation contract |
 | W17 v1–v12 experiments | Fixed KU Qwen2.5-7B; fallback disabled | Prompt, retrieval, iteration and output-mode comparisons |
 | W17 v13–v15 | Groq Qwen3.8-27B | Stronger candidate; quota-limited evidence retained |
-| W17 v16/v17 | Groq GPT-OSS-120B | Stronger available candidate; native optional-filter schema correction |
+| W17 v16–v19 | Groq GPT-OSS-120B | Stronger available candidate; native schema/final-answer/low-reasoning comparisons |
 | Evidently correctness/completeness judge | Groq `openai/gpt-oss-20b`; Gemini alternative | Separate native judge calls and reviewed references; different family from Qwen |
 | Judge calibration | Same Groq judge model | Measure agreement and false passes on 15 approved calibration labels |
 | Nightly Airflow | Production agent; deterministic ground truth only | No judge calls or automatic promotion |
@@ -36,3 +36,5 @@ The initial full calibration attempt hit a genuine Gemini HTTP 429 (observed 5 R
 The user subsequently authorized Qwen or Groq for execution. Current experiments use independent Groq judging with paced calls and native duplicate-input reuse; Gemini remains an alternative rather than a quota-rotation target. See docs/evaluation-runtime.md.
 
 GPT-OSS-120B agent and GPT-OSS-20B judge are different models with separate calls, but share a model family; this may limit judge independence. The frozen deterministic truth gate remains separately required. No golden labels, prompts or quality thresholds are changed in response to held-out results. The v16 rejection was diagnosed with development-query replays only: `source_id: null` is valid for unfiltered runtime search but did not match the old tool schema. v17 changes only that optional field and retains strict required/string-only `read_source`.
+
+The smaller GPT-OSS-20B candidate (v20 and the protocol-repair follow-up) uses reserve credentials 2–5 for the agent and credential 1 for the judge. These are separate calls and credentials but the same model weights, so model independence is not claimed. The 15 approved calibration cases, frozen deterministic truth checks and unchanged promotion criteria still apply. Gemini remains an alternative with its earlier native two-case sanity evidence; no complete Gemini calibration is claimed.
