@@ -2,7 +2,7 @@
 
 Royas Shakya's standalone W15 assistant, W16 agentic verification feature, and W17 MLOps layer. Track A is a separate repository. Built from the assignment PDFs and implementation plan, without reading or reusing existing projects.
 
-**Status:** implementation and protocol tests are local; live LLM experiments, judge calibration, GPU serving, cloud deployment, and remote CI require external resources. No mock result is presented as LLM quality or production readiness. Prompt v2/v3 are explicitly provisional candidates and must be rewritten from actual predecessor failures before use.
+**Status:** real Qwen GPU inference and native tools, a Groq cited baseline, repeated live experiments, independent native Evidently judging, and all 15 approved calibration labels are verified. The v1–v5 quality gates rejected promotion. Additional development revisions and a stronger Groq Qwen candidate are being evaluated. Production and healthy nightly regression remain pending; cloud deployment needs an account and budget. Engineering tests are separate from model quality evidence.
 
 ## Quick start
 
@@ -19,9 +19,9 @@ Open http://localhost:8501, or POST `{"question":"What happens after drift and w
 
 ## W15 implementation and deployment
 
-The W15 baseline at POST /rag makes one application-directed retrieval and one completion (rag.py). W16 POST /ask adds model-directed adaptive cross-source verification; it is not just a fixed RAG sequence repeated. The backend integrates Gemini through its compatible chat/function-calling endpoint, or any configured vLLM endpoint. Prompt files and YAML expose temperature/top_p and retrieval settings. Every requested tool is validated against the two bounded tools search/read_source. Retrieval chunks documents (900 characters, 150 overlap), computes normalized 512-dimensional hashing embeddings, and indexes them in Qdrant. Hashing embeddings are lightweight lexical embeddings rather than pretrained semantic embeddings; collisions and paraphrase recall are limitations, measured by the same harness when an embedding model is changed. The local Qdrant database can persist with QDRANT_PATH; the default in-memory collection is rebuilt from the versioned corpus on startup.
+The W15 baseline at POST /rag makes one application-directed retrieval and one completion (rag.py). W16 POST /ask adds model-directed adaptive cross-source verification; it is not just a fixed RAG sequence repeated. The backend integrates the authenticated KU vLLM endpoint, Groq, or Gemini through compatible chat/function-calling APIs. The verified W15 baseline uses Groq; configuration experiments record the chosen agent model. Prompt files and YAML expose temperature/top_p and retrieval settings. Every requested tool is validated against the two bounded tools search/read_source. Retrieval chunks documents (900 characters, 150 overlap), computes normalized 512-dimensional hashing embeddings, and indexes them in Qdrant. Hashing embeddings are lightweight lexical embeddings rather than pretrained semantic embeddings; collisions and paraphrase recall are limitations, measured by the same harness when an embedding model is changed. The local Qdrant database can persist with QDRANT_PATH; the default in-memory collection is rebuilt from the versioned corpus on startup.
 
-Provider requests are asynchronous, retried three times with exponential backoff for transient errors, with an optional separately configured fallback. Both endpoints obey the same output/citation contract. Requests are bounded by four concurrent model calls and a 180-second timeout. Batch requests consume per-query rate-limit budget (30 per client per minute). An LRU cache holds at most 128 answered/clarification responses for 300 seconds and fingerprints corpus, prompt, configuration, and provider. Concurrent identical requests share one computation. Infrastructure failures are never cached as success. Rate limits/cache are per-process; the documented single-worker deployment preserves that scope. A multi-worker deployment would need a shared store.
+Provider requests are asynchronous, retried three times with exponential backoff for transient errors, with an optional separately configured fallback. Both endpoints obey the same output/citation contract. Requests are bounded by four concurrent model calls and a 180-second timeout by default. Paced configurations receive a derived deadline, capped at 900 seconds, to include queued model calls. Batch requests consume per-query rate-limit budget (30 per client per minute). An LRU cache holds at most 128 answered/clarification responses for 300 seconds and fingerprints corpus, prompt, configuration, and provider. Concurrent identical requests share one computation. Infrastructure failures are never cached as success. Rate limits/cache are per-process; the documented single-worker deployment preserves that scope. A multi-worker deployment would need a shared store.
 
 ### vLLM and optimization
 
@@ -35,7 +35,7 @@ bash serve_vllm.sh
 # Or: docker compose -f compose.yaml up -d
 ```
 
-Use Qwen/Qwen2.5-7B-Instruct on 24 GB GPU, an AWQ quantized variant on 12 GB, or Qwen2.5-3B-Instruct for the cost-axis experiment. Set laptop AGENT_BASE_URL=https://your-stable-hostname/v1, AGENT_MODEL to the exact served model name, and AGENT_API_KEY to the bearer token. serving/named_tunnel.md explains a named Cloudflare tunnel. vLLM uses continuous batching, KV caching, and GPU inference; the application does not reimplement those optimizations. ONNX conversion is not applicable to this API assistant because it does not train or own model weights and vLLM owns autoregressive decoding; quantization is the supported optional optimization. No GPU run or throughput gain is claimed without a benchmark.
+Use Qwen/Qwen2.5-7B-Instruct on 24 GB GPU, an AWQ quantized variant on 12 GB, or Qwen2.5-3B-Instruct for the cost-axis experiment. Set laptop AGENT_BASE_URL=https://your-stable-hostname/v1, AGENT_MODEL to the exact served model name, and AGENT_API_KEY to the bearer token. serving/named_tunnel.md explains a named Cloudflare tunnel. vLLM uses continuous batching, KV caching, and GPU inference; the application does not reimplement those optimizations. ONNX conversion is not applicable to this API assistant because it does not train or own model weights and vLLM owns autoregressive decoding; quantization is the supported optional optimization. Real KU GPU inference and native tool calls passed; see reports/provider_connection.json. No GPU throughput improvement or quantization benchmark is claimed.
 
 ```bash
 # .env must exist before Compose reads env_file.
@@ -66,13 +66,13 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 **Token and cost:** traces aggregate upstream prompt/completion/total tokens per request. Set INPUT_USD_PER_MILLION and OUTPUT_USD_PER_MILLION from your billing plan to log estimated cost; prices are not hardcoded. Unknown total usage blocks promotion. If input/output counts are missing, estimated dollar cost is null and cost_usage_coverage reports the gap; a false zero-cost estimate is never logged. Cached requests report zero new model tokens. No coordination cost is asserted because there is only one agent.
 
-**Failure injection:** timeout, unavailable retrieval, and malformed retrieval are injected persistently. The trace records evidence_valid=false. The model can recognize the failure and abstain/clarify; application validation also rejects answered responses after any tool failure, and the iteration budget guarantees termination. Protocol tests exercise these paths; live failure-injection behavior remains to be measured.
+**Failure injection:** timeout, unavailable retrieval, and malformed retrieval are injected persistently. The trace records evidence_valid=false. The model can recognize the failure and abstain/clarify; application validation also rejects answered responses after any tool failure, and the iteration budget guarantees termination. Protocol tests exercise these paths. Completed live v1–v5 runs recognized every injected retrieval failure safely; raw trajectories and per-run metrics preserve the behavior.
 
 **Tool vs. Agent boundary:** Qdrant search, source reading, and the remote model endpoint are bounded request/response services, modeled as tools/provider calls. They do not own an autonomous task across exchanges or invoke a hidden collaborating agent. The assistant loop owns state, budget, retry boundary, and evidence. vLLM's stateful KV cache is an inference implementation detail within that boundary.
 
 The [live evaluation runtime](docs/evaluation-runtime.md) documents checkpoints, authentication-only reserve-key failover, and native Groq judge caching. Gemini remains an alternative judge.
 
-The active [provider allocation](docs/provider-allocation.md) uses Groq for `/rag`, Qwen for the agent, and Gemini for the judge.
+The active [provider allocation](docs/provider-allocation.md) uses Groq for `/rag`, Qwen for the agent, and independent Groq GPT-OSS for the judge, with Gemini as an alternative.
 
 GPU proxy authentication and the later Groq switch are documented in [docs/provider-setup.md](docs/provider-setup.md). Check live access with `uv run python scripts/check_provider.py` before evaluation.
 
@@ -103,7 +103,21 @@ uv run python -m assistant_mlops.experiment compare
 uv run python -m assistant_mlops.experiment promote --run-id ACTUAL_RUN_ID
 ```
 
-Only explicit promotion changes configs/production.yaml. After promotion, set ASSISTANT_CONFIG=configs/vN.yaml to the promoted version in .env and recreate the backend; it deliberately loads one immutable configuration per process. Reject experiments remain in tracking/history. Production has no initial run ID because no live model has been evaluated yet. reports/mlflow_comparison.md is generated from actual MLflow state, not invented tables. The eventual README winner/trade-off discussion must cite those measured values.
+Only explicit promotion changes configs/production.yaml. After promotion, set ASSISTANT_CONFIG=configs/vN.yaml to the promoted version in .env and recreate the backend; it deliberately loads one immutable configuration per process. Reject experiments remain in tracking/history. Production has no run ID because completed configurations have failed the unchanged quality gate. reports/mlflow_comparison.md is exported from actual MLflow state; reports/completed_experiments.md presents only fully judged runs. Lower token usage is not sufficient for promotion.
+
+### Measured results
+
+Every row below represents 159 actual agent responses and completed independent native judge reports. Prompt revisions cite real predecessor development traces; the frozen golden set was not used for tuning.
+
+| Version | Dev completion | Golden truth | Judge pass | Dev tokens/query | Gate |
+|---|---:|---:|---:|---:|---|
+| v1 | 47.62% | 44.44% | 48.15% | 4197.86 | REJECT |
+| v2 | 48.57% | 48.15% | 37.04% | 2898.30 | REJECT |
+| v3 | 50.48% | 57.41% | 42.59% | 1727.01 | REJECT |
+| v4 | 51.43% | 57.41% | 42.59% | 1566.69 | REJECT |
+| v5 | 66.67% | 72.22% | 50.00% | 2972.55 | REJECT |
+
+v2 fixes final JSON instructions; v3 fixes initial source filtering. v4 changes only the iteration budget: tokens fell 9.28% relative to v3 while golden truth stayed at 57.41%. v5 adds an evidence-to-decision workflow and improves golden truth to 72.22%, at greater token cost. Its independent judge still finds contradictions and missing caveats. Thirteen configurations (v1–v12 and v14) have completed native judging. v14 uses Groq Qwen3.8-27B with a paced, explicit reserve-key pool: development completion reached 96.19%, but its local token allowance exhausted during golden evaluation (31/54 provider outages). Its aggregate golden truth is 64.81% and judge pass is 50.00%; see [infrastructure audit](reports/v14/infrastructure_audit.json). v13 was interrupted and remains KILLED with partial traces. None meets the 85% truth and 80% judge floors, so there is no production winner. Full calibration agreement is 100% with zero false passes on the 15 approved labels. See [completed comparison](reports/completed_experiments.md), [cost chart](reports/cost_quality.png), and each version's native report.
 
 ## W17 c. Monitoring & Regression Strategy (Evidently AI)
 
@@ -117,7 +131,7 @@ Calibration labels were drafted and audited by the assistant, with delegated rev
 
 ## W17 d. Orchestration (Airflow bonus)
 
-The nightly DAG checks /models first. An unavailable GPU/tunnel enters infrastructure_failure and fails visibly, rather than reporting a quality regression from no answers. A healthy endpoint runs a dedicated ground-truth-only nightly module against the production baseline: no paid judge and no promotion. Pass rate below max(0.85, production−0.05), unsafe injected failures, or hard failures >0.05 fail the DAG. Native scheduler and live-model evidence are separate; reports/airflow_infra.txt captures an actual `airflow dags test` run with port 9 deliberately unavailable: infrastructure_failure failed and regression was skipped. This test used the pinned Airflow image without needing model credentials. The healthy live-evaluation run remains pending model access and a promoted baseline. Airflow standalone is a development deployment with a generated local admin password, not a cloud production scheduler. Unpause the DAG only after a baseline exists.
+The nightly DAG checks /models first. An unavailable GPU/tunnel enters infrastructure_failure and fails visibly, rather than reporting a quality regression from no answers. A healthy endpoint runs a dedicated ground-truth-only nightly module against the production baseline: no paid judge and no promotion. Pass rate below max(0.85, production−0.05), unsafe injected failures, or hard failures >0.05 fail the DAG. Native scheduler and live-model evidence are separate; reports/airflow_infra.txt captures an actual `airflow dags test` run with port 9 deliberately unavailable: infrastructure_failure failed and regression was skipped. This test used the pinned Airflow image without needing model credentials. Model access is verified. The healthy live-evaluation run remains pending a configuration that passes promotion. Airflow standalone is a development deployment with a generated local admin password, not a cloud production scheduler. Unpause the DAG only after a baseline exists.
 
 ## Architecture
 
@@ -126,7 +140,7 @@ flowchart TD
   UI[Streamlit UI] --> API[FastAPI async ask and batch]
   API --> Admission[Rate limit, semaphore, TTL cache]
   Admission --> Agent[Single verification agent]
-  Agent --> Model[Gemini or vLLM plus fallback]
+  Agent --> Model[Recorded Qwen or Groq model plus fallback]
   Model --> Decision{Model next action}
   Decision -->|search/read| Tools[Bounded validated tools]
   Docs[MD/TXT/PDF chunking] --> Embeddings[512D normalized hashing embeddings]

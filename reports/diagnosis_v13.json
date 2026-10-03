@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v12/dev/trace_dev-07_r0.json",
+  "failure": "The 7B agent omits a requested GPU configuration despite completing an authentication answer; larger repair budgets and presentation normalization do not reliably resolve compound coverage.",
+  "change": "Use Groq Qwen3.8-27B with the same prompt, tools and budgets. Pace requests to respect the observed 8000 TPM limit; retain the independent GPT-OSS judge.",
+  "axis": "provider.model"
+}

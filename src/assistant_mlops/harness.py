@@ -50,10 +50,10 @@ def assess(case, trace):
                 or case.failure
             )
         )
-    if correct:
-        failure = None
-    elif trace["termination"] in {"provider_unavailable", "tool_budget_exceeded"}:
+    if trace["termination"] in {"provider_unavailable", "tool_budget_exceeded"}:
         failure = "hard_failure"
+    elif correct:
+        failure = None
     elif (
         trace["tool_errors"] > 1 or sum(s["event"] == "invalid_answer" for s in trace["steps"]) > 1
     ):

@@ -185,3 +185,107 @@ async def test_recorded_groq_model_uses_groq_credentials(monkeypatch):
     assert "Cookie" not in provider.headers
     assert provider.request_interval_seconds == 15
     await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_quota_pool_cools_only_the_limited_bucket(monkeypatch):
+    clock = [0.0]
+    observed = []
+    monkeypatch.setattr("assistant_mlops.provider.monotonic", lambda: clock[0])
+
+    async def sleep(delay):
+        clock[0] += delay
+
+    async def handler(request):
+        key = request.headers["Authorization"]
+        observed.append((key, clock[0]))
+        if key == "Bearer limited":
+            return httpx.Response(429, headers={"Retry-After": "30"})
+        return httpx.Response(
+            200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 9}}
+        )
+
+    monkeypatch.setattr("assistant_mlops.provider.asyncio.sleep", sleep)
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="limited",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+        key_pool=["limited", "available"],
+        request_interval_seconds=15,
+    )
+    provider.fallback_url = None
+    await provider.complete([], [])
+    await provider.complete([], [])
+    assert observed == [
+        ("Bearer limited", 0.0),
+        ("Bearer available", 0.0),
+        ("Bearer available", 15.0),
+    ]
+    assert provider.quota_pool.ready[0] == 30
+    await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_quota_pool_paces_each_bucket_independently(monkeypatch):
+    import asyncio
+
+    clock = [0.0]
+    observed = []
+    monkeypatch.setattr("assistant_mlops.provider.monotonic", lambda: clock[0])
+
+    async def sleep(delay):
+        clock[0] += delay
+
+    async def handler(request):
+        observed.append((request.headers["Authorization"], clock[0]))
+        return httpx.Response(200, json={"choices": [{"message": {"content": "{}"}}]})
+
+    monkeypatch.setattr("assistant_mlops.provider.asyncio.sleep", sleep)
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="one",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+        key_pool=["one", "two"],
+        request_interval_seconds=15,
+    )
+    provider.fallback_url = None
+    await asyncio.gather(*(provider.complete([], []) for _ in range(4)))
+    for key in ["Bearer one", "Bearer two"]:
+        assert [timestamp for seen, timestamp in observed if seen == key] == [0.0, 15.0]
+    await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_quota_pool_stops_at_local_daily_budget():
+    async def handler(request):
+        return httpx.Response(
+            200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 9}}
+        )
+
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="one",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+        key_pool=["one", "two"],
+        daily_token_budget=9,
+    )
+    provider.fallback_url = None
+    await provider.complete([], [])
+    await provider.complete([], [])
+    with pytest.raises(ProviderError):
+        await provider.complete([], [])
+    assert provider.quota_pool.used == [9, 9]
+    await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_pool_returns_safely_when_all_cooldowns_exceed_wait_budget():
+    from assistant_mlops.provider import QuotaKeyPool
+
+    pool = QuotaKeyPool(["fixture"], interval=15, daily_budget=180000)
+    pool.block(0, 90)
+    with pytest.raises(ProviderError, match="cooling down"):
+        await pool.acquire()

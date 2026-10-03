@@ -1,0 +1,27 @@
+{
+  "query_id": "0f7b28de-0858-4f87-b1b5-c22a2179442f",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v13",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 150.16596505099733,
+  "token_accounting": "incomplete"
+}

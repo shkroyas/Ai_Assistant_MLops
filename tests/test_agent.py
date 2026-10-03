@@ -52,6 +52,23 @@ def corpus():
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("failure", ["timeout", "malformed", "unavailable"])
+async def test_fail_fast_retrieval_never_requests_another_completion(corpus, failure):
+    # A second model call would exhaust this fixture and fail the test.
+    provider = ScriptedProvider(
+        [call("search", {"query": "retry limit", "reason": "Find handbook guidance"})]
+    )
+    config = yaml.safe_load(Path("configs/v14.yaml").read_text())
+    config["stop_on_tool_error"] = True
+    trace = await Agent(corpus, provider, config).run("What is the retry limit?", failure=failure)
+    assert trace["termination"] == "retrieval_failure"
+    assert trace["answer"]["status"] == "abstain"
+    assert trace["answer"]["sources"] == []
+    assert trace["iterations"] == 1 and trace["tokens"] == 10
+    assert trace["tool_errors"] == 1 and trace["usage_complete"]
+
+
+@pytest.mark.asyncio
 async def test_cross_source_loop_and_usage(corpus):
     messages = [
         call(

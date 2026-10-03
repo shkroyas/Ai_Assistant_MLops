@@ -1,0 +1,21 @@
+{
+  "status": 429,
+  "type": "tokens",
+  "code": "rate_limit_exceeded",
+  "daily": true,
+  "minute": false,
+  "counts": [
+    "Limit 200000",
+    "Used 199554",
+    "Requested 863"
+  ],
+  "retry_after": "181",
+  "limits": {
+    "x-ratelimit-limit-requests": "1000",
+    "x-ratelimit-limit-tokens": "8000",
+    "x-ratelimit-remaining-requests": "851",
+    "x-ratelimit-remaining-tokens": "8000",
+    "x-ratelimit-reset-requests": "3h34m33.599s",
+    "x-ratelimit-reset-tokens": "1ms"
+  }
+}

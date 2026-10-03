@@ -1,0 +1,27 @@
+{
+  "query_id": "5e9bb649-64c0-4d63-a65c-83a18bf5da1b",
+  "question": "For the production checklist: How many provider attempts and what retry strategy are allowed?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 4.6274995838757604e-05,
+  "token_accounting": "incomplete"
+}

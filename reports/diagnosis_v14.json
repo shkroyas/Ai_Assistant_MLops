@@ -1,0 +1,7 @@
+{
+  "trace_path": "reports/v13/dev/trace_dev-05_r1.json",
+  "failure": "The active Groq quota bucket exhausted its 200000 daily tokens and repeated retries returned infrastructure failures. Four supplied reserve keys independently accepted the same bounded call while the active key was limited.",
+  "change": "Enable a pool of the verified available reserve keys, with independent 15-second pacing, server Retry-After cooldowns and a conservative 180000-token local daily budget per bucket. Keep model, prompt, retrieval and iteration budget fixed.",
+  "axis": "provider.quota_pool",
+  "supporting_evidence": "reports/groq_key_scope_checks.json"
+}

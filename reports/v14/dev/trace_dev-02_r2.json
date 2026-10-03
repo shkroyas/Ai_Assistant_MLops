@@ -1,0 +1,99 @@
+{
+  "query_id": "87a74160-b18c-47b9-87bf-a0c3a16b24d9",
+  "question": "Where must API keys be kept?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 807,
+        "completion_tokens": 50,
+        "total_tokens": 857,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "API keys storage location requirements",
+        "reason": "Find where the handbook says API keys must be kept."
+      },
+      "reasoning": "Find where the handbook says API keys must be kept.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.24653343359629312
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.0842151939868927
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.0828493038813273
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1250,
+        "completion_tokens": 49,
+        "total_tokens": 1299,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Confirm the full secret-management guidance on API key storage.",
+        "source_id": "security"
+      },
+      "reasoning": "Confirm the full secret-management guidance on API key storage.",
+      "valid": true,
+      "result": {
+        "source_id": "security",
+        "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"API keys must be kept in a local git-ignored .env file or a cloud secret manager. They must never be placed into logs, prompts, traces, or committed files. (Additionally, the GPU model endpoint requires a bearer token.)\",\"sources\":[{\"source_id\":\"security\",\"quote\":\"API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files.\"}]}",
+      "usage": {
+        "prompt_tokens": 1394,
+        "completion_tokens": 100,
+        "total_tokens": 1494,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 3650,
+  "usage_complete": true,
+  "prompt_tokens": 3451,
+  "completion_tokens": 199,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "API keys must be kept in a local git-ignored .env file or a cloud secret manager. They must never be placed into logs, prompts, traces, or committed files. (Additionally, the GPU model endpoint requires a bearer token.)",
+    "sources": [
+      {
+        "source_id": "security",
+        "quote": "API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 45.126309579994995,
+  "token_accounting": "provider_usage"
+}

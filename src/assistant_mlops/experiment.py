@@ -90,6 +90,16 @@ async def run(config_path, with_judge=False, diagnosis=None):
                 concurrency=4,
             )
             write_report(gold_rows, gold_metrics, directory / "golden")
+            # Availability and accounting must cover the held-out phase too.
+            metrics["usage_complete"] = min(
+                metrics["usage_complete"], gold_metrics["usage_complete"]
+            )
+            metrics["hard_failure_rate"] = max(
+                metrics["hard_failure_rate"], gold_metrics["hard_failure_rate"]
+            )
+            metrics["golden_provider_failure_rate"] = sum(
+                r["trace"]["termination"] == "provider_unavailable" for r in gold_rows
+            ) / len(gold_rows)
             metrics["pct_ground_truth_passed"] = deterministic_report(gold_rows, directory)
             metrics["pct_tests_passed"] = metrics["pct_ground_truth_passed"]
             if with_judge:

@@ -1,0 +1,176 @@
+{
+  "query_id": "dded1c95-66a1-4439-984d-83007ccebd69",
+  "question": "For the production checklist: What is the retry limit?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 811,
+        "completion_tokens": 47,
+        "total_tokens": 858,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "reason": "Find the retry limit in the production checklist."
+      },
+      "reasoning": "Find the retry limit in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 890,
+        "completion_tokens": 51,
+        "total_tokens": 941,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist retry limit",
+        "reason": "Retry the search for the production checklist retry limit after a timeout."
+      },
+      "reasoning": "Retry the search for the production checklist retry limit after a timeout.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 973,
+        "completion_tokens": 50,
+        "total_tokens": 1023,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit production checklist",
+        "reason": "Retry with a reworded query for the retry limit."
+      },
+      "reasoning": "Retry with a reworded query for the retry limit.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1055,
+        "completion_tokens": 45,
+        "total_tokens": 1100,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "reason": "Try a shorter query for the retry limit."
+      },
+      "reasoning": "Try a shorter query for the retry limit.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1132,
+        "completion_tokens": 46,
+        "total_tokens": 1178,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry",
+        "reason": "Try the single keyword retry to find the relevant source."
+      },
+      "reasoning": "Try the single keyword retry to find the relevant source.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1210,
+        "completion_tokens": 47,
+        "total_tokens": 1257,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist",
+        "reason": "Search for the production checklist to locate the retry limit."
+      },
+      "reasoning": "Search for the production checklist to locate the retry limit.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1289,
+        "completion_tokens": 46,
+        "total_tokens": 1335,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "checklist",
+        "reason": "Search for the checklist to locate the retry limit."
+      },
+      "reasoning": "Search for the checklist to locate the retry limit.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 7692,
+  "usage_complete": true,
+  "prompt_tokens": 7360,
+  "completion_tokens": 332,
+  "failure_injection": "timeout",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 104.94493166699976,
+  "token_accounting": "provider_usage"
+}

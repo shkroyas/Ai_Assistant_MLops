@@ -12,6 +12,61 @@ class ProviderError(RuntimeError):
     pass
 
 
+class QuotaKeyPool:
+    """Pace independently available, user-owned quota buckets and honor cooldowns."""
+
+    def __init__(self, keys, interval, daily_budget):
+        self.keys = list(dict.fromkeys(keys))
+        self.interval, self.daily_budget = interval, daily_budget
+        self.ready = [0.0] * len(self.keys)
+        self.busy = [False] * len(self.keys)
+        self.used = [0] * len(self.keys)
+        self.condition = asyncio.Condition()
+
+    async def acquire(self):
+        deadline = monotonic() + 60
+        while True:
+            async with self.condition:
+                eligible = [
+                    i
+                    for i in range(len(self.keys))
+                    if self.used[i] < self.daily_budget and self.ready[i] != float("inf")
+                ]
+                if not eligible:
+                    raise ProviderError("All configured quota buckets are unavailable")
+                free = [i for i in eligible if not self.busy[i]]
+                if not free:
+                    remaining = deadline - monotonic()
+                    if remaining <= 0:
+                        raise ProviderError("Quota queue wait exceeded the request budget")
+                    try:
+                        await asyncio.wait_for(self.condition.wait(), timeout=remaining)
+                    except asyncio.TimeoutError:
+                        raise ProviderError(
+                            "Quota queue wait exceeded the request budget"
+                        ) from None
+                    continue
+                slot = min(free, key=lambda i: self.ready[i])
+                delay = self.ready[slot] - monotonic()
+                if delay <= 0:
+                    self.busy[slot] = True
+                    self.ready[slot] = monotonic() + self.interval
+                    return slot, self.keys[slot]
+                if monotonic() + delay > deadline:
+                    raise ProviderError(
+                        "Quota buckets are cooling down beyond the request wait budget"
+                    )
+            await asyncio.sleep(min(delay, 60))
+
+    def block(self, slot, delay):
+        self.ready[slot] = max(self.ready[slot], monotonic() + delay)
+
+    async def release(self, slot):
+        async with self.condition:
+            self.busy[slot] = False
+            self.condition.notify_all()
+
+
 class ChatProvider:
     """OpenAI-compatible providers, including authenticated Jupyter-proxied vLLM."""
 
@@ -23,6 +78,8 @@ class ChatProvider:
         transport=None,
         auth_prefix="AGENT",
         request_interval_seconds=0,
+        key_pool=None,
+        daily_token_budget=180000,
     ):
         self.base_url = (
             base_url
@@ -40,6 +97,15 @@ class ChatProvider:
         self.request_interval_seconds = request_interval_seconds
         self._pacing_lock = asyncio.Lock()
         self._last_request = None
+        self.quota_pool = None
+        if key_pool:
+            if urlsplit(self.base_url).hostname != "api.groq.com" or "Cookie" in self.headers:
+                raise ValueError(
+                    "Quota pools require the official Groq endpoint without proxy cookies"
+                )
+            if not 1 <= daily_token_budget <= 200000:
+                raise ValueError("Daily pool budget must fit the verified 200000-token allowance")
+            self.quota_pool = QuotaKeyPool(key_pool, request_interval_seconds, daily_token_budget)
 
     async def close(self):
         await self.client.aclose()
@@ -64,13 +130,22 @@ class ChatProvider:
                     for key in os.getenv("GROQ_API_KEYS", "").split(",")
                     if key.strip()
                 ]
-            keys = list(dict.fromkeys(keys))
+            pool = (
+                self.quota_pool
+                if urlsplit(base).hostname == "api.groq.com" and "Cookie" not in headers
+                else None
+            )
+            keys = list(dict.fromkeys(keys)) if not pool else [keys[0]]
             key_index, transient_attempt = 0, 0
-            for _ in range(3 + len(keys)):
+            for _ in range(3 + (len(pool.keys) if pool else len(keys))):
                 headers = {**headers, "Authorization": keys[key_index]}
                 attempt = transient_attempt
+                lease = None
                 try:
-                    if self.request_interval_seconds:
+                    if pool:
+                        lease, leased_key = await pool.acquire()
+                        headers["Authorization"] = "Bearer " + leased_key
+                    if self.request_interval_seconds and not pool:
                         async with self._pacing_lock:
                             if self._last_request is not None:
                                 delay = self.request_interval_seconds - (
@@ -91,6 +166,16 @@ class ChatProvider:
                             "max_tokens": 1200,
                         },
                     )
+                    if pool and response.status_code in {401, 403, 429}:
+                        if response.status_code in {401, 403}:
+                            pool.block(lease, float("inf"))
+                        else:
+                            try:
+                                delay = float(response.headers.get("Retry-After", 60))
+                            except ValueError:
+                                delay = 60
+                            pool.block(lease, max(pool.interval, delay))
+                        continue
                     if response.status_code in {401, 403} and key_index + 1 < len(keys):
                         key_index += 1
                         continue
@@ -124,6 +209,8 @@ class ChatProvider:
                         ):
                             raise ValueError("Malformed tool-call fields")
                     usage = payload.get("usage", {})
+                    if pool:
+                        pool.used[lease] += usage.get("total_tokens") or 0
                     # Do not invent usage when the upstream endpoint omits it.
                     return message, {
                         "prompt_tokens": usage.get("prompt_tokens"),
@@ -142,6 +229,9 @@ class ChatProvider:
                         await asyncio.sleep(0.5 * 2**attempt)
                     else:
                         break
+                finally:
+                    if pool and lease is not None:
+                        await pool.release(lease)
         raise ProviderError("All configured model providers failed")
 
 
@@ -154,10 +244,22 @@ def provider_for_config(config):
         )
     if config["provider"] != "groq":
         raise ValueError("Unsupported experiment provider")
+    pool = None
+    if config.get("key_pool") == "reserves":
+        active = os.getenv("GROQ_API_KEY", "")
+        pool = [
+            key.strip()
+            for key in os.getenv("GROQ_API_KEYS", "").split(",")
+            if key.strip() and key.strip() != active
+        ]
+        if not pool:
+            raise ValueError("No independently available reserve keys configured")
     return ChatProvider(
         base_url="https://api.groq.com/openai/v1",
-        key=os.getenv("GROQ_API_KEY", ""),
+        key=pool[0] if pool else os.getenv("GROQ_API_KEY", ""),
         model=config.get("model") or os.getenv("GROQ_MODEL") or "openai/gpt-oss-20b",
         auth_prefix="GROQ",
         request_interval_seconds=config.get("request_interval_seconds", 0),
+        key_pool=pool,
+        daily_token_budget=config.get("daily_token_budget", 180000),
     )

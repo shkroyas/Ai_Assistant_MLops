@@ -1,0 +1,7 @@
+{
+  "trace_path": "reports/v14/dev/trace_dev-31_r0.json",
+  "failure": "The agent retries a persistently failing retrieval tool across seven iterations, spending 7621 reported tokens and eventually abstaining without verified evidence.",
+  "change": "Stop immediately and return an explicit safe abstention after the first retrieval tool error. Preserve the real failed tool trace and usage. Keep model, prompt, retrieval configuration and normal-query iteration budget unchanged.",
+  "axis": "config.stop_on_tool_error",
+  "execution_status": "PREPARED; requires a fresh complete live evaluation when Groq quota is available. No quality result is claimed."
+}

@@ -1,0 +1,176 @@
+{
+  "query_id": "94a858c7-1123-49da-97ff-a250f046e44f",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 810,
+        "completion_tokens": 56,
+        "total_tokens": 866,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model planned for 24 GB GPU",
+        "reason": "Find which model is planned for 24 GB in the handbook."
+      },
+      "reasoning": "Find which model is planned for 24 GB in the handbook.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 899,
+        "completion_tokens": 52,
+        "total_tokens": 951,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "24 GB model serving plan",
+        "reason": "Retry the search for the 24 GB model plan."
+      },
+      "reasoning": "Retry the search for the 24 GB model plan.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 984,
+        "completion_tokens": 50,
+        "total_tokens": 1034,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "24 GB",
+        "reason": "Search for any mention of 24 GB in the handbook."
+      },
+      "reasoning": "Search for any mention of 24 GB in the handbook.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1067,
+        "completion_tokens": 47,
+        "total_tokens": 1114,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "GPU memory model planned",
+        "reason": "Search for GPU memory and planned model details."
+      },
+      "reasoning": "Search for GPU memory and planned model details.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1147,
+        "completion_tokens": 54,
+        "total_tokens": 1201,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the GPU serving source to find the 24 GB model plan.",
+        "source_id": "gpu-serving"
+      },
+      "reasoning": "Read the GPU serving source to find the 24 GB model plan.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1234,
+        "completion_tokens": 52,
+        "total_tokens": 1286,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model 24GB",
+        "reason": "Try a different phrasing for the 24 GB model."
+      },
+      "reasoning": "Try a different phrasing for the 24 GB model.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1319,
+        "completion_tokens": 52,
+        "total_tokens": 1371,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the service catalog to find model and GPU size details.",
+        "source_id": "service-catalog"
+      },
+      "reasoning": "Read the service catalog to find model and GPU size details.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 7823,
+  "usage_complete": true,
+  "prompt_tokens": 7460,
+  "completion_tokens": 363,
+  "failure_injection": "malformed",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 46.172630278000725,
+  "token_accounting": "provider_usage"
+}

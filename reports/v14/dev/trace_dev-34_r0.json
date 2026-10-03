@@ -1,0 +1,176 @@
+{
+  "query_id": "868d2f70-7226-43e8-b235-5967619d28e5",
+  "question": "What drift triggers challenger training?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 806,
+        "completion_tokens": 50,
+        "total_tokens": 856,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift triggers challenger training",
+        "reason": "Find the handbook rule describing when drift triggers challenger training."
+      },
+      "reasoning": "Find the handbook rule describing when drift triggers challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 888,
+        "completion_tokens": 47,
+        "total_tokens": 935,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift triggers challenger training",
+        "reason": "Retry the search after a tool timeout."
+      },
+      "reasoning": "Retry the search after a tool timeout.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 967,
+        "completion_tokens": 53,
+        "total_tokens": 1020,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "challenger training drift threshold",
+        "reason": "Try a different query to find the drift trigger for challenger training."
+      },
+      "reasoning": "Try a different query to find the drift trigger for challenger training.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1052,
+        "completion_tokens": 54,
+        "total_tokens": 1106,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the drift runbook directly to find the challenger training trigger.",
+        "source_id": "drift-runbook"
+      },
+      "reasoning": "Read the drift runbook directly to find the challenger training trigger.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1138,
+        "completion_tokens": 51,
+        "total_tokens": 1189,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Retry reading the drift runbook after a timeout.",
+        "source_id": "drift-runbook"
+      },
+      "reasoning": "Retry reading the drift runbook after a timeout.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1221,
+        "completion_tokens": 51,
+        "total_tokens": 1272,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift challenger",
+        "reason": "Try a shorter query in case the longer query is causing the timeout."
+      },
+      "reasoning": "Try a shorter query in case the longer query is causing the timeout.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1304,
+        "completion_tokens": 50,
+        "total_tokens": 1354,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift",
+        "reason": "Try the shortest possible query to test whether the tool works at all."
+      },
+      "reasoning": "Try the shortest possible query to test whether the tool works at all.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 7732,
+  "usage_complete": true,
+  "prompt_tokens": 7376,
+  "completion_tokens": 356,
+  "failure_injection": "timeout",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 105.1006291389931,
+  "token_accounting": "provider_usage"
+}
