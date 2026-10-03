@@ -44,3 +44,19 @@ def test_cache_singleflight_batch_and_rate_limit(monkeypatch):
         for _ in range(27):
             assert client.post("/ask", json={"question": "Which model?"}).status_code == 200
         assert client.post("/ask", json={"question": "Which model?"}).status_code == 429
+
+
+def test_paced_agent_has_bounded_deadline_and_recorded_model(monkeypatch, tmp_path):
+    import yaml
+    from pathlib import Path
+
+    config = yaml.safe_load(Path("configs/v1.yaml").read_text())
+    config.update(provider="groq", model="candidate", request_interval_seconds=15)
+    path = tmp_path / "paced.yaml"
+    path.write_text(yaml.safe_dump(config))
+    monkeypatch.setenv("ASSISTANT_CONFIG", str(path))
+    monkeypatch.setenv("GROQ_API_KEY", "groq-fixture")
+    with TestClient(app) as client:
+        health = client.get("/health").json()
+        assert health["provider_model"] == "candidate"
+        assert 7 * 4 * 15 < health["query_timeout_seconds"] <= 900

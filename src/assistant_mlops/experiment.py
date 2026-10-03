@@ -21,8 +21,6 @@ from assistant_mlops.retrieval import Corpus
 async def run(config_path, with_judge=False, diagnosis=None):
     load_dotenv()
     config = yaml.safe_load(Path(config_path).read_text())
-    if not os.getenv("AGENT_API_KEY"):
-        raise RuntimeError("Set AGENT_API_KEY in .env; experiments must use a real provider")
     if with_judge and not (os.getenv("GEMINI_API_KEY") or os.getenv("JUDGE_API_KEY")):
         raise RuntimeError("Configure the judge key before starting paid agent evaluations")
     if config["version"] != "v1" and not diagnosis:
@@ -49,6 +47,9 @@ async def run(config_path, with_judge=False, diagnosis=None):
     mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     mlflow.set_experiment("assistant-configurations")
     provider = provider_for_config(config)
+    if not provider.configured:
+        await provider.close()
+        raise RuntimeError("Configure credentials for the selected agent provider")
     # Prompt comparisons must not silently switch models when the GPU fails.
     provider.fallback_url = None
     corpus = Corpus()

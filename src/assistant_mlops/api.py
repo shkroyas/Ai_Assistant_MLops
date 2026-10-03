@@ -33,6 +33,9 @@ async def lifespan(app):
     corpus = Corpus(path=os.getenv("QDRANT_PATH") or None)
     provider = provider_for_config(config)
     app.state.agent = Agent(corpus, provider, config)
+    app.state.query_timeout = min(
+        900, max(180, 4 * config["max_iterations"] * provider.request_interval_seconds + 40)
+    )
     app.state.baseline_provider = provider
     if os.getenv("GROQ_API_KEY"):
         app.state.baseline_provider = ChatProvider(
@@ -84,7 +87,9 @@ def admit(request, cost=1):
 
 async def compute(question):
     async with app.state.semaphore:
-        return await asyncio.wait_for(app.state.agent.run(question), timeout=180)
+        return await asyncio.wait_for(
+            app.state.agent.run(question), timeout=app.state.query_timeout
+        )
 
 
 async def answer(question):
@@ -135,6 +140,7 @@ def health():
     return {
         "status": "ready",
         "provider_model": app.state.agent.provider.model,
+        "query_timeout_seconds": app.state.query_timeout,
         "baseline_model": app.state.baseline_provider.model,
         "live_provider_configured": app.state.agent.provider.configured,
     }

@@ -15,7 +15,7 @@ if st.button("Verify answer", disabled=len(question.strip()) < 3):
             response = httpx.post(
                 os.getenv("BACKEND_URL", "http://localhost:8000") + "/ask",
                 json={"question": question},
-                timeout=190,
+                timeout=910,
             )
             response.raise_for_status()
             result = response.json()
