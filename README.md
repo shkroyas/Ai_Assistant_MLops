@@ -97,7 +97,7 @@ uv run python -m assistant_mlops.experiment compare
 uv run python -m assistant_mlops.experiment promote --run-id ACTUAL_RUN_ID
 ```
 
-Only explicit promotion changes configs/production.yaml. Reject experiments remain in tracking/history. Production has no initial run ID because no live model has been evaluated yet. reports/mlflow_comparison.md is generated from actual MLflow state, not invented tables. The eventual README winner/trade-off discussion must cite those measured values.
+Only explicit promotion changes configs/production.yaml. After promotion, set ASSISTANT_CONFIG=configs/vN.yaml to the promoted version in .env and recreate the backend; it deliberately loads one immutable configuration per process. Reject experiments remain in tracking/history. Production has no initial run ID because no live model has been evaluated yet. reports/mlflow_comparison.md is generated from actual MLflow state, not invented tables. The eventual README winner/trade-off discussion must cite those measured values.
 
 ## W17 c. Monitoring & Regression Strategy (Evidently AI)
 

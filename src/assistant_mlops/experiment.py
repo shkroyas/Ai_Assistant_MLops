@@ -23,6 +23,8 @@ async def run(config_path, with_judge=False, diagnosis=None):
     config = yaml.safe_load(Path(config_path).read_text())
     if not os.getenv("AGENT_API_KEY"):
         raise RuntimeError("Set AGENT_API_KEY in .env; experiments must use a real provider")
+    if with_judge and not (os.getenv("GEMINI_API_KEY") or os.getenv("JUDGE_API_KEY")):
+        raise RuntimeError("Configure the judge key before starting paid agent evaluations")
     if config["version"] != "v1" and not diagnosis:
         raise ValueError(
             "Revisions require --diagnosis pointing to a real previous failure diagnosis"
