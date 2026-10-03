@@ -96,6 +96,7 @@ async def evaluate(agent, cases, repeats=3, directory=None, concurrency=1):
                     "repeats": repeats,
                     "config": agent.config,
                     "prompt": agent.prompt,
+                    "tools": getattr(agent, "tools", None),
                     "model": agent.provider.model,
                     "endpoint": agent.provider.base_url,
                 },

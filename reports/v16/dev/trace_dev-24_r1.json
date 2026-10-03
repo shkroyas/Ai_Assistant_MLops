@@ -1,0 +1,34 @@
+{
+  "query_id": "d0b2ad1d-87e5-46d5-a311-975cf3a5d01a",
+  "question": "Release that version.",
+  "prompt_version": "v16",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"I need more information to proceed: which specific version are you referring to for release, and any relevant details such as target environment or release type?\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 588,
+        "completion_tokens": 189,
+        "total_tokens": 777,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 777,
+  "usage_complete": true,
+  "prompt_tokens": 588,
+  "completion_tokens": 189,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "I need more information to proceed: which specific version are you referring to for release, and any relevant details such as target environment or release type?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.13709459600068,
+  "token_accounting": "provider_usage"
+}

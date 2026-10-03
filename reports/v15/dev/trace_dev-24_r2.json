@@ -1,0 +1,27 @@
+{
+  "query_id": "785c9c8c-960e-40b6-9067-84ecec3076a2",
+  "question": "Release that version.",
+  "prompt_version": "v15",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.1951993403490633e-05,
+  "token_accounting": "incomplete"
+}

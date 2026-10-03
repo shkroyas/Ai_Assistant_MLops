@@ -1,0 +1,49 @@
+{
+  "query_id": "02f46104-60f4-4f5d-a79e-d77e026f5295",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v16",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 593,
+        "completion_tokens": 81,
+        "total_tokens": 674,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "24 GB model planned",
+        "reason": "Find which model is planned for 24 GB GPU memory in the handbook"
+      },
+      "reasoning": "Find which model is planned for 24 GB GPU memory in the handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 674,
+  "usage_complete": true,
+  "prompt_tokens": 593,
+  "completion_tokens": 81,
+  "failure_injection": "malformed",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.469248533998325,
+  "token_accounting": "provider_usage"
+}

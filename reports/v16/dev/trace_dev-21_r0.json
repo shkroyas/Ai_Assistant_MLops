@@ -1,0 +1,34 @@
+{
+  "query_id": "0f21d350-85ba-4465-abd1-f3ec6e3d5662",
+  "question": "Should I use the better one?",
+  "prompt_version": "v16",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you clarify which specific tool, process, or option you are referring to when you ask \\\"Should I use the better one?\\\" Providing the exact context (e.g., a particular model version, deployment method, experiment framework, etc.) will help me give a precise answer based on the MLOps handbook.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 591,
+        "completion_tokens": 167,
+        "total_tokens": 758,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 758,
+  "usage_complete": true,
+  "prompt_tokens": 591,
+  "completion_tokens": 167,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you clarify which specific tool, process, or option you are referring to when you ask \"Should I use the better one?\" Providing the exact context (e.g., a particular model version, deployment method, experiment framework, etc.) will help me give a precise answer based on the MLOps handbook.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.20024769000156,
+  "token_accounting": "provider_usage"
+}

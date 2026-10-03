@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 import matplotlib
+import yaml
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -22,11 +23,13 @@ def summarize():
         if not all(path.is_file() for path in required):
             continue
         metrics, decision = (json.loads(path.read_text()) for path in required[:2])
+        config = yaml.safe_load(Path(f"configs/{directory.name}.yaml").read_text())
         if "pct_judge_passed" not in metrics:
             continue
         rows.append(
             {
                 "version": directory.name,
+                "model": config.get("model", "Qwen/Qwen2.5-7B-Instruct"),
                 "run_id": decision["run_id"],
                 "development_completion": metrics["task_completion_rate"],
                 "golden_truth_pass": metrics["pct_ground_truth_passed"],
@@ -47,7 +50,7 @@ def summarize():
         "# Completed live experiments",
         "",
         "35 development and 18 frozen golden questions, each repeated three times. "
-        "Agents: KU Qwen2.5-7B (v1–v12), Groq Qwen3.8-27B (v14); "
+        "The CSV records the selected agent model per configuration; "
         "independent judge: Groq GPT-OSS-20B. "
         "Only versions with completed native judge reports are shown. "
         "All MLflow runs, including interrupted and agent-only phases, remain in mlflow_comparison.csv.",
@@ -70,6 +73,8 @@ def summarize():
         "golden traces terminated provider_unavailable. Its aggregate golden rates "
         "include those failures and cannot isolate model quality. See "
         "[infrastructure audit](v14/infrastructure_audit.json).",
+        "v15 encountered Qwen daily quota exhaustion during development and "
+        "cannot isolate model quality. Its original failed samples remain in the reports.",
         "",
     ]
     lines += [
@@ -92,6 +97,8 @@ def summarize():
     axes[0].legend(fontsize=8)
     axes[1].bar(versions, [row["tokens_per_development_query"] for row in rows], color="#375f87")
     axes[1].set(ylabel="Actual provider tokens per query", title="Development cost proxy")
+    for axis in axes:
+        axis.tick_params(axis="x", labelrotation=45, labelsize=8)
     fig.suptitle("Live coursework experiments — production requires a passing gate")
     fig.savefig("reports/cost_quality.png", dpi=160)
     plt.close(fig)

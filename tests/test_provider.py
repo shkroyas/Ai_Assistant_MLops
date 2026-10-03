@@ -5,6 +5,67 @@ from assistant_mlops.provider import ChatProvider, ProviderError
 
 
 @pytest.mark.asyncio
+async def test_explicit_reasoning_effort_is_sent_to_supported_model():
+    async def handler(request):
+        import json
+
+        assert json.loads(request.content)["reasoning_effort"] == "low"
+        return httpx.Response(
+            200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 5}}
+        )
+
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="fixture",
+        model="openai/gpt-oss-120b",
+        reasoning_effort="low",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+    )
+    provider.fallback_url = None
+    await provider.complete([], [])
+    await provider.close()
+
+
+def test_invalid_reasoning_configuration_fails_before_opening_client():
+    with pytest.raises(ValueError, match="requires GPT-OSS"):
+        ChatProvider(model="Qwen/Qwen2.5-7B-Instruct", reasoning_effort="low")
+
+
+@pytest.mark.asyncio
+async def test_depleted_primary_pool_uses_scoped_same_endpoint_fallback(monkeypatch):
+    import json
+
+    monkeypatch.setenv("FALLBACK_BASE_URL", "https://api.groq.com/openai/v1")
+    monkeypatch.setenv("FALLBACK_MODEL", "openai/gpt-oss-20b")
+    monkeypatch.setenv("FALLBACK_API_KEY", "fixture-fallback")
+    monkeypatch.delenv("FALLBACK_PROXY_TOKEN", raising=False)
+    monkeypatch.delenv("FALLBACK_PROXY_COOKIE", raising=False)
+
+    async def handler(request):
+        assert json.loads(request.content)["model"] == "openai/gpt-oss-20b"
+        assert request.headers["Authorization"] == "Bearer fixture-fallback"
+        return httpx.Response(
+            200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 5}}
+        )
+
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="fixture-primary",
+        model="openai/gpt-oss-120b",
+        key_pool=["fixture-primary"],
+        daily_token_budget=9,
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+    )
+    provider.quota_pool.used[0] = 9
+    _, usage = await provider.complete([], [])
+    assert usage["fallback"] and usage["model"] == "openai/gpt-oss-20b"
+    assert provider.quota_pool.used == [9]
+    await provider.close()
+
+
+@pytest.mark.asyncio
 async def test_retry_and_usage(monkeypatch):
     attempts = []
 

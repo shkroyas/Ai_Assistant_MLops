@@ -7,6 +7,7 @@ COPY --chown=airflow:root pyproject.toml uv.lock ./
 ENV UV_LINK_MODE=copy UV_CACHE_DIR=/tmp/uv-cache MPLCONFIGDIR=/tmp/matplotlib EVIDENTLY_DISABLE_TELEMETRY=1
 RUN uv sync --no-cache --locked --no-dev --no-install-project
 COPY --chown=airflow:root . .
-RUN uv sync --no-cache --locked --no-dev --no-editable && chmod -R a+rX /opt/project
+RUN uv sync --no-cache --locked --no-dev --no-editable
 USER airflow
 WORKDIR /opt/project
+RUN .venv/bin/python -c "import assistant_mlops.nightly, mlflow, evidently"

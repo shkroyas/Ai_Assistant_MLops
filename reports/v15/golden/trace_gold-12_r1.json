@@ -1,0 +1,27 @@
+{
+  "query_id": "cebb14df-8581-492b-8417-511e5f1c88b9",
+  "question": "For the production checklist: Should I use the better one?",
+  "prompt_version": "v15",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.9686001653317362e-05,
+  "token_accounting": "incomplete"
+}

@@ -3,6 +3,27 @@ from fastapi.testclient import TestClient
 from assistant_mlops.api import app
 
 
+def test_unset_override_selects_promoted_config(monkeypatch, tmp_path):
+    from assistant_mlops.api import selected_config_path
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("ASSISTANT_CONFIG", "")
+    (tmp_path / "configs").mkdir()
+    production = tmp_path / "configs/production.yaml"
+    production.write_text("version: v16\nrun_id: actual-promoted-run\n")
+    assert selected_config_path() == "configs/v16.yaml"
+    production.write_text("version: v16\nrun_id: null\n")
+    assert selected_config_path() == "configs/v1.yaml"
+
+
+def test_explicit_config_override_takes_precedence(monkeypatch, tmp_path):
+    from assistant_mlops.api import selected_config_path
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("ASSISTANT_CONFIG", "configs/v4.yaml")
+    assert selected_config_path() == "configs/v4.yaml"
+
+
 def test_rag_uses_groq_baseline_without_proxy_headers(monkeypatch):
     monkeypatch.setenv("GROQ_API_KEY", "groq-fixture")
     monkeypatch.setenv("AGENT_PROXY_TOKEN", "proxy-fixture")

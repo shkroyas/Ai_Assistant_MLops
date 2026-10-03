@@ -80,6 +80,7 @@ class ChatProvider:
         request_interval_seconds=0,
         key_pool=None,
         daily_token_budget=180000,
+        reasoning_effort=None,
     ):
         self.base_url = (
             base_url
@@ -88,6 +89,12 @@ class ChatProvider:
         )
         self.key = key if key is not None else os.getenv("AGENT_API_KEY", "")
         self.model = model or os.getenv("AGENT_MODEL") or "gemini-2.5-flash"
+        if reasoning_effort is not None and (
+            reasoning_effort not in {"low", "medium", "high"}
+            or not self.model.startswith("openai/gpt-oss-")
+        ):
+            raise ValueError("Explicit reasoning effort requires GPT-OSS and low/medium/high")
+        self.reasoning_effort = reasoning_effort
         self.client = httpx.AsyncClient(timeout=40, transport=transport)
         self.fallback_url = os.getenv("FALLBACK_BASE_URL")
         self.headers = endpoint_headers(auth_prefix, self.key)
@@ -132,7 +139,10 @@ class ChatProvider:
                 ]
             pool = (
                 self.quota_pool
-                if urlsplit(base).hostname == "api.groq.com" and "Cookie" not in headers
+                if base == self.base_url
+                and model == self.model
+                and urlsplit(base).hostname == "api.groq.com"
+                and "Cookie" not in headers
                 else None
             )
             keys = list(dict.fromkeys(keys)) if not pool else [keys[0]]
@@ -164,6 +174,11 @@ class ChatProvider:
                             "temperature": temperature,
                             "top_p": top_p,
                             "max_tokens": 1200,
+                            **(
+                                {"reasoning_effort": self.reasoning_effort}
+                                if self.reasoning_effort and model.startswith("openai/gpt-oss-")
+                                else {}
+                            ),
                         },
                     )
                     if pool and response.status_code in {401, 403, 429}:
@@ -217,8 +232,12 @@ class ChatProvider:
                         "completion_tokens": usage.get("completion_tokens"),
                         "total_tokens": usage.get("total_tokens"),
                         "model": model,
-                        "fallback": base != self.base_url,
+                        "fallback": (base, model) != (self.base_url, self.model),
                     }
+                except ProviderError:
+                    # A depleted primary pool must not prevent an independently
+                    # configured fallback model from being attempted.
+                    break
                 except httpx.HTTPStatusError as exc:
                     if exc.response.status_code != 429 and exc.response.status_code < 500:
                         break
@@ -262,4 +281,5 @@ def provider_for_config(config):
         request_interval_seconds=config.get("request_interval_seconds", 0),
         key_pool=pool,
         daily_token_budget=config.get("daily_token_budget", 180000),
+        reasoning_effort=config.get("reasoning_effort"),
     )

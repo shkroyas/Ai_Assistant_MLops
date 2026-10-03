@@ -26,9 +26,21 @@ class Batch(BaseModel):
     questions: list[Query] = Field(min_length=1, max_length=8)
 
 
+def selected_config_path():
+    selected = os.getenv("ASSISTANT_CONFIG")
+    if not selected:
+        production = yaml.safe_load(Path("configs/production.yaml").read_text())
+        selected = (
+            f"configs/{production['version']}.yaml"
+            if production.get("run_id")
+            else "configs/v1.yaml"
+        )
+    return selected
+
+
 @asynccontextmanager
 async def lifespan(app):
-    selected = os.getenv("ASSISTANT_CONFIG", "configs/v1.yaml")
+    selected = selected_config_path()
     config = yaml.safe_load(Path(selected).read_text())
     corpus = Corpus(path=os.getenv("QDRANT_PATH") or None)
     provider = provider_for_config(config)

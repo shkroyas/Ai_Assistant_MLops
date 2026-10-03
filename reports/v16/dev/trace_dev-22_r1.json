@@ -1,0 +1,34 @@
+{
+  "query_id": "6d6ed717-0941-42b0-86ca-2932bb97b17f",
+  "question": "Deploy it there.",
+  "prompt_version": "v16",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"clarify\",\n  \"answer\": \"Could you please specify what you would like to deploy and the target environment or platform? I need details about the artifact, service, or model and the deployment destination to provide accurate guidance.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 588,
+        "completion_tokens": 143,
+        "total_tokens": 731,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 731,
+  "usage_complete": true,
+  "prompt_tokens": 588,
+  "completion_tokens": 143,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what you would like to deploy and the target environment or platform? I need details about the artifact, service, or model and the deployment destination to provide accurate guidance.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.829650209001557,
+  "token_accounting": "provider_usage"
+}

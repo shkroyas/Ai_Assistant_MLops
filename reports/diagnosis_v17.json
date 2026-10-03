@@ -1,0 +1,7 @@
+{
+  "trace_path": "reports/v16/dev/trace_dev-03_r0.json",
+  "failure": "The provider rejected native tool generation because optional search source_id was null but its advertised JSON schema allowed only strings. Five real replays returned HTTP 400 tool_use_failed with this exact null argument; the retrieval runtime already supports null as unfiltered search.",
+  "change": "Allow null only for the optional search source_id field, matching the existing unfiltered runtime behavior. Keep read_source required/string-only and all tool names, argument checks, citation validation, model, prompt and evaluation gates unchanged.",
+  "axis": "tool_schema.nullable_search_filter",
+  "supporting_evidence": "reports/provider_120b_repeated_diagnostic.json"
+}
