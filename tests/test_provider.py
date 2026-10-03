@@ -103,3 +103,40 @@ async def test_explicit_groq_client_never_inherits_primary_proxy(monkeypatch):
     with pytest.raises(ProviderError):
         await provider.complete([], [])
     await provider.close()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "status, expected",
+    [(401, ["Bearer rejected", "Bearer reserve"]), (429, ["Bearer rejected"] * 3)],
+)
+async def test_groq_reserve_keys_only_on_auth_rejection(monkeypatch, status, expected):
+    monkeypatch.setenv("GROQ_API_KEYS", "rejected,reserve")
+    observed = []
+    pauses = []
+
+    async def sleep(delay):
+        pauses.append(delay)
+
+    async def handler(request):
+        observed.append(request.headers["Authorization"])
+        if request.headers["Authorization"] == "Bearer reserve":
+            return httpx.Response(200, json={"choices": [{"message": {"content": "hello"}}]})
+        return httpx.Response(status, headers={"Retry-After": "2"})
+
+    monkeypatch.setattr("assistant_mlops.provider.asyncio.sleep", sleep)
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="rejected",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+    )
+    provider.fallback_url = None
+    if status == 429:
+        with pytest.raises(ProviderError):
+            await provider.complete([], [])
+        assert pauses == [2, 2]
+    else:
+        await provider.complete([], [])
+    assert observed == expected
+    await provider.close()

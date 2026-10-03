@@ -62,16 +62,31 @@ async def run(config_path, with_judge=False, diagnosis=None):
                     **config,
                     "model": provider.model,
                     "provider_fallback_enabled": False,
+                    "evaluation_concurrency": 4,
+                    "judge_provider": os.getenv("JUDGE_PROVIDER", "gemini")
+                    if with_judge
+                    else "none",
+                    "judge_model": os.getenv("JUDGE_MODEL", "gemini-2.5-flash")
+                    if with_judge
+                    else "none",
                     "corpus_sha256": corpus.fingerprint,
                     "prompt_sha256": hashlib.sha256(agent.prompt.encode()).hexdigest(),
                 }
             )
             dev_rows, metrics = await evaluate(
-                agent, load_cases("datasets/dev_v1.jsonl"), config["repeats"]
+                agent,
+                load_cases("datasets/dev_v1.jsonl"),
+                config["repeats"],
+                directory=directory / "dev",
+                concurrency=4,
             )
             write_report(dev_rows, metrics, directory / "dev")
             gold_rows, gold_metrics = await evaluate(
-                agent, load_cases("datasets/golden_v1.jsonl"), config["repeats"]
+                agent,
+                load_cases("datasets/golden_v1.jsonl"),
+                config["repeats"],
+                directory=directory / "golden",
+                concurrency=4,
             )
             write_report(gold_rows, gold_metrics, directory / "golden")
             metrics["pct_ground_truth_passed"] = deterministic_report(gold_rows, directory)

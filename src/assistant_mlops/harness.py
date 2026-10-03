@@ -1,5 +1,7 @@
 """W16 evaluation harness, built from scratch; no evaluation framework here."""
 
+import asyncio
+import hashlib
 import json
 import os
 import statistics
@@ -81,17 +83,62 @@ def assess(case, trace):
     }
 
 
-async def evaluate(agent, cases, repeats=3):
-    rows, rates = [], []
-    for repeat in range(repeats):
-        group = []
-        for case in cases:
-            trace = await agent.run(case.question, failure=case.failure)
+async def evaluate(agent, cases, repeats=3, directory=None, concurrency=1):
+    if not 1 <= concurrency <= 4:
+        raise ValueError("Evaluation concurrency must be between one and four")
+    checkpoint = Path(directory) if directory else None
+    if checkpoint:
+        checkpoint.mkdir(parents=True, exist_ok=True)
+        identity = hashlib.sha256(
+            json.dumps(
+                {
+                    "cases": [case.model_dump() for case in cases],
+                    "repeats": repeats,
+                    "config": agent.config,
+                    "prompt": agent.prompt,
+                    "model": agent.provider.model,
+                    "endpoint": agent.provider.base_url,
+                },
+                sort_keys=True,
+            ).encode()
+        ).hexdigest()
+        manifest = checkpoint / "evaluation_identity.json"
+        if manifest.exists() and json.loads(manifest.read_text())["sha256"] != identity:
+            raise ValueError("Checkpoint inputs changed; use a fresh evaluation directory")
+        manifest.write_text(json.dumps({"sha256": identity, "concurrency": concurrency}))
+        (checkpoint / ".rows").mkdir(exist_ok=True)
+    semaphore = asyncio.Semaphore(concurrency)
+    finished = 0
+
+    async def one(repeat, case):
+        nonlocal finished
+        row_file = checkpoint / ".rows" / f"{case.id}_r{repeat}.json" if checkpoint else None
+        if row_file and row_file.exists():
+            row = json.loads(row_file.read_text())
+        else:
+            async with semaphore:
+                trace = await agent.run(case.question, failure=case.failure)
             row = assess(case, trace)
             row["repeat"] = repeat
-            rows.append(row)
-            group.append(row["completed"])
-        rates.append(statistics.mean(group))
+            if row_file:
+                temporary = row_file.with_suffix(".tmp")
+                temporary.write_text(json.dumps(row))
+                temporary.replace(row_file)
+                (checkpoint / f"trace_{case.id}_r{repeat}.json").write_text(
+                    json.dumps(trace, indent=2)
+                )
+        finished += 1
+        if checkpoint:
+            print(
+                f"Evaluation {checkpoint}: {finished}/{len(cases) * repeats} {case.id}", flush=True
+            )
+        return row
+
+    rows = await asyncio.gather(*(one(repeat, case) for repeat in range(repeats) for case in cases))
+    rates = [
+        statistics.mean(row["completed"] for row in rows if row["repeat"] == repeat)
+        for repeat in range(repeats)
+    ]
     count = len(rows)
     if not count:
         raise ValueError("No cases evaluated")

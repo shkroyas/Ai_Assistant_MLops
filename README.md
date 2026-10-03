@@ -70,6 +70,8 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 **Tool vs. Agent boundary:** Qdrant search, source reading, and the remote model endpoint are bounded request/response services, modeled as tools/provider calls. They do not own an autonomous task across exchanges or invoke a hidden collaborating agent. The assistant loop owns state, budget, retry boundary, and evidence. vLLM's stateful KV cache is an inference implementation detail within that boundary.
 
+The [live evaluation runtime](docs/evaluation-runtime.md) documents checkpoints, authentication-only reserve-key failover, and native Groq judge caching. Gemini remains an alternative judge.
+
 The active [provider allocation](docs/provider-allocation.md) uses Groq for `/rag`, Qwen for the agent, and Gemini for the judge.
 
 GPU proxy authentication and the later Groq switch are documented in [docs/provider-setup.md](docs/provider-setup.md). Check live access with `uv run python scripts/check_provider.py` before evaluation.
