@@ -1,0 +1,45 @@
+[
+  {
+    "case_id": "dev-03",
+    "reasoning_effort": "default",
+    "status": 200,
+    "error_code": null,
+    "error_type": null,
+    "failed_generation": null,
+    "usage": {
+      "queue_time": 0.39693222,
+      "prompt_tokens": 592,
+      "prompt_time": 0.005053956,
+      "completion_tokens": 95,
+      "completion_time": 0.360322332,
+      "total_tokens": 687,
+      "total_time": 0.365376288,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 49
+      }
+    }
+  },
+  {
+    "case_id": "dev-03",
+    "reasoning_effort": "low",
+    "status": 200,
+    "error_code": null,
+    "error_type": null,
+    "failed_generation": null,
+    "usage": {
+      "queue_time": 0.05365023,
+      "prompt_tokens": 592,
+      "prompt_time": 0.122160217,
+      "completion_tokens": 52,
+      "completion_time": 0.111931469,
+      "total_tokens": 644,
+      "total_time": 0.234091686,
+      "completion_tokens_details": {
+        "reasoning_tokens": 6
+      }
+    }
+  }
+]

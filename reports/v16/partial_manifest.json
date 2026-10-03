@@ -1,0 +1,8 @@
+{
+  "status": "KILLED",
+  "run_id": "bec225209f34492d9028cab08e52594e",
+  "version": "v16",
+  "completed_development_samples": 70,
+  "reported_tokens": 128270,
+  "reason": "Stopped after repeated real native tool-schema rejections; partial samples cannot serve as a full quality benchmark."
+}

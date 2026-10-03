@@ -13,7 +13,7 @@ health.raise_for_status()
 ui = httpx.get(args.ui_url + "/_stcore/health", timeout=10)
 ui.raise_for_status()
 payload = {"question": "What happens after drift and what permits promotion?"}
-answer = httpx.post(args.base_url + "/ask", json=payload, timeout=190)
+answer = httpx.post(args.base_url + "/ask", json=payload, timeout=910)
 answer.raise_for_status()
 assert answer.json()["status"] in {"answered", "abstain", "clarify"}
 if not health.json()["live_provider_configured"]:

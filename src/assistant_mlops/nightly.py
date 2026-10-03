@@ -34,13 +34,28 @@ async def main():
             passed < threshold
             or metrics["failure_injection_safe"] < 1
             or metrics["hard_failure_rate"] > 0.05
+            or metrics["usage_complete"] < 1
         )
         mlflow.set_experiment("assistant-nightly")
         with mlflow.start_run(run_name="nightly"):
+            mlflow.log_params(
+                {
+                    "production_run_id": production["run_id"],
+                    "production_version": production["version"],
+                    "model": provider.model,
+                }
+            )
             mlflow.log_metrics({**metrics, "pct_tests_passed": passed, "degraded": int(degraded)})
             Path("reports/nightly/status.json").write_text(
                 json.dumps(
-                    {"degraded": degraded, "pct_tests_passed": passed, "threshold": threshold},
+                    {
+                        "degraded": degraded,
+                        "pct_tests_passed": passed,
+                        "threshold": threshold,
+                        "production_run_id": production["run_id"],
+                        "production_version": production["version"],
+                        "model": provider.model,
+                    },
                     indent=2,
                 )
             )

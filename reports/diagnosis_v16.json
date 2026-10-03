@@ -1,0 +1,11 @@
+{
+  "trace_path": "reports/v15/dev/trace_dev-23_r0.json",
+  "failure": "The Qwen3.8-27B daily quota depleted during the new development phase; provider-unavailable traces prevent reliable completion. A small accepted quota probe did not establish a full-run allowance.",
+  "change": "Change only the agent model to Groq GPT-OSS-120B, whose available quota and native tool compatibility passed bounded checks and three development-only smoke cases. Keep prompt, iteration budget, retrieval, fail-fast behavior, pacing and pool allowance unchanged.",
+  "axis": "provider.model",
+  "supporting_evidence": [
+    "reports/provider_candidate_120b_quota.json",
+    "reports/provider_candidate_120b_smoke.json"
+  ],
+  "judge_note": "Agent and judge use distinct model sizes and separate calls but share the GPT-OSS family. Frozen deterministic truth checks remain a separate required gate."
+}

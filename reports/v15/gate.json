@@ -1,0 +1,17 @@
+{
+  "verdict": "REJECT",
+  "checks": {
+    "calibration_reviewed": true,
+    "ground_truth": false,
+    "judge": false,
+    "calibration": true,
+    "judge_truth_agreement": true,
+    "tool_correctness": true,
+    "hard_failure": false,
+    "failure_injection": true,
+    "token_usage_known": false,
+    "golden_provider_available": false
+  },
+  "run_id": "fa60fa3309404c0c80833afc917b538f",
+  "version": "v15"
+}

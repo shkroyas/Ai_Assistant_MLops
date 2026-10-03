@@ -4,6 +4,8 @@ import argparse
 import json
 from pathlib import Path
 
+import yaml
+
 
 def check(static=False):
     files = {
@@ -73,11 +75,23 @@ def check(static=False):
         checks["trace-driven revision diagnoses"] = all(
             Path(f"reports/diagnosis_v{n}.json").exists() for n in [2, 3]
         )
-        checks["promoted production run"] = (
-            "run_id: null" not in Path("configs/production.yaml").read_text()
+        production = yaml.safe_load(Path("configs/production.yaml").read_text())
+        decision_path = Path(f"reports/{production.get('version')}/gate.json")
+        decision = json.loads(decision_path.read_text()) if decision_path.exists() else {}
+        checks["promoted production run"] = bool(
+            production.get("run_id")
+            and decision.get("run_id") == production["run_id"]
+            and decision.get("verdict") == "PROMOTE"
+            and decision.get("checks")
+            and all(decision["checks"].values())
         )
-        checks["healthy and unavailable-endpoint Airflow evidence"] = all(
-            Path(f"reports/airflow_{name}.txt").exists() for name in ["healthy", "infra"]
+        nightly_path = Path("reports/nightly/status.json")
+        nightly = json.loads(nightly_path.read_text()) if nightly_path.exists() else {}
+        checks["healthy and unavailable-endpoint Airflow evidence"] = (
+            all(Path(f"reports/airflow_{name}.txt").exists() for name in ["healthy", "infra"])
+            and nightly.get("degraded") is False
+            and bool(production.get("run_id"))
+            and nightly.get("production_run_id") == production["run_id"]
         )
     lines = ["| Requirement | Result |", "|---|---|"] + [
         f"| {name} | {'PASS' if value else 'PENDING'} |" for name, value in checks.items()

@@ -1,0 +1,47 @@
+[
+  {
+    "case_id": "dev-03",
+    "attempt": 0,
+    "status": 400,
+    "error_code": "tool_use_failed",
+    "error_type": "invalid_request_error",
+    "failed_generation": "{\"name\": \"search\", \"arguments\": {\n  \"query\": \"concurrent model requests limit\",\n  \"reason\": \"Find the handbook limit on concurrent model requests\",\n  \"source_id\": null\n}}",
+    "usage": null
+  },
+  {
+    "case_id": "dev-03",
+    "attempt": 1,
+    "status": 400,
+    "error_code": "tool_use_failed",
+    "error_type": "invalid_request_error",
+    "failed_generation": "{\"name\": \"search\", \"arguments\": {\n  \"query\": \"concurrent model requests limit\",\n  \"reason\": \"Find the handbook limit on concurrent model requests\",\n  \"source_id\": null\n}}",
+    "usage": null
+  },
+  {
+    "case_id": "dev-03",
+    "attempt": 2,
+    "status": 400,
+    "error_code": "tool_use_failed",
+    "error_type": "invalid_request_error",
+    "failed_generation": "{\"name\": \"search\", \"arguments\": {\n  \"query\": \"concurrent model requests limit\",\n  \"reason\": \"Find the handbook limit on concurrent model requests\",\n  \"source_id\": null\n}}",
+    "usage": null
+  },
+  {
+    "case_id": "dev-03",
+    "attempt": 3,
+    "status": 400,
+    "error_code": "tool_use_failed",
+    "error_type": "invalid_request_error",
+    "failed_generation": "{\"name\": \"search\", \"arguments\": {\n  \"query\": \"concurrent model requests limit\",\n  \"reason\": \"Find the handbook limit on concurrent model requests\",\n  \"source_id\": null\n}}",
+    "usage": null
+  },
+  {
+    "case_id": "dev-03",
+    "attempt": 4,
+    "status": 400,
+    "error_code": "tool_use_failed",
+    "error_type": "invalid_request_error",
+    "failed_generation": "{\"name\": \"search\", \"arguments\": {\n  \"query\": \"concurrent model requests limit\",\n  \"reason\": \"Find the handbook limit on concurrent model requests\",\n  \"source_id\": null\n}}",
+    "usage": null
+  }
+]

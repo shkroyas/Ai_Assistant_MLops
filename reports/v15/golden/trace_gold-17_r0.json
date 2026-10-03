@@ -1,0 +1,27 @@
+{
+  "query_id": "daf0a38d-7943-4883-a75e-3eef5f6e83ea",
+  "question": "For the production checklist: What is the production promotion gate?",
+  "prompt_version": "v15",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": "malformed",
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 3.841199941234663e-05,
+  "token_accounting": "incomplete"
+}

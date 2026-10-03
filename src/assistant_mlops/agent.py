@@ -1,4 +1,5 @@
 import asyncio
+import copy
 import json
 import re
 import time
@@ -73,6 +74,12 @@ class Agent:
         if not 1 <= config["max_iterations"] <= 12 or not 1 <= config["top_k"] <= 8:
             raise ValueError("Invalid iteration/retrieval budget")
         self.prompt = prompt or Path(config["prompt"]).read_text()
+        self.tools = copy.deepcopy(TOOLS)
+        if config.get("nullable_search_filter", False):
+            self.tools[0]["function"]["parameters"]["properties"]["source_id"] = {
+                "type": ["string", "null"],
+                "description": "Omit or use null for an unfiltered search; otherwise use a discovered source ID.",
+            }
 
     async def run(self, question, failure=None):
         started = time.perf_counter()
@@ -104,7 +111,7 @@ class Agent:
         for iteration in range(1, self.config["max_iterations"] + 1):
             try:
                 message, usage = await self.provider.complete(
-                    messages, TOOLS, self.config["temperature"], self.config["top_p"]
+                    messages, self.tools, self.config["temperature"], self.config["top_p"]
                 )
             except ProviderError:
                 trace["steps"].append(

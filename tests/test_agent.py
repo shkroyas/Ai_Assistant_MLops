@@ -52,6 +52,31 @@ def corpus():
 
 
 @pytest.mark.asyncio
+async def test_nullable_search_schema_matches_unfiltered_runtime(corpus):
+    class SchemaCheckingProvider(ScriptedProvider):
+        async def complete(self, messages, tools, *args):
+            assert tools[0]["function"]["parameters"]["properties"]["source_id"]["type"] == [
+                "string",
+                "null",
+            ]
+            assert tools[1]["function"]["parameters"]["properties"]["source_id"]["type"] == "string"
+            return await super().complete(messages, tools, *args)
+
+    provider = SchemaCheckingProvider(
+        [
+            call("search", {"query": "retry limit", "source_id": None, "reason": "Find guidance"}),
+            final("abstain", "Fixture final; no quality claim"),
+        ]
+    )
+    config = yaml.safe_load(Path("configs/v15.yaml").read_text())
+    config["nullable_search_filter"] = True
+    trace = await Agent(corpus, provider, config).run("What is the retry limit?")
+    assert trace["steps"][0]["valid"]
+    assert trace["steps"][0]["result"] == corpus.search("retry limit", top_k=config["top_k"])
+    assert trace["tool_errors"] == 0
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize("failure", ["timeout", "malformed", "unavailable"])
 async def test_fail_fast_retrieval_never_requests_another_completion(corpus, failure):
     # A second model call would exhaust this fixture and fail the test.
