@@ -1,0 +1,34 @@
+{
+  "query_id": "ed4f180e-aa7c-4942-92c0-09e1d603d421",
+  "question": "What happens on a search timeout, and does drift alone justify production changes?",
+  "prompt_version": "v6",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you specify the context or type of search timeout you're referring to, and clarify if you are asking about a single factor or multiple factors justifying production changes?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1160,
+        "completion_tokens": 46,
+        "total_tokens": 1206,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1206,
+  "usage_complete": true,
+  "prompt_tokens": 1160,
+  "completion_tokens": 46,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify the context or type of search timeout you're referring to, and clarify if you are asking about a single factor or multiple factors justifying production changes?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.9869780980006908,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,34 @@
+{
+  "query_id": "4e59a90f-970d-4c26-8159-ff93b2425624",
+  "question": "Deploy it there.",
+  "prompt_version": "v6",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Where should it be deployed? Please provide the deployment location or environment details.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1149,
+        "completion_tokens": 27,
+        "total_tokens": 1176,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1176,
+  "usage_complete": true,
+  "prompt_tokens": 1149,
+  "completion_tokens": 27,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Where should it be deployed? Please provide the deployment location or environment details.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5948927579993324,
+  "token_accounting": "provider_usage"
+}

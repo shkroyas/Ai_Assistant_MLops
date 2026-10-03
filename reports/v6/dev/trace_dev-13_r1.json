@@ -1,0 +1,34 @@
+{
+  "query_id": "f78ac800-06a2-47b4-9358-5047c5dc6c1a",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v6",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Do you need to know if the old memo is sufficient for what purpose?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1165,
+        "completion_tokens": 28,
+        "total_tokens": 1193,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1193,
+  "usage_complete": true,
+  "prompt_tokens": 1165,
+  "completion_tokens": 28,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Do you need to know if the old memo is sufficient for what purpose?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6544383239997842,
+  "token_accounting": "provider_usage"
+}

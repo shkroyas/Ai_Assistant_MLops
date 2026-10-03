@@ -1,0 +1,7 @@
+{
+  "trace_path": "reports/v5/dev/trace_dev-06_r0.json",
+  "failure": "The cited compound development query acquires relevant evidence serially but exhausts the four-step budget before finishing. A related policy-conflict development trace returns a flawed one-source authority explanation.",
+  "change": "Require clause-by-clause coverage and at least two relevant exact source quotations for compound/conflicting policy requests. Keep other prompt rules, provider and four-step budget fixed.",
+  "axis": "prompt.multi_source_coverage",
+  "supporting_trace_path": "reports/v5/dev/trace_dev-12_r0.json"
+}

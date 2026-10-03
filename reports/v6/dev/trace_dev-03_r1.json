@@ -1,0 +1,34 @@
+{
+  "query_id": "ac2015ec-5ec5-4907-a43f-b992fa1d6098",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v6",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"How many model requests can execute concurrently for which models or services?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1153,
+        "completion_tokens": 26,
+        "total_tokens": 1179,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1179,
+  "usage_complete": true,
+  "prompt_tokens": 1153,
+  "completion_tokens": 26,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "How many model requests can execute concurrently for which models or services?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5510948610026389,
+  "token_accounting": "provider_usage"
+}
