@@ -1,0 +1,50 @@
+{
+  "query_id": "f91a26a5-6b76-47fb-9030-56f6a8252ff0",
+  "question": "What is the retry limit?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 773,
+        "completion_tokens": 84,
+        "total_tokens": 857,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit MLOps handbook example-company",
+        "reason": "Searching for retry limit in the handbook",
+        "source_id": null
+      },
+      "reasoning": "Searching for retry limit in the handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 857,
+  "usage_complete": true,
+  "prompt_tokens": 773,
+  "completion_tokens": 84,
+  "failure_injection": "timeout",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.74649411700375,
+  "token_accounting": "provider_usage"
+}

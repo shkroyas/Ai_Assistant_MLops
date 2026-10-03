@@ -1,0 +1,93 @@
+{
+  "query_id": "52382072-740b-4d23-928f-677885347b22",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 110,
+        "total_tokens": 885,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model requests can execute concurrently",
+        "reason": "Searching for concurrency limit of model requests in the handbook",
+        "source_id": null
+      },
+      "reasoning": "Searching for concurrency limit of model requests in the handbook",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.3442651927471161
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.12326671679814656
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.11228692531585693
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The application admits at most four concurrent model requests.\", \"sources\": [{\"quote\": \"The application admits at most four concurrent model requests.\", \"source_id\": \"reliability\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1127,
+        "completion_tokens": 101,
+        "total_tokens": 1228,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have found a source \"reliability\" that says: \"The application admits at most four concurrent model requests.\" That answers the question. We should cite that. No other sources needed. Provide JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_f9cc5ae1-f0cc-4087-8d36-ceead8709c1a",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The application admits at most four concurrent model requests.\",\"sources\":[{\"quote\":\"The application admits at most four concurrent model requests.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2113,
+  "usage_complete": true,
+  "prompt_tokens": 1902,
+  "completion_tokens": 211,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The application admits at most four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 15.61615112900472,
+  "token_accounting": "provider_usage"
+}

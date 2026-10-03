@@ -1,0 +1,49 @@
+{
+  "query_id": "572c13c5-5e23-47fc-afa4-89db286c8739",
+  "question": "Deploy it there.",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify what you would like to deploy and where you would like it deployed?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 135,
+        "total_tokens": 906,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Deploy it there.\" We need context: The user is asking about the example-company MLOps handbook. The user says \"Deploy it there.\" We need to interpret what \"it\" refers to. The user hasn't provided context. We need to clarify. According to instructions: If request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we should respond with a clarification.",
+        "tool_calls": [
+          {
+            "id": "fc_b0d79820-9023-4030-b704-3105071aa068",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify what you would like to deploy and where you would like it deployed?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 906,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 135,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what you would like to deploy and where you would like it deployed?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.183500134000496,
+  "token_accounting": "provider_usage"
+}

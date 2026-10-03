@@ -1,0 +1,49 @@
+{
+  "query_id": "bc404495-295c-46d8-aa5d-28ddf8933091",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v22",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t help with that.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 134,
+        "total_tokens": 910,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "User asks: \"How much did my provider charge last month?\" This is a personal records question. The policy says: \"If the user is asking about personal records, we must refuse.\" The user is asking about their provider charges. That is personal financial info. We must refuse. According to policy: \"If the request is for personal records, we must refuse.\" So we should respond with status \"abstain\" and explanation. No sources needed.",
+        "tool_calls": [
+          {
+            "id": "fc_fb1ea9b8-d16b-4489-9e65-38e040b93b8e",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t help with that.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 910,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 134,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t help with that.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.435320295997371,
+  "token_accounting": "provider_usage"
+}
