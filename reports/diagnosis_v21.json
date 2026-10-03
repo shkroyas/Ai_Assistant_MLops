@@ -1,0 +1,11 @@
+{
+  "trace_path": "reports/v20/dev/trace_dev-05_r0.json",
+  "failure": "Development provider errors were reproduced as HTTP 400 tool_use_failed for json<|channel|>commentary. The valid native final answer was rejected before application citation checks.",
+  "change": "Change only the native tool-name validation boundary: official Groq returns tools for application validation; repair only the observed commentary suffix on advertised names. Preserve all strict argument/status/citation/safety checks and unchanged quality gate.",
+  "supporting_evidence": [
+    "reports/provider_20b_development_diagnostic.json",
+    "reports/provider_21_native_protocol_smoke.json"
+  ],
+  "source": "https://console.groq.com/docs/api-reference",
+  "allocation": "Agent reserve keys 2\u20135, judge key 1; same GPT-OSS-20B model weights, separate credentials and calls."
+}

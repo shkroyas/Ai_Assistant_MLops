@@ -1,0 +1,97 @@
+{
+  "query_id": "551deb06-a9da-4146-8448-dc2fe8343fe4",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 786,
+        "completion_tokens": 68,
+        "total_tokens": 854,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "old memo accuracy 0.82 worse F1",
+        "reason": "Search for memo about model metrics",
+        "source_id": null
+      },
+      "reasoning": "Search for memo about model metrics",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.17774285461005648
+        },
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.1556997917347589
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.14574101479739168
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"No. The legacy memo that allowed promotion when accuracy exceeded 0.80 is superseded by the current release policy, which requires an F1 improvement of at least 0.005 and limits ROC\\u2011AUC drop to 0.01 on a frozen holdout. Since the model\\u2019s F1 is worse, it does not meet the current criteria, so the old memo alone is insufficient.\", \"sources\": [{\"quote\": \"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\", \"source_id\": \"legacy-policy\"}, {\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 237,
+        "total_tokens": 1380,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need answer: old memo not enough. Cite legacy-policy and release-policy.",
+        "tool_calls": [
+          {
+            "id": "fc_25c39687-9643-47fc-9c66-6a8496c65864",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"No. The legacy memo that allowed promotion when accuracy exceeded 0.80 is superseded by the current release policy, which requires an F1 improvement of at least 0.005 and limits ROC\u2011AUC drop to 0.01 on a frozen holdout. Since the model\u2019s F1 is worse, it does not meet the current criteria, so the old memo alone is insufficient.\",\"sources\":[{\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\",\"source_id\":\"legacy-policy\"},{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2234,
+  "usage_complete": true,
+  "prompt_tokens": 1929,
+  "completion_tokens": 305,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "No. The legacy memo that allowed promotion when accuracy exceeded 0.80 is superseded by the current release policy, which requires an F1 improvement of at least 0.005 and limits ROC\u2011AUC drop to 0.01 on a frozen holdout. Since the model\u2019s F1 is worse, it does not meet the current criteria, so the old memo alone is insufficient.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 30.628106607000518,
+  "token_accounting": "provider_usage"
+}

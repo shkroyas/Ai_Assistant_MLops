@@ -1,0 +1,97 @@
+{
+  "query_id": "cbfa3415-f54d-4ad6-8dc2-fe187d9baff6",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 786,
+        "completion_tokens": 54,
+        "total_tokens": 840,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "old memo accuracy 0.82 worse F1 model",
+        "reason": "search for memo about model metrics",
+        "source_id": null
+      },
+      "reasoning": "search for memo about model metrics",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.210213830833538
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.18768712909815177
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.16709347372404892
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"No. The legacy memo that allowed promotion when accuracy exceeded 0.80 is superseded by the current release policy. The current policy requires that a model be promoted only when its F1 score improves by at least 0.005 on a frozen holdout and its ROC\\u2011AUC does not drop by more than 0.01. Since the model\\u2019s F1 is worse, it does not meet the current promotion criteria, so the old memo alone is insufficient.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\", \"source_id\": \"release-policy\"}, {\"quote\": \"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\", \"source_id\": \"legacy-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1139,
+        "completion_tokens": 248,
+        "total_tokens": 1387,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have release-policy and legacy-policy. Need answer: old memo not enough. Provide explanation.",
+        "tool_calls": [
+          {
+            "id": "fc_adf1db2d-21b2-418e-bcc2-61d9c219efcb",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"No. The legacy memo that allowed promotion when accuracy exceeded 0.80 is superseded by the current release policy. The current policy requires that a model be promoted only when its F1 score improves by at least 0.005 on a frozen holdout and its ROC\u2011AUC does not drop by more than 0.01. Since the model\u2019s F1 is worse, it does not meet the current promotion criteria, so the old memo alone is insufficient.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\",\"source_id\":\"release-policy\"},{\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\",\"source_id\":\"legacy-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2227,
+  "usage_complete": true,
+  "prompt_tokens": 1925,
+  "completion_tokens": 302,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "No. The legacy memo that allowed promotion when accuracy exceeded 0.80 is superseded by the current release policy. The current policy requires that a model be promoted only when its F1 score improves by at least 0.005 on a frozen holdout and its ROC\u2011AUC does not drop by more than 0.01. Since the model\u2019s F1 is worse, it does not meet the current promotion criteria, so the old memo alone is insufficient.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+      },
+      {
+        "source_id": "legacy-policy",
+        "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 29.78613656199741,
+  "token_accounting": "provider_usage"
+}

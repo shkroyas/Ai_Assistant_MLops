@@ -1,0 +1,50 @@
+{
+  "query_id": "f9f7b079-47f8-49e7-b47b-bdc04f9279d6",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 46,
+        "total_tokens": 822,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "24 GB model planned",
+        "reason": "search for model planned for 24 GB",
+        "source_id": null
+      },
+      "reasoning": "search for model planned for 24 GB",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 822,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 46,
+  "failure_injection": "malformed",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.923629625998728,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,49 @@
+{
+  "query_id": "db57f30a-07af-4d54-8dff-4f2d862a6091",
+  "question": "Fix the pipeline.",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which pipeline you are referring to and what issues you are encountering?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 63,
+        "total_tokens": 834,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need to clarify what pipeline. Ask for clarification.",
+        "tool_calls": [
+          {
+            "id": "fc_fa12efd8-6467-4a14-bddd-3eb7bd6a8c12",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which pipeline you are referring to and what issues you are encountering?\",\"reason\":\"User request is ambiguous\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 834,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 63,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which pipeline you are referring to and what issues you are encountering?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.810551326001587,
+  "token_accounting": "provider_usage"
+}

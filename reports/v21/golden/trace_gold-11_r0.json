@@ -1,0 +1,49 @@
+{
+  "query_id": "0308a6fa-d4fc-477b-8a26-bcbd3df2ce7f",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v21",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t help with that.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 781,
+        "completion_tokens": 56,
+        "total_tokens": 837,
+        "model": "openai/gpt-oss-20b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "Need clarify: user asks about provider charge last month. That's personal records. Must abstain.",
+        "tool_calls": [
+          {
+            "id": "fc_0e8f7d5c-18bb-4d0c-a4ca-ce4cb494b48e",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t help with that.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 837,
+  "usage_complete": true,
+  "prompt_tokens": 781,
+  "completion_tokens": 56,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t help with that.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.55902581600094,
+  "token_accounting": "provider_usage"
+}

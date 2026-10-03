@@ -1,0 +1,8 @@
+{
+  "original_run_id": "b2fb975b789f4b7ea75ab8a1be0d547c",
+  "original_status": "FAILED",
+  "agent_samples": 159,
+  "failure_stage": "native_judge",
+  "failure_type": "RateLimitError",
+  "recovery": "Resume every unchanged agent checkpoint, including the development provider failure. Move native judging from daily-exhausted key 1 to supplied available key 2, at 20-second pacing. No sample, verdict, label or threshold is replaced."
+}
