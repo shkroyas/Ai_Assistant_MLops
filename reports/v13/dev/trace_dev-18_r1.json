@@ -1,0 +1,65 @@
+{
+  "query_id": "a87628c5-26ab-4e18-810b-9899faed1fc2",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v13",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 809,
+        "completion_tokens": 49,
+        "total_tokens": 858,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "provider charge last month billing",
+        "reason": "Check whether the handbook contains any personal billing information."
+      },
+      "reasoning": "Check whether the handbook contains any personal billing information.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.08606629818677904
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.06444910168647768
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.057377532124519355
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 858,
+  "usage_complete": false,
+  "prompt_tokens": 809,
+  "completion_tokens": 49,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 2,
+  "latency_seconds": 300.38373048500216,
+  "token_accounting": "incomplete"
+}

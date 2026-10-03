@@ -1,0 +1,27 @@
+{
+  "query_id": "97ac7b14-260d-4573-92cb-9298a1724e22",
+  "question": "Is the historical accuracy rule still an alternative to the F1 gate?",
+  "prompt_version": "v13",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 165.17885335499886,
+  "token_accounting": "incomplete"
+}

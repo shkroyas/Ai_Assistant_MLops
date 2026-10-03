@@ -1,0 +1,11 @@
+{
+  "run_id": "63a3a8e99aa5477085064b4703376371",
+  "version": "v14",
+  "golden_samples": 54,
+  "golden_provider_unavailable": 31,
+  "golden_usage_complete": false,
+  "reported_agent_tokens": 721599,
+  "cause": "Verified available reserve buckets reached the per-process 180000-token guard during golden evaluation. Provider-unavailable traces are retained, not replaced.",
+  "historical_summary_limitation": "metrics.json availability and token-accounting fields originally covered development only. This audit preserves the original evidence and records the held-out infrastructure failure separately. Future harness and gates cover both phases.",
+  "production_decision": "REJECT; no promotion. Held-out rates include infrastructure failures and cannot isolate model quality."
+}

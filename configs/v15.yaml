@@ -1,0 +1,15 @@
+version: v15
+prompt: prompts/prompt_v9.md
+max_iterations: 7
+top_k: 3
+temperature: 0.1
+top_p: 0.9
+repeats: 3
+validation_feedback: specific
+final_json_mode: normalize_wrapper
+provider: groq
+model: qwen/qwen3.8-27b
+request_interval_seconds: 15
+key_pool: reserves
+daily_token_budget: 180000
+stop_on_tool_error: true

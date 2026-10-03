@@ -1,0 +1,103 @@
+{
+  "query_id": "680455bb-f168-4873-8992-2e005cc68add",
+  "question": "For the production checklist: Can accuracy above 0.80 authorize a release today?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 818,
+        "completion_tokens": 51,
+        "total_tokens": 869,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist accuracy threshold authorize release",
+        "reason": "Find the release policy criteria for accuracy and production checklist."
+      },
+      "reasoning": "Find the release policy criteria for accuracy and production checklist.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.16087467795129157
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.14846645642271283
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.14014255388902536
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1271,
+        "completion_tokens": 52,
+        "total_tokens": 1323,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the full current release policy to confirm all production checklist criteria.",
+        "source_id": "release-policy"
+      },
+      "reasoning": "Read the full current release policy to confirm all production checklist criteria.",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"No. Accuracy above 0.80 does not authorize a release today. That was the old 2024 rule (promote any model when accuracy exceeded 0.80), which is explicitly superseded and marked 'Do not apply the old rule.' Under the current governing release policy, production model changes require an evaluation on a frozen holdout, and you may promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion, you must keep the previous production version for rollback, and the release approver is the project owner.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\"},{\"source_id\":\"legacy-policy\",\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"}]}",
+      "usage": {
+        "prompt_tokens": 1435,
+        "completion_tokens": 246,
+        "total_tokens": 1681,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 3873,
+  "usage_complete": true,
+  "prompt_tokens": 3524,
+  "completion_tokens": 349,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "No. Accuracy above 0.80 does not authorize a release today. That was the old 2024 rule (promote any model when accuracy exceeded 0.80), which is explicitly superseded and marked 'Do not apply the old rule.' Under the current governing release policy, production model changes require an evaluation on a frozen holdout, and you may promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion, you must keep the previous production version for rollback, and the release approver is the project owner.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+      },
+      {
+        "source_id": "legacy-policy",
+        "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 30.38005626899394,
+  "token_accounting": "provider_usage"
+}

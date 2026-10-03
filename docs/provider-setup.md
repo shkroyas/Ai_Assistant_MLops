@@ -36,7 +36,7 @@ Agent API access and judge API access are separate. Native Evidently evaluation 
 
 ## Verified university endpoint result
 
-On 2026-10-03, authenticated `/models` returned 200 and listed Qwen/Qwen2.5-7B-Instruct. A real greeting returned नमस्ते, using 52 tokens. Native tool calls returned HTTP 400 because automatic tool choice/parser were not enabled. Evidence: `reports/provider_connection.json`.
+On 2026-10-03, authenticated `/models` returned 200 and listed Qwen/Qwen2.5-7B-Instruct. A real greeting returned नमस्ते, using 52 tokens. The initial native tool check returned HTTP 400 until automatic tool choice/parser were enabled. The subsequent check passed and returned a real native search call (335 tokens). Current evidence: `reports/provider_connection.json`.
 
 On the GPU host, stop the existing model process before starting its replacement on the same port. Preserve its existing memory/context settings and any backend API key; add the two tool flags. A basic command for the supplied model is:
 
@@ -47,3 +47,7 @@ vllm serve Qwen/Qwen2.5-7B-Instruct \
 ```
 
 The proxy remains `/proxy/8000/v1`. The repository's `serving/serve_vllm.sh` also enables these flags, but uses port 8002 and requires its own API key; it is not a drop-in replacement for this proxy setup. Do not claim native agent execution until the check succeeds after the GPU server is restarted.
+
+## Authorized provider allocation
+
+KU Qwen2.5-7B runs v1–v12. Groq Qwen3.8-27B is the stronger candidate in v13/v14; the independent native Evidently judge remains Groq GPT-OSS-20B. Five Groq and five Gemini keys remain in the ignored local environment. Explicit `key_pool: reserves` activates paced available Groq buckets, full server cooldowns, bounded waits and local token guards; default clients retain authentication-only failover. Gemini remains an alternative. See [runtime evidence and quota limits](evaluation-runtime.md). No quota settings are modified.

@@ -1,0 +1,176 @@
+{
+  "query_id": "96491082-3929-463d-9e68-8cf602798cb1",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v13",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 806,
+        "completion_tokens": 47,
+        "total_tokens": 853,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how should credentials be stored",
+        "reason": "Find the handbook guidance on credential storage."
+      },
+      "reasoning": "Find the handbook guidance on credential storage.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 885,
+        "completion_tokens": 46,
+        "total_tokens": 931,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials storage secrets management",
+        "reason": "Retry the search for credential storage guidance."
+      },
+      "reasoning": "Retry the search for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 963,
+        "completion_tokens": 47,
+        "total_tokens": 1010,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the security source for credential storage guidance.",
+        "source_id": "security"
+      },
+      "reasoning": "Read the security source for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1042,
+        "completion_tokens": 44,
+        "total_tokens": 1086,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials stored secrets",
+        "reason": "Retry search for credential storage guidance."
+      },
+      "reasoning": "Retry search for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1118,
+        "completion_tokens": 47,
+        "total_tokens": 1165,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the security source for credential storage guidance.",
+        "source_id": "security"
+      },
+      "reasoning": "Read the security source for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1197,
+        "completion_tokens": 42,
+        "total_tokens": 1239,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials",
+        "reason": "Retry search for credential storage guidance."
+      },
+      "reasoning": "Retry search for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1271,
+        "completion_tokens": 47,
+        "total_tokens": 1318,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the security source for credential storage guidance.",
+        "source_id": "security"
+      },
+      "reasoning": "Read the security source for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 7602,
+  "usage_complete": true,
+  "prompt_tokens": 7282,
+  "completion_tokens": 320,
+  "failure_injection": "unavailable",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 420.2255785689995,
+  "token_accounting": "provider_usage"
+}

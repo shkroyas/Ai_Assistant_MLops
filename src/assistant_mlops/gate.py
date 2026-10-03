@@ -19,6 +19,8 @@ def gate(candidate, production=None):
         "hard_failure": candidate.get("hard_failure_rate", 1) <= bars["hard_failure_max"],
         "failure_injection": candidate.get("failure_injection_safe", 0) == 1,
         "token_usage_known": candidate.get("usage_complete", 0) == 1,
+        "golden_provider_available": candidate.get("golden_provider_failure_rate", 0)
+        <= bars["hard_failure_max"],
     }
     if production:
         tolerance = max(bars["completion_drop"], 2 * production.get("completion_spread", 0))

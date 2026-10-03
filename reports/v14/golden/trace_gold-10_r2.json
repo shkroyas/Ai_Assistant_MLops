@@ -1,0 +1,27 @@
+{
+  "query_id": "2a6d46b9-4d6d-4c0f-a7d2-5e22c28f435c",
+  "question": "For the production checklist: What is the company annual revenue?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 3.860099968733266e-05,
+  "token_accounting": "incomplete"
+}

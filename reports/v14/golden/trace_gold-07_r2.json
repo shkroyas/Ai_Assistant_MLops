@@ -1,0 +1,27 @@
+{
+  "query_id": "7b91b162-ee2f-4695-ac1b-79e67d7f3d44",
+  "question": "For the production checklist: Can accuracy above 0.80 authorize a release today?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 3.9091995859052986e-05,
+  "token_accounting": "incomplete"
+}

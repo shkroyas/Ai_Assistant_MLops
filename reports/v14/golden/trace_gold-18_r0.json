@@ -1,0 +1,145 @@
+{
+  "query_id": "c43ec1a0-4ac7-4adf-9d31-49ece41293a4",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v14",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 811,
+        "completion_tokens": 49,
+        "total_tokens": 860,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist credentials storage",
+        "reason": "Find how credentials should be stored in the production checklist."
+      },
+      "reasoning": "Find how credentials should be stored in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 892,
+        "completion_tokens": 45,
+        "total_tokens": 937,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials stored production checklist",
+        "reason": "Retry search for credential storage guidance."
+      },
+      "reasoning": "Retry search for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 969,
+        "completion_tokens": 59,
+        "total_tokens": 1028,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how should credentials be stored",
+        "reason": "Search security source for credential storage.",
+        "source_id": "security"
+      },
+      "reasoning": "Search security source for credential storage.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1060,
+        "completion_tokens": 46,
+        "total_tokens": 1106,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read security source for credential storage guidance.",
+        "source_id": "security"
+      },
+      "reasoning": "Read security source for credential storage guidance.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1138,
+        "completion_tokens": 43,
+        "total_tokens": 1181,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials stored",
+        "reason": "Final retry for credential storage facts."
+      },
+      "reasoning": "Final retry for credential storage facts.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"I could not retrieve the handbook's production checklist guidance because the search and read tools are currently unavailable (tool failures). I cannot verify how credentials should be stored, so I am abstaining rather than guessing.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1213,
+        "completion_tokens": 54,
+        "total_tokens": 1267,
+        "model": "qwen/qwen3.8-27b",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 6379,
+  "usage_complete": true,
+  "prompt_tokens": 6083,
+  "completion_tokens": 296,
+  "failure_injection": "unavailable",
+  "tool_errors": 5,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I could not retrieve the handbook's production checklist guidance because the search and read tools are currently unavailable (tool failures). I cannot verify how credentials should be stored, so I am abstaining rather than guessing.",
+    "sources": []
+  },
+  "iterations": 6,
+  "latency_seconds": 105.34609495400218,
+  "token_accounting": "provider_usage"
+}

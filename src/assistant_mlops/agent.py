@@ -250,6 +250,24 @@ class Agent:
                 messages.append(
                     {"role": "tool", "tool_call_id": call["id"], "content": json.dumps(result)}
                 )
+                if had_tool_error and self.config.get("stop_on_tool_error", False):
+                    break
+            if had_tool_error and self.config.get("stop_on_tool_error", False):
+                answer = Answer(
+                    status="abstain",
+                    answer="Retrieval failed; I cannot verify the requested handbook guidance "
+                    "safely. Please retry when the source tools are available.",
+                )
+                trace["termination"] = "retrieval_failure"
+                trace["steps"].append(
+                    {
+                        "step": iteration,
+                        "event": "stop_on_tool_error",
+                        "reasoning": "Stop after failed retrieval instead of spending tokens "
+                        "retrying without verified evidence.",
+                    }
+                )
+                break
             # Preserve protocol pairs, cap old outputs; full raw results stay in trace.
             for msg in messages[2:-5]:
                 if msg["role"] == "tool" and len(msg["content"]) > 700:

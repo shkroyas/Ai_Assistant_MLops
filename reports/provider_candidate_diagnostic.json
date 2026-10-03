@@ -1,0 +1,7 @@
+{
+  "status": 429,
+  "error_type": "tokens",
+  "error_code": "rate_limit_exceeded",
+  "failed_generation": null,
+  "usage": null
+}

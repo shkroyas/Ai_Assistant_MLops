@@ -1,0 +1,27 @@
+{
+  "query_id": "334b16c6-6139-436f-8634-9358cbab4f7c",
+  "question": "What happens on a search timeout, and does drift alone justify production changes?",
+  "prompt_version": "v13",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 210.21256397199613,
+  "token_accounting": "incomplete"
+}
