@@ -26,12 +26,17 @@ def quota_cooldown(response):
             error = item.get("error", {}) if isinstance(item, dict) else {}
             if not isinstance(error, dict):
                 continue
-            match = re.search(r"(?:try again|retry) in ([\d.hms ]+)", error.get("message", ""), re.I)
+            match = re.search(
+                r"(?:try again|retry) in ([\d.hms ]+)", error.get("message", ""), re.I
+            )
             if match:
-                delay = max(delay, sum(
-                    float(number) * {"h": 3600, "m": 60, "s": 1}[unit]
-                    for number, unit in re.findall(r"([\d.]+)([hms])", match[1])
-                ))
+                delay = max(
+                    delay,
+                    sum(
+                        float(number) * {"h": 3600, "m": 60, "s": 1}[unit]
+                        for number, unit in re.findall(r"([\d.]+)([hms])", match[1])
+                    ),
+                )
             for detail in error.get("details", []):
                 if isinstance(detail, dict) and "retryDelay" in detail:
                     delay = max(delay, float(str(detail["retryDelay"]).removesuffix("s")))

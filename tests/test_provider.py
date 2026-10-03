@@ -4,12 +4,23 @@ import pytest
 from assistant_mlops.provider import ChatProvider, ProviderError
 
 
-@pytest.mark.parametrize("body,expected", [
-    ([{"error": {"message": "Please retry in 54m25.5s.", "details": [
-        {"retryDelay": "3265s"}
-    ]}}], 3265.5),
-    ({"error": {"message": "Please try again in 1h2m3s."}}, 3723),
-])
+@pytest.mark.parametrize(
+    "body,expected",
+    [
+        (
+            [
+                {
+                    "error": {
+                        "message": "Please retry in 54m25.5s.",
+                        "details": [{"retryDelay": "3265s"}],
+                    }
+                }
+            ],
+            3265.5,
+        ),
+        ({"error": {"message": "Please try again in 1h2m3s."}}, 3723),
+    ],
+)
 def test_quota_cooldown_honors_full_structured_server_delay(body, expected):
     from assistant_mlops.provider import quota_cooldown
 

@@ -43,9 +43,8 @@ async def test_native_judge_rotates_quota_failure_and_restores_key(monkeypatch, 
 async def test_native_judge_never_sends_reserve_keys_to_other_host(monkeypatch):
     monkeypatch.setenv("JUDGE_API_KEYS", "reserve")
     wrapper = GroqJudgeWrapper(
-        "model", Options.from_list([
-            GroqJudgeOptions(api_key="first", api_url="https://other.example/v1")
-        ])
+        "model",
+        Options.from_list([GroqJudgeOptions(api_key="first", api_url="https://other.example/v1")]),
     )
     with pytest.raises(ValueError, match="official Groq"):
         await wrapper.complete([LLMMessage(role="user", content="question")])
