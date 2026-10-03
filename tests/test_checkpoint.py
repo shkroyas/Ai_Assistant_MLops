@@ -14,6 +14,7 @@ async def test_checkpoint_resumes_completed_real_calls_and_rejects_changed_input
         config = {"version": "fixture"}
         prompt = "fixture prompt"
         provider = SimpleNamespace(model="fixture", base_url="https://fixture.test")
+        corpus = SimpleNamespace(fingerprint="original-corpus")
 
         async def run(self, question, failure=None):
             calls.append(question)
@@ -42,6 +43,10 @@ async def test_checkpoint_resumes_completed_real_calls_and_rejects_changed_input
     resumed, resumed_metrics = await evaluate(agent, [case], repeats=3, directory=tmp_path)
     assert len(calls) == 3 and resumed == rows and resumed_metrics == metrics
     assert len(list(tmp_path.glob("trace_*.json"))) == 3
+    agent.corpus.fingerprint = "changed-corpus"
+    with pytest.raises(ValueError, match="Checkpoint inputs changed"):
+        await evaluate(agent, [case], repeats=3, directory=tmp_path)
+    agent.corpus.fingerprint = "original-corpus"
     agent.provider.model = "changed-model"
     with pytest.raises(ValueError, match="Checkpoint inputs changed"):
         await evaluate(agent, [case], repeats=3, directory=tmp_path)

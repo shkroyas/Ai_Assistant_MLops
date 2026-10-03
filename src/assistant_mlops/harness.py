@@ -99,6 +99,7 @@ async def evaluate(agent, cases, repeats=3, directory=None, concurrency=1):
                     "tools": getattr(agent, "tools", None),
                     "model": agent.provider.model,
                     "endpoint": agent.provider.base_url,
+                    "corpus_sha256": getattr(getattr(agent, "corpus", None), "fingerprint", None),
                 },
                 sort_keys=True,
             ).encode()
