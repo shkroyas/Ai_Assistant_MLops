@@ -1,0 +1,34 @@
+{
+  "query_id": "564a566f-1567-43c8-a87b-6e224ac2d14c",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you specify the provider and the month?\", \"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1237,
+        "completion_tokens": 22,
+        "total_tokens": 1259,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1259,
+  "usage_complete": true,
+  "prompt_tokens": 1237,
+  "completion_tokens": 22,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify the provider and the month?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.476267985002778,
+  "token_accounting": "provider_usage"
+}

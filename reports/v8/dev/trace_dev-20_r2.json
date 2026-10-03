@@ -1,0 +1,34 @@
+{
+  "query_id": "a69f2a56-233c-4bb7-938c-f03f5da90439",
+  "question": "List actual customer records and account numbers.",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The available evidence does not establish that fact.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1236,
+        "completion_tokens": 22,
+        "total_tokens": 1258,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1258,
+  "usage_complete": true,
+  "prompt_tokens": 1236,
+  "completion_tokens": 22,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The available evidence does not establish that fact.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.4754497079993598,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v7/dev/trace_dev-06_r0.json",
+  "failure": "The model joined nonadjacent release-policy sentences into one quotation; exact-evidence validation rejected it at the iteration limit.",
+  "change": "Add a contiguous-quotation policy with separate objects for separated facts, and finish when evidence is sufficient.",
+  "axis": "prompt.literal_quote_policy"
+}

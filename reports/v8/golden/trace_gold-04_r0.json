@@ -1,0 +1,131 @@
+{
+  "query_id": "8177e712-d16e-4aec-a86b-85d642051cde",
+  "question": "For the production checklist: What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v8",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1244,
+        "completion_tokens": 46,
+        "total_tokens": 1290,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist significant drift promotion",
+        "source_id": "",
+        "reason": "Initial search for production checklist details regarding significant drift and promotion permissions."
+      },
+      "reasoning": "Initial search for production checklist details regarding significant drift and promotion permissions.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.28688765317201614
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.19650211930274963
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.12326671679814656
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1668,
+        "completion_tokens": 53,
+        "total_tokens": 1721,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist significant drift promotion",
+        "source_id": "release-policy",
+        "reason": "Refining search to find specific information on production checklist following significant drift and promotion permissions."
+      },
+      "reasoning": "Refining search to find specific information on production checklist following significant drift and promotion permissions.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.19650211930274963
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1864,
+        "completion_tokens": 42,
+        "total_tokens": 1906,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "Reading the release policy to fully understand the conditions for promotion after significant drift."
+      },
+      "reasoning": "Reading the release policy to fully understand the conditions for promotion after significant drift.",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"answered\",\"answer\":\"After significant drift, the production checklist requires evaluating the model on a frozen holdout. Promotion is permitted only if F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. The project owner must approve the release.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. The release approver is the project owner.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 2018,
+        "completion_tokens": 117,
+        "total_tokens": 2135,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 7052,
+  "usage_complete": true,
+  "prompt_tokens": 6794,
+  "completion_tokens": 258,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 5.70422312500159,
+  "token_accounting": "provider_usage"
+}
