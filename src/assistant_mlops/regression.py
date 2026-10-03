@@ -4,14 +4,91 @@ import os
 import time
 from datetime import timedelta
 from pathlib import Path
+from typing import ClassVar
 
 import pandas as pd
 from evidently import DataDefinition, Dataset, Report
 from evidently.descriptors.llm_judges import LLMEval
+from evidently.legacy.utils.sync import sync_api
 from evidently.llm.templates import BinaryClassificationPromptTemplate
-from evidently.llm.utils.wrapper import GeminiOptions, OpenAIOptions, RateLimits
+from evidently.llm.utils.wrapper import (
+    GeminiOptions,
+    LLMOptions,
+    LiteLLMWrapper,
+    OpenAIOptions,
+    RateLimits,
+    llm_provider,
+)
 from evidently.metrics import CategoryCount
 from evidently.tests import gte
+
+
+class GroqJudgeOptions(LLMOptions):
+    __provider_name__: ClassVar[str] = "groq"
+
+    def get_additional_kwargs(self):
+        return {"max_completion_tokens": 512, "reasoning_effort": "low"}
+
+
+@llm_provider("groq", None)
+class GroqJudgeWrapper(LiteLLMWrapper):
+    __llm_options_type__: ClassVar = GroqJudgeOptions
+
+    def cache_path(self, messages):
+        identity = json.dumps(
+            {
+                "model": self.model,
+                "messages": [message.dict() for message in messages],
+                "options": self.options.get_additional_kwargs(),
+            },
+            sort_keys=True,
+        )
+        directory = Path(os.getenv("JUDGE_CACHE_PATH") or "reports/.judge_cache")
+        directory.mkdir(parents=True, exist_ok=True)
+        return directory / (hashlib.sha256(identity.encode()).hexdigest() + ".json")
+
+    async def complete(self, messages, seed=None):
+        result = await super().complete(messages, seed)
+        path = self.cache_path(messages)
+        temporary = path.with_suffix(".tmp")
+        temporary.write_text(
+            json.dumps(
+                {
+                    "model": self.model,
+                    "text": result.result,
+                    "input_tokens": result.input_tokens,
+                    "output_tokens": result.output_tokens,
+                }
+            )
+        )
+        temporary.replace(path)
+        return result
+
+    async def run_batch(self, requests, batch_size=None, limits=None):
+        # Repeated agent samples remain independent. Identical judge inputs share a verdict.
+        requests = list(requests)
+        results, pending = {}, {}
+        for request in requests:
+            path = self.cache_path(request.messages)
+            if path in results or path in pending:
+                continue
+            if path.exists():
+                try:
+                    results[path] = request.response_parser(json.loads(path.read_text())["text"])
+                    continue
+                except (ValueError, KeyError):
+                    path.unlink()
+            pending[path] = request
+        print(
+            f"Native Groq judge: {len(pending)} new, {len(results)} cached, {len(requests)} rows",
+            flush=True,
+        )
+        if pending:
+            values = await super().run_batch(list(pending.values()), batch_size, limits)
+            results.update(zip(pending, values))
+        return [results[self.cache_path(request.messages)] for request in requests]
+
+    run_batch_sync = sync_api(run_batch)
 
 
 def judge_descriptors():
@@ -64,11 +141,14 @@ def judge(frame, directory):
     if interval < 1:
         raise ValueError("Judge request interval must be at least one second")
     limits = RateLimits(rpm=1, interval=timedelta(seconds=interval))
-    options = (
-        GeminiOptions(api_key=key, limits=limits)
-        if provider == "gemini"
-        else OpenAIOptions(api_key=key, api_url=os.getenv("JUDGE_BASE_URL") or None, limits=limits)
-    )
+    if provider == "gemini":
+        options = GeminiOptions(api_key=key, limits=limits)
+    elif provider == "groq":
+        options = GroqJudgeOptions(api_key=key, limits=limits)
+    else:
+        options = OpenAIOptions(
+            api_key=key, api_url=os.getenv("JUDGE_BASE_URL") or None, limits=limits
+        )
     for index, descriptor in enumerate(judge_descriptors()):
         if index:
             # Native descriptor limiters are separate; preserve pacing across the boundary.
@@ -109,6 +189,23 @@ def deterministic_report(rows, directory):
 
 
 def calibrate(directory="reports/judge_calibration"):
+    identity = hashlib.sha256(
+        json.dumps(
+            {
+                "labels": Path("datasets/judge_calibration_v1.jsonl").read_text(),
+                "review": Path("datasets/calibration_review.json").read_text(),
+                "provider": os.getenv("JUDGE_PROVIDER", "gemini"),
+                "model": os.getenv("JUDGE_MODEL", "gemini-2.5-flash"),
+                "implementation": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            },
+            sort_keys=True,
+        ).encode()
+    ).hexdigest()
+    result_path = Path(directory) / "calibration.json"
+    if result_path.exists():
+        cached = json.loads(result_path.read_text())
+        if cached.get("identity_sha256") == identity:
+            return cached
     rows = [
         json.loads(line)
         for line in Path("datasets/judge_calibration_v1.jsonl").read_text().splitlines()
@@ -129,6 +226,13 @@ def calibrate(directory="reports/judge_calibration"):
             and review.get("labels_sha256")
             == hashlib.sha256(Path("datasets/judge_calibration_v1.jsonl").read_bytes()).hexdigest()
         )
+    )
+    result.update(
+        {
+            "identity_sha256": identity,
+            "judge_provider": os.getenv("JUDGE_PROVIDER", "gemini"),
+            "judge_model": os.getenv("JUDGE_MODEL", "gemini-2.5-flash"),
+        }
     )
     Path(directory, "calibration.json").write_text(json.dumps(result, indent=2))
     return result

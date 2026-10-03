@@ -1,5 +1,6 @@
 import asyncio
 import os
+from urllib.parse import urlsplit
 
 import httpx
 
@@ -42,7 +43,18 @@ class ChatProvider:
                 )
             )
         for base, headers, model in endpoints:
-            for attempt in range(3):
+            keys = [headers.get("Authorization", "")]
+            if urlsplit(base).hostname == "api.groq.com" and "Cookie" not in headers:
+                keys += [
+                    "Bearer " + key.strip()
+                    for key in os.getenv("GROQ_API_KEYS", "").split(",")
+                    if key.strip()
+                ]
+            keys = list(dict.fromkeys(keys))
+            key_index, transient_attempt = 0, 0
+            for _ in range(3 + len(keys)):
+                headers = {**headers, "Authorization": keys[key_index]}
+                attempt = transient_attempt
                 try:
                     response = await self.client.post(
                         base.rstrip("/") + "/chat/completions",
@@ -56,9 +68,17 @@ class ChatProvider:
                             "max_tokens": 1200,
                         },
                     )
+                    if response.status_code in {401, 403} and key_index + 1 < len(keys):
+                        key_index += 1
+                        continue
                     if response.status_code == 429 or response.status_code >= 500:
                         if attempt < 2:
-                            await asyncio.sleep(0.5 * 2**attempt)
+                            transient_attempt += 1
+                            try:
+                                delay = float(response.headers.get("Retry-After", 0))
+                            except ValueError:
+                                delay = 0
+                            await asyncio.sleep(min(60, max(delay, 0.5 * 2**attempt)))
                             continue
                     response.raise_for_status()
                     payload = response.json()
@@ -92,9 +112,11 @@ class ChatProvider:
                 except httpx.HTTPStatusError as exc:
                     if exc.response.status_code != 429 and exc.response.status_code < 500:
                         break
-                    if attempt < 2:
-                        await asyncio.sleep(0.5 * 2**attempt)
+                    break
                 except (httpx.RequestError, ValueError, KeyError, IndexError, TypeError):
                     if attempt < 2:
+                        transient_attempt += 1
                         await asyncio.sleep(0.5 * 2**attempt)
+                    else:
+                        break
         raise ProviderError("All configured model providers failed")

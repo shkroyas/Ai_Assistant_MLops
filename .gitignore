@@ -9,3 +9,5 @@ mlartifacts/
 data/raw/
 .qdrant/
 .airflow/
+
+reports/.judge_cache/

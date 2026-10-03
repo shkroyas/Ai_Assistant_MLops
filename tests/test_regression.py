@@ -10,6 +10,8 @@ from assistant_mlops.regression import deterministic_report, judge, judge_descri
 def test_native_judge_report_plumbing_with_stubbed_descriptor(monkeypatch, tmp_path):
     """Tests native report/test wiring; explicitly not evidence of judge quality."""
     monkeypatch.setenv("JUDGE_API_KEY", "test-fixture-only")
+    monkeypatch.setenv("JUDGE_PROVIDER", "gemini")
+    monkeypatch.setenv("JUDGE_REQUEST_INTERVAL_SECONDS", "15")
     pauses = []
     monkeypatch.setattr("assistant_mlops.regression.time.sleep", pauses.append)
 
