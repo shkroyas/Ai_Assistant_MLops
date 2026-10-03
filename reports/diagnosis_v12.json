@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v11/dev/trace_dev-10_r0.json",
+  "failure": "After a prose final answer is rejected, Qwen repeatedly wraps its answer JSON in tool_call tags; the strict parser rejects these presentation wrappers until the iteration budget is exhausted.",
+  "change": "Normalize only recognized complete wrappers (JSON fences, matching status prefixes, and tool_call tags around an Answer-schema object). Never execute textual tool tags or alter answer values; retain raw output and all citation checks.",
+  "axis": "config.final_json_mode"
+}
