@@ -162,3 +162,28 @@ def test_retrieval_bounds_and_sources(corpus):
     assert hits and {r["source_id"] for r in hits} == {"security"}
     with pytest.raises(ValueError):
         corpus.search("keys", top_k=100)
+
+
+@pytest.mark.asyncio
+async def test_specific_feedback_preserves_clarification_without_retrieval(corpus):
+    class CapturingProvider(ScriptedProvider):
+        async def complete(self, messages, *args):
+            if len(messages) > 2:
+                repair = messages[-1]["content"]
+                assert "Preserve your intended" in repair
+                assert "clarify and abstain do not need citations" in repair
+                assert "Do not retrieve policy about output validation" in repair
+            return await super().complete(messages, *args)
+
+    config = yaml.safe_load(Path("configs/v1.yaml").read_text())
+    config["validation_feedback"] = "specific"
+    provider = CapturingProvider(
+        [
+            {"content": 'clarify\n{"status":"clarify","answer":"Which options?","sources":[]}'},
+            final("clarify", "Which options?"),
+        ]
+    )
+    trace = await Agent(corpus, provider, config).run("Should I use that one?")
+    assert trace["answer"]["status"] == "clarify"
+    assert trace["iterations"] == 2
+    assert all(step["event"] != "tool_call" for step in trace["steps"])

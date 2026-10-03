@@ -8,15 +8,15 @@ This allocation follows the W15–W17 implementation plan and the user's request
 | W16 `/ask` and `/batch` agent | KU GPU `Qwen/Qwen2.5-7B-Instruct` | Native multi-step search/read-source loop |
 | Runtime fallback | Groq `openai/gpt-oss-20b` | Endpoint failures still obey the answer/citation contract |
 | W17 v1–v4 experiments | Fixed KU Qwen model; fallback disabled | Compare prompt/retrieval/step changes without switching model families |
-| Evidently correctness/completeness judge | Gemini `gemini-2.5-flash` | Independent model family; reviewed reference answers |
-| Judge calibration | Same Gemini model | Measure agreement and false passes on 15 approved calibration labels |
+| Evidently correctness/completeness judge | Groq `openai/gpt-oss-20b`; Gemini alternative | Independent model family from Qwen; reviewed reference answers |
+| Judge calibration | Same Groq judge model | Measure agreement and false passes on 15 approved calibration labels |
 | Nightly Airflow | Production agent; deterministic ground truth only | No judge calls or automatic promotion |
 
 ## Key use
 
-Five Groq and five Gemini keys were supplied as comma-separated values. Each provider now has one active singular key; all supplied values are preserved in local `GROQ_API_KEYS` and `GEMINI_API_KEYS` reserve lists. Reserve lists are not automatically rotated. The active Groq key is also assigned to the runtime fallback; Gemini is reserved for the judge rather than serving as an agent fallback. Keys stay in ignored `.env` with mode 0600 and are never logged to MLflow.
+Five Groq and five Gemini keys were supplied as comma-separated values. Each provider now has one active singular key; all supplied values are preserved in local `GROQ_API_KEYS` and `GEMINI_API_KEYS` reserve lists. The Groq runtime tries reserve keys only after authentication rejection (401/403); HTTP 429 uses pacing/backoff and never rotates keys. Native judge calls use the configured active judge key. The active Groq key is also assigned to the runtime fallback; Gemini is an alternative judge rather than an agent fallback. Keys stay in ignored `.env` with mode 0600 and are never logged to MLflow.
 
-Additional keys do not imply additional quota: Groq documents organization-level limits, while Gemini limits are project-scoped. Use backoff and the judge pacing at one request per 15 seconds (the observed Gemini quota is 5 RPM). Sources: https://console.groq.com/docs/rate-limits and https://ai.google.dev/gemini-api/docs/rate-limits.
+Additional keys do not imply additional quota: Groq documents organization-level limits, while Gemini limits are project-scoped. Current Groq judging is paced at one request per 10 seconds. Gemini needs at least 15 seconds between requests for the observed 5 RPM quota. Sources: https://console.groq.com/docs/rate-limits and https://ai.google.dev/gemini-api/docs/rate-limits.
 
 ## Live checks
 
@@ -25,8 +25,10 @@ Additional keys do not imply additional quota: Groq documents organization-level
 - `reports/provider_roles_smoke.json`: real Groq W15 retrieval response includes a verified quote; Groq native tool-call protocol passed; native Gemini/Evidently classified a matching reference as pass and a contradictory answer as fail.
 - `reports/provider_judge_smoke/`: actual Evidently HTML, JSON and judge verdicts for those two examples. This is a plumbing smoke test, not full judge calibration or a benchmark. The Groq tool smoke produced an unrecognized source filter; full agent evaluation must measure tool argument correctness rather than inferring it from protocol support.
 
-Royas authorized delegated assistant review of the 15 calibration labels. The review record includes provenance and label SHA. It does not claim individual manual human labeling. Full calibration, repeated v1–v4 experiments, gate checks, promotion, healthy nightly evidence and cloud deployment are separate remaining execution stages.
+Royas authorized delegated assistant review of the 15 calibration labels. The review record includes provenance and label SHA. It does not claim individual manual human labeling. Full Groq calibration completed with agreement 1.0 and false-pass rate 0.0. Repeated experiments and native judging are underway; production promotion, healthy nightly evidence and cloud deployment remain separate execution stages.
 
 The activated API's `/rag` query answered with Groq. The first Qwen `/ask` query safely abstained at its seven-iteration budget; see `reports/provider_routes_smoke.json`. This is a real initial quality failure to investigate with development traces, not an endpoint failure.
 
-The initial full calibration attempt hit a genuine Gemini HTTP 429 (observed 5 RPM). It did not produce a completed calibration report. Judge requests now use a 15-second interval, including a pause between native descriptors. API keys are not auto-rotated to avoid quota pacing. Raw SDK exception chains are suppressed because they can include credential-bearing URLs. The initial v1 run was interrupted before its judge stage and explicitly marked KILLED in MLflow.
+The initial full calibration attempt hit a genuine Gemini HTTP 429 (observed 5 RPM). It did not produce a completed calibration report. That Gemini attempt used a corrected 15-second interval, including a pause between native descriptors. API keys are not auto-rotated to avoid quota pacing. Raw SDK exception chains are suppressed because they can include credential-bearing URLs. The initial v1 run was interrupted before its judge stage and explicitly marked KILLED in MLflow.
+
+The user subsequently authorized Qwen or Groq for execution. Current experiments use independent Groq judging with paced calls and native duplicate-input reuse; Gemini remains an alternative rather than a quota-rotation target. See docs/evaluation-runtime.md.

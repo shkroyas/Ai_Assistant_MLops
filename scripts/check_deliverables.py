@@ -31,10 +31,24 @@ def check(static=False):
         name: Path(path).exists() and Path(path).stat().st_size > 0 for name, path in files.items()
     }
     if not static:
-        checks["W15 live major-provider execution"] = Path(
-            "reports/live_provider_smoke.json"
-        ).exists()
-        checks["W15 local vLLM execution"] = Path("reports/vllm_smoke.json").exists()
+        role_path = Path("reports/provider_roles_smoke.json")
+        roles = json.loads(role_path.read_text()) if role_path.exists() else {}
+        baseline = roles.get("groq_baseline", {})
+        checks["W15 live major-provider execution"] = (
+            baseline.get("status") == "answered"
+            and bool(baseline.get("sources"))
+            and baseline.get("token_accounting") == "provider_usage"
+            and baseline.get("tokens", 0) > 0
+        )
+        connection_path = Path("reports/provider_connection.json")
+        connection = json.loads(connection_path.read_text()) if connection_path.exists() else {}
+        checks["W15 GPU vLLM execution"] = (
+            connection.get("status") == "passed"
+            and connection.get("models_http_status") == 200
+            and connection.get("model_listed") is True
+            and bool(connection.get("native_tool_calls"))
+            and connection.get("tool_usage", {}).get("total_tokens", 0) > 0
+        )
         checks["W16 live harness results"] = Path("reports/v1/dev/harness.md").exists()
         versions = []
         for n in range(1, 5):

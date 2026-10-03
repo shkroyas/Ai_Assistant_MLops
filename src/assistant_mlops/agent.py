@@ -135,12 +135,23 @@ class Agent:
                     messages.append(
                         {"role": "assistant", "content": message.get("content") or "{}"}
                     )
-                    messages.append(
-                        {
-                            "role": "user",
-                            "content": "Output failed validation. Cite exact retrieved quotes; if insufficient, abstain.",
-                        }
-                    )
+                    feedback = "Output failed validation. Cite exact retrieved quotes; if insufficient, abstain."
+                    if self.config.get("validation_feedback") == "specific":
+                        feedback = (
+                            "Repair the previous final response. Return ONLY one JSON object with "
+                            "status (answered, abstain or clarify), answer (nonempty string), and "
+                            "sources (array of source_id/quote objects). Preserve your intended "
+                            "status and meaning; clarify and abstain do not need citations. "
+                            "Do not retrieve policy about output validation to repair JSON syntax. "
+                            "For answered responses, copy contiguous quotations from evidence "
+                            "already retrieved, or retrieve only genuinely missing evidence. "
+                            "Validation reason: " + str(exc).splitlines()[0]
+                        )
+                        if had_tool_error:
+                            feedback += (
+                                " A retrieval tool failed; use abstain rather than answered."
+                            )
+                    messages.append({"role": "user", "content": feedback})
                     continue
             if len(calls) > 4:
                 trace["termination"] = "tool_budget_exceeded"
