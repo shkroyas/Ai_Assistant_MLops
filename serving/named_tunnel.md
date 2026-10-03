@@ -1,0 +1,2 @@
+# Stable GPU endpoint
+Create a named Cloudflare tunnel through your account dashboard. Route its hostname to the GPU host at http://localhost:8002. Run `cloudflared tunnel run --token "$CF_TUNNEL_TOKEN"` in the GPU session. Set AGENT_BASE_URL to https://your-hostname/v1 and AGENT_API_KEY to the vLLM token in the laptop .env. Keep bearer authentication enabled. No tunnel or GPU is claimed to have been deployed here.
