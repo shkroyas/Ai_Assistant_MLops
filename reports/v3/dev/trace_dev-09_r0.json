@@ -1,0 +1,34 @@
+{
+  "query_id": "8538b6a8-0e8a-409b-a42a-bb09ee24a83d",
+  "question": "Which port hosts the assistant UI and where should its API key go?",
+  "prompt_version": "v3",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Please specify if you need the port number for the assistant UI or the location for the API key.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 778,
+        "completion_tokens": 32,
+        "total_tokens": 810,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 810,
+  "usage_complete": true,
+  "prompt_tokens": 778,
+  "completion_tokens": 32,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Please specify if you need the port number for the assistant UI or the location for the API key.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6774900919990614,
+  "token_accounting": "provider_usage"
+}

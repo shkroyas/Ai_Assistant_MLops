@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v2/dev/trace_dev-01_r0.json",
+  "failure": "Qwen guessed source filters and sequentially searched seven unrelated documents before reaching reliability at the budget boundary.",
+  "change": "Search the whole corpus first using an empty source_id; only filter to source IDs discovered in previous results. Keep JSON contract, model, budgets and retrieval top_k fixed.",
+  "axis": "prompt.retrieval_source_selection"
+}

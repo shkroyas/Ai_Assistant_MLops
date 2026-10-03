@@ -1,0 +1,34 @@
+{
+  "query_id": "88a4151d-956f-48ee-b787-f52880fe1d09",
+  "question": "For the production checklist: Change the limit.",
+  "prompt_version": "v3",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"What specific limit needs to be changed in the production checklist?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 773,
+        "completion_tokens": 25,
+        "total_tokens": 798,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 798,
+  "usage_complete": true,
+  "prompt_tokens": 773,
+  "completion_tokens": 25,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "What specific limit needs to be changed in the production checklist?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5428562509987387,
+  "token_accounting": "provider_usage"
+}

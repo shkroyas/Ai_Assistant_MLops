@@ -1,0 +1,34 @@
+{
+  "query_id": "fa7a1a2a-1d48-4654-b220-00ccebf7513a",
+  "question": "Who approves releases, and should golden questions guide prompt revisions?",
+  "prompt_version": "v3",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Please specify which type of release you are referring to (e.g., model deployment, software update).\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 776,
+        "completion_tokens": 33,
+        "total_tokens": 809,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 809,
+  "usage_complete": true,
+  "prompt_tokens": 776,
+  "completion_tokens": 33,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Please specify which type of release you are referring to (e.g., model deployment, software update).",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7042217620000883,
+  "token_accounting": "provider_usage"
+}
