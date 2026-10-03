@@ -1,0 +1,176 @@
+{
+  "query_id": "81d78e4d-9b14-4fb8-a64c-8021eac7078e",
+  "question": "What is the retry limit?",
+  "prompt_version": "v11",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 673,
+        "completion_tokens": 83,
+        "total_tokens": 756,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "reason": "Determine the retry limit for operations"
+      },
+      "reasoning": "Determine the retry limit for operations",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 737,
+        "completion_tokens": 40,
+        "total_tokens": 777,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "default retry limit",
+        "reason": "Determine the default retry limit for operations if the initial query was unsuccessful"
+      },
+      "reasoning": "Determine the default retry limit for operations if the initial query was unsuccessful",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 809,
+        "completion_tokens": 35,
+        "total_tokens": 844,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "maximum retry attempts",
+        "reason": "Determine the maximum number of retry attempts allowed"
+      },
+      "reasoning": "Determine the maximum number of retry attempts allowed",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 876,
+        "completion_tokens": 33,
+        "total_tokens": 909,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry policy",
+        "reason": "Identify the retry policy details including limits"
+      },
+      "reasoning": "Identify the retry policy details including limits",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 941,
+        "completion_tokens": 36,
+        "total_tokens": 977,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit in policies",
+        "reason": "Find the specific retry limit mentioned in the policies"
+      },
+      "reasoning": "Find the specific retry limit mentioned in the policies",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1009,
+        "completion_tokens": 42,
+        "total_tokens": 1051,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit in MLOps handbook",
+        "reason": "Locate the retry limit specified in the MLOps handbook"
+      },
+      "reasoning": "Locate the retry limit specified in the MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1083,
+        "completion_tokens": 46,
+        "total_tokens": 1129,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "default retry limit in MLOps handbook",
+        "reason": "Determine the default retry limit for operations as per the MLOps handbook"
+      },
+      "reasoning": "Determine the default retry limit for operations as per the MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6443,
+  "usage_complete": true,
+  "prompt_tokens": 6128,
+  "completion_tokens": 315,
+  "failure_injection": "timeout",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.669720531001076,
+  "token_accounting": "provider_usage"
+}

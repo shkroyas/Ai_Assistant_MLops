@@ -1,0 +1,8 @@
+version: v11
+prompt: prompts/prompt_v9.md
+max_iterations: 7
+top_k: 3
+temperature: 0.1
+top_p: 0.9
+repeats: 3
+validation_feedback: specific

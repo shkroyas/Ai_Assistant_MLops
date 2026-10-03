@@ -1,0 +1,125 @@
+{
+  "query_id": "72ac064c-c944-4cca-b6a7-28977b035ae4",
+  "question": "What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v11",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 678,
+        "completion_tokens": 88,
+        "total_tokens": 766,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "significant drift promotion process",
+        "reason": "Finding the process for promoting models after significant drift detection"
+      },
+      "reasoning": "Finding the process for promoting models after significant drift detection",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.32530002193204516
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.09549105424387723
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.0698856594812837
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1092,
+        "completion_tokens": 40,
+        "total_tokens": 1132,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "drift-runbook",
+        "reason": "To understand the process for handling significant drift and subsequent promotion"
+      },
+      "reasoning": "To understand the process for handling significant drift and subsequent promotion",
+      "valid": true,
+      "result": {
+        "source_id": "drift-runbook",
+        "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1246,
+        "completion_tokens": 37,
+        "total_tokens": 1283,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "To find the criteria for model promotion after drift detection"
+      },
+      "reasoning": "To find the criteria for model promotion after drift detection",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\n\"status\": \"answered\",\n\"answer\": \"Significant drift is detected when there is an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05. After detecting significant drift, the model undergoes challenger training and evaluation, but immediate promotion is not authorized. Instead, a control batch is evaluated before deciding whether to trust the alerts. Promotion can only occur if the F1 score improves by at least 0.005 and the ROC-AUC does not drop by more than 0.01. The previous production version must be kept for rollback purposes, and the project owner serves as the release approver.\",\n\"sources\": [\n    {\"source_id\": \"drift-runbook\", \"quote\": \"Drift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\"},\n    {\"source_id\": \"release-policy\", \"quote\": \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\"}\n]\n}",
+      "usage": {
+        "prompt_tokens": 1395,
+        "completion_tokens": 298,
+        "total_tokens": 1693,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 4874,
+  "usage_complete": true,
+  "prompt_tokens": 4411,
+  "completion_tokens": 463,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "Significant drift is detected when there is an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05. After detecting significant drift, the model undergoes challenger training and evaluation, but immediate promotion is not authorized. Instead, a control batch is evaluated before deciding whether to trust the alerts. Promotion can only occur if the F1 score improves by at least 0.005 and the ROC-AUC does not drop by more than 0.01. The previous production version must be kept for rollback purposes, and the project owner serves as the release approver.",
+    "sources": [
+      {
+        "source_id": "drift-runbook",
+        "quote": "Drift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 9.542625541002053,
+  "token_accounting": "provider_usage"
+}

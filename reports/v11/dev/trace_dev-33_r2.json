@@ -1,0 +1,176 @@
+{
+  "query_id": "9f035074-c2a3-4a98-a104-7d1c9e069e3a",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v11",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 673,
+        "completion_tokens": 83,
+        "total_tokens": 756,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to store credentials",
+        "reason": "Find guidelines on storing credentials"
+      },
+      "reasoning": "Find guidelines on storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 737,
+        "completion_tokens": 33,
+        "total_tokens": 770,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "secure storage of credentials",
+        "reason": "Find guidelines on securely storing credentials"
+      },
+      "reasoning": "Find guidelines on securely storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 802,
+        "completion_tokens": 35,
+        "total_tokens": 837,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "best practices for credential storage",
+        "reason": "Find best practices for storing credentials securely"
+      },
+      "reasoning": "Find best practices for storing credentials securely",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 869,
+        "completion_tokens": 32,
+        "total_tokens": 901,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credential storage policies",
+        "reason": "Find policies related to credential storage"
+      },
+      "reasoning": "Find policies related to credential storage",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 933,
+        "completion_tokens": 35,
+        "total_tokens": 968,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credential management and storage",
+        "reason": "Find guidelines on managing and storing credentials securely"
+      },
+      "reasoning": "Find guidelines on managing and storing credentials securely",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1000,
+        "completion_tokens": 34,
+        "total_tokens": 1034,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "secure methods for storing credentials",
+        "reason": "Find secure methods for storing credentials"
+      },
+      "reasoning": "Find secure methods for storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 7,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1066,
+        "completion_tokens": 34,
+        "total_tokens": 1100,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to securely store credentials",
+        "reason": "Find guidelines on securely storing credentials"
+      },
+      "reasoning": "Find guidelines on securely storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 6366,
+  "usage_complete": true,
+  "prompt_tokens": 6080,
+  "completion_tokens": 286,
+  "failure_injection": "unavailable",
+  "tool_errors": 7,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 6.0626918070011016,
+  "token_accounting": "provider_usage"
+}
