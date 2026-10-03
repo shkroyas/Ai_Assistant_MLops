@@ -1,0 +1,26 @@
+{
+  "health": {
+    "status": "ready",
+    "provider_model": "gemini-2.5-flash",
+    "live_provider_configured": false
+  },
+  "ui_status": 200,
+  "ui_url": "http://localhost:18501",
+  "request": {
+    "question": "What happens after drift and what permits promotion?"
+  },
+  "response": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": [],
+    "query_id": "abc400ce-0a11-48f3-ae61-64bac58980fc",
+    "iterations": 1,
+    "tokens": 0,
+    "token_accounting": "incomplete",
+    "tokens_consumed_this_request": 0,
+    "shared_computation": false,
+    "cache_hit": false,
+    "termination": "provider_unavailable"
+  },
+  "scope": "Deployment and graceful-degradation smoke test, not live model quality"
+}

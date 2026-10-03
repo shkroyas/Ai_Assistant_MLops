@@ -7,6 +7,7 @@ from pathlib import Path
 
 def check(static=False):
     files = {
+        "W15 single-pass baseline": "src/assistant_mlops/rag.py",
         "W15 LLM retries and fallback": "src/assistant_mlops/provider.py",
         "W15 RAG embeddings and vector database": "src/assistant_mlops/retrieval.py",
         "W15 structured output": "src/assistant_mlops/schemas.py",
@@ -30,6 +31,11 @@ def check(static=False):
         name: Path(path).exists() and Path(path).stat().st_size > 0 for name, path in files.items()
     }
     if not static:
+        checks["W15 live major-provider execution"] = Path(
+            "reports/live_provider_smoke.json"
+        ).exists()
+        checks["W15 local vLLM execution"] = Path("reports/vllm_smoke.json").exists()
+        checks["W16 live harness results"] = Path("reports/v1/dev/harness.md").exists()
         versions = []
         for n in range(1, 5):
             filename = Path(f"reports/v{n}/metrics.json")

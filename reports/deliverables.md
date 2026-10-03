@@ -1,5 +1,6 @@
 | Requirement | Result |
 |---|---|
+| W15 single-pass baseline | PASS |
 | W15 LLM retries and fallback | PASS |
 | W15 RAG embeddings and vector database | PASS |
 | W15 structured output | PASS |
@@ -18,6 +19,9 @@
 | W17 regression promotion gate | PASS |
 | W17 Airflow DAG | PASS |
 | Architecture and assignment write-up | PASS |
+| W15 live major-provider execution | PENDING |
+| W15 local vLLM execution | PENDING |
+| W16 live harness results | PENDING |
 | at least three actual prompt/config runs | PENDING |
 | judge, truth and total regression metrics per run | PENDING |
 | native judge HTML per version | PENDING |
@@ -28,4 +32,4 @@
 | promoted production run | PENDING |
 | healthy and unavailable-endpoint Airflow evidence | PENDING |
 
-18/27 checks pass.
+19/31 checks pass.
