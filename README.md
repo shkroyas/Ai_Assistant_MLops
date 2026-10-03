@@ -153,4 +153,4 @@ Static PASS means implementation files exist, not a completed live submission. F
 
 ## Verified local services
 
-The Docker UI is currently running at http://localhost:18501 and API at http://localhost:8000/docs. The MLflow UI is http://localhost:5000. `uv run python scripts/smoke_api.py --ui-url http://localhost:18501` verifies UI/backend health and safe abstention without credentials; reports/deployment_smoke.json is infrastructure evidence only. After updating .env credentials, recreate backend with `docker compose up -d --force-recreate backend`; startup loads the new values.
+The Docker UI is currently running at http://localhost:18501 and API at http://localhost:8000/docs. The MLflow UI is http://localhost:5000. `uv run python scripts/smoke_api.py --ui-url http://localhost:18501` verifies UI/backend health and safe abstention without credentials; reports/deployment_smoke.json is infrastructure evidence only. After updating .env credentials, recreate backend with `docker compose up -d --build --force-recreate backend`; startup loads the new values.
