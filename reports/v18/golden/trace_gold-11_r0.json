@@ -1,0 +1,49 @@
+{
+  "query_id": "49801473-e454-4e2d-9945-8eef4e01772b",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"I\\u2019m sorry, but I can\\u2019t provide that information.\", \"sources\": [], \"status\": \"abstain\"}",
+      "usage": {
+        "prompt_tokens": 781,
+        "completion_tokens": 169,
+        "total_tokens": 950,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user asks: \"For the production checklist: How much did my provider charge last month?\" This is a personal record request (financial info). According to policy, we must not provide personal records. The user is asking about their provider charges, which is personal data. The instruction says: \"You answer questions about the example-company MLOps handbook. The user is asking about this handbook unless they explicitly ask for personal records.\" This is a request for personal records, which we must not provide. So we must respond with status \"abstain\" and no sources. Provide explanation.",
+        "tool_calls": [
+          {
+            "id": "fc_d18743cb-ac56-4f14-b905-ab519c09b2b5",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"I\u2019m sorry, but I can\u2019t provide that information.\",\"sources\":[],\"status\":\"abstain\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 950,
+  "usage_complete": true,
+  "prompt_tokens": 781,
+  "completion_tokens": 169,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I\u2019m sorry, but I can\u2019t provide that information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 13.497582268995757,
+  "token_accounting": "provider_usage"
+}

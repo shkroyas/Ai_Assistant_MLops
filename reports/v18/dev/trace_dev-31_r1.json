@@ -1,0 +1,50 @@
+{
+  "query_id": "a301313a-d9ff-408e-a030-617e583cd1f8",
+  "question": "What is the retry limit?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 773,
+        "completion_tokens": 149,
+        "total_tokens": 922,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "reason": "Find the policy defining retry limit in the handbook",
+        "source_id": null
+      },
+      "reasoning": "Find the policy defining retry limit in the handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 922,
+  "usage_complete": true,
+  "prompt_tokens": 773,
+  "completion_tokens": 149,
+  "failure_injection": "timeout",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.497081216002698,
+  "token_accounting": "provider_usage"
+}

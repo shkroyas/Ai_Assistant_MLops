@@ -1,0 +1,49 @@
+{
+  "query_id": "159731c5-6851-447a-aa3e-4c20078e6d51",
+  "question": "Fix the pipeline.",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please provide more details about which pipeline you need fixed (e.g., data ingestion, model training, deployment) and any specific issues or error messages you are encountering?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 152,
+        "total_tokens": 923,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Fix the pipeline.\" That's vague. Need clarification: what pipeline? Likely MLOps pipeline? The user didn't specify object or options. According to instructions, if request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we need to respond with a JSON with status \"clarify\", answer explaining need more info, sources empty.",
+        "tool_calls": [
+          {
+            "id": "fc_7dee06d1-74ae-485d-a544-8e8c6dade5ca",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please provide more details about which pipeline you need fixed (e.g., data ingestion, model training, deployment) and any specific issues or error messages you are encountering?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 923,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 152,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please provide more details about which pipeline you need fixed (e.g., data ingestion, model training, deployment) and any specific issues or error messages you are encountering?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.605734304997895,
+  "token_accounting": "provider_usage"
+}

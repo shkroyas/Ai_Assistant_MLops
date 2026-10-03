@@ -1,0 +1,93 @@
+{
+  "query_id": "d1e1c5db-c4d9-40db-8e5e-6074bb39a0fa",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 775,
+        "completion_tokens": 100,
+        "total_tokens": 875,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "concurrent model requests limit",
+        "reason": "Find the handbook limit on concurrent model requests",
+        "source_id": null
+      },
+      "reasoning": "Find the handbook limit on concurrent model requests",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.2277100212661466
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.14451833967049638
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.10482848922192554
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The application can execute up to four concurrent model requests.\", \"sources\": [{\"quote\": \"The application admits at most four concurrent model requests.\", \"source_id\": \"reliability\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1149,
+        "completion_tokens": 157,
+        "total_tokens": 1306,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have a result from reliability source: \"The application admits at most four concurrent model requests.\" That answers the question. Need to provide answer with citation. Provide JSON with status answered, answer: \"The application can execute up to four concurrent model requests.\" Provide source quote. Use quote exactly as in source: \"The application admits at most four concurrent model requests.\" Ensure source_id reliability.",
+        "tool_calls": [
+          {
+            "id": "fc_80943acf-53c5-426c-bfbd-75d8639c543f",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The application can execute up to four concurrent model requests.\",\"sources\":[{\"quote\":\"The application admits at most four concurrent model requests.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2181,
+  "usage_complete": true,
+  "prompt_tokens": 1924,
+  "completion_tokens": 257,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The application can execute up to four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 2,
+  "latency_seconds": 30.420694174994424,
+  "token_accounting": "provider_usage"
+}

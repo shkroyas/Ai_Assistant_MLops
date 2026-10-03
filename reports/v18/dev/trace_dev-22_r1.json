@@ -1,0 +1,49 @@
+{
+  "query_id": "053e9ab8-3ffe-475c-809b-eea970fcb855",
+  "question": "Deploy it there.",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify what you would like to deploy and the target environment or location?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 127,
+        "total_tokens": 898,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Deploy it there.\" This is ambiguous. They likely refer to some deployment location, but we lack context. The instruction says if request lacks object or options needed to understand, ask clarifying question using status clarify. So we need to ask clarification: what to deploy? Where? Need more info. So we should respond with a clarification JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_27de99e8-343c-4b72-bc22-32890f27ad70",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify what you would like to deploy and the target environment or location?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 898,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 127,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what you would like to deploy and the target environment or location?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 14.625586352995015,
+  "token_accounting": "provider_usage"
+}

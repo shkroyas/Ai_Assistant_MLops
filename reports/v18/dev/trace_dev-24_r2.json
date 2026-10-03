@@ -1,0 +1,49 @@
+{
+  "query_id": "0d8e6559-ab50-4dc2-9274-6c6361be4e3e",
+  "question": "Release that version.",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which version you would like to release and any relevant details (e.g., product, environment, release policy)?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 158,
+        "total_tokens": 929,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Release that version.\" This is ambiguous. They likely refer to releasing a version of something, maybe a software version. The request lacks object (which version) and options. According to instructions, if request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we need to ask: which version? Provide clarification. Use json tool with status \"clarify\". Provide answer explaining need for clarification. No sources needed.",
+        "tool_calls": [
+          {
+            "id": "fc_1234cb3b-4761-4f15-a3c7-5fd3c7931ccd",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which version you would like to release and any relevant details (e.g., product, environment, release policy)?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 929,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 158,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which version you would like to release and any relevant details (e.g., product, environment, release policy)?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 12.946889216000272,
+  "token_accounting": "provider_usage"
+}

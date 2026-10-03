@@ -1,0 +1,49 @@
+{
+  "query_id": "73720560-0b23-479a-9adb-7ca6648d329c",
+  "question": "Deploy it there.",
+  "prompt_version": "v18",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify what you would like to deploy and the target environment or location? I need details about the artifact and the deployment target to provide accurate guidance.\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 1539,
+        "completion_tokens": 160,
+        "total_tokens": 1699,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Deploy it there.\" This is ambiguous. They likely refer to deploying something, but we lack context. The user hasn't provided object or options. According to instructions, if request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we need to ask clarification: what to deploy where? So we need to output a JSON with status \"clarify\", answer explaining need for clarification, sources empty.",
+        "tool_calls": [
+          {
+            "id": "fc_e59bb3e6-4c3b-47bc-bb3f-4968d304993b",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify what you would like to deploy and the target environment or location? I need details about the artifact and the deployment target to provide accurate guidance.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 1699,
+  "usage_complete": true,
+  "prompt_tokens": 1539,
+  "completion_tokens": 160,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what you would like to deploy and the target environment or location? I need details about the artifact and the deployment target to provide accurate guidance.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 15.48160472100426,
+  "token_accounting": "provider_usage"
+}
