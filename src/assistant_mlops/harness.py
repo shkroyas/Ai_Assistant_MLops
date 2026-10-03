@@ -116,12 +116,21 @@ async def evaluate(agent, cases, repeats=3):
         ),
     }
     if os.getenv("INPUT_USD_PER_MILLION") and os.getenv("OUTPUT_USD_PER_MILLION"):
+        known = []
         for row in rows:
-            row["estimated_cost_usd"] = (
-                row["prompt_tokens"] * float(os.environ["INPUT_USD_PER_MILLION"])
-                + row["completion_tokens"] * float(os.environ["OUTPUT_USD_PER_MILLION"])
-            ) / 1_000_000
-        summary["estimated_cost_usd_mean"] = statistics.mean(r["estimated_cost_usd"] for r in rows)
+            valid = row["usage_complete"] and (
+                row["prompt_tokens"] + row["completion_tokens"] == row["tokens"]
+            )
+            row["estimated_cost_usd"] = None
+            if valid:
+                row["estimated_cost_usd"] = (
+                    row["prompt_tokens"] * float(os.environ["INPUT_USD_PER_MILLION"])
+                    + row["completion_tokens"] * float(os.environ["OUTPUT_USD_PER_MILLION"])
+                ) / 1_000_000
+                known.append(row["estimated_cost_usd"])
+        summary["cost_usage_coverage"] = len(known) / len(rows)
+        if len(known) == len(rows):
+            summary["estimated_cost_usd_mean"] = statistics.mean(known)
     return rows, summary
 
 

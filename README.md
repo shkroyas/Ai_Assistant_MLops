@@ -64,7 +64,7 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 **Skill vs. Agent:** a skill could describe policy interpretation, but cannot replace adaptive evidence collection and sufficiency decisions; search and read_source remain bounded tools, and no extra agent was added.
 
-**Token and cost:** traces aggregate upstream prompt/completion/total tokens per request. Set INPUT_USD_PER_MILLION and OUTPUT_USD_PER_MILLION from your billing plan to log estimated cost; prices are not hardcoded. Unknown usage blocks promotion. Cached requests report zero new model tokens. No coordination cost is asserted because there is only one agent.
+**Token and cost:** traces aggregate upstream prompt/completion/total tokens per request. Set INPUT_USD_PER_MILLION and OUTPUT_USD_PER_MILLION from your billing plan to log estimated cost; prices are not hardcoded. Unknown total usage blocks promotion. If input/output counts are missing, estimated dollar cost is null and cost_usage_coverage reports the gap; a false zero-cost estimate is never logged. Cached requests report zero new model tokens. No coordination cost is asserted because there is only one agent.
 
 **Failure injection:** timeout, unavailable retrieval, and malformed retrieval are injected persistently. The trace records evidence_valid=false. The model can recognize the failure and abstain/clarify; application validation also rejects answered responses after any tool failure, and the iteration budget guarantees termination. Protocol tests exercise these paths; live failure-injection behavior remains to be measured.
 

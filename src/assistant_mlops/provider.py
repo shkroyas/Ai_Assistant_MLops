@@ -32,7 +32,7 @@ class ChatProvider:
                 (
                     self.fallback_url,
                     os.getenv("FALLBACK_API_KEY", ""),
-                    os.getenv("FALLBACK_MODEL", "Qwen/Qwen2.5-7B-Instruct"),
+                    (os.getenv("FALLBACK_MODEL") or "Qwen/Qwen2.5-7B-Instruct"),
                 )
             )
         for base, key, model in endpoints:

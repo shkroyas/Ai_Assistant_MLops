@@ -60,7 +60,7 @@ def judge(frame, directory):
     options = (
         GeminiOptions(api_key=key, rpm_limit=10)
         if provider == "gemini"
-        else OpenAIOptions(api_key=key, api_url=os.getenv("JUDGE_BASE_URL"), rpm_limit=10)
+        else OpenAIOptions(api_key=key, api_url=os.getenv("JUDGE_BASE_URL") or None, rpm_limit=10)
     )
     for descriptor in judge_descriptors():
         dataset.add_descriptor(descriptor, options=[options])
