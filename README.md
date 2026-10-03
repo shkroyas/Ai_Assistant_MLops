@@ -78,7 +78,7 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 Datasets are authored before experiments: 35 dev cases, 18 golden regression cases, and 15 proposed calibration labels, seven deliberately wrong. Corpus facts, not agent output, are the source of truth. Golden paraphrases overlap dev facts; this measures regression, not independent generalization. Review proposed labels yourself before claiming human agreement (datasets/README.md).
 
-Run v1 first:
+Start the tracking service with `docker compose up -d --build backend mlflow`; the .env template points host experiments at http://localhost:5000 so they appear in the same Docker MLflow UI. For a file-only workflow, explicitly set MLFLOW_TRACKING_URI=sqlite:///mlflow.db and start a local MLflow viewer against that database. Run v1 first:
 
 ```bash
 uv run python -m assistant_mlops.experiment run --config configs/v1.yaml --judge
