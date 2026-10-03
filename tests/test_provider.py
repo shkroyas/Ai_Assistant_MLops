@@ -140,3 +140,48 @@ async def test_groq_reserve_keys_only_on_auth_rejection(monkeypatch, status, exp
         await provider.complete([], [])
     assert observed == expected
     await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_pacing_is_shared_across_concurrent_queries(monkeypatch):
+    import asyncio
+
+    clock = [0.0]
+    sent = []
+    monkeypatch.setattr("assistant_mlops.provider.monotonic", lambda: clock[0])
+
+    async def sleep(delay):
+        clock[0] += delay
+
+    async def handler(request):
+        sent.append(clock[0])
+        return httpx.Response(200, json={"choices": [{"message": {"content": "{}"}}]})
+
+    monkeypatch.setattr("assistant_mlops.provider.asyncio.sleep", sleep)
+    provider = ChatProvider(
+        base_url="https://fixture.test",
+        key="fixture",
+        transport=httpx.MockTransport(handler),
+        request_interval_seconds=15,
+    )
+    provider.fallback_url = None
+    await asyncio.gather(*(provider.complete([], []) for _ in range(3)))
+    assert sent == [0.0, 15.0, 30.0]
+    await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_recorded_groq_model_uses_groq_credentials(monkeypatch):
+    from assistant_mlops.provider import provider_for_config
+
+    monkeypatch.setenv("AGENT_PROXY_TOKEN", "primary-secret")
+    monkeypatch.setenv("AGENT_PROXY_COOKIE", "primary=session")
+    monkeypatch.setenv("GROQ_API_KEY", "groq-fixture")
+    provider = provider_for_config(
+        {"provider": "groq", "model": "candidate", "request_interval_seconds": 15}
+    )
+    assert provider.model == "candidate"
+    assert provider.headers["Authorization"] == "Bearer groq-fixture"
+    assert "Cookie" not in provider.headers
+    assert provider.request_interval_seconds == 15
+    await provider.close()
