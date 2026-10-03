@@ -1,0 +1,34 @@
+{
+  "query_id": "39375a0e-ae70-42cd-b519-eabfa07cda7e",
+  "question": "Should I use the better one?",
+  "prompt_version": "v5",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Could you please specify which two options you are comparing?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1027,
+        "completion_tokens": 24,
+        "total_tokens": 1051,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1051,
+  "usage_complete": true,
+  "prompt_tokens": 1027,
+  "completion_tokens": 24,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which two options you are comparing?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5175040139984048,
+  "token_accounting": "provider_usage"
+}

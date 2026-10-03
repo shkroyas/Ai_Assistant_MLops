@@ -1,0 +1,127 @@
+{
+  "query_id": "3f0e42d1-a576-46cf-bac3-7becaf7873b6",
+  "question": "What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v5",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1031,
+        "completion_tokens": 44,
+        "total_tokens": 1075,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift significant promotion policy",
+        "source_id": "",
+        "reason": "Initial search for policies related to significant drift and promotion."
+      },
+      "reasoning": "Initial search for policies related to significant drift and promotion.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.2277100128179823
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12732140565850297
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.07307841226454288
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1455,
+        "completion_tokens": 48,
+        "total_tokens": 1503,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "promotion criteria after drift",
+        "source_id": "release-policy",
+        "reason": "Refine search to find specific criteria for promotion after detecting drift."
+      },
+      "reasoning": "Refine search to find specific criteria for promotion after detecting drift.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.12732140565850297
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1646,
+        "completion_tokens": 36,
+        "total_tokens": 1682,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "Read the release policy for detailed promotion criteria."
+      },
+      "reasoning": "Read the release policy for detailed promotion criteria.",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"After significant drift, promotion is permitted only when the F1 score improves by at least 0.005 and the ROC-AUC score does not drop by more than 0.01. A drift alert alone does not authorize promotion.\",\"sources\":[{\"source_id\":\"release-policy\",\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\"}]}",
+      "usage": {
+        "prompt_tokens": 1794,
+        "completion_tokens": 110,
+        "total_tokens": 1904,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 6164,
+  "usage_complete": true,
+  "prompt_tokens": 5926,
+  "completion_tokens": 238,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "After significant drift, promotion is permitted only when the F1 score improves by at least 0.005 and the ROC-AUC score does not drop by more than 0.01. A drift alert alone does not authorize promotion.",
+    "sources": [
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 5.111866720999387,
+  "token_accounting": "provider_usage"
+}

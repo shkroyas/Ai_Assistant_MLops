@@ -1,0 +1,6 @@
+{
+  "trace_path": "reports/v4/dev/trace_dev-02_r0.json",
+  "failure": "A factual in-domain question is answered with abstention before any retrieval; other development traces omit one subquestion or source in a compound request.",
+  "change": "Add an evidence-to-decision checklist: retrieve before factual answers, cover every subquestion, cite each supporting source, and choose abstain versus clarify from evidence availability. Keep provider, v3 base prompt and four-step budget fixed.",
+  "axis": "prompt.evidence_sufficiency_workflow"
+}
