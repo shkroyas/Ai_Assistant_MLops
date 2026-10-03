@@ -1,0 +1,34 @@
+{
+  "query_id": "e3400e5e-a51c-4423-8040-04a48357b50a",
+  "question": "Deploy it there.",
+  "prompt_version": "v5",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The request is unclear; please specify the deployment target and context.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1024,
+        "completion_tokens": 26,
+        "total_tokens": 1050,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1050,
+  "usage_complete": true,
+  "prompt_tokens": 1024,
+  "completion_tokens": 26,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The request is unclear; please specify the deployment target and context.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5572339050013397,
+  "token_accounting": "provider_usage"
+}

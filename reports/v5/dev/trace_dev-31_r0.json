@@ -1,0 +1,114 @@
+{
+  "query_id": "8174d517-0366-4f85-bed3-0176c6ffeac2",
+  "question": "What is the retry limit?",
+  "prompt_version": "v5",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1026,
+        "completion_tokens": 36,
+        "total_tokens": 1062,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "source_id": "",
+        "reason": "initial search for retry limit information"
+      },
+      "reasoning": "initial search for retry limit information",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1094,
+        "completion_tokens": 36,
+        "total_tokens": 1130,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "source_id": "",
+        "reason": "retrieving retry limit information"
+      },
+      "reasoning": "retrieving retry limit information",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1162,
+        "completion_tokens": 38,
+        "total_tokens": 1200,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "source_id": "",
+        "reason": "attempting to find retry limit information again"
+      },
+      "reasoning": "attempting to find retry limit information again",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1232,
+        "completion_tokens": 37,
+        "total_tokens": 1269,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "source_id": "",
+        "reason": "final attempt to locate retry limit information"
+      },
+      "reasoning": "final attempt to locate retry limit information",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    }
+  ],
+  "tokens": 4661,
+  "usage_complete": true,
+  "prompt_tokens": 4514,
+  "completion_tokens": 147,
+  "failure_injection": "timeout",
+  "tool_errors": 4,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 4.2862538720000884,
+  "token_accounting": "provider_usage"
+}

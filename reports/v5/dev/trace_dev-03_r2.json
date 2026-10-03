@@ -1,0 +1,125 @@
+{
+  "query_id": "d6694c00-347b-4cfb-9695-f0f08f60068f",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v5",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1028,
+        "completion_tokens": 40,
+        "total_tokens": 1068,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model requests concurrency",
+        "source_id": "",
+        "reason": "initial search for information on concurrent model requests execution"
+      },
+      "reasoning": "initial search for information on concurrent model requests execution",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.19245009331740479
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.12403474115574192
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.1025978433134096
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1459,
+        "completion_tokens": 36,
+        "total_tokens": 1495,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "reliability",
+        "reason": "read specific document for precise concurrency limit information"
+      },
+      "reasoning": "read specific document for precise concurrency limit information",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: trailing characters at line 1 column 209 [type=json_invalid, input_value='{\"status\":\"answered\",\"an...nt model requests.\"}]}`', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"answered\",\"answer\":\"The application admits at most four concurrent model requests.\",\"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}`",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1599,
+        "completion_tokens": 41,
+        "total_tokens": 1640,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: trailing characters at line 1 column 209 [type=json_invalid, input_value='{\"status\":\"answered\",\"an...nt model requests.\"}]}`', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"answered\",\"answer\":\"The application admits at most four concurrent model requests.\",\"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}`",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1665,
+        "completion_tokens": 41,
+        "total_tokens": 1706,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 5909,
+  "usage_complete": true,
+  "prompt_tokens": 5751,
+  "completion_tokens": 158,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 3.4044578630018805,
+  "token_accounting": "provider_usage"
+}

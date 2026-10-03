@@ -1,0 +1,105 @@
+{
+  "query_id": "a7505b6a-0f0d-4bbd-8fa8-f09a3a5642f3",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v5",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1028,
+        "completion_tokens": 40,
+        "total_tokens": 1068,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model requests concurrency",
+        "source_id": "",
+        "reason": "initial search for information on concurrent model requests execution"
+      },
+      "reasoning": "initial search for information on concurrent model requests execution",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.19245009331740479
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.12403474115574192
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.1025978433134096
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1459,
+        "completion_tokens": 49,
+        "total_tokens": 1508,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "maximum concurrent model requests",
+        "source_id": "reliability",
+        "reason": "refining search to find the exact maximum number of concurrent model requests"
+      },
+      "reasoning": "refining search to find the exact maximum number of concurrent model requests",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.2277100212661466
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The application admits at most four concurrent model requests.\",\"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}",
+      "usage": {
+        "prompt_tokens": 1642,
+        "completion_tokens": 41,
+        "total_tokens": 1683,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 4259,
+  "usage_complete": true,
+  "prompt_tokens": 4129,
+  "completion_tokens": 130,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The application admits at most four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 3.138537903003453,
+  "token_accounting": "provider_usage"
+}
