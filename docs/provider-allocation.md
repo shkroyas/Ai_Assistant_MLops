@@ -16,7 +16,7 @@ This allocation follows the W15–W17 implementation plan and the user's request
 
 Five Groq and five Gemini keys were supplied as comma-separated values. Each provider now has one active singular key; all supplied values are preserved in local `GROQ_API_KEYS` and `GEMINI_API_KEYS` reserve lists. Reserve lists are not automatically rotated. The active Groq key is also assigned to the runtime fallback; Gemini is reserved for the judge rather than serving as an agent fallback. Keys stay in ignored `.env` with mode 0600 and are never logged to MLflow.
 
-Additional keys do not imply additional quota: Groq documents organization-level limits, while Gemini limits are project-scoped. Use backoff and the existing judge RPM limit. Sources: https://console.groq.com/docs/rate-limits and https://ai.google.dev/gemini-api/docs/rate-limits.
+Additional keys do not imply additional quota: Groq documents organization-level limits, while Gemini limits are project-scoped. Use backoff and the judge pacing at one request per 15 seconds (the observed Gemini quota is 5 RPM). Sources: https://console.groq.com/docs/rate-limits and https://ai.google.dev/gemini-api/docs/rate-limits.
 
 ## Live checks
 
@@ -28,3 +28,5 @@ Additional keys do not imply additional quota: Groq documents organization-level
 Royas authorized delegated assistant review of the 15 calibration labels. The review record includes provenance and label SHA. It does not claim individual manual human labeling. Full calibration, repeated v1–v4 experiments, gate checks, promotion, healthy nightly evidence and cloud deployment are separate remaining execution stages.
 
 The activated API's `/rag` query answered with Groq. The first Qwen `/ask` query safely abstained at its seven-iteration budget; see `reports/provider_routes_smoke.json`. This is a real initial quality failure to investigate with development traces, not an endpoint failure.
+
+The initial full calibration attempt hit a genuine Gemini HTTP 429 (observed 5 RPM). It did not produce a completed calibration report. Judge requests now use a 15-second interval, including a pause between native descriptors. API keys are not auto-rotated to avoid quota pacing. Raw SDK exception chains are suppressed because they can include credential-bearing URLs. The initial v1 run was interrupted before its judge stage and explicitly marked KILLED in MLflow.

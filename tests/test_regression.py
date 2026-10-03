@@ -9,8 +9,12 @@ from assistant_mlops.regression import deterministic_report, judge, judge_descri
 def test_native_judge_report_plumbing_with_stubbed_descriptor(monkeypatch, tmp_path):
     """Tests native report/test wiring; explicitly not evidence of judge quality."""
     monkeypatch.setenv("JUDGE_API_KEY", "test-fixture-only")
+    pauses = []
+    monkeypatch.setattr("assistant_mlops.regression.time.sleep", pauses.append)
 
     def generate(self, dataset, options):
+        assert options[0].limits.rpm == 1
+        assert options[0].limits.interval.total_seconds() >= 15
         return {
             self.alias: DatasetColumn(ColumnType.Categorical, pd.Series(["correct", "incorrect"])),
             self.alias + " reasoning": DatasetColumn(
@@ -26,6 +30,21 @@ def test_native_judge_report_plumbing_with_stubbed_descriptor(monkeypatch, tmp_p
     assert scored.judge_pass.tolist() == [True, False]
     assert (tmp_path / "evidently_judge.html").stat().st_size > 10000
     assert {d.alias for d in judge_descriptors()} == {"correctness", "completeness"}
+    assert pauses == [15]
+
+
+def test_judge_sdk_exception_does_not_expose_key_url(monkeypatch, tmp_path):
+    monkeypatch.setenv("JUDGE_API_KEY", "fixture-secret")
+
+    def generate(self, dataset, options):
+        raise ValueError("https://fixture.test/generate?key=fixture-secret")
+
+    monkeypatch.setattr(LLMEval, "generate_data", generate)
+    frame = pd.DataFrame({"query": ["q"], "reference": ["r"], "response": ["a"]})
+    with pytest.raises(RuntimeError) as caught:
+        judge(frame, tmp_path)
+    assert str(caught.value) == "Judge request failed: ValueError"
+    assert caught.value.__suppress_context__
 
 
 def test_judge_cannot_silently_fake_results(monkeypatch, tmp_path):
