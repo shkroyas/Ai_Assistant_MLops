@@ -19,17 +19,17 @@
 | W17 regression promotion gate | PASS |
 | W17 Airflow DAG | PASS |
 | Architecture and assignment write-up | PASS |
-| W15 live major-provider execution | PENDING |
-| W15 local vLLM execution | PENDING |
-| W16 live harness results | PENDING |
-| at least three actual prompt/config runs | PENDING |
-| judge, truth and total regression metrics per run | PENDING |
-| native judge HTML per version | PENDING |
-| full live trajectories | PENDING |
-| judge calibration evidence | PENDING |
-| exported live MLflow comparison | PENDING |
-| trace-driven revision diagnoses | PENDING |
+| W15 live major-provider execution | PASS |
+| W15 GPU vLLM execution | PASS |
+| W16 live harness results | PASS |
+| at least three actual prompt/config runs | PASS |
+| judge, truth and total regression metrics per run | PASS |
+| native judge HTML per version | PASS |
+| full live trajectories | PASS |
+| judge calibration evidence | PASS |
+| exported live MLflow comparison | PASS |
+| trace-driven revision diagnoses | PASS |
 | promoted production run | PENDING |
 | healthy and unavailable-endpoint Airflow evidence | PENDING |
 
-19/31 checks pass.
+29/31 checks pass.
