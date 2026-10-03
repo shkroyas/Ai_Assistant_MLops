@@ -1,0 +1,34 @@
+{
+  "query_id": "92e57364-8bff-442a-afe2-ee034283f29b",
+  "question": "The 2024 memo says promote on accuracy. Which document overrides it?",
+  "prompt_version": "v4",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Which specific document are you asking about that might override the 2024 memo on promoting accuracy?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 781,
+        "completion_tokens": 34,
+        "total_tokens": 815,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 815,
+  "usage_complete": true,
+  "prompt_tokens": 781,
+  "completion_tokens": 34,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Which specific document are you asking about that might override the 2024 memo on promoting accuracy?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7109590700019908,
+  "token_accounting": "provider_usage"
+}
