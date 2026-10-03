@@ -2,6 +2,7 @@ import pandas as pd
 import pytest
 from evidently.core.datasets import ColumnType, DatasetColumn
 from evidently.descriptors.llm_judges import LLMEval
+from evidently.llm.utils.wrapper import GeminiOptions
 
 from assistant_mlops.regression import deterministic_report, judge, judge_descriptors
 
@@ -13,8 +14,8 @@ def test_native_judge_report_plumbing_with_stubbed_descriptor(monkeypatch, tmp_p
     monkeypatch.setattr("assistant_mlops.regression.time.sleep", pauses.append)
 
     def generate(self, dataset, options):
-        assert options[0].limits.rpm == 1
-        assert options[0].limits.interval.total_seconds() >= 15
+        assert options.get(GeminiOptions).limits.rpm == 1
+        assert options.get(GeminiOptions).limits.interval.total_seconds() >= 15
         return {
             self.alias: DatasetColumn(ColumnType.Categorical, pd.Series(["correct", "incorrect"])),
             self.alias + " reasoning": DatasetColumn(
