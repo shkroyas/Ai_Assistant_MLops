@@ -1,0 +1,27 @@
+{
+  "query_id": "a619aa0d-0580-4e3d-b1de-cc8ea9d8b6bd",
+  "question": "Which port hosts the assistant UI and where should its API key go?",
+  "prompt_version": "v23",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 45.45835918800003,
+  "token_accounting": "incomplete"
+}

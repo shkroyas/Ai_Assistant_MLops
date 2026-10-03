@@ -1,0 +1,9 @@
+{
+  "run_id": "37d7021ba6c540a894e510d470ae9f02",
+  "status": "KILLED",
+  "completion": "partial development only; no held-out/judge/gate result",
+  "development_samples": 36,
+  "provider_unavailable_traces": 36,
+  "reason": "All five supplied Gemini Flash keys returned 429 RESOURCE_EXHAUSTED with GenerateRequestsPerDayPerProjectPerModel-FreeTier quotaValue=20. Interrupted to avoid continuing known-unavailable calls.",
+  "evidence": "reports/gemini_flash_project_quota.json"
+}

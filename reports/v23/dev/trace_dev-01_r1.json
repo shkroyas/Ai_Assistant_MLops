@@ -1,0 +1,27 @@
+{
+  "query_id": "0f1f4054-3643-44af-bfda-7fcca3764371",
+  "question": "How many provider attempts and what retry strategy are allowed?",
+  "prompt_version": "v23",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 45.966572293000354,
+  "token_accounting": "incomplete"
+}
