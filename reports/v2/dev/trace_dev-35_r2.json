@@ -1,0 +1,149 @@
+{
+  "query_id": "76a05c14-9dca-49d7-bcad-b635b44c77e2",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 671,
+        "completion_tokens": 45,
+        "total_tokens": 716,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "release-policy",
+        "reason": "\u67e5\u627e24GB\u5185\u5b58\u5bf9\u5e94\u7684\u6a21\u578b\u8ba1\u5212"
+      },
+      "reasoning": "\u67e5\u627e24GB\u5185\u5b58\u5bf9\u5e94\u7684\u6a21\u578b\u8ba1\u5212",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 749,
+        "completion_tokens": 51,
+        "total_tokens": 800,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "legacy-policy",
+        "reason": "\u5c1d\u8bd5\u4ece\u53e6\u4e00\u4e2a\u653f\u7b56\u6587\u4ef6\u4e2d\u67e5\u627e24GB\u5185\u5b58\u5bf9\u5e94\u7684\u6a21\u578b\u8ba1\u5212"
+      },
+      "reasoning": "\u5c1d\u8bd5\u4ece\u53e6\u4e00\u4e2a\u653f\u7b56\u6587\u4ef6\u4e2d\u67e5\u627e24GB\u5185\u5b58\u5bf9\u5e94\u7684\u6a21\u578b\u8ba1\u5212",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 833,
+        "completion_tokens": 46,
+        "total_tokens": 879,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "experiment-policy",
+        "reason": "\u518d\u6b21\u5c1d\u8bd5\u4ece\u5b9e\u9a8c\u7b56\u7565\u6587\u4ef6\u4e2d\u67e5\u627e\u76f8\u5173\u4fe1\u606f"
+      },
+      "reasoning": "\u518d\u6b21\u5c1d\u8bd5\u4ece\u5b9e\u9a8c\u7b56\u7565\u6587\u4ef6\u4e2d\u67e5\u627e\u76f8\u5173\u4fe1\u606f",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 912,
+        "completion_tokens": 51,
+        "total_tokens": 963,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "service-catalog",
+        "reason": "\u5c1d\u8bd5\u4ece\u670d\u52a1\u76ee\u5f55\u4e2d\u67e5\u627e24GB\u5185\u5b58\u5bf9\u5e94\u7684\u6a21\u578b\u8ba1\u5212"
+      },
+      "reasoning": "\u5c1d\u8bd5\u4ece\u670d\u52a1\u76ee\u5f55\u4e2d\u67e5\u627e24GB\u5185\u5b58\u5bf9\u5e94\u7684\u6a21\u578b\u8ba1\u5212",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 996,
+        "completion_tokens": 49,
+        "total_tokens": 1045,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model for 24 GB",
+        "source_id": "drift-runbook",
+        "reason": "\u6700\u540e\u5c1d\u8bd5\u4ece\u6f02\u79fb\u8fd0\u884c\u624b\u518c\u4e2d\u67e5\u627e\u76f8\u5173\u4fe1\u606f"
+      },
+      "reasoning": "\u6700\u540e\u5c1d\u8bd5\u4ece\u6f02\u79fb\u8fd0\u884c\u624b\u518c\u4e2d\u67e5\u627e\u76f8\u5173\u4fe1\u606f",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The available evidence does not establish that fact.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1078,
+        "completion_tokens": 22,
+        "total_tokens": 1100,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 5503,
+  "usage_complete": true,
+  "prompt_tokens": 5239,
+  "completion_tokens": 264,
+  "failure_injection": "malformed",
+  "tool_errors": 5,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The available evidence does not establish that fact.",
+    "sources": []
+  },
+  "iterations": 6,
+  "latency_seconds": 5.493818792001548,
+  "token_accounting": "provider_usage"
+}

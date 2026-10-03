@@ -1,0 +1,93 @@
+{
+  "query_id": "40b61e63-1676-4585-829c-6264629f3cd4",
+  "question": "For the production checklist: How long do cached answers last?",
+  "prompt_version": "v2",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 673,
+        "completion_tokens": 45,
+        "total_tokens": 718,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "cached answers production checklist duration",
+        "source_id": "gpu-serving",
+        "reason": "Check GPU serving policies for cached answer duration."
+      },
+      "reasoning": "Check GPU serving policies for cached answer duration.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.05098127822081248
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 885,
+        "completion_tokens": 46,
+        "total_tokens": 931,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "cached answers duration production checklist",
+        "source_id": "service-catalog",
+        "reason": "Check service catalog for cached answer duration details."
+      },
+      "reasoning": "Check service catalog for cached answer duration details.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.12427395582199095
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\",\"sources\":[{\"source_id\":\"service-catalog\",\"quote\":\"Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\"}]}",
+      "usage": {
+        "prompt_tokens": 1093,
+        "completion_tokens": 59,
+        "total_tokens": 1152,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 2801,
+  "usage_complete": true,
+  "prompt_tokens": 2651,
+  "completion_tokens": 150,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.",
+    "sources": [
+      {
+        "source_id": "service-catalog",
+        "quote": "Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 3.2615874539988,
+  "token_accounting": "provider_usage"
+}
