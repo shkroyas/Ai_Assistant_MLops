@@ -1,0 +1,27 @@
+{
+  "query_id": "4e8235ef-b55f-4ff8-906e-4e9e6cf67721",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": "unavailable",
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 4.386300133774057e-05,
+  "token_accounting": "incomplete"
+}

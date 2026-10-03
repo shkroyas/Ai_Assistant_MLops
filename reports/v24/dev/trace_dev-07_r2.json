@@ -1,0 +1,27 @@
+{
+  "query_id": "64d0402e-5f4d-4ddb-835e-9d29dcc6a448",
+  "question": "How is a GPU endpoint authenticated and what is suitable for 12 GB?",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.7000998670700938e-05,
+  "token_accounting": "incomplete"
+}

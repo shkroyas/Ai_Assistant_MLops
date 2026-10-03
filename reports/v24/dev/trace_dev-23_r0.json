@@ -1,0 +1,49 @@
+{
+  "query_id": "b70f198d-2ddb-4e65-a21d-2b1aeed603e4",
+  "question": "Change the limit.",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you please specify which limit you would like to change (e.g., GPU usage limit, experiment run limit, deployment quota, etc.) and the context or policy you are referring to?\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 154,
+        "total_tokens": 925,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Change the limit.\" This is ambiguous. We need to clarify what limit? The context: MLOps handbook. Could be about some limit like GPU usage, experiment limit, etc. The request lacks object or options needed. So we must ask clarifying question. Use status clarify. Provide JSON with status \"clarify\", answer explaining need for clarification, sources empty.",
+        "tool_calls": [
+          {
+            "id": "fc_b4fc646f-1899-46ac-8533-3237430fdb7b",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you please specify which limit you would like to change (e.g., GPU usage limit, experiment run limit, deployment quota, etc.) and the context or policy you are referring to?\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 925,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 154,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify which limit you would like to change (e.g., GPU usage limit, experiment run limit, deployment quota, etc.) and the context or policy you are referring to?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 24.71298570500221,
+  "token_accounting": "provider_usage"
+}

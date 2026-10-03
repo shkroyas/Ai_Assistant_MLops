@@ -1,0 +1,49 @@
+{
+  "query_id": "821a0b68-b012-419a-9bb5-707cda683af5",
+  "question": "Release that version.",
+  "prompt_version": "v24",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"Could you specify which version you would like to release? Please provide the version identifier or name.\", \"sources\": [], \"status\": \"clarify\"}",
+      "usage": {
+        "prompt_tokens": 771,
+        "completion_tokens": 173,
+        "total_tokens": 944,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "The user says \"Release that version.\" This is ambiguous. They likely refer to releasing a version of something, maybe a software version. The request lacks object: which version? No context. According to instructions, if request lacks object or options needed to understand it, ask a clarifying question using status clarify. So we need to respond with a JSON with status \"clarify\", answer explaining need clarification, sources empty.\n\nThus produce JSON with status clarify, answer: \"Could you specify which version you would like to release? Please provide the version identifier or name.\" No sources.\n\n",
+        "tool_calls": [
+          {
+            "id": "fc_2dfff306-e293-4707-add6-9e7a806b29e2",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"Could you specify which version you would like to release? Please provide the version identifier or name.\",\"sources\":[],\"status\":\"clarify\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 944,
+  "usage_complete": true,
+  "prompt_tokens": 771,
+  "completion_tokens": 173,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you specify which version you would like to release? Please provide the version identifier or name.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 25.147111266000138,
+  "token_accounting": "provider_usage"
+}

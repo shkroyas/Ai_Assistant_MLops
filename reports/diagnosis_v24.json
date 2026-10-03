@@ -1,0 +1,10 @@
+{
+  "trace_path": "reports/v23/dev/trace_dev-18_r0.json",
+  "failure": "Gemini Flash returned daily project free-tier exhaustion for all supplied keys; partial v23 is stopped and cannot qualify.",
+  "change": "Return to the available Groq GPT-OSS-120B model family using the existing native-tool name validation repair. Medium reasoning follows its previously measured development performance. Use conservative 25-second per-key pacing for the observed 8000-token per-minute buckets. Prompt, tool semantics, corpus, labels, repeated samples and gate thresholds remain unchanged.",
+  "supporting_evidence": [
+    "reports/gemini_flash_project_quota.json",
+    "reports/groq_120b_current_quota.json"
+  ],
+  "limitations": "Tiny availability probes do not establish sufficient daily token capacity. The fresh complete cohort must qualify independently."
+}
