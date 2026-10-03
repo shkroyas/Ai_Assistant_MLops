@@ -2,6 +2,7 @@
 
 import json
 import os
+import runpy
 import subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -17,9 +18,8 @@ ROOT = Path(os.getenv("PROJECT_DIR", "/opt/project"))
 def health_branch():
     url = os.getenv("AGENT_BASE_URL", "").rstrip("/") + "/models"
     try:
-        request = Request(
-            url, headers={"Authorization": "Bearer " + os.getenv("AGENT_API_KEY", "")}
-        )
+        headers = runpy.run_path(str(ROOT / "src/assistant_mlops/auth.py"))["endpoint_headers"]
+        request = Request(url, headers=headers("AGENT", os.getenv("AGENT_API_KEY", "")))
         with urlopen(request, timeout=15) as response:
             if response.status != 200:
                 return "infrastructure_failure"

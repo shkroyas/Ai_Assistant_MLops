@@ -49,6 +49,8 @@ async def run(config_path, with_judge=False, diagnosis=None):
     mlflow.set_tracking_uri((os.getenv("MLFLOW_TRACKING_URI") or "sqlite:///mlflow.db"))
     mlflow.set_experiment("assistant-configurations")
     provider = ChatProvider()
+    # Prompt comparisons must not silently switch models when the GPU fails.
+    provider.fallback_url = None
     corpus = Corpus()
     agent = Agent(corpus, provider, config)
     directory = Path("reports") / config["version"]
@@ -59,6 +61,7 @@ async def run(config_path, with_judge=False, diagnosis=None):
                 {
                     **config,
                     "model": provider.model,
+                    "provider_fallback_enabled": False,
                     "corpus_sha256": corpus.fingerprint,
                     "prompt_sha256": hashlib.sha256(agent.prompt.encode()).hexdigest(),
                 }

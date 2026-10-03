@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -107,8 +108,14 @@ def calibrate(directory="reports/judge_calibration"):
         "disagreements": scored.loc[scored.judge_pass != scored.label, "id"].tolist(),
     }
     review = json.loads(Path("datasets/calibration_review.json").read_text())
-    result["calibration_human_reviewed"] = float(
-        bool(review.get("reviewed") and review.get("reviewer"))
+    result["calibration_review_approved"] = float(
+        bool(
+            review.get("reviewed")
+            and review.get("reviewer")
+            and review.get("owner_approved")
+            and review.get("labels_sha256")
+            == hashlib.sha256(Path("datasets/judge_calibration_v1.jsonl").read_bytes()).hexdigest()
+        )
     )
     Path(directory, "calibration.json").write_text(json.dumps(result, indent=2))
     return result

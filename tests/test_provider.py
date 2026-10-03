@@ -29,6 +29,33 @@ async def test_retry_and_usage(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_proxy_auth_is_scoped_and_cookie_prefix_removed(monkeypatch):
+    monkeypatch.setenv("AGENT_PROXY_TOKEN", "fixture-token")
+    monkeypatch.setenv("AGENT_PROXY_COOKIE", "\nCookie: fixture=session\n")
+    monkeypatch.setenv("FALLBACK_BASE_URL", "https://groq.test/openai/v1")
+    monkeypatch.setenv("FALLBACK_API_KEY", "groq-fixture")
+    requests = []
+
+    async def handler(request):
+        requests.append(request)
+        if request.url.host == "proxy.test":
+            assert request.headers["Authorization"] == "token fixture-token"
+            assert request.headers["Cookie"] == "fixture=session"
+            return httpx.Response(401)
+        assert request.headers["Authorization"] == "Bearer groq-fixture"
+        assert "Cookie" not in request.headers
+        return httpx.Response(200, json={"choices": [{"message": {"content": "hello"}}]})
+
+    provider = ChatProvider(
+        base_url="https://proxy.test/v1", key="", transport=httpx.MockTransport(handler)
+    )
+    assert provider.configured
+    _, usage = await provider.complete([], [])
+    assert usage["fallback"] and len(requests) == 2
+    await provider.close()
+
+
+@pytest.mark.asyncio
 async def test_fallback_and_graceful_failure(monkeypatch):
     monkeypatch.setenv("FALLBACK_BASE_URL", "https://backup.test")
 
@@ -47,6 +74,26 @@ async def test_fallback_and_graceful_failure(monkeypatch):
     )
     _, usage = await provider.complete([], [])
     assert usage["fallback"] is True and usage["total_tokens"] is None
+    await provider.close()
+
+
+@pytest.mark.asyncio
+async def test_explicit_groq_client_never_inherits_primary_proxy(monkeypatch):
+    monkeypatch.setenv("AGENT_PROXY_TOKEN", "primary-secret")
+    monkeypatch.setenv("AGENT_PROXY_COOKIE", "primary=session")
+
+    async def handler(request):
+        assert request.headers["Authorization"] == "Bearer groq-fixture"
+        assert "Cookie" not in request.headers
+        return httpx.Response(200, json={"choices": [{"message": {"content": "hello"}}]})
+
+    provider = ChatProvider(
+        base_url="https://groq.test/openai/v1",
+        key="groq-fixture",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(handler),
+    )
+    await provider.complete([], [])
     await provider.close()
     provider = ChatProvider(
         base_url="https://primary.test",

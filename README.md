@@ -70,6 +70,10 @@ The scratch-built harness runs 35 development questions across seven categories,
 
 **Tool vs. Agent boundary:** Qdrant search, source reading, and the remote model endpoint are bounded request/response services, modeled as tools/provider calls. They do not own an autonomous task across exchanges or invoke a hidden collaborating agent. The assistant loop owns state, budget, retry boundary, and evidence. vLLM's stateful KV cache is an inference implementation detail within that boundary.
 
+The active [provider allocation](docs/provider-allocation.md) uses Groq for `/rag`, Qwen for the agent, and Gemini for the judge.
+
+GPU proxy authentication and the later Groq switch are documented in [docs/provider-setup.md](docs/provider-setup.md). Check live access with `uv run python scripts/check_provider.py` before evaluation.
+
 ## W17 a. Environment & Reproducibility (uv)
 
 `uv sync --locked` recreates the assistant environment. MLflow 2.22.2 needs SQLAlchemy 2.0.41; Evidently is pinned at 0.7.23 for tested descriptor/report APIs. Native LLM evaluation uses evidently[llm], with pinned CPU-only torch/transformers so an application laptop does not install CUDA libraries. GPU serving has its own serving/uv.lock and environment, avoiding incompatible torch requirements. Dockerfile.airflow installs the project in an isolated venv so it cannot replace Airflow's dependencies.
@@ -107,7 +111,7 @@ Approved references in datasets/golden_v1.jsonl are compared with fresh candidat
 uv run python -m assistant_mlops.experiment judge-check
 ```
 
-Review all 15 labels in judge_calibration_v1.jsonl, then set reviewed=true and reviewer="Royas Shakya" in datasets/calibration_review.json only after completing that review. The promotion gate requires this human-review flag. Read both responses and judge reasoning in judge_verdicts.csv, especially contradictions, caveat omissions, false passes, and safe abstentions. Judge-vs-ground-truth agreement may expose deterministic paraphrase false negatives or judge bias. Judge calls require GEMINI_API_KEY or JUDGE_API_KEY and may need a slower rate limit. HTML reports are committed and logged when genuinely generated. Missing judge evidence rejects promotion. The predeclared gate requires ≥85% ground-truth pass, ≥80% judge pass, ≥80% calibration-label agreement, ≥75% judge/truth agreement, ≥90% tool correctness, ≤5% hard failures, all injected failures safe, and known token usage. With a baseline, completion may not drop beyond max(5 points, twice repeated-run spread), ground truth may not drop >5 points, tokens ≤1.3× and steps ≤1.25×. The golden set is never used to tune prompts.
+Calibration labels were drafted and audited by the assistant, with delegated review explicitly approved by Royas Shakya. datasets/calibration_review.json records the approval, method, and label-file SHA; it does not claim individual human labeling. The promotion gate requires approved review matching the current label SHA. Read both responses and judge reasoning in judge_verdicts.csv, especially contradictions, caveat omissions, false passes, and safe abstentions. Judge-vs-ground-truth agreement may expose deterministic paraphrase false negatives or judge bias. Judge calls require GEMINI_API_KEY or JUDGE_API_KEY and may need a slower rate limit. HTML reports are committed and logged when genuinely generated. Missing judge evidence rejects promotion. The predeclared gate requires ≥85% ground-truth pass, ≥80% judge pass, ≥80% calibration-label agreement, ≥75% judge/truth agreement, ≥90% tool correctness, ≤5% hard failures, all injected failures safe, and known token usage. With a baseline, completion may not drop beyond max(5 points, twice repeated-run spread), ground truth may not drop >5 points, tokens ≤1.3× and steps ≤1.25×. The golden set is never used to tune prompts.
 
 ## W17 d. Orchestration (Airflow bonus)
 

@@ -3,15 +3,17 @@ import os
 
 import httpx
 
+from assistant_mlops.auth import endpoint_headers
+
 
 class ProviderError(RuntimeError):
     pass
 
 
 class ChatProvider:
-    """Gemini's compatible API or a vLLM endpoint. Never silently uses a mock."""
+    """OpenAI-compatible providers, including authenticated Jupyter-proxied vLLM."""
 
-    def __init__(self, base_url=None, key=None, model=None, transport=None):
+    def __init__(self, base_url=None, key=None, model=None, transport=None, auth_prefix="AGENT"):
         self.base_url = (
             base_url
             or os.getenv("AGENT_BASE_URL")
@@ -21,28 +23,30 @@ class ChatProvider:
         self.model = model or os.getenv("AGENT_MODEL") or "gemini-2.5-flash"
         self.client = httpx.AsyncClient(timeout=40, transport=transport)
         self.fallback_url = os.getenv("FALLBACK_BASE_URL")
+        self.headers = endpoint_headers(auth_prefix, self.key)
+        self.configured = bool(self.key or os.getenv(f"{auth_prefix}_PROXY_TOKEN"))
 
     async def close(self):
         await self.client.aclose()
 
     async def complete(self, messages, tools, temperature=0.1, top_p=0.9):
-        if not self.key and not self.fallback_url:
+        if not self.configured and not self.fallback_url:
             raise ProviderError("No model credentials configured")
-        endpoints = [(self.base_url, self.key, self.model)]
+        endpoints = [(self.base_url, self.headers, self.model)] if self.configured else []
         if self.fallback_url:
             endpoints.append(
                 (
                     self.fallback_url,
-                    os.getenv("FALLBACK_API_KEY", ""),
+                    endpoint_headers("FALLBACK", os.getenv("FALLBACK_API_KEY", "")),
                     (os.getenv("FALLBACK_MODEL") or "Qwen/Qwen2.5-7B-Instruct"),
                 )
             )
-        for base, key, model in endpoints:
+        for base, headers, model in endpoints:
             for attempt in range(3):
                 try:
                     response = await self.client.post(
                         base.rstrip("/") + "/chat/completions",
-                        headers={"Authorization": f"Bearer {key}"},
+                        headers=headers,
                         json={
                             "model": model,
                             "messages": messages,
