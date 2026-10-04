@@ -201,3 +201,8 @@ At the 2026-10-04 handoff audit, the Docker services were running with UI at htt
 ## Submission evidence
 
 [Core scorecard](reports/deliverables.md), [production gate](reports/v34/gate.json), [native Evidently report](reports/v34/evidently_judge.html), [nightly status](reports/nightly/status.json), [real screenshots](reports/screenshots/manifest.json), [production API features](reports/api_features_smoke.json), and [Qwen3 session setup](docs/qwen14b-session.md). Both tasks remain separate repositories.
+
+
+## Temporary Azure HTTPS demonstration
+
+The separate Task B image adds an authenticated Nginx gateway, FastAPI and a small MLflow instance. Azure supplies HTTPS; Qwen inference uses the existing authenticated Jupyter HTTPS server proxy. The demo uses no SSH tunnel. See [deployment instructions, cost and cleanup](docs/azure-demo.md). Cloud availability must be established by the deployment smoke report; source files alone do not establish a running deployment.

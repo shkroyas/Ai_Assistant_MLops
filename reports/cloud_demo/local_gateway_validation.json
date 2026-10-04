@@ -1,0 +1,84 @@
+{
+  "checked_at": "2026-10-04T06:57:14.489173+00:00",
+  "scope": "Corrected local Docker gateway; not Azure HTTPS verification",
+  "checks": [
+    {
+      "path": "/healthz",
+      "status": 200,
+      "health": {
+        "status": "ready",
+        "provider_model": "Qwen/Qwen3-14B-AWQ",
+        "configuration_version": "v34",
+        "query_timeout_seconds": 180,
+        "baseline_model": "openai/gpt-oss-20b",
+        "live_provider_configured": true
+      }
+    },
+    {
+      "path": "/service/docs",
+      "status": 200
+    },
+    {
+      "path": "/service/openapi.json",
+      "status": 200
+    },
+    {
+      "path": "/tracking/",
+      "status": 200
+    },
+    {
+      "path": "/assistant/",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "anonymous_root_status": 401
+    },
+    {
+      "query": {
+        "question": "What retry strategy is allowed for transient provider errors?"
+      },
+      "response": {
+        "status": "answered",
+        "answer": "The policy allows retrying transient provider errors up to three attempts, using exponential backoff between attempts.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+          }
+        ],
+        "query_id": "83802077-ce67-4811-a78f-a9a7ea70ee5e",
+        "iterations": 4,
+        "tokens": 6698,
+        "token_accounting": "provider_usage",
+        "tokens_consumed_this_request": 6698,
+        "shared_computation": false,
+        "cache_hit": false,
+        "termination": "answered"
+      }
+    },
+    {
+      "cache_response": {
+        "status": "answered",
+        "answer": "The policy allows retrying transient provider errors up to three attempts, using exponential backoff between attempts.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+          }
+        ],
+        "query_id": "83802077-ce67-4811-a78f-a9a7ea70ee5e",
+        "iterations": 4,
+        "tokens": 6698,
+        "token_accounting": "provider_usage",
+        "tokens_consumed_this_request": 0,
+        "shared_computation": false,
+        "cache_hit": true,
+        "termination": "answered"
+      }
+    }
+  ]
+}
