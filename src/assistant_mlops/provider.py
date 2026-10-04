@@ -10,7 +10,33 @@ from assistant_mlops.auth import endpoint_headers
 
 
 class ProviderError(RuntimeError):
-    pass
+    def __init__(self, message, diagnostics=None):
+        super().__init__(message)
+        self.diagnostics = diagnostics or []
+
+
+def quota_scope(response):
+    try:
+        payload = response.json()
+        entries = payload if isinstance(payload, list) else [payload]
+        for entry in entries:
+            error = entry.get("error", {}) if isinstance(entry, dict) else {}
+            message = error.get("message", "") if isinstance(error, dict) else ""
+            for code, label in [
+                ("TPD", "tokens_per_day"),
+                ("TPM", "tokens_per_minute"),
+                ("RPD", "requests_per_day"),
+                ("RPM", "requests_per_minute"),
+            ]:
+                if "(" + code + ")" in message:
+                    return label
+            for detail in error.get("details", []) if isinstance(error, dict) else []:
+                for violation in detail.get("violations", []) if isinstance(detail, dict) else []:
+                    if "RequestsPerDay" in violation.get("quotaId", ""):
+                        return "requests_per_day"
+    except (ValueError, TypeError, AttributeError):
+        pass
+    return "unknown"
 
 
 def quota_cooldown(response):
@@ -171,6 +197,7 @@ class ChatProvider:
         await self.client.aclose()
 
     async def complete(self, messages, tools, temperature=0.1, top_p=0.9):
+        diagnostics = []
         if not self.configured and not self.fallback_url:
             raise ProviderError("No model credentials configured")
         endpoints = [(self.base_url, self.headers, self.model)] if self.configured else []
@@ -254,6 +281,20 @@ class ChatProvider:
                             ),
                         },
                     )
+                    if response.status_code >= 400:
+                        diagnostics.append(
+                            {
+                                "http_status": response.status_code,
+                                "model": model,
+                                "account_slot": lease + 1 if lease is not None else None,
+                                "quota_scope": quota_scope(response)
+                                if response.status_code == 429
+                                else None,
+                                "cooldown_seconds": quota_cooldown(response)
+                                if response.status_code == 429
+                                else None,
+                            }
+                        )
                     if pool and response.status_code in {401, 403, 429}:
                         if response.status_code in {401, 403}:
                             pool.block(lease, float("inf"))
@@ -315,6 +356,7 @@ class ChatProvider:
                         "total_tokens": usage.get("total_tokens"),
                         "model": model,
                         "fallback": not primary_endpoint,
+                        **({"upstream_failures": diagnostics} if diagnostics else {}),
                         **({"tool_name_normalizations": normalizations} if normalizations else {}),
                     }
                 except ProviderError:
@@ -334,7 +376,7 @@ class ChatProvider:
                 finally:
                     if pool and lease is not None:
                         await pool.release(lease)
-        raise ProviderError("All configured model providers failed")
+        raise ProviderError("All configured model providers failed", diagnostics=diagnostics)
 
 
 def provider_for_config(config):

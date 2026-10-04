@@ -156,12 +156,13 @@ class Agent:
                 message, usage = await self.provider.complete(
                     messages, self.tools, self.config["temperature"], self.config["top_p"]
                 )
-            except ProviderError:
+            except ProviderError as exc:
                 trace["steps"].append(
                     {
                         "step": iteration,
                         "event": "provider_error",
                         "reasoning": "Providers unavailable; cannot obtain a grounded answer",
+                        "provider_failures": getattr(exc, "diagnostics", []),
                     }
                 )
                 trace["usage_complete"] = False
