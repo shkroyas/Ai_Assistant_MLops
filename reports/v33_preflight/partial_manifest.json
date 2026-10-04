@@ -8,5 +8,6 @@
   "promotion_eligible": false,
   "decision": "Abandoned after policy-reading regression; preserve actual failed samples.",
   "source_config": "configs/v33.yaml",
-  "source_prompt": "prompts/prompt_v33.md"
+  "source_prompt": "prompts/prompt_v33.md",
+  "run_id": "84fb9fe0f6384dafa25b2b8fc94425b5"
 }

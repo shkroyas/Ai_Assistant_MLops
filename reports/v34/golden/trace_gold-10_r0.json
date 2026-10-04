@@ -1,0 +1,34 @@
+{
+  "query_id": "8a9913fb-b0a9-4561-9d59-08ba4f2c3356",
+  "question": "For the production checklist: What is the company annual revenue?",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The company's annual revenue is not disclosed in the provided sources.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1243,
+        "completion_tokens": 26,
+        "total_tokens": 1269,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1269,
+  "usage_complete": true,
+  "prompt_tokens": 1243,
+  "completion_tokens": 26,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The company's annual revenue is not disclosed in the provided sources.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.4190038359997743,
+  "token_accounting": "provider_usage"
+}

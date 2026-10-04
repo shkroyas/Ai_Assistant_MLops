@@ -1,0 +1,34 @@
+{
+  "query_id": "8f7b5e66-cd91-4394-939d-171de79c49f6",
+  "question": "Fix the pipeline.",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"I need more information about what specific issue you are referring to with the pipeline. Could you please provide details about the problem or the context in which the pipeline is being used?\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1235,
+        "completion_tokens": 48,
+        "total_tokens": 1283,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1283,
+  "usage_complete": true,
+  "prompt_tokens": 1235,
+  "completion_tokens": 48,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "I need more information about what specific issue you are referring to with the pipeline. Could you please provide details about the problem or the context in which the pipeline is being used?",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7539560019999954,
+  "token_accounting": "provider_usage"
+}
