@@ -1,0 +1,9 @@
+{
+  "trace_path": "reports/v26/dev/trace_dev-07_r0.json",
+  "failure": "The development answer reported authentication unsupported after retrieving GPU memory guidance without the required security evidence. Other preflight cases miss complementary retrieved policy sources.",
+  "change": "Change only the embedding axis from 512-dimensional lexical hashing to the pinned normalized MiniLM semantic embedding model. Keep the v26 prompt, tools, top_k=3, model, repetitions and scoring.",
+  "supporting_evidence": [
+    "reports/semantic_retrieval_development_smoke.json",
+    "reports/semantic_embedding_model.json"
+  ]
+}

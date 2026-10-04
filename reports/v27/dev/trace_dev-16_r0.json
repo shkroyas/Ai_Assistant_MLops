@@ -1,0 +1,55 @@
+{
+  "query_id": "b07e52d8-be48-4902-afa5-554dbb5bac12",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v27",
+  "steps": [
+    {
+      "step": 1,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='abstain\\n[{\"source_id\": \"\", \"quote\": \"\"}]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "abstain\n[{\"source_id\": \"\", \"quote\": \"\"}]",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1085,
+        "completion_tokens": 16,
+        "total_tokens": 1101,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"status\": \"abstain\", \"answer\": \"The company annual revenue is not available in the provided sources.\", \"sources\": []}",
+      "usage": {
+        "prompt_tokens": 1215,
+        "completion_tokens": 30,
+        "total_tokens": 1245,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 2346,
+  "usage_complete": true,
+  "prompt_tokens": 2300,
+  "completion_tokens": 46,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The company annual revenue is not available in the provided sources.",
+    "sources": []
+  },
+  "iterations": 2,
+  "latency_seconds": 1.051868360998924,
+  "token_accounting": "provider_usage"
+}
