@@ -1,0 +1,81 @@
+{
+  "query_id": "17ff0c8b-6eaf-4b6c-abfb-d21702d84fd5",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v28",
+  "steps": [
+    {
+      "step": 1,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='abstain\\n[{\"source_id\": ...he provided sources.\"}]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "abstain\n[{\"source_id\": \"\", \"quote\": \"This request asks for a financial fact not present in the provided sources.\"}]",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1085,
+        "completion_tokens": 30,
+        "total_tokens": 1115,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "draft_answer",
+      "draft": {
+        "status": "abstain",
+        "answer": "This request asks for a financial fact not present in the provided sources.",
+        "sources": []
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\": \"abstain\", \"answer\": \"This request asks for a financial fact not present in the provided sources.\", \"sources\": []}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1229,
+        "completion_tokens": 32,
+        "total_tokens": 1261,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\": \"abstain\", \"answer\": \"This request asks for a financial fact not present in the provided sources.\", \"sources\": []}",
+      "usage": {
+        "prompt_tokens": 1364,
+        "completion_tokens": 32,
+        "total_tokens": 1396,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 3772,
+  "usage_complete": true,
+  "prompt_tokens": 3678,
+  "completion_tokens": 94,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "This request asks for a financial fact not present in the provided sources.",
+    "sources": []
+  },
+  "iterations": 3,
+  "latency_seconds": 2.032344250001188,
+  "token_accounting": "provider_usage"
+}

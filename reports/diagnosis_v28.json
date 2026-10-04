@@ -1,0 +1,5 @@
+{
+  "trace_path": "reports/v27/dev/trace_dev-08_r0.json",
+  "failure": "The development answer contradicted its own retrieved experiment-policy quotation about which questions may guide prompt revision. Other development responses omit required conflict details or earlier supporting sources.",
+  "change": "Enable one bounded self-review of a valid draft inside the existing agent iteration budget. Drafts and all actual token usage are retained; final citations/status remain validated. Keep prompt, semantic model/revision, top_k, LLM, repetitions, references and gate unchanged."
+}

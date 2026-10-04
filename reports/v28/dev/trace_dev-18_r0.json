@@ -1,0 +1,102 @@
+{
+  "query_id": "2ce27a45-d47d-4b49-a082-5da4254b81df",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v28",
+  "steps": [
+    {
+      "step": 1,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Abstain\\n[{\"source_id\": ...of individual users.\"}]', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Abstain\n[{\"source_id\": \"\", \"quote\": \"We do not have access to financial or personal records of individual users.\"}]",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1087,
+        "completion_tokens": 30,
+        "total_tokens": 1117,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "invalid_answer",
+      "reasoning": "Citation not present in retrieved evidence",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\n  \"status\": \"abstain\",\n  \"answer\": \"We do not have access to financial or personal records of individual users.\",\n  \"sources\": [\n    {\n      \"source_id\": \"\",\n      \"quote\": \"We do not have access to financial or personal records of individual users.\"\n    }\n  ]\n}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1231,
+        "completion_tokens": 67,
+        "total_tokens": 1298,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 3,
+      "event": "draft_answer",
+      "draft": {
+        "status": "abstain",
+        "answer": "We do not have access to financial or personal records of individual users.",
+        "sources": []
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\n  \"status\": \"abstain\",\n  \"answer\": \"We do not have access to financial or personal records of individual users.\",\n  \"sources\": []\n}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1412,
+        "completion_tokens": 36,
+        "total_tokens": 1448,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\n  \"status\": \"abstain\",\n  \"answer\": \"We do not have access to financial or personal records of individual users.\",\n  \"sources\": []\n}",
+      "usage": {
+        "prompt_tokens": 1551,
+        "completion_tokens": 36,
+        "total_tokens": 1587,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 5450,
+  "usage_complete": true,
+  "prompt_tokens": 5281,
+  "completion_tokens": 169,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "We do not have access to financial or personal records of individual users.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 3.5280944030018873,
+  "token_accounting": "provider_usage"
+}
