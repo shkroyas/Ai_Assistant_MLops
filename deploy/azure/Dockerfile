@@ -6,6 +6,7 @@ COPY deploy/azure/nginx.conf /etc/nginx/conf.d/default.conf
 COPY deploy/azure/index.html /app/deploy/azure/index.html
 COPY configs /app/configs
 COPY prompts /app/prompts
+COPY reports /app/reports
 ENV DEMO_TASK=B
 EXPOSE 8080
 CMD ["python", "/app/deploy/azure/entrypoint.py"]

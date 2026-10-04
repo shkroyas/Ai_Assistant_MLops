@@ -1,0 +1,72 @@
+{
+  "checked_at": "2026-10-04T07:29:06.550212+00:00",
+  "scope": "Actual Azure HTTPS infrastructure; inference currently blocked at Jupyter access gate",
+  "base_url": "https://task-b.calmflower-4280b7f7.centralindia.azurecontainerapps.io",
+  "expires_utc": "2026-10-04T11:15:00+00:00",
+  "cleanup_preflight": "Succeeded",
+  "checks": [
+    {
+      "path": "/",
+      "http_status": 200
+    },
+    {
+      "path": "/healthz",
+      "http_status": 200,
+      "health": {
+        "status": "ready",
+        "provider_model": "Qwen/Qwen3-14B-AWQ",
+        "configuration_version": "v34",
+        "query_timeout_seconds": 180,
+        "baseline_model": "openai/gpt-oss-20b",
+        "live_provider_configured": true
+      }
+    },
+    {
+      "path": "/service/docs",
+      "http_status": 200
+    },
+    {
+      "path": "/service/openapi.json",
+      "http_status": 200
+    },
+    {
+      "path": "/tracking/",
+      "http_status": 200
+    },
+    {
+      "path": "/assistant/",
+      "http_status": 200
+    },
+    {
+      "path": "/",
+      "anonymous_http_status": 401
+    },
+    {
+      "path": "/service/docs",
+      "anonymous_http_status": 401
+    },
+    {
+      "path": "/tracking/",
+      "anonymous_http_status": 401
+    }
+  ],
+  "inference": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": [],
+    "query_id": "b04c1694-b2dc-4569-a0f5-65c4acfb9ee3",
+    "iterations": 1,
+    "tokens": 0,
+    "token_accounting": "incomplete",
+    "tokens_consumed_this_request": 0,
+    "shared_computation": false,
+    "cache_hit": false,
+    "termination": "provider_unavailable"
+  },
+  "proxy_connection": {
+    "models_http_status": 302,
+    "redirect_path": "/hub/access",
+    "same_from_workspace": true
+  },
+  "status": "infrastructure_passed_inference_blocked"
+}
