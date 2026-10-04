@@ -1,0 +1,49 @@
+{
+  "query_id": "6af7370d-c447-4002-ad7c-13d980a5d86f",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 942,
+        "completion_tokens": 33,
+        "total_tokens": 975,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "how to store credentials",
+        "reason": "search for guidelines on storing credentials"
+      },
+      "reasoning": "search for guidelines on storing credentials",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 975,
+  "usage_complete": true,
+  "prompt_tokens": 942,
+  "completion_tokens": 33,
+  "failure_injection": "unavailable",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6994500940054422,
+  "token_accounting": "provider_usage"
+}

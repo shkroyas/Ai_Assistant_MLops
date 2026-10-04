@@ -1,0 +1,164 @@
+{
+  "query_id": "3bd4da35-9925-412c-beec-84183322a58d",
+  "question": "For the production checklist: How is a GPU endpoint authenticated and what is suitable for 12 GB?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 957,
+        "completion_tokens": 41,
+        "total_tokens": 998,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "GPU endpoint authentication production checklist",
+        "reason": "Find details on how GPU endpoints are authenticated in the production checklist."
+      },
+      "reasoning": "Find details on how GPU endpoints are authenticated in the production checklist.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.19650211930274963
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.17213259637355804
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.12326671679814656
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1366,
+        "completion_tokens": 55,
+        "total_tokens": 1421,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "GPU endpoint authentication production checklist 12 GB",
+        "source_id": "security",
+        "reason": "Refine search to find specific information about GPU endpoint authentication and suitable GPU size."
+      },
+      "reasoning": "Refine search to find specific information about GPU endpoint authentication and suitable GPU size.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.10256410799395747
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1547,
+        "completion_tokens": 55,
+        "total_tokens": 1602,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "GPU endpoint authentication production checklist 12 GB",
+        "source_id": null,
+        "reason": "Perform an unfiltered search for detailed information on GPU endpoint authentication and suitable GPU size."
+      },
+      "reasoning": "Perform an unfiltered search for detailed information on GPU endpoint authentication and suitable GPU size.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.23357092314837558
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.16967595019738607
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.14322297747775622
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='From the search results,...WQ quantized model.\"}]}', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "From the search results, we can see that the production checklist does not explicitly detail the authentication method for GPU endpoints. However, it mentions that the GPU model endpoint requires a bearer token for authentication. Regarding the suitable GPU size for 12 GB, the document suggests using an AWQ quantized model for a 12 GB slot.\n\nHere is the relevant quote from the \"GPU serving\" section:\n\n\"**For a 12 GB slot use an AWQ quantized model.**\"\n\nThis indicates that an AWQ quantized model is suitable for a 12 GB GPU slot.\n\n{\"status\":\"answered\",\"answer\":\"The GPU endpoint requires a bearer token for authentication, and an AWQ quantized model is suitable for a 12 GB GPU slot.\",\"sources\":[{\"source_id\":\"gpu-serving\",\"quote\":\"For a 12 GB slot use an AWQ quantized model.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 2011,
+        "completion_tokens": 183,
+        "total_tokens": 2194,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The GPU endpoint requires a bearer token for authentication, and an AWQ quantized model is suitable for a 12 GB GPU slot.\",\"sources\":[{\"source_id\":\"gpu-serving\",\"quote\":\"For a 12 GB slot use an AWQ quantized model.\"}]}",
+      "usage": {
+        "prompt_tokens": 2308,
+        "completion_tokens": 63,
+        "total_tokens": 2371,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 8586,
+  "usage_complete": true,
+  "prompt_tokens": 8189,
+  "completion_tokens": 397,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The GPU endpoint requires a bearer token for authentication, and an AWQ quantized model is suitable for a 12 GB GPU slot.",
+    "sources": [
+      {
+        "source_id": "gpu-serving",
+        "quote": "For a 12 GB slot use an AWQ quantized model."
+      }
+    ]
+  },
+  "iterations": 5,
+  "latency_seconds": 8.672720871996717,
+  "token_accounting": "provider_usage"
+}

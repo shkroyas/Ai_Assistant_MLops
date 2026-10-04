@@ -1,0 +1,49 @@
+{
+  "query_id": "4251fba8-dd81-4f1f-8ef2-b9addde018b6",
+  "question": "What is the retry limit?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 942,
+        "completion_tokens": 87,
+        "total_tokens": 1029,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "retry limit",
+        "reason": "Finding the retry limit policy in the MLOps handbook"
+      },
+      "reasoning": "Finding the retry limit policy in the MLOps handbook",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 1029,
+  "usage_complete": true,
+  "prompt_tokens": 942,
+  "completion_tokens": 87,
+  "failure_injection": "timeout",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 1.7755351060040994,
+  "token_accounting": "provider_usage"
+}

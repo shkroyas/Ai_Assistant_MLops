@@ -1,0 +1,120 @@
+{
+  "query_id": "4b09ec04-7400-461a-9130-6207b383a8f0",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 944,
+        "completion_tokens": 85,
+        "total_tokens": 1029,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model requests concurrency limit",
+        "reason": "Finding the concurrency limit for model requests"
+      },
+      "reasoning": "Finding the concurrency limit for model requests",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.19518001822812567
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.14451833967049638
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.1397713189625674
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1369,
+        "completion_tokens": 40,
+        "total_tokens": 1409,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "reliability",
+        "reason": "Reading the reliability section to find the concurrency limit for model requests"
+      },
+      "reasoning": "Reading the reliability section to find the concurrency limit for model requests",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: trailing characters at line 1 column 210 [type=json_invalid, input_value='{\"status\":\"answered\",\"an...t model requests.\"}]}\\'', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"answered\",\"answer\":\"The application admits at most four concurrent model requests.\", \"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}'",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1513,
+        "completion_tokens": 42,
+        "total_tokens": 1555,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The application admits at most four concurrent model requests.\",\"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}",
+      "usage": {
+        "prompt_tokens": 1669,
+        "completion_tokens": 41,
+        "total_tokens": 1710,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 5703,
+  "usage_complete": true,
+  "prompt_tokens": 5495,
+  "completion_tokens": 208,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The application admits at most four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 4.54970013199636,
+  "token_accounting": "provider_usage"
+}

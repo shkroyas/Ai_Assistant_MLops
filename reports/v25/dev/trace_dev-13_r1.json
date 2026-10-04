@@ -1,0 +1,119 @@
+{
+  "query_id": "9832c90c-e42b-400f-87f4-11e10d6ac29b",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 956,
+        "completion_tokens": 87,
+        "total_tokens": 1043,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model accuracy and F1 score criteria",
+        "reason": "Find criteria for evaluating model performance"
+      },
+      "reasoning": "Find criteria for evaluating model performance",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.20403742071634837
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.1686150338214874
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.16724841085573008
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1372,
+        "completion_tokens": 36,
+        "total_tokens": 1408,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "legacy-policy",
+        "reason": "Review the superseding policy for model release criteria"
+      },
+      "reasoning": "Review the superseding policy for model release criteria",
+      "valid": true,
+      "result": {
+        "source_id": "legacy-policy",
+        "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"status\": \"answered\", \"answer\": \"No, the old memo is not enough. The current policy requires using F1 and ROC-AUC scores on a frozen holdout set for model evaluation, not just relying on accuracy.\", \"sources\": [{\"source_id\": \"legacy-policy\", \"quote\": \"This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"}]}",
+      "usage": {
+        "prompt_tokens": 1506,
+        "completion_tokens": 132,
+        "total_tokens": 1638,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-972f45c2ec62d928",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"answered\", \"answer\": \"No, the old memo is not enough. The current policy requires using F1 and ROC-AUC scores on a frozen holdout set for model evaluation, not just relying on accuracy.\", \"sources\": [{\"source_id\": \"legacy-policy\", \"quote\": \"This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"}]}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 4089,
+  "usage_complete": true,
+  "prompt_tokens": 3834,
+  "completion_tokens": 255,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "No, the old memo is not enough. The current policy requires using F1 and ROC-AUC scores on a frozen holdout set for model evaluation, not just relying on accuracy.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 5.259718702996906,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,157 @@
+{
+  "query_id": "a01fbf22-ce66-4b09-9aa7-31ab53999d9a",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 943,
+        "completion_tokens": 114,
+        "total_tokens": 1057,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "company annual revenue",
+        "reason": "Searching for the company's annual revenue"
+      },
+      "reasoning": "Searching for the company's annual revenue",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.11115400522031102
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.07532435939720944
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.06839856220893974
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1442,
+        "completion_tokens": 92,
+        "total_tokens": 1534,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "company annual revenue",
+        "source_id": "release-policy",
+        "reason": "Filtering search to the release policy document for potential mentions of annual revenue."
+      },
+      "reasoning": "Filtering search to the release policy document for potential mentions of annual revenue.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.07532435939720944
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1677,
+        "completion_tokens": 109,
+        "total_tokens": 1786,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "company annual revenue",
+        "reason": "Performing an unfiltered search to locate the company's annual revenue in any relevant document."
+      },
+      "reasoning": "Performing an unfiltered search to locate the company's annual revenue in any relevant document.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.11115400522031102
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.07532435939720944
+        },
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.06839856220893974
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\": \"abstain\", \"answer\": \"The company's annual revenue is not documented in the provided sources.\", \"sources\": []}",
+      "usage": {
+        "prompt_tokens": 2222,
+        "completion_tokens": 141,
+        "total_tokens": 2363,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": "After performing an unfiltered search, the company's annual revenue is still not found in the documents searched. Given that the requested information is not present in the available sources, we must conclude that the specific detail about the company's annual revenue is not documented in the provided handbook.\n\nSince we cannot find the required information, I will abstain from providing an answer based on the given sources.\n\n",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-872c5b66c9ae1009",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"abstain\", \"answer\": \"The company's annual revenue is not documented in the provided sources.\", \"sources\": [], \"reason\": \"The search across multiple documents did not yield any information regarding the company's annual revenue.\"}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 6740,
+  "usage_complete": true,
+  "prompt_tokens": 6284,
+  "completion_tokens": 456,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The company's annual revenue is not documented in the provided sources.",
+    "sources": []
+  },
+  "iterations": 4,
+  "latency_seconds": 9.547263813001337,
+  "token_accounting": "provider_usage"
+}
