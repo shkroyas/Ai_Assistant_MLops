@@ -1,0 +1,12 @@
+{
+  "status": "FINISHED",
+  "scope": "development-only prompt preflight",
+  "samples": 12,
+  "passes": 9,
+  "native_judge": false,
+  "golden_evaluation": false,
+  "promotion_eligible": false,
+  "decision": "Abandoned after policy-reading regression; preserve actual failed samples.",
+  "source_config": "configs/v33.yaml",
+  "source_prompt": "prompts/prompt_v33.md"
+}

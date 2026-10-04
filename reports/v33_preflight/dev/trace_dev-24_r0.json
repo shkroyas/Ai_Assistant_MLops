@@ -1,0 +1,34 @@
+{
+  "query_id": "5837376f-85bf-4c64-b0c7-f8d77284095e",
+  "question": "Release that version.",
+  "prompt_version": "v33",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"The request to release a version is unclear. Please specify which version you are referring to and provide any necessary evaluation evidence or context.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1342,
+        "completion_tokens": 38,
+        "total_tokens": 1380,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1380,
+  "usage_complete": true,
+  "prompt_tokens": 1342,
+  "completion_tokens": 38,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "The request to release a version is unclear. Please specify which version you are referring to and provide any necessary evaluation evidence or context.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6058510329999081,
+  "token_accounting": "provider_usage"
+}

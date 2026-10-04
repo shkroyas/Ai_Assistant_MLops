@@ -1,0 +1,9 @@
+{
+  "trace_path": "reports/v32/dev/trace_dev-12_r0.json",
+  "failure": "The development response omitted explicit supersession and included unrelated rollback/approver clauses. Repeated dev-24 attempts searched despite an unspecified release version, ending abstain instead of clarify.",
+  "change": "Change only the prompt: explicitly state policy supersession, scope factual answers to the requested information, and clarify unspecified release actions before retrieval. Keep model, non-thinking mode, tools, semantic retrieval, review, repetitions, labels and gate unchanged.",
+  "supporting_development_traces": [
+    "reports/v32/dev/trace_dev-11_r0.json",
+    "reports/v32/dev/trace_dev-24_r0.json"
+  ]
+}

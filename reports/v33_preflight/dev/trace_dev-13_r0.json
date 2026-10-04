@@ -1,0 +1,34 @@
+{
+  "query_id": "6af5b516-0265-49b6-820d-60d142d7e91a",
+  "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+  "prompt_version": "v33",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"The request omits the object, options, target, version, or desired change needed to understand it. Ask a specific clarifying question.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1358,
+        "completion_tokens": 40,
+        "total_tokens": 1398,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1398,
+  "usage_complete": true,
+  "prompt_tokens": 1358,
+  "completion_tokens": 40,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "The request omits the object, options, target, version, or desired change needed to understand it. Ask a specific clarifying question.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6338622869998289,
+  "token_accounting": "provider_usage"
+}
