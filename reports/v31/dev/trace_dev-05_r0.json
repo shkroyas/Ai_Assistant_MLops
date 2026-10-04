@@ -1,0 +1,129 @@
+{
+  "query_id": "700ed5c1-5835-4184-ae33-a2ee5e12560b",
+  "question": "What model and precision are planned for a 24 GB GPU?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1066,
+        "completion_tokens": 184,
+        "total_tokens": 1250,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "24 GB GPU model precision planned",
+        "reason": "Find policy specifying which model and precision to use on a 24 GB GPU",
+        "source_id": null
+      },
+      "reasoning": "Find policy specifying which model and precision to use on a 24 GB GPU",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.5143557810088779
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.2995240598223166
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.19436195180701799
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "The planned primary model for a 24\u202fGB GPU is Qwen2.5-7B-Instruct, served with vLLM using BF16 precision.",
+        "sources": [
+          {
+            "source_id": "gpu-serving",
+            "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have a source gpu-serving that directly answers: \"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\" That answers both model and precision. No conflict. So answer with that. Need to cite source. Provide answer: Model: Qwen2.5-7B-Instruct; Precision: BF16. Provide source quote.",
+        "tool_calls": [
+          {
+            "id": "fc_78c9e4a4-40ff-4c6d-a6e4-57773e455ea1",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The planned primary model for a 24\u202fGB GPU is Qwen2.5-7B-Instruct, served with vLLM using BF16 precision.\",\"sources\":[{\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\",\"source_id\":\"gpu-serving\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1440,
+        "completion_tokens": 201,
+        "total_tokens": 1641,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The planned primary model for a 24\\u202fGB GPU is Qwen2.5-7B-Instruct, served with BF16 precision.\", \"sources\": [{\"quote\": \"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\", \"source_id\": \"gpu-serving\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1648,
+        "completion_tokens": 287,
+        "total_tokens": 1935,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to verify the answer. The question: \"What model and precision are planned for a 24 GB GPU?\" The retrieved source gpu-serving says: \"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\" That directly answers both model and precision. No conflict. So answer is correct. Need to ensure we include exact quote. Already have. Should we include any other source? Only one needed. The answer should be a JSON with status answered, answer string, sources array with quote and source_id. Ensure answer includes both model and precision. Provide answer: \"The planned primary model for a 24\u202fGB GPU is Qwen2.5\u20117B\u2011Instruct, served with BF16 precision.\" That matches. Provide source. No policy conflict. So final.",
+        "tool_calls": [
+          {
+            "id": "fc_2ed047a7-dc04-4f48-a0f3-e0fbcd628247",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The planned primary model for a 24\u202fGB GPU is Qwen2.5-7B-Instruct, served with BF16 precision.\",\"sources\":[{\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\",\"source_id\":\"gpu-serving\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 4826,
+  "usage_complete": true,
+  "prompt_tokens": 4154,
+  "completion_tokens": 672,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The planned primary model for a 24\u202fGB GPU is Qwen2.5-7B-Instruct, served with BF16 precision.",
+    "sources": [
+      {
+        "source_id": "gpu-serving",
+        "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 180.59125218100235,
+  "token_accounting": "provider_usage"
+}

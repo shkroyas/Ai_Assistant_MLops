@@ -1,0 +1,28 @@
+{
+  "query_id": "5738ef7e-327e-4e63-99d4-89c0f86d7e17",
+  "question": "Change the limit.",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer",
+      "provider_failures": []
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.8012997063342482e-05,
+  "token_accounting": "incomplete"
+}

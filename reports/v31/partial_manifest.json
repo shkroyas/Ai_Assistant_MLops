@@ -1,0 +1,25 @@
+{
+  "run_id": "a0dd294f9f104cf9b57e32b47ec78e09",
+  "status": "KILLED",
+  "scope": "interrupted full evaluation",
+  "promotion_eligible": false,
+  "reason": "Stopped at user request while they restart the GPU session with a Qwen 14B model. Original samples are preserved, including upstream daily-token errors and queue failures. No completed native judge or promotion gate.",
+  "phases": {
+    "dev": {
+      "samples": 105,
+      "terminations": {
+        "provider_unavailable": 93,
+        "answered": 12
+      },
+      "tokens": 85194
+    },
+    "golden": {
+      "samples": 9,
+      "terminations": {
+        "provider_unavailable": 8,
+        "abstain": 1
+      },
+      "tokens": 21971
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "trace_path": "reports/v30/dev/trace_dev-08_r0.json",
+  "failure": "The Qwen development answer continued to invert a retrieved prohibition despite prompt and review corrections.",
+  "change": "Change provider/model family to available Groq GPT-OSS-120B medium reasoning. User confirmed all five supplied Groq credentials belong to different accounts; include every account with corrected structured cooldowns and 60-second per-key pacing. Keep the v30 prompt, semantic model/revision, answered-only review, tools, repetition and frozen scoring unchanged. Allocation and compatibility settings are necessary to operate this provider, not separately measured causal factors.",
+  "supporting_evidence": [
+    "reports/groq_individual_accounts_models.json",
+    "reports/groq_all_accounts_native_smoke.json"
+  ],
+  "limits": "Successful small replays do not establish capacity for the complete cohort. Retain every actual provider failure and unchanged gate."
+}

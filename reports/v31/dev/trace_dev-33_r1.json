@@ -1,0 +1,28 @@
+{
+  "query_id": "b8d62b15-4e53-49e5-8365-55782a51f63b",
+  "question": "How should credentials be stored?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer",
+      "provider_failures": []
+    }
+  ],
+  "tokens": 0,
+  "usage_complete": false,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "failure_injection": "unavailable",
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 2.41960005951114e-05,
+  "token_accounting": "incomplete"
+}
