@@ -238,7 +238,7 @@ def main():
             "@" + str(job_json),
             none=True,
         )
-        for _ in range(60):
+        for _ in range(180):
             job_state = az("rest", "--method", "get", "--url", job_uri + "?api-version=2025-07-01")
             (private / "cleanup-provisioning.json").write_text(json.dumps(job_state))
             (private / "cleanup-provisioning.json").chmod(0o600)
@@ -250,6 +250,14 @@ def main():
             time.sleep(3)
         else:
             raise DeploymentError("Cleanup job provisioning timed out")
+        previous = az(
+            "rest",
+            "--method",
+            "get",
+            "--url",
+            job_uri + "/executions?api-version=2025-07-01",
+        )
+        previous_names = {r["name"] for r in previous.get("value", [])}
         execution = az(
             "rest",
             "--method",
@@ -257,7 +265,7 @@ def main():
             "--url",
             job_uri + "/start?api-version=2025-07-01",
         )
-        execution_name = execution["name"]
+        execution_name = (execution or {}).get("name")
         for _ in range(90):
             response = az(
                 "rest",
@@ -267,6 +275,12 @@ def main():
                 job_uri + "/executions?api-version=2025-07-01",
             )
             runs = response.get("value", [])
+            # Start may return 202 with no body. The newly created execution is
+            # unambiguous because this fresh job has no concurrent scheduled run.
+            if execution_name is None:
+                created = [r for r in runs if r["name"] not in previous_names]
+                if len(created) == 1:
+                    execution_name = created[0]["name"]
             current = next((r for r in runs if r["name"] == execution_name), {})
             status = current.get("properties", {}).get("status")
             if status == "Succeeded":
