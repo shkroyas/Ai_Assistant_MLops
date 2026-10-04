@@ -1,0 +1,11 @@
+{
+  "completion": "Nine development-only prompt preflight cases; no complete cohort, held-out judging or gate.",
+  "run_id": "f41878e61edb4fd383e355655349c61a",
+  "status": "FINISHED",
+  "scope": "development-only preflight",
+  "samples": 9,
+  "native_judge": false,
+  "golden_evaluation": false,
+  "promotion_eligible": false,
+  "source_smoke_report": "reports/qwen_reading_prompt_smoke.json"
+}

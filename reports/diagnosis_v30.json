@@ -1,0 +1,5 @@
+{
+  "trace_path": "reports/v29/dev/trace_dev-08_r0.json",
+  "failure": "The development answer inverted a retrieved prohibition about data use. A separate conflict answer used vague wording instead of stating which document supersedes which.",
+  "change": "Change only the prompt: emphasize preserving negation and exclusions, add an invented abstract reading example, and require a clear supported supersession statement with current conditions and both citations. Keep review scope, semantic model/revision, LLM, retrieval, labels and scoring unchanged."
+}
