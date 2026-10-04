@@ -1,0 +1,129 @@
+{
+  "query_id": "c923dcb2-6ca2-428c-83e3-862b3ea8ffb6",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1061,
+        "completion_tokens": 119,
+        "total_tokens": 1180,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "concurrent model requests limit",
+        "reason": "Find the maximum number of model requests that can execute concurrently according to the handbook",
+        "source_id": null
+      },
+      "reasoning": "Find the maximum number of model requests that can execute concurrently according to the handbook",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.5221569857629393
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.24337526403540427
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.23677198890192314
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "The system allows at most four concurrent model requests.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "The application admits at most four concurrent model requests."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have a source \"reliability\" that says: \"The application admits at most four concurrent model requests.\" That answers the question. Need to provide answer with status answered, include quote and source_id.\n\nCheck if any other source mentions concurrency. Not needed. Provide answer: \"Four concurrent model requests.\"\n\nInclude citation.",
+        "tool_calls": [
+          {
+            "id": "fc_83528432-179b-464b-8f4a-974e9b2467e1",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The system allows at most four concurrent model requests.\",\"sources\":[{\"quote\":\"The application admits at most four concurrent model requests.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1432,
+        "completion_tokens": 138,
+        "total_tokens": 1570,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The system allows at most four concurrent model requests.\", \"sources\": [{\"quote\": \"The application admits at most four concurrent model requests.\", \"source_id\": \"reliability\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1598,
+        "completion_tokens": 220,
+        "total_tokens": 1818,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to verify the answer. The question: \"How many model requests can execute concurrently?\" The retrieved source from reliability says: \"The application admits at most four concurrent model requests.\" That directly answers. No conflict. Need to ensure we cite correctly. The answer should be explicit yes/no? It's a number. Provide answer: \"Four concurrent model requests.\" Provide source. Ensure format correct: status \"answered\". Provide answer string. Should we include any other nuance? The source also mentions rate limiting 30 requests per minute per client, but question only about concurrent. So answer is four. Provide citation. Ensure quote exactly as in source: \"The application admits at most four concurrent model requests.\" Good.\n\nNow produce final JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_b241ecca-08bb-4f47-bbef-e6f5160ec2b6",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The system allows at most four concurrent model requests.\",\"sources\":[{\"quote\":\"The application admits at most four concurrent model requests.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 4568,
+  "usage_complete": true,
+  "prompt_tokens": 4091,
+  "completion_tokens": 477,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The system allows at most four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 120.79849578300491,
+  "token_accounting": "provider_usage"
+}

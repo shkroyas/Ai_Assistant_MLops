@@ -1,0 +1,169 @@
+{
+  "query_id": "035b2a45-2f61-47e4-a157-abd26bc467b4",
+  "question": "How many provider attempts and what retry strategy are allowed?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1064,
+        "completion_tokens": 118,
+        "total_tokens": 1182,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "provider attempts retry strategy allowed",
+        "reason": "Find policy on number of provider attempts and retry strategy",
+        "source_id": null
+      },
+      "reasoning": "Find policy on number of provider attempts and retry strategy",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.6306993456007042
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.249412721176104
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.14968459165048972
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1415,
+        "completion_tokens": 71,
+        "total_tokens": 1486,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false,
+        "upstream_failures": [
+          {
+            "http_status": 429,
+            "model": "openai/gpt-oss-120b",
+            "account_slot": 4,
+            "quota_scope": "tokens_per_day",
+            "cooldown_seconds": 120.0
+          }
+        ]
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the policy about provider attempts and retry strategy",
+        "source_id": "reliability"
+      },
+      "reasoning": "Read the policy about provider attempts and retry strategy",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "You may retry transient provider errors up to three attempts, using an exponential backoff strategy.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have the source \"reliability\" containing the needed info: \"Retry transient provider errors up to three attempts with exponential backoff.\"\n\nThe question: \"How many provider attempts and what retry strategy are allowed?\" So answer: up to three attempts, using exponential backoff.\n\nWe need to provide answer with sources. Use json final.",
+        "tool_calls": [
+          {
+            "id": "fc_a7da2979-cbf1-4df5-8dcc-e098b2bacab4",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"You may retry transient provider errors up to three attempts, using an exponential backoff strategy.\",\"sources\":[{\"quote\":\"Retry transient provider errors up to three attempts with exponential backoff.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1539,
+        "completion_tokens": 152,
+        "total_tokens": 1691,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"The policy permits up to three retry attempts for transient provider errors, and the retries must use an exponential backoff strategy.\", \"sources\": [{\"quote\": \"Retry transient provider errors up to three attempts with exponential backoff.\", \"source_id\": \"reliability\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1716,
+        "completion_tokens": 235,
+        "total_tokens": 1951,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false,
+        "upstream_failures": [
+          {
+            "http_status": 429,
+            "model": "openai/gpt-oss-120b",
+            "account_slot": 4,
+            "quota_scope": "tokens_per_day",
+            "cooldown_seconds": 102.0
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to verify the question: \"How many provider attempts and what retry strategy are allowed?\" The answer should include number of attempts and the retry strategy. We have source reliability: \"Retry transient provider errors up to three attempts with exponential backoff.\" That directly answers both parts. No conflict. So answer should be \"Three attempts, using exponential backoff.\" Provide citation. Ensure answer includes both parts explicitly. The status should be answered. Provide sources list with quote. That matches. The earlier draft said \"You may retry transient provider errors up to three attempts, using an exponential backoff strategy.\" That's fine. Need to ensure answer includes both number and strategy. It's correct. Provide final JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_659b7003-5506-4545-b4ca-14645efc86e0",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The policy permits up to three retry attempts for transient provider errors, and the retries must use an exponential backoff strategy.\",\"sources\":[{\"quote\":\"Retry transient provider errors up to three attempts with exponential backoff.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 6310,
+  "usage_complete": true,
+  "prompt_tokens": 5734,
+  "completion_tokens": 576,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The policy permits up to three retry attempts for transient provider errors, and the retries must use an exponential backoff strategy.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 181.34562557799654,
+  "token_accounting": "provider_usage"
+}

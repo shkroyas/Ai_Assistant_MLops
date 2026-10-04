@@ -1,0 +1,459 @@
+{
+  "model": "openai/gpt-oss-120b",
+  "allocation": "all five separately owned supplied accounts",
+  "per_key_seconds": 60,
+  "metrics": {
+    "task_completion_rate": 1,
+    "tool_call_correctness": 1.0,
+    "tool_argument_validity": 1.0,
+    "trajectory_length_mean": 2.6666666666666665,
+    "tokens_per_query_mean": 3537,
+    "usage_complete": 1.0,
+    "latency_mean": 41.488032881003164,
+    "completion_spread": 0,
+    "hard_failure_rate": 0.0,
+    "failure_injection_safe": 0
+  },
+  "quota_errors": [],
+  "accepted_tokens_by_key": [
+    2787,
+    1824,
+    2826,
+    1241,
+    1933
+  ],
+  "rows": [
+    {
+      "case_id": "dev-07",
+      "category": "cross-source",
+      "completed": true,
+      "tool_calls": 2,
+      "valid_calls": 2,
+      "appropriate_calls": 2,
+      "failure_class": null,
+      "iterations": 3,
+      "tokens": 4028,
+      "usage_complete": true,
+      "latency_seconds": 61.313208014005795,
+      "reference": "Require a bearer token; use an AWQ quantized model for 12 GB.",
+      "response": "The GPU model endpoint is secured with bearer\u2011token authentication \u2013 the client must include a valid token in the Authorization header when calling the endpoint. For a GPU that only has 12\u202fGB of memory, the handbook recommends using an AWQ\u2011quantized model (e.g., an AWQ\u2011quantized version of the target model) instead of the full\u2011precision model that requires a larger GPU.",
+      "injected": false,
+      "prompt_tokens": 3481,
+      "completion_tokens": 547,
+      "query": "How is a GPU endpoint authenticated and what is suitable for 12 GB?",
+      "status": "answered",
+      "trace": {
+        "query_id": "fa04dbb0-6d4c-494f-98c0-d1c23769317d",
+        "question": "How is a GPU endpoint authenticated and what is suitable for 12 GB?",
+        "prompt_version": "provider-120-all-smoke",
+        "steps": [
+          {
+            "step": 1,
+            "event": "tool_call",
+            "usage": {
+              "prompt_tokens": 782,
+              "completion_tokens": 102,
+              "total_tokens": 884,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "tool": "search",
+            "args": {
+              "query": "GPU endpoint authentication suitable for 12 GB",
+              "reason": "Find authentication method for GPU endpoint and recommendation for 12 GB GPU",
+              "source_id": null
+            },
+            "reasoning": "Find authentication method for GPU endpoint and recommendation for 12 GB GPU",
+            "valid": true,
+            "result": [
+              {
+                "source_id": "gpu-serving",
+                "offset": 0,
+                "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+                "score": 0.27572341700433317
+              },
+              {
+                "source_id": "reliability",
+                "offset": 0,
+                "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+                "score": 0.19096396997034162
+              },
+              {
+                "source_id": "release-policy",
+                "offset": 0,
+                "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+                "score": 0.11678546157418779
+              }
+            ]
+          },
+          {
+            "step": 2,
+            "event": "tool_call",
+            "usage": {
+              "prompt_tokens": 1177,
+              "completion_tokens": 64,
+              "total_tokens": 1241,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "tool": "search",
+            "args": {
+              "query": "GPU endpoint authentication",
+              "reason": "Find authentication method for GPU endpoint",
+              "source_id": null
+            },
+            "reasoning": "Find authentication method for GPU endpoint",
+            "valid": true,
+            "result": [
+              {
+                "source_id": "reliability",
+                "offset": 0,
+                "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+                "score": 0.23094011198088576
+              },
+              {
+                "source_id": "security",
+                "offset": 0,
+                "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+                "score": 0.08268982743716129
+              },
+              {
+                "source_id": "drift-runbook",
+                "offset": 0,
+                "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+                "score": 0.07698003732696192
+              }
+            ]
+          },
+          {
+            "step": 3,
+            "event": "finish",
+            "reasoning": "{\"answer\": \"The GPU model endpoint is secured with bearer\\u2011token authentication \\u2013 the client must include a valid token in the Authorization header when calling the endpoint. For a GPU that only has 12\\u202fGB of memory, the handbook recommends using an AWQ\\u2011quantized model (e.g., an AWQ\\u2011quantized version of the target model) instead of the full\\u2011precision model that requires a larger GPU.\", \"sources\": [{\"quote\": \"The GPU model endpoint requires a bearer token.\", \"source_id\": \"security\"}, {\"quote\": \"For a 12 GB slot use an AWQ quantized model.\", \"source_id\": \"gpu-serving\"}], \"status\": \"answered\"}",
+            "usage": {
+              "prompt_tokens": 1522,
+              "completion_tokens": 381,
+              "total_tokens": 1903,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "raw_response": {
+              "role": "assistant",
+              "reasoning": "We have two parts: authentication method for GPU endpoint, and suitable model for 12 GB GPU.\n\nFrom gpu-serving source we have recommendation: For a 12 GB slot use an AWQ quantized model. Also mentions primary model Qwen2.5-7B-Instruct served by vLLM using BF16 on 24 GB GPU.\n\nFrom security source we have: \"The GPU model endpoint requires a bearer token.\" That addresses authentication.\n\nWe need to cite both sources. Provide answer: GPU endpoint uses bearer token authentication (passed in Authorization header). For 12 GB GPU, use an AWQ quantized model (e.g., AWQ quantized version of the model). Provide details.\n\nLet's capture quotes.\n\nFrom gpu-serving: \"# GPU serving \u2014 example deployment choices ... For a 12 GB slot use an AWQ quantized model.\"\n\nFrom security: \"# Secret management \u2014 example company handbook ... The GPU model endpoint requires a bearer token.\"\n\nWe need to include source IDs and quotes.\n\nNow produce final JSON with status answered.\n\n",
+              "tool_calls": [
+                {
+                  "id": "fc_fdc281ed-3b06-4a13-ab53-db8a1914a73e",
+                  "type": "function",
+                  "function": {
+                    "name": "json",
+                    "arguments": "{\"answer\":\"The GPU model endpoint is secured with bearer\u2011token authentication \u2013 the client must include a valid token in the Authorization header when calling the endpoint. For a GPU that only has 12\u202fGB of memory, the handbook recommends using an AWQ\u2011quantized model (e.g., an AWQ\u2011quantized version of the target model) instead of the full\u2011precision model that requires a larger GPU.\",\"sources\":[{\"quote\":\"The GPU model endpoint requires a bearer token.\",\"source_id\":\"security\"},{\"quote\":\"For a 12 GB slot use an AWQ quantized model.\",\"source_id\":\"gpu-serving\"}],\"status\":\"answered\"}"
+                  }
+                }
+              ]
+            },
+            "native_final_answer": true
+          }
+        ],
+        "tokens": 4028,
+        "usage_complete": true,
+        "prompt_tokens": 3481,
+        "completion_tokens": 547,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "answered",
+        "answer": {
+          "status": "answered",
+          "answer": "The GPU model endpoint is secured with bearer\u2011token authentication \u2013 the client must include a valid token in the Authorization header when calling the endpoint. For a GPU that only has 12\u202fGB of memory, the handbook recommends using an AWQ\u2011quantized model (e.g., an AWQ\u2011quantized version of the target model) instead of the full\u2011precision model that requires a larger GPU.",
+          "sources": [
+            {
+              "source_id": "security",
+              "quote": "The GPU model endpoint requires a bearer token."
+            },
+            {
+              "source_id": "gpu-serving",
+              "quote": "For a 12 GB slot use an AWQ quantized model."
+            }
+          ]
+        },
+        "iterations": 3,
+        "latency_seconds": 61.313208014005795,
+        "token_accounting": "provider_usage"
+      },
+      "repeat": 0
+    },
+    {
+      "case_id": "dev-08",
+      "category": "cross-source",
+      "completed": true,
+      "tool_calls": 2,
+      "valid_calls": 2,
+      "appropriate_calls": 2,
+      "failure_class": null,
+      "iterations": 3,
+      "tokens": 4037,
+      "usage_complete": true,
+      "latency_seconds": 2.620676922000712,
+      "reference": "The project owner approves releases. Golden queries are held out; development queries guide revisions.",
+      "response": "In the example\u2011company MLOps handbook, the release approver is the project owner. Golden questions (the golden evaluation set) are kept separate from prompt tuning and are not used to drive prompt revisions; instead, development queries are used to guide revisions.",
+      "injected": false,
+      "prompt_tokens": 3404,
+      "completion_tokens": 633,
+      "query": "Who approves releases, and should golden questions guide prompt revisions?",
+      "status": "answered",
+      "trace": {
+        "query_id": "fc99b218-7255-4c93-af35-20197bd70211",
+        "question": "Who approves releases, and should golden questions guide prompt revisions?",
+        "prompt_version": "provider-120-all-smoke",
+        "steps": [
+          {
+            "step": 1,
+            "event": "tool_call",
+            "usage": {
+              "prompt_tokens": 779,
+              "completion_tokens": 109,
+              "total_tokens": 888,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "tool": "search",
+            "args": {
+              "query": "who approves releases example-company MLOps handbook release approval",
+              "reason": "Find approval authority for releases",
+              "source_id": null
+            },
+            "reasoning": "Find approval authority for releases",
+            "valid": true,
+            "result": [
+              {
+                "source_id": "drift-runbook",
+                "offset": 0,
+                "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+                "score": 0.1669931474023509
+              },
+              {
+                "source_id": "release-policy",
+                "offset": 0,
+                "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+                "score": 0.16340147768933644
+              },
+              {
+                "source_id": "security",
+                "offset": 0,
+                "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+                "score": 0.15695699357527942
+              }
+            ]
+          },
+          {
+            "step": 2,
+            "event": "tool_call",
+            "usage": {
+              "prompt_tokens": 1136,
+              "completion_tokens": 80,
+              "total_tokens": 1216,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "tool": "search",
+            "args": {
+              "query": "golden questions guide prompt revisions example-company handbook",
+              "reason": "Find guidance on golden questions and prompt revisions",
+              "source_id": null
+            },
+            "reasoning": "Find guidance on golden questions and prompt revisions",
+            "valid": true,
+            "result": [
+              {
+                "source_id": "experiment-policy",
+                "offset": 0,
+                "text": "# Experiment policy \u2014 example company handbook\nThe golden evaluation set is held out from prompt tuning. Development queries guide revisions. Run each query three times to estimate sampling spread. Log prompt version, retrieval top_k, temperature, tokens, latency, and the full raw tool trajectory. Calibration labels are manually reviewed rather than generated by the assistant.\n",
+                "score": 0.26866419762142835
+              },
+              {
+                "source_id": "security",
+                "offset": 0,
+                "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+                "score": 0.21483447358539948
+              },
+              {
+                "source_id": "release-policy",
+                "offset": 0,
+                "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+                "score": 0.17395415669805997
+              }
+            ]
+          },
+          {
+            "step": 3,
+            "event": "finish",
+            "reasoning": "{\"answer\": \"In the example\\u2011company MLOps handbook, the release approver is the project owner. Golden questions (the golden evaluation set) are kept separate from prompt tuning and are not used to drive prompt revisions; instead, development queries are used to guide revisions.\", \"sources\": [{\"quote\": \"The release approver is the project owner.\", \"source_id\": \"release-policy\"}, {\"quote\": \"The golden evaluation set is held out from prompt tuning. Development queries guide revisions.\", \"source_id\": \"experiment-policy\"}], \"status\": \"answered\"}",
+            "usage": {
+              "prompt_tokens": 1489,
+              "completion_tokens": 444,
+              "total_tokens": 1933,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "raw_response": {
+              "role": "assistant",
+              "reasoning": "We have two questions:\n\n1. Who approves releases? According to release-policy source: \"The release approver is the project owner.\"\n\nWe need to cite that.\n\n2. Should golden questions guide prompt revisions? Need to find guidance. The experiment-policy mentions \"The golden evaluation set is held out from prompt tuning. Development queries guide revisions.\" That suggests golden questions (maybe golden evaluation set) are held out, and development queries guide revisions. So golden questions are not used to guide prompt revisions; instead development queries do. So answer: No, golden questions should not guide prompt revisions; they are held out for evaluation, while development queries guide revisions.\n\nWe need to support with quote. The experiment-policy text: \"The golden evaluation set is held out from prompt tuning. Development queries guide revisions.\" That directly addresses.\n\nThus answer includes both parts.\n\nNow produce final JSON with status answered, answer summarizing both, and sources list with two entries: release-policy quote and experiment-policy quote.\n\nWe need to include quote strings exactly as contiguous substring. Provide each quote.\n\nLet's extract exact substrings:\n\nFrom release-policy: \"The release approver is the project owner.\"\n\nFrom experiment-policy: \"The golden evaluation set is held out from prompt tuning. Development queries guide revisions.\"\n\nMake sure quotes are contiguous substrings. The second includes two sentences; it's contiguous in source text: \"The golden evaluation set is held out from prompt tuning. Development queries guide revisions.\" Yes.\n\nNow produce final JSON.",
+              "tool_calls": [
+                {
+                  "id": "fc_dc5e0ed5-fb9c-47fa-9b84-c9d24999f15e",
+                  "type": "function",
+                  "function": {
+                    "name": "json",
+                    "arguments": "{\"answer\":\"In the example\u2011company MLOps handbook, the release approver is the project owner. Golden questions (the golden evaluation set) are kept separate from prompt tuning and are not used to drive prompt revisions; instead, development queries are used to guide revisions.\",\"sources\":[{\"quote\":\"The release approver is the project owner.\",\"source_id\":\"release-policy\"},{\"quote\":\"The golden evaluation set is held out from prompt tuning. Development queries guide revisions.\",\"source_id\":\"experiment-policy\"}],\"status\":\"answered\"}"
+                  }
+                }
+              ]
+            },
+            "native_final_answer": true
+          }
+        ],
+        "tokens": 4037,
+        "usage_complete": true,
+        "prompt_tokens": 3404,
+        "completion_tokens": 633,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "answered",
+        "answer": {
+          "status": "answered",
+          "answer": "In the example\u2011company MLOps handbook, the release approver is the project owner. Golden questions (the golden evaluation set) are kept separate from prompt tuning and are not used to drive prompt revisions; instead, development queries are used to guide revisions.",
+          "sources": [
+            {
+              "source_id": "release-policy",
+              "quote": "The release approver is the project owner."
+            },
+            {
+              "source_id": "experiment-policy",
+              "quote": "The golden evaluation set is held out from prompt tuning. Development queries guide revisions."
+            }
+          ]
+        },
+        "iterations": 3,
+        "latency_seconds": 2.620676922000712,
+        "token_accounting": "provider_usage"
+      },
+      "repeat": 0
+    },
+    {
+      "case_id": "dev-13",
+      "category": "conflict",
+      "completed": true,
+      "tool_calls": 1,
+      "valid_calls": 1,
+      "appropriate_calls": 1,
+      "failure_class": null,
+      "iterations": 2,
+      "tokens": 2546,
+      "usage_complete": true,
+      "latency_seconds": 60.530213707002986,
+      "reference": "No. The old rule is superseded; current releases require an F1 improvement of 0.005.",
+      "response": "No. The legacy memo that allowed promotion based solely on accuracy >\u202f0.80 has been superseded. Current release policy requires evaluation on a frozen holdout and promotion only when the model\u2019s F1 improves by at least 0.005 (and ROC\u2011AUC does not drop more than 0.01). Therefore a model with 0.82 accuracy but a worse F1 does not meet the current criteria, and the old memo is not sufficient.",
+      "injected": false,
+      "prompt_tokens": 1936,
+      "completion_tokens": 610,
+      "query": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+      "status": "answered",
+      "trace": {
+        "query_id": "b3966e95-1155-4c60-9cb7-ccc4959908e3",
+        "question": "A model has accuracy 0.82 and worse F1. Is the old memo enough?",
+        "prompt_version": "provider-120-all-smoke",
+        "steps": [
+          {
+            "step": 1,
+            "event": "tool_call",
+            "usage": {
+              "prompt_tokens": 786,
+              "completion_tokens": 150,
+              "total_tokens": 936,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "tool": "search",
+            "args": {
+              "query": "accuracy 0.82 worse F1 old memo enough model performance thresholds memo",
+              "reason": "Find policy about model performance thresholds and whether old memo can be used",
+              "source_id": null
+            },
+            "reasoning": "Find policy about model performance thresholds and whether old memo can be used",
+            "valid": true,
+            "result": [
+              {
+                "source_id": "legacy-policy",
+                "offset": 0,
+                "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+                "score": 0.18142065010791972
+              },
+              {
+                "source_id": "release-policy",
+                "offset": 0,
+                "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+                "score": 0.15804073645991834
+              },
+              {
+                "source_id": "experiment-policy",
+                "offset": 0,
+                "text": "# Experiment policy \u2014 example company handbook\nThe golden evaluation set is held out from prompt tuning. Development queries guide revisions. Run each query three times to estimate sampling spread. Log prompt version, retrieval top_k, temperature, tokens, latency, and the full raw tool trajectory. Calibration labels are manually reviewed rather than generated by the assistant.\n",
+                "score": 0.14464394173035544
+              }
+            ]
+          },
+          {
+            "step": 2,
+            "event": "finish",
+            "reasoning": "{\"answer\": \"No. The legacy memo that allowed promotion based solely on accuracy >\\u202f0.80 has been superseded. Current release policy requires evaluation on a frozen holdout and promotion only when the model\\u2019s F1 improves by at least 0.005 (and ROC\\u2011AUC does not drop more than 0.01). Therefore a model with 0.82 accuracy but a worse F1 does not meet the current criteria, and the old memo is not sufficient.\", \"sources\": [{\"quote\": \"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\", \"source_id\": \"legacy-policy\"}, {\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+            "usage": {
+              "prompt_tokens": 1150,
+              "completion_tokens": 460,
+              "total_tokens": 1610,
+              "model": "openai/gpt-oss-120b",
+              "fallback": false
+            },
+            "raw_response": {
+              "role": "assistant",
+              "reasoning": "We need to answer: \"A model has accuracy 0.82 and worse F1. Is the old memo enough?\" We need to interpret: The old memo (legacy-policy) says any model with accuracy >0.80 can be promoted. But release-policy supersedes it, requiring F1 improvement and ROC-AUC constraints. So old memo is not enough. Provide answer with citations.\n\nWe have sources: legacy-policy and release-policy. Need to quote relevant parts.\n\nFrom legacy-policy: \"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"\n\nFrom release-policy: \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\"\n\nThus answer: No, old memo not enough; must follow release-policy.\n\nNow produce JSON.",
+              "tool_calls": [
+                {
+                  "id": "fc_a344b35a-f973-49d2-97d2-a8bb35fcf18b",
+                  "type": "function",
+                  "function": {
+                    "name": "json",
+                    "arguments": "{\"answer\":\"No. The legacy memo that allowed promotion based solely on accuracy \\u003e\u202f0.80 has been superseded. Current release policy requires evaluation on a frozen holdout and promotion only when the model\u2019s F1 improves by at least 0.005 (and ROC\u2011AUC does not drop more than 0.01). Therefore a model with 0.82 accuracy but a worse F1 does not meet the current criteria, and the old memo is not sufficient.\",\"sources\":[{\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\",\"source_id\":\"legacy-policy\"},{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+                  }
+                }
+              ]
+            },
+            "native_final_answer": true
+          }
+        ],
+        "tokens": 2546,
+        "usage_complete": true,
+        "prompt_tokens": 1936,
+        "completion_tokens": 610,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "answered",
+        "answer": {
+          "status": "answered",
+          "answer": "No. The legacy memo that allowed promotion based solely on accuracy >\u202f0.80 has been superseded. Current release policy requires evaluation on a frozen holdout and promotion only when the model\u2019s F1 improves by at least 0.005 (and ROC\u2011AUC does not drop more than 0.01). Therefore a model with 0.82 accuracy but a worse F1 does not meet the current criteria, and the old memo is not sufficient.",
+          "sources": [
+            {
+              "source_id": "legacy-policy",
+              "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule."
+            },
+            {
+              "source_id": "release-policy",
+              "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+            }
+          ]
+        },
+        "iterations": 2,
+        "latency_seconds": 60.530213707002986,
+        "token_accounting": "provider_usage"
+      },
+      "repeat": 0
+    }
+  ]
+}

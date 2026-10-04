@@ -1,0 +1,87 @@
+[
+  {
+    "key_index": 1,
+    "http_status": 200,
+    "active_models": [
+      "allam-2-7b",
+      "canopylabs/orpheus-arabic-saudi",
+      "canopylabs/orpheus-v1-english",
+      "meta-llama/llama-prompt-guard-2-22m",
+      "meta-llama/llama-prompt-guard-2-86m",
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b",
+      "openai/gpt-oss-safeguard-20b",
+      "qwen/qwen3.8-27b",
+      "whisper-large-v3",
+      "whisper-large-v3-turbo"
+    ]
+  },
+  {
+    "key_index": 2,
+    "http_status": 200,
+    "active_models": [
+      "allam-2-7b",
+      "canopylabs/orpheus-arabic-saudi",
+      "canopylabs/orpheus-v1-english",
+      "meta-llama/llama-prompt-guard-2-22m",
+      "meta-llama/llama-prompt-guard-2-86m",
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b",
+      "openai/gpt-oss-safeguard-20b",
+      "qwen/qwen3.8-27b",
+      "whisper-large-v3",
+      "whisper-large-v3-turbo"
+    ]
+  },
+  {
+    "key_index": 3,
+    "http_status": 200,
+    "active_models": [
+      "allam-2-7b",
+      "canopylabs/orpheus-arabic-saudi",
+      "canopylabs/orpheus-v1-english",
+      "meta-llama/llama-prompt-guard-2-22m",
+      "meta-llama/llama-prompt-guard-2-86m",
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b",
+      "openai/gpt-oss-safeguard-20b",
+      "qwen/qwen3.8-27b",
+      "whisper-large-v3",
+      "whisper-large-v3-turbo"
+    ]
+  },
+  {
+    "key_index": 4,
+    "http_status": 200,
+    "active_models": [
+      "allam-2-7b",
+      "canopylabs/orpheus-arabic-saudi",
+      "canopylabs/orpheus-v1-english",
+      "meta-llama/llama-prompt-guard-2-22m",
+      "meta-llama/llama-prompt-guard-2-86m",
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b",
+      "openai/gpt-oss-safeguard-20b",
+      "qwen/qwen3.8-27b",
+      "whisper-large-v3",
+      "whisper-large-v3-turbo"
+    ]
+  },
+  {
+    "key_index": 5,
+    "http_status": 200,
+    "active_models": [
+      "allam-2-7b",
+      "canopylabs/orpheus-arabic-saudi",
+      "canopylabs/orpheus-v1-english",
+      "meta-llama/llama-prompt-guard-2-22m",
+      "meta-llama/llama-prompt-guard-2-86m",
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b",
+      "openai/gpt-oss-safeguard-20b",
+      "qwen/qwen3.8-27b",
+      "whisper-large-v3",
+      "whisper-large-v3-turbo"
+    ]
+  }
+]

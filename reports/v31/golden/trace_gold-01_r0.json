@@ -1,0 +1,212 @@
+{
+  "query_id": "ec88d97c-96ae-4807-80bf-04e9d39396ec",
+  "question": "For the production checklist: How many provider attempts and what retry strategy are allowed?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1069,
+        "completion_tokens": 133,
+        "total_tokens": 1202,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist provider attempts retry strategy",
+        "reason": "Find the production checklist details about provider attempts and retry strategy",
+        "source_id": null
+      },
+      "reasoning": "Find the production checklist details about provider attempts and retry strategy",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.48457018952680464
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.33554427625936806
+        },
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.1870015083857279
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1435,
+        "completion_tokens": 104,
+        "total_tokens": 1539,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist provider attempts",
+        "reason": "search for provider attempts in production checklist",
+        "source_id": null
+      },
+      "reasoning": "search for provider attempts in production checklist",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.3367799553484424
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.2778063723424526
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.19352873159909345
+        }
+      ]
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1783,
+        "completion_tokens": 73,
+        "total_tokens": 1856,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read the details about provider attempts and retry strategy",
+        "source_id": "reliability"
+      },
+      "reasoning": "Read the details about provider attempts and retry strategy",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "The production checklist permits up to three provider attempts, and the retry strategy must use exponential backoff.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "Retry transient provider errors up to three attempts with exponential backoff."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have retrieved the relevant source: reliability. It says \"Retry transient provider errors up to three attempts with exponential backoff.\"\n\nThe user asks: \"For the production checklist: How many provider attempts and what retry strategy are allowed?\" The production checklist likely refers to this reliability section. The answer: up to three attempts, using exponential backoff.\n\nWe need to provide final answer with status answered, include source quote.\n\nMake sure to quote verbatim: \"Retry transient provider errors up to three attempts with exponential backoff.\"\n\nProvide answer: \"The checklist allows up to three provider attempts, using an exponential backoff retry strategy.\"\n\nNow produce JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_cb8c916c-e52f-45fc-88b0-8e6f9fdcb0be",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"The production checklist permits up to three provider attempts, and the retry strategy must use exponential backoff.\",\"sources\":[{\"quote\":\"Retry transient provider errors up to three attempts with exponential backoff.\",\"source_id\":\"reliability\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1907,
+        "completion_tokens": 220,
+        "total_tokens": 2127,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 2086,
+        "completion_tokens": 148,
+        "total_tokens": 2234,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false,
+        "upstream_failures": [
+          {
+            "http_status": 429,
+            "model": "openai/gpt-oss-120b",
+            "account_slot": 3,
+            "quota_scope": "tokens_per_day",
+            "cooldown_seconds": 210.0
+          }
+        ]
+      },
+      "tool": "search",
+      "args": {
+        "query": "production checklist",
+        "reason": "Find production checklist details",
+        "source_id": null
+      },
+      "reasoning": "Find production checklist details",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.3022787416001196
+        },
+        {
+          "source_id": "experiment-policy",
+          "offset": 0,
+          "text": "# Experiment policy \u2014 example company handbook\nThe golden evaluation set is held out from prompt tuning. Development queries guide revisions. Run each query three times to estimate sampling spread. Log prompt version, retrieval top_k, temperature, tokens, latency, and the full raw tool trajectory. Calibration labels are manually reviewed rather than generated by the assistant.\n",
+          "score": 0.29005219590354325
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.2012083855555207
+        }
+      ]
+    },
+    {
+      "step": 6,
+      "event": "provider_error",
+      "reasoning": "Providers unavailable; cannot obtain a grounded answer",
+      "provider_failures": []
+    }
+  ],
+  "tokens": 8958,
+  "usage_complete": false,
+  "prompt_tokens": 8280,
+  "completion_tokens": 678,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "provider_unavailable",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 6,
+  "latency_seconds": 298.37624931900064,
+  "token_accounting": "incomplete"
+}

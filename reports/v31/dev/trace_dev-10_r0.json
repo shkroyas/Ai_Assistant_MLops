@@ -1,0 +1,250 @@
+{
+  "query_id": "cfb6afc6-286c-4e22-bd3e-750fa1461bf3",
+  "question": "What happens on a search timeout, and does drift alone justify production changes?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1068,
+        "completion_tokens": 138,
+        "total_tokens": 1206,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "search timeout what happens",
+        "reason": "Find policy about search timeout handling",
+        "source_id": null
+      },
+      "reasoning": "Find policy about search timeout handling",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.36003219274107023
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.17912974490047823
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.13568410088363472
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1429,
+        "completion_tokens": 80,
+        "total_tokens": 1509,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read policy about tool timeout handling",
+        "source_id": "reliability"
+      },
+      "reasoning": "Read policy about tool timeout handling",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1550,
+        "completion_tokens": 90,
+        "total_tokens": 1640,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift justify production changes",
+        "reason": "Find policy about drift and production changes",
+        "source_id": null
+      },
+      "reasoning": "Find policy about drift and production changes",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.6551675973772253
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.42308279293559525
+        },
+        {
+          "source_id": "experiment-policy",
+          "offset": 0,
+          "text": "# Experiment policy \u2014 example company handbook\nThe golden evaluation set is held out from prompt tuning. Development queries guide revisions. Run each query three times to estimate sampling spread. Log prompt version, retrieval top_k, temperature, tokens, latency, and the full raw tool trajectory. Calibration labels are manually reviewed rather than generated by the assistant.\n",
+          "score": 0.24302140540348868
+        }
+      ]
+    },
+    {
+      "step": 4,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1910,
+        "completion_tokens": 314,
+        "total_tokens": 2224,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Get exact drift runbook text",
+        "source_id": "drift-runbook"
+      },
+      "reasoning": "Get exact drift runbook text",
+      "valid": true,
+      "result": {
+        "source_id": "drift-runbook",
+        "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n"
+      }
+    },
+    {
+      "step": 5,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1875,
+        "completion_tokens": 284,
+        "total_tokens": 2159,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Read release policy drift clause",
+        "source_id": "release-policy"
+      },
+      "reasoning": "Read release policy drift clause",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 6,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "On a tool timeout the system must abstain or ask for clarification and must not use invalid evidence. A drift alert by itself does not authorize a production model change; drift only triggers challenger training and evaluation, and promotion requires a frozen holdout evaluation with the required performance improvements.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "On tool timeout, abstain or ask for clarification; never use invalid evidence."
+          },
+          {
+            "source_id": "release-policy",
+            "quote": "A drift alert alone never authorizes promotion."
+          },
+          {
+            "source_id": "drift-runbook",
+            "quote": "Drift triggers challenger training and evaluation, not immediate promotion."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to answer: \"What happens on a search timeout, and does drift alone justify production changes?\" Two parts.\n\nFirst part: search timeout handling. From reliability source: \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\" So answer: on a tool timeout, the system must abstain or ask for clarification, not proceed.\n\nSecond part: does drift alone justify production changes? From release-policy: \"A drift alert alone never authorizes promotion.\" Also drift-runbook says drift triggers challenger training and evaluation, not immediate promotion. So answer: No, drift alone does not justify production changes; must meet evaluation criteria (frozen holdout, F1 improvement, ROC-AUC limits) and get approval.\n\nWe need to cite both sources. Provide answer with status answered, include quotes.\n\nQuotes:\n\nFrom reliability: \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"\n\nFrom release-policy: \"A drift alert alone never authorizes promotion.\"\n\nOptionally also drift-runbook: \"Drift triggers challenger training and evaluation, not immediate promotion.\"\n\nWe need separate citation objects.\n\nNow produce final JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_e0a1e2f3-21f4-45c2-a8bd-0d6482fbccc9",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"On a tool timeout the system must abstain or ask for clarification and must not use invalid evidence. A drift alert by itself does not authorize a production model change; drift only triggers challenger training and evaluation, and promotion requires a frozen holdout evaluation with the required performance improvements.\",\"sources\":[{\"quote\":\"On tool timeout, abstain or ask for clarification; never use invalid evidence.\",\"source_id\":\"reliability\"},{\"quote\":\"A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"},{\"quote\":\"Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1999,
+        "completion_tokens": 415,
+        "total_tokens": 2414,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 7,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"On a tool timeout the system must abstain or ask for clarification and must not use invalid evidence. A drift alert alone does not authorize a production model change; drift only triggers challenger training and evaluation, and promotion requires a frozen holdout evaluation with the required performance improvements.\", \"sources\": [{\"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\", \"source_id\": \"reliability\"}, {\"quote\": \"A drift alert alone never authorizes promotion.\", \"source_id\": \"release-policy\"}, {\"quote\": \"Drift triggers challenger training and evaluation, not immediate promotion.\", \"source_id\": \"drift-runbook\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 2255,
+        "completion_tokens": 442,
+        "total_tokens": 2697,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to verify the answer. The question: \"What happens on a search timeout, and does drift alone justify production changes?\" Two parts.\n\nFirst part: \"What happens on a search timeout\". The source we have is reliability: \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\" That addresses tool timeout, not search timeout. The question says \"search timeout\". In the context of the system, \"search\" likely refers to tool search? The reliability doc says \"On tool timeout\". That likely applies to any tool, including search. So answer: must abstain or ask for clarification, not use invalid evidence.\n\nSecond part: \"does drift alone justify production changes?\" We have release-policy: \"A drift alert alone never authorizes promotion.\" Also drift-runbook: \"Drift triggers challenger training and evaluation, not immediate promotion.\" So answer: No, drift alone does not justify production changes; must have evaluation on frozen holdout with performance thresholds.\n\nWe need to ensure we cite both sources. Also need to mention any supersession? No conflict. So final answer should be status answered, include answer and sources.\n\nMake sure quotes are verbatim substrings. Provide three quotes as we have. Ensure answer includes both parts clearly.\n\nLet's craft final JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_02b407af-89c1-4837-9d22-0c11fc1b39cb",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"On a tool timeout the system must abstain or ask for clarification and must not use invalid evidence. A drift alert alone does not authorize a production model change; drift only triggers challenger training and evaluation, and promotion requires a frozen holdout evaluation with the required performance improvements.\",\"sources\":[{\"quote\":\"On tool timeout, abstain or ask for clarification; never use invalid evidence.\",\"source_id\":\"reliability\"},{\"quote\":\"A drift alert alone never authorizes promotion.\",\"source_id\":\"release-policy\"},{\"quote\":\"Drift triggers challenger training and evaluation, not immediate promotion.\",\"source_id\":\"drift-runbook\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 13849,
+  "usage_complete": true,
+  "prompt_tokens": 12086,
+  "completion_tokens": 1763,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "On a tool timeout the system must abstain or ask for clarification and must not use invalid evidence. A drift alert alone does not authorize a production model change; drift only triggers challenger training and evaluation, and promotion requires a frozen holdout evaluation with the required performance improvements.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "On tool timeout, abstain or ask for clarification; never use invalid evidence."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "A drift alert alone never authorizes promotion."
+      },
+      {
+        "source_id": "drift-runbook",
+        "quote": "Drift triggers challenger training and evaluation, not immediate promotion."
+      }
+    ]
+  },
+  "iterations": 7,
+  "latency_seconds": 360.07439725300355,
+  "token_accounting": "provider_usage"
+}

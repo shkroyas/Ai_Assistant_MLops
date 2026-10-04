@@ -1,0 +1,137 @@
+{
+  "query_id": "319e0479-6286-4a19-ba00-e7fae4f60cf5",
+  "question": "Can accuracy above 0.80 authorize a release today?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1065,
+        "completion_tokens": 104,
+        "total_tokens": 1169,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "accuracy 0.80 release authorize today",
+        "reason": "Find policy about accuracy threshold for release authorization",
+        "source_id": null
+      },
+      "reasoning": "Find policy about accuracy threshold for release authorization",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.47306889578448696
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.45303326551283285
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.3007054833932002
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "No. The legacy rule that any model with accuracy above 0.80 could be promoted is superseded. The current release\u2011policy requires evaluation on a frozen holdout and promotion only when the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. Therefore, accuracy >\u202f0.80 alone does not authorize a release today.",
+        "sources": [
+          {
+            "source_id": "legacy-policy",
+            "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout."
+          },
+          {
+            "source_id": "release-policy",
+            "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have a question: \"Can accuracy above 0.80 authorize a release today?\" Need to answer based on handbook. We have legacy-policy says old rule superseded. release-policy says current releases use F1 and ROC-AUC thresholds, not accuracy. So answer: No, accuracy >0.80 does not authorize release; current policy supersedes legacy; need F1 improvement >=0.005 and ROC-AUC drop <=0.01. Provide citations.\n\nWe need to cite both legacy-policy (to show superseded) and release-policy (current criteria). Provide answer with status answered.\n\nLet's extract relevant quotes.\n\nFrom legacy-policy: \"This document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\"\n\nFrom release-policy: \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\"\n\nThus answer: No, accuracy >0.80 does not authorize release today; current release-policy supersedes legacy; must meet F1 and ROC-AUC criteria.\n\nNow produce final JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_0bb403a2-9599-4a1d-b1d6-982a8bc14783",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"No. The legacy rule that any model with accuracy above 0.80 could be promoted is superseded. The current release\u2011policy requires evaluation on a frozen holdout and promotion only when the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. Therefore, accuracy \\u003e\u202f0.80 alone does not authorize a release today.\",\"sources\":[{\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout.\",\"source_id\":\"legacy-policy\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1410,
+        "completion_tokens": 485,
+        "total_tokens": 1895,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 3,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"No. The legacy rule that any model with accuracy above 0.80 could be promoted is superseded. The current release\\u2011policy requires evaluation on a frozen holdout and promotion only when the F1 score improves by at least 0.005 and the ROC\\u2011AUC does not drop by more than 0.01. Therefore, accuracy >\\u202f0.80 alone does not authorize a release today.\", \"sources\": [{\"quote\": \"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout.\", \"source_id\": \"legacy-policy\"}, {\"quote\": \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1717,
+        "completion_tokens": 483,
+        "total_tokens": 2200,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to ensure answer matches question: \"Can accuracy above 0.80 authorize a release today?\" Need to answer yes/no with explanation, citing current policy and supersession. We have two sources: legacy-policy says old rule superseded. release-policy gives current criteria: F1 improvement and ROC-AUC condition. No mention of accuracy. So answer: No, accuracy >0.80 does not authorize release today. Provide supersession statement. Already did. Need to ensure we include both sources and correct phrasing: \"[release-policy] supersedes [legacy-policy]\"? Actually legacy says superseded by release-policy. So we should state release-policy supersedes legacy. Provide current conditions. Already gave. Need to cite both. Ensure quotes are verbatim substrings. The quotes we used are correct. Check that release-policy quote includes \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\" That's correct. Also need to mention that release approver is project owner? Not needed. The question only about accuracy threshold. So answer is fine.\n\nBut need to ensure we include both sources in separate citation objects. Already done. Need to ensure status \"answered\". Provide final JSON via json tool.",
+        "tool_calls": [
+          {
+            "id": "fc_378d16b4-40fc-4746-a860-5afa9dce75bb",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"No. The legacy rule that any model with accuracy above 0.80 could be promoted is superseded. The current release\u2011policy requires evaluation on a frozen holdout and promotion only when the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. Therefore, accuracy \\u003e\u202f0.80 alone does not authorize a release today.\",\"sources\":[{\"quote\":\"The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout.\",\"source_id\":\"legacy-policy\"},{\"quote\":\"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 5264,
+  "usage_complete": true,
+  "prompt_tokens": 4192,
+  "completion_tokens": 1072,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "No. The legacy rule that any model with accuracy above 0.80 could be promoted is superseded. The current release\u2011policy requires evaluation on a frozen holdout and promotion only when the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. Therefore, accuracy >\u202f0.80 alone does not authorize a release today.",
+    "sources": [
+      {
+        "source_id": "legacy-policy",
+        "quote": "The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01."
+      }
+    ]
+  },
+  "iterations": 3,
+  "latency_seconds": 180.37361227999645,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,159 @@
+{
+  "query_id": "df944893-7727-4dd5-bfb4-3cf450dd3127",
+  "question": "Where must API keys be kept?",
+  "prompt_version": "v31",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1060,
+        "completion_tokens": 104,
+        "total_tokens": 1164,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "API keys must be kept",
+        "reason": "Find policy on storage location for API keys",
+        "source_id": null
+      },
+      "reasoning": "Find policy on storage location for API keys",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.49939656137650157
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.172372944903505
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.10991333333345574
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1423,
+        "completion_tokens": 110,
+        "total_tokens": 1533,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "reason": "Get exact wording about where API keys must be kept",
+        "source_id": "security"
+      },
+      "reasoning": "Get exact wording about where API keys must be kept",
+      "valid": true,
+      "result": {
+        "source_id": "security",
+        "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "API keys must be stored in a local git\u2011ignored .env file or in a cloud secret manager, and must never be placed in logs, prompts, traces, or committed files.",
+        "sources": [
+          {
+            "source_id": "security",
+            "quote": "API keys belong in a local git-ignored .env file or cloud secret manager."
+          },
+          {
+            "source_id": "security",
+            "quote": "Never put API keys into logs, prompts, traces, or committed files."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We have the source. The question: \"Where must API keys be kept?\" The answer: According to security source, \"API keys belong in a local git-ignored .env file or cloud secret manager.\" Must also note they must not be put into logs, prompts, traces, or committed files. So answer: They must be kept in a local git-ignored .env file or a cloud secret manager, and never in logs, prompts, traces, or committed files.\n\nWe need to produce final JSON with status answered, answer string, and sources list with quotes. Provide verbatim substring. Use quote: \"API keys belong in a local git-ignored .env file or cloud secret manager.\" Also maybe include \"Never put API keys into logs, prompts, traces, or committed files.\" Provide both citations maybe separate entries.\n\nLet's include both quotes from same source but separate entries? Could combine but separate is fine.\n\nNow produce final answer.",
+        "tool_calls": [
+          {
+            "id": "fc_e66f8c34-68e5-474a-87dd-6c580ac41658",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"API keys must be stored in a local git\u2011ignored .env file or in a cloud secret manager, and must never be placed in logs, prompts, traces, or committed files.\",\"sources\":[{\"quote\":\"API keys belong in a local git-ignored .env file or cloud secret manager.\",\"source_id\":\"security\"},{\"quote\":\"Never put API keys into logs, prompts, traces, or committed files.\",\"source_id\":\"security\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "usage": {
+        "prompt_tokens": 1538,
+        "completion_tokens": 327,
+        "total_tokens": 1865,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"answer\": \"API keys must be stored in a local git\\u2011ignored .env file or in a cloud secret manager, and must never be placed in logs, prompts, traces, or committed files.\", \"sources\": [{\"quote\": \"API keys belong in a local git-ignored .env file or cloud secret manager.\", \"source_id\": \"security\"}, {\"quote\": \"Never put API keys into logs, prompts, traces, or committed files.\", \"source_id\": \"security\"}], \"status\": \"answered\"}",
+      "usage": {
+        "prompt_tokens": 1758,
+        "completion_tokens": 395,
+        "total_tokens": 2153,
+        "model": "openai/gpt-oss-120b",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "reasoning": "We need to verify the answer. The question: \"Where must API keys be kept?\" The retrieved source says: \"API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files.\"\n\nThus answer should be: API keys must be kept in a local git-ignored .env file or a cloud secret manager; they must not be placed in logs, prompts, traces, or committed files.\n\nWe have citations for both statements. The answer seems correct. Need to ensure we include both quotes exactly as in source. The quotes we used: \"API keys belong in a local git-ignored .env file or cloud secret manager.\" and \"Never put API keys into logs, prompts, traces, or committed files.\"\n\nCheck source text: \"# Secret management \u2014 example company handbook\\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\"\n\nThus quotes are correct.\n\nWe need to ensure final JSON includes status \"answered\". Provide answer and sources.\n\nWe must not include extra text. Provide final JSON.",
+        "tool_calls": [
+          {
+            "id": "fc_6da31408-3ac1-43e8-85bc-0bdf6e83b5e5",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"answer\":\"API keys must be stored in a local git\u2011ignored .env file or in a cloud secret manager, and must never be placed in logs, prompts, traces, or committed files.\",\"sources\":[{\"quote\":\"API keys belong in a local git-ignored .env file or cloud secret manager.\",\"source_id\":\"security\"},{\"quote\":\"Never put API keys into logs, prompts, traces, or committed files.\",\"source_id\":\"security\"}],\"status\":\"answered\"}"
+            }
+          }
+        ]
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 6715,
+  "usage_complete": true,
+  "prompt_tokens": 5779,
+  "completion_tokens": 936,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "API keys must be stored in a local git\u2011ignored .env file or in a cloud secret manager, and must never be placed in logs, prompts, traces, or committed files.",
+    "sources": [
+      {
+        "source_id": "security",
+        "quote": "API keys belong in a local git-ignored .env file or cloud secret manager."
+      },
+      {
+        "source_id": "security",
+        "quote": "Never put API keys into logs, prompts, traces, or committed files."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 181.4966466659971,
+  "token_accounting": "provider_usage"
+}
