@@ -1,0 +1,10 @@
+{
+  "trace_path": "reports/v25/dev/trace_dev-07_r0.json",
+  "failure": "The development answer omitted GPU-memory suitability, one of two requested parts. Other development traces confuse absent factual data with ambiguous intent, omit governing conditions/conflict sources, or correct a fabrication request using answered instead of safe refusal.",
+  "change": "Change only the prompt to prioritize intent/status selection, all requested parts, explicit governing conditions, both conflicting sources, short exact quotes, and actual-versus-hypothetical tool failures. Model, tools, retrieval, repetition, labels and gate remain unchanged.",
+  "supporting_development_traces": [
+    "reports/v25/dev/trace_dev-18_r0.json",
+    "reports/v25/dev/trace_dev-21_r0.json",
+    "reports/v25/dev/trace_dev-29_r0.json"
+  ]
+}
