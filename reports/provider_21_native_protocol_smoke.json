@@ -1,0 +1,591 @@
+[
+  {
+    "query_id": "b04b6087-eee4-4106-804f-6d23c6e0c9c2",
+    "question": "Release that version.",
+    "prompt_version": "candidate-v21-smoke",
+    "steps": [
+      {
+        "step": 1,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 771,
+          "completion_tokens": 65,
+          "total_tokens": 836,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "search",
+        "args": {
+          "query": "release policy version release that version handbook",
+          "reason": "search for release policy regarding version release",
+          "source_id": null
+        },
+        "reasoning": "search for release policy regarding version release",
+        "valid": true,
+        "result": [
+          {
+            "source_id": "release-policy",
+            "offset": 0,
+            "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+            "score": 0.2859525859563387
+          },
+          {
+            "source_id": "legacy-policy",
+            "offset": 0,
+            "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+            "score": 0.1875744306985956
+          },
+          {
+            "source_id": "drift-runbook",
+            "offset": 0,
+            "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+            "score": 0.12524486055176315
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "event": "finish",
+        "reasoning": "{\"answer\": \"To release a new model version, the production model must first be evaluated on a frozen holdout dataset. Promotion is allowed only if the F1 score improves by at least 0.005 and the ROC\\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion. The previous production version must be retained for rollback, and the project owner serves as the release approver.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+        "usage": {
+          "prompt_tokens": 1126,
+          "completion_tokens": 182,
+          "total_tokens": 1308,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false,
+          "tool_name_normalizations": [
+            {
+              "id": "fc_141ca1c2-5a93-40a3-8b70-b24aa8c2c242",
+              "original": "json<|channel|>commentary",
+              "canonical": "json"
+            }
+          ]
+        },
+        "raw_response": {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "fc_141ca1c2-5a93-40a3-8b70-b24aa8c2c242",
+              "type": "function",
+              "function": {
+                "name": "json",
+                "arguments": "{\"answer\":\"To release a new model version, the production model must first be evaluated on a frozen holdout dataset. Promotion is allowed only if the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion. The previous production version must be retained for rollback, and the project owner serves as the release approver.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+              }
+            }
+          ]
+        },
+        "native_final_answer": true
+      }
+    ],
+    "tokens": 2144,
+    "usage_complete": true,
+    "prompt_tokens": 1897,
+    "completion_tokens": 247,
+    "failure_injection": null,
+    "tool_errors": 0,
+    "termination": "answered",
+    "answer": {
+      "status": "answered",
+      "answer": "To release a new model version, the production model must first be evaluated on a frozen holdout dataset. Promotion is allowed only if the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion. The previous production version must be retained for rollback, and the project owner serves as the release approver.",
+      "sources": [
+        {
+          "source_id": "release-policy",
+          "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+        }
+      ]
+    },
+    "iterations": 2,
+    "latency_seconds": 15.604143584998383,
+    "token_accounting": "provider_usage"
+  },
+  {
+    "query_id": "90f9c6aa-7051-434b-bae3-a5cc7b35e815",
+    "question": "What model and precision are planned for a 24 GB GPU?",
+    "prompt_version": "candidate-v21-smoke",
+    "steps": [
+      {
+        "step": 1,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 780,
+          "completion_tokens": 53,
+          "total_tokens": 833,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "search",
+        "args": {
+          "query": "24 GB GPU model precision planned",
+          "reason": "Find handbook info on GPU model and precision for 24GB GPU",
+          "source_id": null
+        },
+        "reasoning": "Find handbook info on GPU model and precision for 24GB GPU",
+        "valid": true,
+        "result": [
+          {
+            "source_id": "gpu-serving",
+            "offset": 0,
+            "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+            "score": 0.2305715061697534
+          },
+          {
+            "source_id": "security",
+            "offset": 0,
+            "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+            "score": 0.1393736757131084
+          },
+          {
+            "source_id": "release-policy",
+            "offset": 0,
+            "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+            "score": 0.12695918186432606
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "event": "finish",
+        "reasoning": "{\"answer\": \"The handbook specifies that a 24\\u202fGB GPU will run the Qwen2.5\\u20117B\\u2011Instruct model using BF16 precision.\", \"sources\": [{\"quote\": \"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\", \"source_id\": \"gpu-serving\"}], \"status\": \"answered\"}",
+        "usage": {
+          "prompt_tokens": 1165,
+          "completion_tokens": 95,
+          "total_tokens": 1260,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false,
+          "tool_name_normalizations": [
+            {
+              "id": "fc_3bd5e9f2-ed7e-449f-a58b-c56ae35e6d4b",
+              "original": "json<|channel|>commentary",
+              "canonical": "json"
+            }
+          ]
+        },
+        "raw_response": {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "fc_3bd5e9f2-ed7e-449f-a58b-c56ae35e6d4b",
+              "type": "function",
+              "function": {
+                "name": "json",
+                "arguments": "{\"answer\":\"The handbook specifies that a 24\u202fGB GPU will run the Qwen2.5\u20117B\u2011Instruct model using BF16 precision.\",\"sources\":[{\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\",\"source_id\":\"gpu-serving\"}],\"status\":\"answered\"}"
+              }
+            }
+          ]
+        },
+        "native_final_answer": true
+      }
+    ],
+    "tokens": 2093,
+    "usage_complete": true,
+    "prompt_tokens": 1945,
+    "completion_tokens": 148,
+    "failure_injection": null,
+    "tool_errors": 0,
+    "termination": "answered",
+    "answer": {
+      "status": "answered",
+      "answer": "The handbook specifies that a 24\u202fGB GPU will run the Qwen2.5\u20117B\u2011Instruct model using BF16 precision.",
+      "sources": [
+        {
+          "source_id": "gpu-serving",
+          "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+        }
+      ]
+    },
+    "iterations": 2,
+    "latency_seconds": 30.041383739000594,
+    "token_accounting": "provider_usage"
+  },
+  {
+    "query_id": "60a79583-2721-47da-9e3a-5eba34e778f3",
+    "question": "Release that version.",
+    "prompt_version": "candidate-v21-smoke",
+    "steps": [
+      {
+        "step": 1,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 771,
+          "completion_tokens": 64,
+          "total_tokens": 835,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "search",
+        "args": {
+          "query": "release policy version release that version",
+          "reason": "search for release policy regarding version release",
+          "source_id": null
+        },
+        "reasoning": "search for release policy regarding version release",
+        "valid": true,
+        "result": [
+          {
+            "source_id": "release-policy",
+            "offset": 0,
+            "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+            "score": 0.26093123504709
+          },
+          {
+            "source_id": "legacy-policy",
+            "offset": 0,
+            "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+            "score": 0.19968823031287852
+          },
+          {
+            "source_id": "drift-runbook",
+            "offset": 0,
+            "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+            "score": 0.08888889054589781
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "event": "finish",
+        "reasoning": "{\"answer\": \"To release a new model version, the project owner must approve the promotion after the model has been evaluated on a frozen holdout set. The promotion is only allowed if the F1 score improves by at least 0.005 and the ROC\\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion, and the previous production version must be retained for rollback. These rules are defined in the current release policy and supersede the older legacy rule that only required accuracy above 0.80.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+        "usage": {
+          "prompt_tokens": 1124,
+          "completion_tokens": 205,
+          "total_tokens": 1329,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false,
+          "tool_name_normalizations": [
+            {
+              "id": "fc_7b51284c-a081-453d-80c2-1fd1de9fe1fc",
+              "original": "json<|channel|>commentary",
+              "canonical": "json"
+            }
+          ]
+        },
+        "raw_response": {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "fc_7b51284c-a081-453d-80c2-1fd1de9fe1fc",
+              "type": "function",
+              "function": {
+                "name": "json",
+                "arguments": "{\"answer\":\"To release a new model version, the project owner must approve the promotion after the model has been evaluated on a frozen holdout set. The promotion is only allowed if the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion, and the previous production version must be retained for rollback. These rules are defined in the current release policy and supersede the older legacy rule that only required accuracy above 0.80.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+              }
+            }
+          ]
+        },
+        "native_final_answer": true
+      }
+    ],
+    "tokens": 2164,
+    "usage_complete": true,
+    "prompt_tokens": 1895,
+    "completion_tokens": 269,
+    "failure_injection": null,
+    "tool_errors": 0,
+    "termination": "answered",
+    "answer": {
+      "status": "answered",
+      "answer": "To release a new model version, the project owner must approve the promotion after the model has been evaluated on a frozen holdout set. The promotion is only allowed if the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion, and the previous production version must be retained for rollback. These rules are defined in the current release policy and supersede the older legacy rule that only required accuracy above 0.80.",
+      "sources": [
+        {
+          "source_id": "release-policy",
+          "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+        }
+      ]
+    },
+    "iterations": 2,
+    "latency_seconds": 30.94039407600212,
+    "token_accounting": "provider_usage"
+  },
+  {
+    "query_id": "06f4d946-fab1-4bf5-8df8-173088a0b76e",
+    "question": "What model and precision are planned for a 24 GB GPU?",
+    "prompt_version": "candidate-v21-smoke",
+    "steps": [
+      {
+        "step": 1,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 780,
+          "completion_tokens": 53,
+          "total_tokens": 833,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "search",
+        "args": {
+          "query": "24 GB GPU model precision planned",
+          "reason": "Find handbook info on GPU model and precision for 24GB GPU",
+          "source_id": null
+        },
+        "reasoning": "Find handbook info on GPU model and precision for 24GB GPU",
+        "valid": true,
+        "result": [
+          {
+            "source_id": "gpu-serving",
+            "offset": 0,
+            "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+            "score": 0.2305715061697534
+          },
+          {
+            "source_id": "security",
+            "offset": 0,
+            "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+            "score": 0.1393736757131084
+          },
+          {
+            "source_id": "release-policy",
+            "offset": 0,
+            "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+            "score": 0.12695918186432606
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "event": "finish",
+        "reasoning": "{\"answer\": \"The handbook specifies that a 24\\u202fGB GPU will run the Qwen2.5\\u20117B\\u2011Instruct model using BF16 precision.\", \"sources\": [{\"quote\": \"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\", \"source_id\": \"gpu-serving\"}], \"status\": \"answered\"}",
+        "usage": {
+          "prompt_tokens": 1165,
+          "completion_tokens": 92,
+          "total_tokens": 1257,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false,
+          "tool_name_normalizations": [
+            {
+              "id": "fc_a154b2e0-d26c-4ac3-a622-bf3249709473",
+              "original": "json<|channel|>commentary",
+              "canonical": "json"
+            }
+          ]
+        },
+        "raw_response": {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "fc_a154b2e0-d26c-4ac3-a622-bf3249709473",
+              "type": "function",
+              "function": {
+                "name": "json",
+                "arguments": "{\"answer\":\"The handbook specifies that a 24\u202fGB GPU will run the Qwen2.5\u20117B\u2011Instruct model using BF16 precision.\",\"sources\":[{\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\",\"source_id\":\"gpu-serving\"}],\"status\":\"answered\"}"
+              }
+            }
+          ]
+        },
+        "native_final_answer": true
+      }
+    ],
+    "tokens": 2090,
+    "usage_complete": true,
+    "prompt_tokens": 1945,
+    "completion_tokens": 145,
+    "failure_injection": null,
+    "tool_errors": 0,
+    "termination": "answered",
+    "answer": {
+      "status": "answered",
+      "answer": "The handbook specifies that a 24\u202fGB GPU will run the Qwen2.5\u20117B\u2011Instruct model using BF16 precision.",
+      "sources": [
+        {
+          "source_id": "gpu-serving",
+          "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+        }
+      ]
+    },
+    "iterations": 2,
+    "latency_seconds": 29.0751882379991,
+    "token_accounting": "provider_usage"
+  },
+  {
+    "query_id": "63337741-9f26-48c5-9dc3-c0a95420bba4",
+    "question": "Release that version.",
+    "prompt_version": "candidate-v21-smoke",
+    "steps": [
+      {
+        "step": 1,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 771,
+          "completion_tokens": 65,
+          "total_tokens": 836,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "search",
+        "args": {
+          "query": "release policy version release that version handbook",
+          "reason": "Search for release policy regarding version release",
+          "source_id": null
+        },
+        "reasoning": "Search for release policy regarding version release",
+        "valid": true,
+        "result": [
+          {
+            "source_id": "release-policy",
+            "offset": 0,
+            "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+            "score": 0.2859525859563387
+          },
+          {
+            "source_id": "legacy-policy",
+            "offset": 0,
+            "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+            "score": 0.1875744306985956
+          },
+          {
+            "source_id": "drift-runbook",
+            "offset": 0,
+            "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+            "score": 0.12524486055176315
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "event": "finish",
+        "reasoning": "{\"answer\": \"To release a new model version, the project owner must approve the promotion after the model has been evaluated on a frozen holdout. Promotion is allowed only if the F1 score improves by at least 0.005 and the ROC\\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion, and the previous production version must be retained for rollback. The legacy 2024 rule that promoted any model with accuracy over 0.80 is superseded and no longer applies.\", \"sources\": [{\"quote\": \"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\", \"source_id\": \"release-policy\"}], \"status\": \"answered\"}",
+        "usage": {
+          "prompt_tokens": 1126,
+          "completion_tokens": 202,
+          "total_tokens": 1328,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false,
+          "tool_name_normalizations": [
+            {
+              "id": "fc_b880d1fa-8f4c-414a-971c-506c3b43edc9",
+              "original": "json<|channel|>commentary",
+              "canonical": "json"
+            }
+          ]
+        },
+        "raw_response": {
+          "role": "assistant",
+          "tool_calls": [
+            {
+              "id": "fc_b880d1fa-8f4c-414a-971c-506c3b43edc9",
+              "type": "function",
+              "function": {
+                "name": "json",
+                "arguments": "{\"answer\":\"To release a new model version, the project owner must approve the promotion after the model has been evaluated on a frozen holdout. Promotion is allowed only if the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion, and the previous production version must be retained for rollback. The legacy 2024 rule that promoted any model with accuracy over 0.80 is superseded and no longer applies.\",\"sources\":[{\"quote\":\"Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\",\"source_id\":\"release-policy\"}],\"status\":\"answered\"}"
+              }
+            }
+          ]
+        },
+        "native_final_answer": true
+      }
+    ],
+    "tokens": 2164,
+    "usage_complete": true,
+    "prompt_tokens": 1897,
+    "completion_tokens": 267,
+    "failure_injection": null,
+    "tool_errors": 0,
+    "termination": "answered",
+    "answer": {
+      "status": "answered",
+      "answer": "To release a new model version, the project owner must approve the promotion after the model has been evaluated on a frozen holdout. Promotion is allowed only if the F1 score improves by at least 0.005 and the ROC\u2011AUC does not drop by more than 0.01. A drift alert alone does not authorize promotion, and the previous production version must be retained for rollback. The legacy 2024 rule that promoted any model with accuracy over 0.80 is superseded and no longer applies.",
+      "sources": [
+        {
+          "source_id": "release-policy",
+          "quote": "Production model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner."
+        }
+      ]
+    },
+    "iterations": 2,
+    "latency_seconds": 30.42510542999662,
+    "token_accounting": "provider_usage"
+  },
+  {
+    "query_id": "7e2e5355-fb69-4ca7-a4cc-735f5125bf79",
+    "question": "What model and precision are planned for a 24 GB GPU?",
+    "prompt_version": "candidate-v21-smoke",
+    "steps": [
+      {
+        "step": 1,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 780,
+          "completion_tokens": 53,
+          "total_tokens": 833,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "search",
+        "args": {
+          "query": "24 GB GPU model precision planned",
+          "reason": "Find handbook info on GPU model and precision for 24GB GPU",
+          "source_id": null
+        },
+        "reasoning": "Find handbook info on GPU model and precision for 24GB GPU",
+        "valid": true,
+        "result": [
+          {
+            "source_id": "gpu-serving",
+            "offset": 0,
+            "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+            "score": 0.2305715061697534
+          },
+          {
+            "source_id": "security",
+            "offset": 0,
+            "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+            "score": 0.1393736757131084
+          },
+          {
+            "source_id": "release-policy",
+            "offset": 0,
+            "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+            "score": 0.12695918186432606
+          }
+        ]
+      },
+      {
+        "step": 2,
+        "event": "tool_call",
+        "usage": {
+          "prompt_tokens": 1165,
+          "completion_tokens": 106,
+          "total_tokens": 1271,
+          "model": "openai/gpt-oss-20b",
+          "fallback": false
+        },
+        "tool": "json<|channel|>final",
+        "args": {
+          "answer": "For a 24\u202fGB GPU the handbook specifies that the primary model to be served is Qwen2.5\u20117B\u2011Instruct, and it should be run with BF16 precision using vLLM.",
+          "sources": [
+            {
+              "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.",
+              "source_id": "gpu-serving"
+            }
+          ],
+          "status": "answered"
+        },
+        "reasoning": "",
+        "valid": false,
+        "result": {
+          "error": "Tool decision requires a one-line reason",
+          "evidence_valid": false
+        }
+      },
+      {
+        "step": 2,
+        "event": "stop_on_tool_error",
+        "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+      }
+    ],
+    "tokens": 2104,
+    "usage_complete": true,
+    "prompt_tokens": 1945,
+    "completion_tokens": 159,
+    "failure_injection": null,
+    "tool_errors": 1,
+    "termination": "retrieval_failure",
+    "answer": {
+      "status": "abstain",
+      "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+      "sources": []
+    },
+    "iterations": 2,
+    "latency_seconds": 29.698542129997804,
+    "token_accounting": "provider_usage"
+  }
+]

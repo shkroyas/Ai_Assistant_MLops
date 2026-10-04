@@ -1,0 +1,24 @@
+{
+  "captured_at_utc": "2026-10-04T02:05:04.952687+00:00",
+  "api_configuration_version": "v34",
+  "judge_report_version": "v34",
+  "api_health": {
+    "status": "ready",
+    "provider_model": "Qwen/Qwen3-14B-AWQ",
+    "configuration_version": "v34",
+    "query_timeout_seconds": 180,
+    "baseline_model": "openai/gpt-oss-20b",
+    "live_provider_configured": true
+  },
+  "healthy_run_id": "manual__2026-10-04T06:31:00+05:45",
+  "infra_run_id": "manual__2026-10-04T06:30:00+05:45",
+  "files": {
+    "mlflow_experiments.png": "f4a6e06cf8cd4f691413a762871b8d5a7f5554161d4cce6e5afa0313f94ad9c5",
+    "assistant_answer.png": "0a866add2c746fc623edb452d616ac9d36ff31cc76c9ed225b7fc28e8d3ede08",
+    "api_docs.png": "b11ce3f7e9bec7e853d6357dd643375395396dbdc7508abfb826af441051021b",
+    "airflow_infra.png": "573608c8f84327bea00336f4a1bd14fee8944ad90a1236f34097834af1ecca79",
+    "airflow_healthy.png": "a0dbd6d4ff6f190a59f1ad9612b0389f5d4379622eebeaf0af38ddc2c8fef682",
+    "evidently_judge.png": "c219c8a12209f318d14b596e52fc84d88e3fc462ec436d833bbdbc268c61e2b2",
+    "evidently_judge_tests.png": "997e346ffc7cb2e57adfcffd94ac67f2bea0e7cd6ee81ef0a05e21d25a6cc6ab"
+  }
+}

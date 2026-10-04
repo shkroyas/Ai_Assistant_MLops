@@ -29,7 +29,7 @@
 | judge calibration evidence | PASS |
 | exported live MLflow comparison | PASS |
 | trace-driven revision diagnoses | PASS |
-| promoted production run | PENDING |
-| healthy and unavailable-endpoint Airflow evidence | PENDING |
+| promoted production run | PASS |
+| healthy and unavailable-endpoint Airflow evidence | PASS |
 
-29/31 checks pass.
+31/31 checks pass.

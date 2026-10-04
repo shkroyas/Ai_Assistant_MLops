@@ -1,0 +1,115 @@
+{
+  "health": {
+    "status": "ready",
+    "provider_model": "Qwen/Qwen2.5-7B-Instruct",
+    "configuration_version": "v25",
+    "query_timeout_seconds": 180,
+    "baseline_model": "openai/gpt-oss-20b",
+    "live_provider_configured": true
+  },
+  "question": "How long are cached responses kept?",
+  "concurrent": [
+    {
+      "status": "answered",
+      "answer": "Cached responses are kept for 300 seconds, after which they expire and are invalidated by a corpus or configuration change.",
+      "sources": [
+        {
+          "source_id": "service-catalog",
+          "quote": "Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change."
+        }
+      ],
+      "query_id": "976d31bf-ccda-4609-9676-aa895de2d4f5",
+      "iterations": 3,
+      "tokens": 4323,
+      "token_accounting": "provider_usage",
+      "tokens_consumed_this_request": 4323,
+      "shared_computation": false,
+      "cache_hit": false,
+      "termination": "answered"
+    },
+    {
+      "status": "answered",
+      "answer": "Cached responses are kept for 300 seconds, after which they expire and are invalidated by a corpus or configuration change.",
+      "sources": [
+        {
+          "source_id": "service-catalog",
+          "quote": "Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change."
+        }
+      ],
+      "query_id": "976d31bf-ccda-4609-9676-aa895de2d4f5",
+      "iterations": 3,
+      "tokens": 4323,
+      "token_accounting": "provider_usage",
+      "tokens_consumed_this_request": 0,
+      "shared_computation": true,
+      "cache_hit": false,
+      "termination": "answered"
+    }
+  ],
+  "concurrent_wall_seconds": 3.601864767006191,
+  "cached": {
+    "status": "answered",
+    "answer": "Cached responses are kept for 300 seconds, after which they expire and are invalidated by a corpus or configuration change.",
+    "sources": [
+      {
+        "source_id": "service-catalog",
+        "quote": "Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change."
+      }
+    ],
+    "query_id": "976d31bf-ccda-4609-9676-aa895de2d4f5",
+    "iterations": 3,
+    "tokens": 4323,
+    "token_accounting": "provider_usage",
+    "tokens_consumed_this_request": 0,
+    "shared_computation": true,
+    "cache_hit": true,
+    "termination": "answered"
+  },
+  "batch": [
+    {
+      "status": "answered",
+      "answer": "Cached responses are kept for 300 seconds, after which they expire and are invalidated by a corpus or configuration change.",
+      "sources": [
+        {
+          "source_id": "service-catalog",
+          "quote": "Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change."
+        }
+      ],
+      "query_id": "976d31bf-ccda-4609-9676-aa895de2d4f5",
+      "iterations": 3,
+      "tokens": 4323,
+      "token_accounting": "provider_usage",
+      "tokens_consumed_this_request": 0,
+      "shared_computation": true,
+      "cache_hit": true,
+      "termination": "answered"
+    },
+    {
+      "status": "answered",
+      "answer": "The application can admit at most four concurrent model requests.",
+      "sources": [
+        {
+          "source_id": "reliability",
+          "quote": "The application admits at most four concurrent model requests."
+        }
+      ],
+      "query_id": "724d3684-fe45-48bb-9462-7b93a566f1ee",
+      "iterations": 4,
+      "tokens": 5691,
+      "token_accounting": "provider_usage",
+      "tokens_consumed_this_request": 5691,
+      "shared_computation": false,
+      "cache_hit": false,
+      "termination": "answered"
+    }
+  ],
+  "checks": {
+    "live_grounded_answers": true,
+    "shared_query_id": true,
+    "single_new_computation": true,
+    "cache_reuse": true,
+    "batch_size": true,
+    "batch_cached_answer": true
+  },
+  "passed": true
+}
