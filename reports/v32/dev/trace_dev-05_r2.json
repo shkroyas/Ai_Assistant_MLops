@@ -1,0 +1,131 @@
+{
+  "query_id": "9bc5eed3-b136-4042-a098-b8100a70013f",
+  "question": "What model and precision are planned for a 24 GB GPU?",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1245,
+        "completion_tokens": 51,
+        "total_tokens": 1296,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model precision 24 GB GPU",
+        "source_id": null,
+        "reason": "To find information about model and precision for a 24 GB GPU."
+      },
+      "reasoning": "To find information about model and precision for a 24 GB GPU.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "gpu-serving",
+          "offset": 0,
+          "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n",
+          "score": 0.5188185329563708
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.27433751275271634
+        },
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.20441823989205285
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1676,
+        "completion_tokens": 48,
+        "total_tokens": 1724,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "gpu-serving",
+        "reason": "To get detailed information about the model and precision for a 24 GB GPU from the relevant source."
+      },
+      "reasoning": "To get detailed information about the model and precision for a 24 GB GPU from the relevant source.",
+      "valid": true,
+      "result": {
+        "source_id": "gpu-serving",
+        "text": "# GPU serving \u2014 example deployment choices\nThe planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU. For a 12 GB slot use an AWQ quantized model. For a cost comparison use Qwen2.5-3B-Instruct. Benchmark actual latency and quality before changing production. ONNX conversion is outside this project because vLLM owns the autoregressive decoding and KV cache.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "The planned model for a 24 GB GPU is Qwen2.5-7B-Instruct, using BF16 precision.",
+        "sources": [
+          {
+            "source_id": "gpu-serving",
+            "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"answered\",\"answer\":\"The planned model for a 24 GB GPU is Qwen2.5-7B-Instruct, using BF16 precision.\",\"sources\":[{\"source_id\":\"gpu-serving\",\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1855,
+        "completion_tokens": 80,
+        "total_tokens": 1935,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The planned model for a 24 GB GPU is Qwen2.5-7B-Instruct, using BF16 precision.\",\"sources\":[{\"source_id\":\"gpu-serving\",\"quote\":\"The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU.\"}]}",
+      "usage": {
+        "prompt_tokens": 2038,
+        "completion_tokens": 80,
+        "total_tokens": 2118,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 7073,
+  "usage_complete": true,
+  "prompt_tokens": 6814,
+  "completion_tokens": 259,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The planned model for a 24 GB GPU is Qwen2.5-7B-Instruct, using BF16 precision.",
+    "sources": [
+      {
+        "source_id": "gpu-serving",
+        "quote": "The planned primary model is Qwen2.5-7B-Instruct served by vLLM using BF16 on a 24 GB GPU."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 4.368290664000028,
+  "token_accounting": "provider_usage"
+}

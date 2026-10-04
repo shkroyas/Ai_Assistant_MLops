@@ -1,0 +1,34 @@
+{
+  "query_id": "d3091c44-8fd6-4f14-9d84-2a78b597ae6d",
+  "question": "How much did my provider charge last month?",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"I cannot access personal financial information or billing details. Please check your account with your provider for accurate information.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1240,
+        "completion_tokens": 34,
+        "total_tokens": 1274,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1274,
+  "usage_complete": true,
+  "prompt_tokens": 1240,
+  "completion_tokens": 34,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I cannot access personal financial information or billing details. Please check your account with your provider for accurate information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.5446584659999871,
+  "token_accounting": "provider_usage"
+}

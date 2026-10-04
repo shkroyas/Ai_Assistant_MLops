@@ -1,0 +1,50 @@
+{
+  "query_id": "ebdf8279-fea1-4204-9a98-2b1b47e14bb0",
+  "question": "What drift triggers challenger training?",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1237,
+        "completion_tokens": 47,
+        "total_tokens": 1284,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "drift triggers challenger training",
+        "source_id": null,
+        "reason": "To find information about drift triggers and challenger training in the handbook."
+      },
+      "reasoning": "To find information about drift triggers and challenger training in the handbook.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool timeout",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 1284,
+  "usage_complete": true,
+  "prompt_tokens": 1237,
+  "completion_tokens": 47,
+  "failure_injection": "timeout",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7297950869999568,
+  "token_accounting": "provider_usage"
+}

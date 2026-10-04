@@ -1,0 +1,51 @@
+{
+  "query_id": "15123f30-bb89-4fa0-9177-aa949d649fdd",
+  "question": "Release that version.",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1235,
+        "completion_tokens": 57,
+        "total_tokens": 1292,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "clarify",
+      "args": {
+        "status": "clarify",
+        "answer": "What version are you referring to? Please provide more details.",
+        "sources": [],
+        "reason": "The request omits the specific version to be released."
+      },
+      "reasoning": "The request omits the specific version to be released.",
+      "valid": false,
+      "result": {
+        "error": "Unknown tool",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 1292,
+  "usage_complete": true,
+  "prompt_tokens": 1235,
+  "completion_tokens": 57,
+  "failure_injection": null,
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.8928531530000328,
+  "token_accounting": "provider_usage"
+}

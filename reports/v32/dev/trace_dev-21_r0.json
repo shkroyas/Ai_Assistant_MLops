@@ -1,0 +1,34 @@
+{
+  "query_id": "bd2f8d04-0e03-403d-8c7c-d51c21212733",
+  "question": "Should I use the better one?",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"Your question is unclear. Please specify what 'the better one' refers to and provide additional context so I can assist you effectively.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1238,
+        "completion_tokens": 38,
+        "total_tokens": 1276,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1276,
+  "usage_complete": true,
+  "prompt_tokens": 1238,
+  "completion_tokens": 38,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Your question is unclear. Please specify what 'the better one' refers to and provide additional context so I can assist you effectively.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.6094759259999591,
+  "token_accounting": "provider_usage"
+}

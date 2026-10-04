@@ -1,0 +1,34 @@
+{
+  "query_id": "79e1f828-cbd9-4ee4-a585-f1dfef0a4482",
+  "question": "For the production checklist: Change the limit.",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"The request to 'change the limit' is unclear. Please specify which limit you are referring to and provide the desired change.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1240,
+        "completion_tokens": 37,
+        "total_tokens": 1277,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1277,
+  "usage_complete": true,
+  "prompt_tokens": 1240,
+  "completion_tokens": 37,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "The request to 'change the limit' is unclear. Please specify which limit you are referring to and provide the desired change.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7686192649999839,
+  "token_accounting": "provider_usage"
+}
