@@ -1,0 +1,5 @@
+{
+  "trace_path": "reports/v28/dev/trace_dev-29_r0.json",
+  "failure": "The valid draft safely refused fabrication, but mandatory review changed it into clarification.",
+  "change": "Restrict optional bounded review to grounded answered drafts. Preserve already-safe abstention and clarification without extra inference. All other settings and scoring remain unchanged."
+}

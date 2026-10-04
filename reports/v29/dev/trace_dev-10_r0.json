@@ -1,0 +1,202 @@
+{
+  "query_id": "02d01d59-0e79-4f6b-90ae-6faf39e4b9ce",
+  "question": "What happens on a search timeout, and does drift alone justify production changes?",
+  "prompt_version": "v29",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1093,
+        "completion_tokens": 48,
+        "total_tokens": 1141,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "search for timeout policy and drift criteria for production changes",
+        "reason": "find relevant policies for timeout and drift criteria"
+      },
+      "reasoning": "find relevant policies for timeout and drift criteria",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.4432454855206769
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.43049361445194556
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.36299294557831174
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1520,
+        "completion_tokens": 38,
+        "total_tokens": 1558,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "reliability",
+        "reason": "understand the policy on tool timeout and fallback models"
+      },
+      "reasoning": "understand the policy on tool timeout and fallback models",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1662,
+        "completion_tokens": 41,
+        "total_tokens": 1703,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "determine if drift alone justifies production changes according to the release policy"
+      },
+      "reasoning": "determine if drift alone justifies production changes according to the release policy",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected `,` or `}` at line 1 column 712 [type=json_invalid, input_value='{\"name\": \"json\", \"argume...r production changes\"})', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "<tool_call>\n{\"name\": \"json\", \"arguments\": {\"status\": \"answered\", \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, never use invalid evidence. Drift alone does not justify production changes; a drift alert requires further evaluation on a frozen holdout and must meet specific criteria such as F1 improvement and ROC-AUC drop limits before a model can be promoted.\", \"sources\": [{\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"}, {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}], \"reason\": \"compiled evidence on search timeout and drift criteria for production changes\"})\n</tool_call>",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1815,
+        "completion_tokens": 158,
+        "total_tokens": 1973,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 5,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected `,` or `}` at line 1 column 712 [type=json_invalid, input_value='{\"name\": \"json\", \"argume...r production changes\"})', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "<tool_call>\n{\"name\": \"json\", \"arguments\": {\"status\": \"answered\", \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, never use invalid evidence. Drift alone does not justify production changes; a drift alert requires further evaluation on a frozen holdout and must meet specific criteria such as F1 improvement and ROC-AUC drop limits before a model can be promoted.\", \"sources\": [{\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"}, {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}], \"reason\": \"compiled evidence on search timeout and drift criteria for production changes\"})\n</tool_call>",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 2087,
+        "completion_tokens": 158,
+        "total_tokens": 2245,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 6,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "On a search timeout, the system will either abstain or ask for clarification, never use invalid evidence. Drift alone does not justify production changes; a drift alert requires further evaluation on a frozen holdout and must meet specific criteria such as F1 improvement and ROC-AUC drop limits before a model can be promoted.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "On tool timeout, abstain or ask for clarification; never use invalid evidence."
+          },
+          {
+            "source_id": "release-policy",
+            "quote": "A drift alert alone never authorizes promotion."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\n    \"status\": \"answered\",\n    \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, never use invalid evidence. Drift alone does not justify production changes; a drift alert requires further evaluation on a frozen holdout and must meet specific criteria such as F1 improvement and ROC-AUC drop limits before a model can be promoted.\",\n    \"sources\": [\n        {\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"},\n        {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}\n    ]\n}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 2359,
+        "completion_tokens": 139,
+        "total_tokens": 2498,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 7,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\nreason\n  Extra inputs are not permitted [type=extra_forbidden, input_value='compiled evidence on sea... for production changes', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/extra_forbidden",
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\n    \"status\": \"answered\",\n    \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, never use invalid evidence. Drift alone does not justify production changes; a drift alert requires further evaluation on a frozen holdout and must meet specific criteria such as F1 improvement and ROC-AUC drop limits before a model can be promoted.\",\n    \"sources\": [\n        {\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"},\n        {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}\n    ],\n    \"reason\": \"compiled evidence on search timeout and drift criteria for production changes\"\n}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 2601,
+        "completion_tokens": 156,
+        "total_tokens": 2757,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 13875,
+  "usage_complete": true,
+  "prompt_tokens": 13137,
+  "completion_tokens": 738,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "max_iterations",
+  "answer": {
+    "status": "abstain",
+    "answer": "Evidence could not be verified safely.",
+    "sources": []
+  },
+  "iterations": 7,
+  "latency_seconds": 14.988530310001806,
+  "token_accounting": "provider_usage"
+}
