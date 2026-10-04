@@ -1,0 +1,21 @@
+{
+  "captured_at_utc": "2026-10-03T23:31:57.995063+00:00",
+  "api_configuration_version": "v25",
+  "judge_report_version": "v22",
+  "api_health": {
+    "status": "ready",
+    "provider_model": "Qwen/Qwen2.5-7B-Instruct",
+    "configuration_version": "v25",
+    "query_timeout_seconds": 180,
+    "baseline_model": "openai/gpt-oss-20b",
+    "live_provider_configured": true
+  },
+  "healthy_run_id": null,
+  "infra_run_id": null,
+  "files": {
+    "mlflow_experiments.png": "e44fbc37cd943cdcb682229cee66b0ceda542e331b11b053fa3f9485c06cf7d1",
+    "assistant_answer.png": "0318934b0ae79726f9e69bd602cd64cbf33d5520beb0e2288285816bf7296011",
+    "api_docs.png": "b11ce3f7e9bec7e853d6357dd643375395396dbdc7508abfb826af441051021b",
+    "evidently_judge.png": "c6cf1a61a1b82cfc63efa1e40bd1233facf82fe9a18046adf0b917f4ffc26c46"
+  }
+}

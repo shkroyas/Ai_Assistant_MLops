@@ -1,8 +1,8 @@
-# Qwen3 14B GPU session — prepared, not executed
+# Qwen3 14B GPU session
 
-Task B is paused while Royas restarts the GPU session. `configs/v32.yaml` selects
+Royas supplied the restarted GPU session and authorized full Task B evaluation. `configs/v32.yaml` selects
 `Qwen/Qwen3-14B-AWQ`, an official quantized 14B checkpoint, as the memory-saving
-default. This configuration has no measured quality result or production promotion.
+default. The actual connection and nine development preflight cases passed. The full v32 cohort completed 159 agent attempts with complete usage: 97/105 development and 54/54 golden reference checks passed. v32 retained REJECT with the 20B judge. Fresh v34 uses identical agent settings and the calibrated 120B judge; all checks passed, and production now selects v34. Its healthy nightly passed 18/18 cases.
 The exact GPU VRAM and available memory must be checked in the new session.
 
 ## Start the server in the GPU session
@@ -53,7 +53,7 @@ independent upstream bearer authentication, its forwarding behavior must be
 verified in the connection check. Keep the existing Groq/Gemini credentials for
 judging. Do not paste credentials into YAML, reports or committed examples.
 
-Leave `ASSISTANT_CONFIG` at its current value while the endpoint is unverified.
+Production currently uses v34 with `ASSISTANT_CONFIG` blank. Leave it blank to select the promoted configuration after restart. For a changed session, verify the endpoint before switching configurations.
 After checks pass, `ASSISTANT_CONFIG=configs/v32.yaml` selects this candidate for
 development use; it does not promote it. Docker services need recreation to load
 new environment values.

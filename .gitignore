@@ -12,3 +12,5 @@ data/raw/
 .airflow/
 
 reports/.judge_cache/
+reports/v*/dev/.rows/
+reports/v*/golden/.rows/

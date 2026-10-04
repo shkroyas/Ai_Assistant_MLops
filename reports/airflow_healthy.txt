@@ -1,0 +1,57 @@
+[2026-10-04T02:02:27.160+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/project/dags
+[2026-10-04T02:02:27.186+0000] {dag.py:4435} INFO - dagrun id: assistant_nightly_regression
+[2026-10-04T02:02:27.192+0000] {dag.py:4451} INFO - created dagrun <DagRun assistant_nightly_regression @ 2026-10-04 06:31:00+05:45: manual__2026-10-04T06:31:00+05:45, state:running, queued_at: None. externally triggered: False>
+[2026-10-04T02:02:27.207+0000] {dag.py:4396} INFO - [DAG TEST] starting task_id=endpoint_health map_index=-1
+[2026-10-04T02:02:27.207+0000] {dag.py:4399} INFO - [DAG TEST] running task <TaskInstance: assistant_nightly_regression.endpoint_health manual__2026-10-04T06:31:00+05:45 [scheduled]>
+[2026-10-04 02:02:27,372] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='royas' AIRFLOW_CTX_DAG_ID='assistant_nightly_regression' AIRFLOW_CTX_TASK_ID='endpoint_health' AIRFLOW_CTX_EXECUTION_DATE='2026-10-04T00:46:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-10-04T06:31:00+05:45'
+[2026-10-04T02:02:27.372+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='royas' AIRFLOW_CTX_DAG_ID='assistant_nightly_regression' AIRFLOW_CTX_TASK_ID='endpoint_health' AIRFLOW_CTX_EXECUTION_DATE='2026-10-04T00:46:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-10-04T06:31:00+05:45'
+[2026-10-04T02:02:27.373+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2026-10-04 02:02:27,380] {baseoperator.py:423} WARNING - BranchPythonOperator.execute cannot be called outside TaskInstance!
+[2026-10-04T02:02:27.380+0000] {baseoperator.py:423} WARNING - BranchPythonOperator.execute cannot be called outside TaskInstance!
+[2026-10-04 02:02:27,436] {python.py:240} INFO - Done. Returned value was: regression
+[2026-10-04T02:02:27.436+0000] {python.py:240} INFO - Done. Returned value was: regression
+[2026-10-04 02:02:27,437] {branch.py:38} INFO - Branch into regression
+[2026-10-04T02:02:27.437+0000] {branch.py:38} INFO - Branch into regression
+[2026-10-04T02:02:27.437+0000] {skipmixin.py:233} INFO - Following branch {'regression'}
+[2026-10-04T02:02:27.442+0000] {skipmixin.py:281} INFO - Skipping tasks [('infrastructure_failure', -1)]
+[2026-10-04T02:02:27.455+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2026-10-04T02:02:27.455+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=assistant_nightly_regression, task_id=endpoint_health, run_id=manual__2026-10-04T06:31:00+05:45, execution_date=20261004T004600, start_date=, end_date=20261004T020227
+[2026-10-04T02:02:27.464+0000] {dag.py:4410} INFO - [DAG TEST] end task task_id=endpoint_health map_index=-1
+[2026-10-04T02:02:27.473+0000] {dag.py:4396} INFO - [DAG TEST] starting task_id=regression map_index=-1
+[2026-10-04T02:02:27.474+0000] {dag.py:4399} INFO - [DAG TEST] running task <TaskInstance: assistant_nightly_regression.regression manual__2026-10-04T06:31:00+05:45 [scheduled]>
+[2026-10-04 02:02:27,486] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='royas' AIRFLOW_CTX_DAG_ID='assistant_nightly_regression' AIRFLOW_CTX_TASK_ID='regression' AIRFLOW_CTX_EXECUTION_DATE='2026-10-04T00:46:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-10-04T06:31:00+05:45'
+[2026-10-04T02:02:27.486+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='royas' AIRFLOW_CTX_DAG_ID='assistant_nightly_regression' AIRFLOW_CTX_TASK_ID='regression' AIRFLOW_CTX_EXECUTION_DATE='2026-10-04T00:46:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-10-04T06:31:00+05:45'
+[2026-10-04T02:02:27.487+0000] {taskinstance.py:732} INFO - ::endgroup::
+/opt/project/.venv/lib/python3.12/site-packages/evidently/descriptors/text_match.py:118: SyntaxWarning: invalid escape sequence '\d'
+  """
+/opt/project/.venv/lib/python3.12/site-packages/qdrant_client/http/models/models.py:758: SyntaxWarning: invalid escape sequence '\&'
+  description="Check that the field is empty, alternative syntax for `is_empty: \&quot;field_name\&quot;`",
+/opt/project/.venv/lib/python3.12/site-packages/qdrant_client/http/models/models.py:762: SyntaxWarning: invalid escape sequence '\&'
+  description="Check that the field is null, alternative syntax for `is_null: \&quot;field_name\&quot;`",
+2026/10/04 02:03:42 INFO mlflow.tracking.fluent: Experiment with name 'assistant-nightly' does not exist. Creating a new experiment.
+2026/10/04 02:03:42 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+🏃 View run nightly at: http://mlflow:5000/#/experiments/2/runs/c7265a8a8ebb4267b64d302ea253a06c
+🧪 View experiment at: http://mlflow:5000/#/experiments/2
+[2026-10-04 02:03:44,098] {python.py:240} INFO - Done. Returned value was: None
+[2026-10-04T02:03:44.098+0000] {python.py:240} INFO - Done. Returned value was: None
+[2026-10-04T02:03:44.102+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2026-10-04T02:03:44.102+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=assistant_nightly_regression, task_id=regression, run_id=manual__2026-10-04T06:31:00+05:45, execution_date=20261004T004600, start_date=, end_date=20261004T020344
+[2026-10-04T02:03:44.113+0000] {dag.py:4410} INFO - [DAG TEST] end task task_id=regression map_index=-1
+[2026-10-04T02:03:44.115+0000] {dagrun.py:854} INFO - Marking run <DagRun assistant_nightly_regression @ 2026-10-04 00:46:00+00:00: manual__2026-10-04T06:31:00+05:45, state:running, queued_at: None. externally triggered: False> successful
+[2026-10-04T02:03:44.115+0000] {dagrun.py:905} INFO - DagRun Finished: dag_id=assistant_nightly_regression, execution_date=2026-10-04 00:46:00+00:00, run_id=manual__2026-10-04T06:31:00+05:45, run_start_date=2026-10-04 00:46:00+00:00, run_end_date=2026-10-04 02:03:44.115484+00:00, run_duration=4664.115484, state=success, external_trigger=False, run_type=manual, data_interval_start=2026-10-02 02:00:00+00:00, data_interval_end=2026-10-03 02:00:00+00:00, dag_hash=None

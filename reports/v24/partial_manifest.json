@@ -24,6 +24,7 @@
       "tokens": 2624
     }
   },
-  "reason": "Original agent samples encountered remaining daily quota exhaustion. Interrupted; no successful or failed sample replaced.",
-  "availability_probe_limitation": "All keys accepted tiny probes, which did not establish enough daily tokens for this cohort."
+  "reason": "Original provider-unavailable samples are preserved. The exact upstream quota scope was not recorded at execution, so daily exhaustion is unproven for this run. Its loaded provider used the earlier header-only cooldown handling. Current replay diagnostics test all five accounts with structured cooldown handling.",
+  "availability_probe_limitation": "All keys accepted tiny probes, which did not establish enough daily tokens for this cohort.",
+  "attribution_correction": "Earlier narrative inferred daily quota exhaustion; direct upstream evidence for that scope was not captured. No sample or metric is changed."
 }

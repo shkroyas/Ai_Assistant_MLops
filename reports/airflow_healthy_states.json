@@ -1,0 +1,26 @@
+[
+  {
+    "dag_id": "assistant_nightly_regression",
+    "execution_date": "2026-10-04T00:46:00+00:00",
+    "task_id": "endpoint_health",
+    "state": "success",
+    "start_date": "",
+    "end_date": "2026-10-04T02:02:27.455320+00:00"
+  },
+  {
+    "dag_id": "assistant_nightly_regression",
+    "execution_date": "2026-10-04T00:46:00+00:00",
+    "task_id": "regression",
+    "state": "success",
+    "start_date": "",
+    "end_date": "2026-10-04T02:03:44.102845+00:00"
+  },
+  {
+    "dag_id": "assistant_nightly_regression",
+    "execution_date": "2026-10-04T00:46:00+00:00",
+    "task_id": "infrastructure_failure",
+    "state": "skipped",
+    "start_date": "2026-10-04T02:02:27.442911+00:00",
+    "end_date": "2026-10-04T02:02:27.442911+00:00"
+  }
+]

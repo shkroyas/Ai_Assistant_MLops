@@ -1,0 +1,218 @@
+{
+  "errors": [
+    {
+      "http_status": 400,
+      "code": "tool_use_failed",
+      "failed_generation": "{\"name\": \"search\", \"arguments\": {\"query\":\"frozen holdout\",\"reason\":\"search for policy on frozen holdout\",\"source_id\":null}}"
+    },
+    {
+      "http_status": 400,
+      "code": "tool_use_failed",
+      "failed_generation": "{\"name\": \"search\", \"arguments\": {\"query\":\"provider attempts retry strategy allowed example-company MLOps handbook\",\"reason\":\"search for provider attempts and retry strategy in handbook\",\"source_id\":null}}"
+    },
+    {
+      "http_status": 400,
+      "code": "tool_use_failed",
+      "failed_generation": "{\"name\": \"search\", \"arguments\": {\"query\":\"release approval who approves releases example-company MLOps handbook\",\"reason\":\"Find release approval policy\",\"source_id\":null}}"
+    },
+    {
+      "http_status": 400,
+      "code": "tool_use_failed",
+      "failed_generation": "{\"name\": \"search\", \"arguments\": {\"query\":\"release policy version release example-company MLOps handbook\",\"reason\":\"Search for release policy information\",\"source_id\":null}}"
+    }
+  ],
+  "attempts": [
+    {
+      "case_id": "dev-15",
+      "category": "conflict",
+      "completed": false,
+      "tool_calls": 0,
+      "valid_calls": 0,
+      "appropriate_calls": 0,
+      "failure_class": "hard_failure",
+      "iterations": 1,
+      "tokens": 0,
+      "usage_complete": false,
+      "latency_seconds": 0.754714700000477,
+      "reference": "No. The memo is superseded and current releases require a frozen holdout.",
+      "response": "Evidence could not be verified safely.",
+      "injected": false,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "query": "Can the owner ignore the frozen holdout because the legacy memo lacks one?",
+      "status": "abstain",
+      "trace": {
+        "query_id": "8e6a62a6-a920-4d97-ae6e-eca1d9bd5f76",
+        "question": "Can the owner ignore the frozen holdout because the legacy memo lacks one?",
+        "prompt_version": "candidate-v23-smoke",
+        "tool_transport": "structured_actions",
+        "steps": [
+          {
+            "step": 1,
+            "event": "provider_error",
+            "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+          }
+        ],
+        "tokens": 0,
+        "usage_complete": false,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "provider_unavailable",
+        "answer": {
+          "status": "abstain",
+          "answer": "Evidence could not be verified safely.",
+          "sources": []
+        },
+        "iterations": 1,
+        "latency_seconds": 0.754714700000477,
+        "token_accounting": "incomplete"
+      }
+    },
+    {
+      "case_id": "dev-01",
+      "category": "single-source",
+      "completed": false,
+      "tool_calls": 0,
+      "valid_calls": 0,
+      "appropriate_calls": 0,
+      "failure_class": "hard_failure",
+      "iterations": 1,
+      "tokens": 0,
+      "usage_complete": false,
+      "latency_seconds": 14.869798845997138,
+      "reference": "Retry up to three attempts with exponential backoff.",
+      "response": "Evidence could not be verified safely.",
+      "injected": false,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "query": "How many provider attempts and what retry strategy are allowed?",
+      "status": "abstain",
+      "trace": {
+        "query_id": "01fa52e9-ab19-48fa-b795-f0a052cf9b1a",
+        "question": "How many provider attempts and what retry strategy are allowed?",
+        "prompt_version": "candidate-v23-smoke",
+        "tool_transport": "structured_actions",
+        "steps": [
+          {
+            "step": 1,
+            "event": "provider_error",
+            "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+          }
+        ],
+        "tokens": 0,
+        "usage_complete": false,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "provider_unavailable",
+        "answer": {
+          "status": "abstain",
+          "answer": "Evidence could not be verified safely.",
+          "sources": []
+        },
+        "iterations": 1,
+        "latency_seconds": 14.869798845997138,
+        "token_accounting": "incomplete"
+      }
+    },
+    {
+      "case_id": "dev-08",
+      "category": "cross-source",
+      "completed": false,
+      "tool_calls": 0,
+      "valid_calls": 0,
+      "appropriate_calls": 0,
+      "failure_class": "hard_failure",
+      "iterations": 1,
+      "tokens": 0,
+      "usage_complete": false,
+      "latency_seconds": 15.043080914998427,
+      "reference": "The project owner approves releases. Golden queries are held out; development queries guide revisions.",
+      "response": "Evidence could not be verified safely.",
+      "injected": false,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "query": "Who approves releases, and should golden questions guide prompt revisions?",
+      "status": "abstain",
+      "trace": {
+        "query_id": "63f38b9b-4a0d-4a4e-8871-4e8580a88530",
+        "question": "Who approves releases, and should golden questions guide prompt revisions?",
+        "prompt_version": "candidate-v23-smoke",
+        "tool_transport": "structured_actions",
+        "steps": [
+          {
+            "step": 1,
+            "event": "provider_error",
+            "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+          }
+        ],
+        "tokens": 0,
+        "usage_complete": false,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "provider_unavailable",
+        "answer": {
+          "status": "abstain",
+          "answer": "Evidence could not be verified safely.",
+          "sources": []
+        },
+        "iterations": 1,
+        "latency_seconds": 15.043080914998427,
+        "token_accounting": "incomplete"
+      }
+    },
+    {
+      "case_id": "dev-24",
+      "category": "ambiguous",
+      "completed": false,
+      "tool_calls": 0,
+      "valid_calls": 0,
+      "appropriate_calls": 0,
+      "failure_class": "hard_failure",
+      "iterations": 1,
+      "tokens": 0,
+      "usage_complete": false,
+      "latency_seconds": 15.079585894003685,
+      "reference": "Which version and evaluation evidence?",
+      "response": "Evidence could not be verified safely.",
+      "injected": false,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "query": "Release that version.",
+      "status": "abstain",
+      "trace": {
+        "query_id": "0bf4f9cc-8f42-4566-9b8c-17765106000c",
+        "question": "Release that version.",
+        "prompt_version": "candidate-v23-smoke",
+        "tool_transport": "structured_actions",
+        "steps": [
+          {
+            "step": 1,
+            "event": "provider_error",
+            "reasoning": "Providers unavailable; cannot obtain a grounded answer"
+          }
+        ],
+        "tokens": 0,
+        "usage_complete": false,
+        "prompt_tokens": 0,
+        "completion_tokens": 0,
+        "failure_injection": null,
+        "tool_errors": 0,
+        "termination": "provider_unavailable",
+        "answer": {
+          "status": "abstain",
+          "answer": "Evidence could not be verified safely.",
+          "sources": []
+        },
+        "iterations": 1,
+        "latency_seconds": 15.079585894003685,
+        "token_accounting": "incomplete"
+      }
+    }
+  ]
+}

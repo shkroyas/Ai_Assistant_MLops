@@ -1,0 +1,8 @@
+{
+  "degraded": false,
+  "pct_tests_passed": 1.0,
+  "threshold": 0.95,
+  "production_run_id": "1e0bc9bd432a426ca5c4e5e76e127490",
+  "production_version": "v34",
+  "model": "Qwen/Qwen3-14B-AWQ"
+}
