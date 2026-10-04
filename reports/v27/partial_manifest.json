@@ -1,0 +1,10 @@
+{
+  "run_id": "8c45d185b14d4baaaf052909e429768e",
+  "status": "FINISHED",
+  "scope": "development-only preflight",
+  "samples": 8,
+  "native_judge": false,
+  "golden_evaluation": false,
+  "promotion_eligible": false,
+  "source_smoke_report": "reports/qwen_semantic_agent_smoke.json"
+}
