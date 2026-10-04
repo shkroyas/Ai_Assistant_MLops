@@ -1,0 +1,49 @@
+{
+  "query_id": "79cde4f7-022d-41e8-b699-7290f6a622c2",
+  "question": "What is the production promotion gate?",
+  "prompt_version": "v28",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1085,
+        "completion_tokens": 41,
+        "total_tokens": 1126,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "production promotion gate",
+        "reason": "Find the definition of the production promotion gate in the MLOps handbook."
+      },
+      "reasoning": "Find the definition of the production promotion gate in the MLOps handbook.",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 1126,
+  "usage_complete": true,
+  "prompt_tokens": 1085,
+  "completion_tokens": 41,
+  "failure_injection": "malformed",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.8491795599984471,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,194 @@
+{
+  "query_id": "ea23ba1b-2531-4fcd-8276-e8e2877bcbc0",
+  "question": "What happens on a search timeout, and does drift alone justify production changes?",
+  "prompt_version": "v28",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1093,
+        "completion_tokens": 48,
+        "total_tokens": 1141,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "search for timeout policy and drift criteria for production changes",
+        "reason": "find relevant policies for timeout and drift criteria"
+      },
+      "reasoning": "find relevant policies for timeout and drift criteria",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.4432454855206769
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.43049361445194556
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.36299294557831174
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1520,
+        "completion_tokens": 38,
+        "total_tokens": 1558,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "reliability",
+        "reason": "understand the policy on tool timeout and fallback models"
+      },
+      "reasoning": "understand the policy on tool timeout and fallback models",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1662,
+        "completion_tokens": 41,
+        "total_tokens": 1703,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "determine if drift alone justifies production changes according to the release policy"
+      },
+      "reasoning": "determine if drift alone justifies production changes according to the release policy",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "On a search timeout, the system will either abstain or ask for clarification, as stated in the assistant reliability service contract. Drift alone does not justify production changes; a drift alert requires further evaluation and does not authorize immediate promotion according to the release policy.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "On tool timeout, abstain or ask for clarification; never use invalid evidence."
+          },
+          {
+            "source_id": "release-policy",
+            "quote": "A drift alert alone never authorizes promotion."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-864f6ac9cc06688e",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"answered\", \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, as stated in the assistant reliability service contract. Drift alone does not justify production changes; a drift alert requires further evaluation and does not authorize immediate promotion according to the release policy.\", \"sources\": [{\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"}, {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}], \"reason\": \"Provided evidence on search timeout policy and drift criteria for production changes.\"}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1815,
+        "completion_tokens": 149,
+        "total_tokens": 1964,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 5,
+      "event": "finish",
+      "reasoning": "{\"status\": \"answered\", \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, as stated in the assistant reliability service contract. Drift alone does not justify production changes; a drift alert requires further evaluation and does not authorize immediate promotion according to the release policy. The drift criteria include significant shifts in the mean MonthlyCharges or churn rate, but these alone do not trigger immediate production changes.\", \"sources\": [{\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"}, {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}, {\"source_id\": \"drift-runbook\", \"quote\": \"Drift triggers challenger training and evaluation, not immediate promotion.\"}]}",
+      "usage": {
+        "prompt_tokens": 2091,
+        "completion_tokens": 204,
+        "total_tokens": 2295,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-91913484d9b6f312",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"answered\", \"answer\": \"On a search timeout, the system will either abstain or ask for clarification, as stated in the assistant reliability service contract. Drift alone does not justify production changes; a drift alert requires further evaluation and does not authorize immediate promotion according to the release policy. The drift criteria include significant shifts in the mean MonthlyCharges or churn rate, but these alone do not trigger immediate production changes.\", \"sources\": [{\"source_id\": \"reliability\", \"quote\": \"On tool timeout, abstain or ask for clarification; never use invalid evidence.\"}, {\"source_id\": \"release-policy\", \"quote\": \"A drift alert alone never authorizes promotion.\"}, {\"source_id\": \"drift-runbook\", \"quote\": \"Drift triggers challenger training and evaluation, not immediate promotion.\"}], \"reason\": \"Provided evidence on search timeout policy, drift criteria, and production change authorization.\"}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 8661,
+  "usage_complete": true,
+  "prompt_tokens": 8181,
+  "completion_tokens": 480,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "On a search timeout, the system will either abstain or ask for clarification, as stated in the assistant reliability service contract. Drift alone does not justify production changes; a drift alert requires further evaluation and does not authorize immediate promotion according to the release policy. The drift criteria include significant shifts in the mean MonthlyCharges or churn rate, but these alone do not trigger immediate production changes.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "On tool timeout, abstain or ask for clarification; never use invalid evidence."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "A drift alert alone never authorizes promotion."
+      },
+      {
+        "source_id": "drift-runbook",
+        "quote": "Drift triggers challenger training and evaluation, not immediate promotion."
+      }
+    ]
+  },
+  "iterations": 5,
+  "latency_seconds": 9.883360514002561,
+  "token_accounting": "provider_usage"
+}
