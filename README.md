@@ -1,5 +1,7 @@
 # Track B — MLOps Knowledge Assistant
 
+[![CI and container delivery](https://github.com/shkroyas/Ai_Assistant_MLops/actions/workflows/ci.yml/badge.svg)](https://github.com/shkroyas/Ai_Assistant_MLops/actions/workflows/ci.yml)
+
 **Week 17 handoff:** [Detailed report and deliverable locations](docs/week17-submission-report.md) · [Task A README](https://github.com/shkroyas/w17-trackA-churn-mlops#readme) · [Task A detailed report](https://github.com/shkroyas/w17-trackA-churn-mlops/blob/main/docs/week17-submission-report.md)
 
 Royas Shakya's standalone W15 assistant, W16 agentic verification feature, and W17 MLOps layer. Track A is a separate repository. Built from the assignment PDFs and implementation plan, without reading or reusing existing projects.
@@ -34,6 +36,60 @@ This repository evolves a document-grounded assistant from the Week 15 baseline 
 | Submission and verification | Supplies detailed decisions, reproduction steps, file hashes, 80 engineering tests, required CI and downloadable source bundles. | [Detailed report](docs/week17-submission-report.md), [inventory](docs/deliverable-manifest.tsv), [release assets](https://github.com/shkroyas/Ai_Assistant_MLops/releases/tag/w17-trackB-final) |
 
 Engineering checks, measured model quality, judge verdicts and deployment smoke checks establish different facts. The [detailed report](docs/week17-submission-report.md) explains the evaluation limits and the distinction between agent changes and judge changes. Task A remains in its [own repository and README](https://github.com/shkroyas/w17-trackA-churn-mlops#readme).
+
+## Results and screenshot evidence
+
+| Recorded production v34 result | Value | Underlying evidence |
+|---|---|---|
+| Evaluation cohort | 105 development + 54 golden attempts; complete usage | [Metrics](reports/v34/metrics.json) |
+| Completion and quality | 94.29% development completion; 100% golden truth; 81.48% joint native judge pass | [Measured scorecard](reports/deliverables.md) |
+| Native descriptor tests | Correctness 51/54; completeness 44/54; both pass 80% thresholds | [Native Evidently HTML](reports/v34/evidently_judge.html) |
+| Promotion | All declared checks pass; PROMOTE | [Gate decision](reports/v34/gate.json) |
+| Healthy nightly regression | 18/18 frozen cases pass; intentional outage takes the infrastructure-failure branch | [Nightly evidence](reports/nightly/), [task states](reports/airflow_infra_states.json) |
+
+**Fresh actual assistant answer with its source quotation**
+
+![Fresh Qwen answer, tool steps, measured usage and source quotation](reports/readme_evidence/assistant_answer.png)
+
+**Native correctness and completeness tests**
+
+![Native Evidently v34 tests, both passing their declared thresholds](reports/readme_evidence/evidently_judge_tests.png)
+
+<details>
+<summary>View native tracked experiments and approved production metrics</summary>
+
+![Native assistant experiment table](reports/readme_evidence/mlflow_experiments.png)
+
+![Native approved v34 run metadata and PROMOTE tag](reports/readme_evidence/production_run.png)
+
+![Actual logged v34 production metrics](reports/readme_evidence/production_metrics.png)
+
+![Native judge category counts and shares](reports/readme_evidence/evidently_judge.png)
+
+</details>
+
+<details>
+<summary>View actual Airflow healthy and deliberate infrastructure-failure runs</summary>
+
+These screenshots view existing native task states. They do not trigger another paid judge run or claim long-term cloud scheduler uptime.
+
+![Actual healthy Airflow run](reports/readme_evidence/airflow_healthy.png)
+
+![Actual intentional infrastructure-failure run](reports/readme_evidence/airflow_infra.png)
+
+</details>
+
+[Capture timestamps, source pages, API configuration and image SHA-256](reports/readme_evidence/manifest.json). The fresh functional answer is distinct from the historical full v34 evaluation; changing the judge does not establish an agent improvement. Download native HTML reports to view them, since GitHub does not execute their frontend.
+
+## CI and continuous container delivery
+
+[GitHub Actions workflow](.github/workflows/ci.yml) runs locked setup, Ruff checks, engineering tests and deliverable verification on PRs and main. Task A also reproduces its actual training/monitoring pipeline. A dependent container job builds the application and authenticated demo images, then tests real startup, protected/native routes, and Task A prediction/invalid-input handling. Task B checks the packaged v34 configuration and report routes; CI does not use live model credentials or claim a new model-quality evaluation.
+
+PRs build and verify images. Only successful main runs publish them to GHCR with full-commit `sha-...` tags and a `latest` tag. The Actions artifact contains `container-smoke.json` and, after publication, `container-delivery.json` with exact registry digests. The workflow uses its scoped `GITHUB_TOKEN`; private local credentials and model caches are excluded from Docker contexts. A manual Actions dispatch on main provides the same checked delivery path.
+
+Application image: `ghcr.io/shkroyas/ai_assistant_mlops`. Demo image: `ghcr.io/shkroyas/ai_assistant_mlops-demo`. Private package access may require GitHub registry authentication.
+
+Container delivery publishes tested artifacts; Azure provisioning remains an explicitly bounded manual demo operation. This workflow does not create cloud resources or extend a running demo. See [GitHub’s container publishing documentation](https://docs.github.com/en/actions/tutorials/publish-packages/publish-docker-images).
 
 ## Week 17 deliverables and required README sections
 

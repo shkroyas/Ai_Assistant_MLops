@@ -1,0 +1,81 @@
+{
+  "captured_at_utc": "2026-10-04T11:13:49.494208+00:00",
+  "task": "B",
+  "scope": "Native report rendering and actual existing local services",
+  "health": {
+    "status": "ready",
+    "provider_model": "Qwen/Qwen3-14B-AWQ",
+    "configuration_version": "v34",
+    "query_timeout_seconds": 180,
+    "baseline_model": "openai/gpt-oss-20b",
+    "live_provider_configured": true
+  },
+  "screenshots": [
+    {
+      "file": "mlflow_experiments.png",
+      "source": "http://localhost:5000/#/experiments/1",
+      "description": "Native MLflow experiment table from the running local tracking store; new/independent runtime IDs may differ from archived assignment runs.",
+      "sha256": "f8e4bd0061ad8d7aa8383d6f7f3b8c1c42fef67fcedf01a6bb7a80ad716ce3c0",
+      "captured_at_utc": "2026-10-04T11:13:05.005702+00:00"
+    },
+    {
+      "file": "evidently_judge.png",
+      "source": "file:///home/royas-shakya/Downloads/mlops/ai-assistant-week15-16/reports/v34/evidently_judge.html",
+      "description": "Native v34 correctness/completeness judge report; archived 159-attempt evaluation, not a new evaluation.",
+      "sha256": "c219c8a12209f318d14b596e52fc84d88e3fc462ec436d833bbdbc268c61e2b2",
+      "captured_at_utc": "2026-10-04T11:13:28.057281+00:00"
+    },
+    {
+      "file": "evidently_judge_tests.png",
+      "source": "reports/v34/evidently_judge.html#tests",
+      "description": "Native correctness/completeness category-share tests from approved v34; both pass their 80% thresholds.",
+      "sha256": "4c35dc7775378fdc20ab05acde987d633375912acd9e39ffd79a19311971d769",
+      "captured_at_utc": "2026-10-04T11:17:21.955544+00:00"
+    },
+    {
+      "file": "api_docs.png",
+      "source": "http://localhost:8000/docs",
+      "description": "Actual API Swagger UI for the running approved assistant.",
+      "sha256": "b11ce3f7e9bec7e853d6357dd643375395396dbdc7508abfb826af441051021b",
+      "captured_at_utc": "2026-10-04T11:13:33.423146+00:00"
+    },
+    {
+      "file": "assistant_answer.png",
+      "source": "http://localhost:18501",
+      "description": "Fresh actual local assistant interaction using the refreshed HTTPS Qwen proxy, with returned source quotation and usage; not a full new quality evaluation.",
+      "sha256": "0a866add2c746fc623edb452d616ac9d36ff31cc76c9ed225b7fc28e8d3ede08",
+      "captured_at_utc": "2026-10-04T11:13:39.321994+00:00"
+    },
+    {
+      "file": "airflow_healthy.png",
+      "source": "http://localhost:8080/dags/assistant_nightly_regression/grid?dag_run_id=manual__2026-10-04T06%3A31%3A00%2B05%3A45",
+      "description": "Actual native Airflow task states for the recorded healthy run; viewing an existing run, not triggering another evaluation.",
+      "sha256": "ec097f549e5989c6dd5a63ccd5c07a7f2deef0c94178b6773f26732aee1541b0",
+      "captured_at_utc": "2026-10-04T11:13:45.659394+00:00"
+    },
+    {
+      "file": "airflow_infra.png",
+      "source": "http://localhost:8080/dags/assistant_nightly_regression/grid?dag_run_id=manual__2026-10-04T06%3A30%3A00%2B05%3A45",
+      "description": "Actual native Airflow task states for the recorded infra run; viewing an existing run, not triggering another evaluation.",
+      "sha256": "e7ce82f7bd4fcc50aa0e12491052c10027dfab803b11a97a85bce4289fe0e3d7",
+      "captured_at_utc": "2026-10-04T11:13:49.412712+00:00"
+    },
+    {
+      "file": "production_run.png",
+      "source": "http://localhost:5000/#/experiments/1/runs/1e0bc9bd432a426ca5c4e5e76e127490",
+      "description": "Native tracked production v34 run; historical quality results, not a new full evaluation.",
+      "sha256": "a0bc5b8546db3fa948f891f3fbdd7c874797bc4ce442c1ff28d868968b88c59a",
+      "captured_at_utc": "2026-10-04T11:17:19.411889+00:00"
+    },
+    {
+      "file": "production_metrics.png",
+      "source": "http://localhost:5000/#/experiments/1/runs/1e0bc9bd432a426ca5c4e5e76e127490",
+      "description": "Native MLflow logged metric values for the actual approved v34 production run.",
+      "sha256": "ec20802b7b0155d2513be3552d52532264da95c7ea0b89a217bd68bcc5684ebc",
+      "captured_at_utc": "2026-10-04T11:21:02.645653+00:00"
+    }
+  ],
+  "no_new_full_quality_evaluation": true,
+  "no_credentials_captured": true,
+  "capture_batch_completed_at_utc": "2026-10-04T11:21:02.645653+00:00"
+}
