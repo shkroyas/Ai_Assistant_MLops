@@ -1,25 +1,41 @@
 # Track B — MLOps Knowledge Assistant
 
+**Week 17 handoff:** [Detailed report and deliverable locations](docs/week17-submission-report.md) · [Task A README](https://github.com/shkroyas/w17-trackA-churn-mlops#readme) · [Task A detailed report](https://github.com/shkroyas/w17-trackA-churn-mlops/blob/main/docs/week17-submission-report.md)
+
 Royas Shakya's standalone W15 assistant, W16 agentic verification feature, and W17 MLOps layer. Track A is a separate repository. Built from the assignment PDFs and implementation plan, without reading or reusing existing projects.
 
 **Status:** Task B core checks pass **31/31**; **78 engineering tests** and required CI pass. Production is Qwen3-14B-AWQ v34, MLflow run `1e0bc9bd432a426ca5c4e5e76e127490`: 100% golden truth, 81.48% joint native 120B judge pass, complete usage and zero hard/provider failures. The real production API concurrency/cache/batch checks and 18/18 healthy Airflow regression pass. All 23 completed native-judged configurations and failed/partial preflights are preserved. Cloud deployment remains an optional extension requiring an account, target and budget.
+
+## Week 17 deliverables and required README sections
+
+[Complete file inventory with SHA-256](docs/deliverable-manifest.tsv) · [Detailed implementation report](docs/week17-submission-report.md) · [Core evidence scorecard](reports/deliverables.md)
+
+| Assessed section | Direct link |
+|---|---|
+| a. Environment and reproducibility | [uv setup](#w17-a-environment--reproducibility-uv) |
+| b. Experiment tracking and selection | [MLflow strategy](#w17-b-experiment-tracking-strategy-mlflow) |
+| c. Monitoring | [Evidently strategy](#w17-c-monitoring--regression-strategy-evidently-ai) |
+| d. Optional orchestration | [Airflow DAG](#w17-d-orchestration-airflow-bonus) |
 
 ## Quick start
 
 ```bash
 uv sync --locked
-cp .env.example .env
-# Set AGENT_API_KEY locally. Gemini's compatible API is the default.
+test -f .env || cp .env.example .env
+# For promoted v34, configure the Qwen3 endpoint and authentication privately.
+# Leave ASSISTANT_CONFIG empty; see docs/qwen14b-session.md.
 uv run uvicorn assistant_mlops.api:app --port 8000
 # In a second terminal:
 uv run streamlit run src/assistant_mlops/ui.py
 ```
 
+Production v34 requires `Qwen/Qwen3-14B-AWQ` with the configured native tool/non-thinking protocol. The template's Gemini defaults are an alternative: explicitly set `ASSISTANT_CONFIG=configs/v1.yaml` to use them for development. This does not promote v1 or reproduce v34. For native v34 evaluation, use `JUDGE_PROVIDER=groq`, `JUDGE_MODEL=openai/gpt-oss-120b` and a private `JUDGE_API_KEY`. Ordinary API answers do not invoke the judge. Never replace an existing credential file with the template.
+
 Open http://localhost:8501, or POST `{"question":"What happens after drift and what permits promotion?"}` to http://localhost:8000/ask. POST /batch accepts `{"questions":[{"question":"What is the retry limit?"}]}` (up to eight). The corpus is a fictional example-company MLOps handbook, explicitly labeled in each source; replace corpus/ files with your approved documents. There is no claim to access your organization's real policies. Supported ingestion: Markdown, text, PDF. Query responses are validated JSON with answered/abstain/clarify status and exact retrieved citations. /health distinguishes initialized service from configured provider access. Without access, /ask abstains instead of silently returning a fixture answer.
 
 ## W15 implementation and deployment
 
-The W15 baseline at POST /rag makes one application-directed retrieval and one completion (rag.py). W16 POST /ask adds model-directed adaptive cross-source verification; it is not just a fixed RAG sequence repeated. The backend integrates the authenticated KU vLLM endpoint, Groq, or Gemini through compatible chat/function-calling APIs. The verified W15 baseline uses Groq; configuration experiments record the chosen agent model. Prompt files and YAML expose temperature/top_p and retrieval settings. Every requested tool is validated against the bounded retrieval tools search/read_source; opt-in native final answers use a validated json submission tool. Retrieval chunks documents (900 characters, 150 overlap), computes normalized 512-dimensional hashing embeddings, and indexes them in Qdrant. Hashing embeddings are lightweight lexical embeddings rather than pretrained semantic embeddings; collisions and paraphrase recall are limitations, measured by the same harness when an embedding model is changed. The local Qdrant database can persist with QDRANT_PATH; the default in-memory collection is rebuilt from the versioned corpus on startup.
+The W15 baseline at POST /rag makes one application-directed retrieval and one completion (rag.py). W16 POST /ask adds model-directed adaptive cross-source verification; it is not just a fixed RAG sequence repeated. The backend integrates the authenticated KU vLLM endpoint, Groq, or Gemini through compatible chat/function-calling APIs. The verified W15 baseline uses Groq; configuration experiments record the chosen agent model. Prompt files and YAML expose temperature/top_p and retrieval settings. Every requested tool is validated against the bounded retrieval tools search/read_source; opt-in native final answers use a validated json submission tool. Retrieval chunks documents (900 characters, 150 overlap) and indexes embeddings in Qdrant. The original/default baseline uses normalized 512-dimensional hashing embeddings; production v34 uses pinned 384-dimensional MiniLM semantic embeddings (see [semantic retrieval](docs/semantic-retrieval.md)). Hashing embeddings are lightweight lexical embeddings rather than pretrained semantic embeddings; collisions and paraphrase recall are limitations, measured by the same harness when an embedding model is changed. The local Qdrant database can persist with QDRANT_PATH; the default in-memory collection is rebuilt from the versioned corpus on startup.
 
 Provider requests are asynchronous, retried three times with exponential backoff for transient errors, with an optional separately configured fallback. Both endpoints obey the same output/citation contract. Requests are bounded by four concurrent model calls and a 180-second timeout by default. Paced configurations receive a derived deadline, capped at 900 seconds, to include queued model calls. Batch requests consume per-query rate-limit budget (30 per client per minute). An LRU cache holds at most 128 answered/clarification responses for 300 seconds and fingerprints corpus, prompt, configuration, and provider. Concurrent identical requests share one computation. Infrastructure failures are never cached as success. Rate limits/cache are per-process; the documented single-worker deployment preserves that scope. A multi-worker deployment would need a shared store.
 
@@ -35,7 +51,7 @@ bash serve_vllm.sh
 # Or: docker compose -f compose.yaml up -d
 ```
 
-Use Qwen/Qwen2.5-7B-Instruct on 24 GB GPU, an AWQ quantized variant on 12 GB, or Qwen2.5-3B-Instruct for the cost-axis experiment. Set laptop AGENT_BASE_URL=https://your-stable-hostname/v1, AGENT_MODEL to the exact served model name, and AGENT_API_KEY to the bearer token. serving/named_tunnel.md explains a named Cloudflare tunnel. vLLM uses continuous batching, KV caching, and GPU inference; the application does not reimplement those optimizations. ONNX conversion is not applicable to this API assistant because it does not train or own model weights and vLLM owns autoregressive decoding; quantization is the supported optional optimization. Real KU GPU inference and native tool calls passed; see reports/provider_connection.json. No GPU throughput improvement or quantization benchmark is claimed.
+The initial experiments used Qwen2.5-7B. Current production uses **Qwen/Qwen3-14B-AWQ**; follow [the Qwen3 session instructions](docs/qwen14b-session.md) and `serving/serve_qwen14b.sh`. Verify available VRAM rather than assuming a checkpoint fits. Set laptop AGENT_BASE_URL=https://your-stable-hostname/v1, AGENT_MODEL to the exact served model name, and AGENT_API_KEY to the bearer token. serving/named_tunnel.md explains a named Cloudflare tunnel. vLLM uses continuous batching, KV caching, and GPU inference; the application does not reimplement those optimizations. ONNX conversion is not applicable to this API assistant because it does not train or own model weights and vLLM owns autoregressive decoding; quantization is the supported optional optimization. Real KU GPU inference and native tool calls passed; see reports/provider_connection.json. No GPU throughput improvement or quantization benchmark is claimed.
 
 ```bash
 # .env must exist before Compose reads env_file.
@@ -82,9 +98,9 @@ GPU proxy authentication and the later Groq switch are documented in [docs/provi
 
 ## W17 b. Experiment Tracking Strategy (MLflow)
 
-Datasets are authored before experiments: 35 dev cases, 18 golden regression cases, and 15 proposed calibration labels, seven deliberately wrong. Corpus facts, not agent output, are the source of truth. Golden paraphrases overlap dev facts; this measures regression, not independent generalization. Review proposed labels yourself before claiming human agreement (datasets/README.md).
+Datasets are authored before experiments: 35 dev cases, 18 golden regression cases, and 15 proposed calibration labels, seven deliberately wrong. Corpus facts, not agent output, are the source of truth. Golden paraphrases overlap dev facts; this measures regression, not independent generalization. The assistant drafted/audited the calibration labels; Royas explicitly delegated and approved review (datasets/calibration_review.json). This is not individual human annotation. Any label changes require a new matching review record.
 
-Start the tracking service with `docker compose up -d --build backend mlflow`; the .env template points host experiments at http://localhost:5000 so they appear in the same Docker MLflow UI. For a file-only workflow, explicitly set MLFLOW_TRACKING_URI=sqlite:///mlflow.db and start a local MLflow viewer against that database. Run v1 first:
+Start the tracking service with `docker compose up -d --build backend mlflow`; the .env template points host experiments at http://localhost:5000 so they appear in the same Docker MLflow UI. For a file-only workflow, explicitly set MLFLOW_TRACKING_URI=sqlite:///mlflow.db and start a local MLflow viewer against that database. The following commands document the historical experiment workflow; they call paid/limited providers. For new experiments, copy a candidate into a fresh version and preserve the submitted reports. Historical v1 reproduction:
 
 ```bash
 uv run python -m assistant_mlops.experiment run --config configs/v1.yaml --judge
@@ -150,7 +166,7 @@ flowchart TD
   Agent --> Model[Recorded Qwen or Groq model plus fallback]
   Model --> Decision{Model next action}
   Decision -->|search/read| Tools[Bounded validated tools]
-  Docs[MD/TXT/PDF chunking] --> Embeddings[512D normalized hashing embeddings]
+  Docs[MD/TXT/PDF chunking] --> Embeddings[512D hashing baseline / 384D MiniLM production]
   Embeddings --> Qdrant[Qdrant vector database]
   Tools --> Qdrant
   Tools --> Notes[Capped results and external notes]
@@ -176,11 +192,11 @@ uv run python scripts/check_deliverables.py --static
 uv run python scripts/check_deliverables.py
 ```
 
-Static PASS means implementation files exist, not a completed live submission. Full scorecard deliberately reports PENDING for missing real experiment/judge/production/Airflow evidence. GitHub labels/issues/branch rules, remote main CI, and final release tags cannot be established by local files alone. Do not label this w17-trackB-final until full scorecard passes. A real failure trace and live run comparison are required for a trace-driven claim.
+Static PASS means implementation files exist, not a completed live submission. Full scorecard deliberately reports PENDING for missing real experiment/judge/production/Airflow evidence. The published repository has protected main, required passing CI, a closed W17 milestone and the [w17-trackB-final release](https://github.com/shkroyas/Ai_Assistant_MLops/releases/tag/w17-trackB-final), created after the full scorecard passed. A real failure trace and live run comparison are required for a trace-driven claim.
 
 ## Verified local services
 
-The Docker UI is currently running at http://localhost:18501 and API at http://localhost:8000/docs. The MLflow UI is http://localhost:5000. `uv run python scripts/smoke_api.py --ui-url http://localhost:18501` verifies UI/backend health and safe abstention without credentials; reports/deployment_smoke.json is infrastructure evidence only. After updating .env credentials, recreate backend with `docker compose up -d --build --force-recreate backend`; startup loads the new values.
+At the 2026-10-04 handoff audit, the Docker services were running with UI at http://localhost:18501 and API at http://localhost:8000/docs. The MLflow UI is http://localhost:5000. `uv run python scripts/smoke_api.py --ui-url http://localhost:18501` verifies UI/backend health and safe abstention without credentials; reports/deployment_smoke.json is infrastructure evidence only. After updating .env credentials, recreate backend with `docker compose up -d --build --force-recreate backend`; startup loads the new values.
 
 ## Submission evidence
 
