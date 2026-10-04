@@ -25,6 +25,7 @@ def test_explicit_config_override_takes_precedence(monkeypatch, tmp_path):
 
 
 def test_rag_uses_groq_baseline_without_proxy_headers(monkeypatch):
+    monkeypatch.setenv("ASSISTANT_CONFIG", "configs/v1.yaml")
     monkeypatch.setenv("GROQ_API_KEY", "groq-fixture")
     monkeypatch.setenv("AGENT_PROXY_TOKEN", "proxy-fixture")
     monkeypatch.setenv("AGENT_PROXY_COOKIE", "proxy=session")
@@ -42,6 +43,7 @@ def test_rag_uses_groq_baseline_without_proxy_headers(monkeypatch):
 
 
 def test_cache_singleflight_batch_and_rate_limit(monkeypatch):
+    monkeypatch.setenv("ASSISTANT_CONFIG", "configs/v1.yaml")
     calls = []
     with TestClient(app) as client:
 
