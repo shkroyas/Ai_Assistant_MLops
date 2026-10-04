@@ -1,0 +1,34 @@
+{
+  "query_id": "4b7dbaac-9203-4d75-abe9-f686091e511b",
+  "question": "What is the company annual revenue?",
+  "prompt_version": "v33",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"The company annual revenue is not disclosed in the provided sources.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1345,
+        "completion_tokens": 25,
+        "total_tokens": 1370,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1370,
+  "usage_complete": true,
+  "prompt_tokens": 1345,
+  "completion_tokens": 25,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "The company annual revenue is not disclosed in the provided sources.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.41973905299983016,
+  "token_accounting": "provider_usage"
+}
