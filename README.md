@@ -6,6 +6,35 @@ Royas Shakya's standalone W15 assistant, W16 agentic verification feature, and W
 
 **Status:** Task B core checks pass **31/31**; **80 engineering tests** and required CI pass. Production is Qwen3-14B-AWQ v34, MLflow run `1e0bc9bd432a426ca5c4e5e76e127490`: 100% golden truth, 81.48% joint native 120B judge pass, complete usage and zero hard/provider failures. The real production API concurrency/cache/batch checks and 18/18 healthy Airflow regression pass. All 23 completed native-judged configurations and failed/partial preflights are preserved. Both optional Azure demos passed authenticated HTTPS and actual inference checks; see the temporary deployment section below.
 
+## Project demonstration
+
+[![Watch the Week 17 Task A and Task B core demonstration](docs/images/week17-core-demo.png)](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-task-a-b-core-demo.mp4)
+
+**[Watch or download week17-task-a-b-core-demo.mp4](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-task-a-b-core-demo.mp4)** (9m45s) — the project walkthrough now uses a natural neural English narrator. It shows real application interactions, measured experiments, native reports, and local Airflow execution for both separate tasks.
+
+[Core transcript](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/TRANSCRIPT.md) · [Timed captions](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-core-demo.srt) · [Chapters and SHA-256](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/core-video-manifest.json) · [Extended video with the verified Azure demo](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-task-a-b-complete-demo.mp4)
+
+The combined videos are hosted on Task A's private release; sign in with an account that has access to that repository. See [video contents and narration details](docs/demo-video.md). Narration is synthetic neural speech. Existing real footage is retimed to the revised narration; original experiment results and earlier recordings are preserved.
+
+## What was built
+
+This repository evolves a document-grounded assistant from the Week 15 baseline into the Week 16 verification agent and the Week 17 tracked evaluation and deployment system.
+
+| Deliverable | What it does | Source and evidence |
+|---|---|---|
+| Week 15 RAG baseline | Retrieves fictional handbook passages once, generates a structured answer and returns source quotations. | [Baseline](src/assistant_mlops/rag.py), [retrieval](src/assistant_mlops/retrieval.py), [corpus](corpus/) |
+| Week 16 verification agent | Lets one agent choose searches, source reads, clarification and termination within explicit iteration/tool limits. | [Agent loop](src/assistant_mlops/agent.py), [configuration versions](configs/), [prompt versions](prompts/) |
+| Provider and request handling | Supports real model calls, bounded retries, async batch requests, rate limits, validated caching and shared identical requests. | [Provider](src/assistant_mlops/provider.py), [API](src/assistant_mlops/api.py), [API feature checks](reports/api_features_smoke.json) |
+| Streamlit interface | Provides an interactive assistant backed by the actual API, with answers, sources and verification results. | [UI](src/assistant_mlops/ui.py), [real screenshots](reports/screenshots/) |
+| Scratch-built evaluation harness | Records development/golden outcomes, full tool trajectories, usage, latency and failure types; preserves rejected and interrupted runs. | [Harness](src/assistant_mlops/harness.py), [experiments](src/assistant_mlops/experiment.py), [all measured reports](reports/) |
+| Week 17 MLflow and native Evidently judging | Tracks 23 completed native-judged configurations; applies correctness/completeness checks and calibrated promotion gates. | [Regression judging](src/assistant_mlops/regression.py), [gate](src/assistant_mlops/gate.py), [v34 native report](reports/v34/evidently_judge.html) |
+| Approved Qwen3-14B-AWQ v34 | Serves the configuration that passed the unchanged production gate. The 159-attempt cohort reached 100% golden truth and 81.48% joint native judge pass. | [Approved config](configs/v34.yaml), [metrics](reports/v34/metrics.json), [gate result](reports/v34/gate.json), [GPU setup](docs/qwen14b-session.md) |
+| Airflow regression monitoring | Checks provider health before an 18-case regression; records both the successful run and deliberate infrastructure failure. | [DAG](dags/assistant_regression.py), [nightly evidence](reports/nightly/) |
+| Docker and temporary Azure demo | Hosts the authenticated API, UI, tracking and reports; reaches the separate GPU through HTTPS Jupyter proxy and refreshes credentials without extending cleanup. | [Compose](compose.yaml), [Azure tooling](deploy/azure/), [deployment guide](docs/azure-demo.md), [live checks](reports/cloud_demo/azure_https_smoke.json) |
+| Submission and verification | Supplies detailed decisions, reproduction steps, file hashes, 80 engineering tests, required CI and downloadable source bundles. | [Detailed report](docs/week17-submission-report.md), [inventory](docs/deliverable-manifest.tsv), [release assets](https://github.com/shkroyas/Ai_Assistant_MLops/releases/tag/w17-trackB-final) |
+
+Engineering checks, measured model quality, judge verdicts and deployment smoke checks establish different facts. The [detailed report](docs/week17-submission-report.md) explains the evaluation limits and the distinction between agent changes and judge changes. Task A remains in its [own repository and README](https://github.com/shkroyas/w17-trackA-churn-mlops#readme).
+
 ## Week 17 deliverables and required README sections
 
 [Complete file inventory with SHA-256](docs/deliverable-manifest.tsv) · [Detailed implementation report](docs/week17-submission-report.md) · [Core evidence scorecard](reports/deliverables.md)
@@ -208,5 +237,3 @@ At the 2026-10-04 handoff audit, the Docker services were running with UI at htt
 The separate Task B image adds an authenticated Nginx gateway, FastAPI and a small MLflow instance. Azure supplies HTTPS; Qwen inference uses the existing authenticated Jupyter HTTPS server proxy. The demo uses no SSH tunnel. See [deployment instructions, cost and cleanup](docs/azure-demo.md). Cloud availability must be established by the deployment smoke report; source files alone do not establish a running deployment.
 
 Demo deployed on 2026-10-04: [Task B HTTPS gateway](https://task-b.calmflower-4280b7f7.centralindia.azurecontainerapps.io). Authentication uses the generated private `demo-access.json`; credentials are excluded from Git. Scheduled deletion: **2026-10-04 11:15 UTC / 17:00 Nepal**. [Deployment evidence](reports/cloud_demo/azure_deployment.json). Actual public HTTPS, sourced Qwen inference and zero-new-token cache reuse [passed](reports/cloud_demo/azure_https_smoke.json). The earlier [proxy outage](reports/cloud_demo/azure_provider_unavailable.json) remains recorded separately.
-
-The [complete 9-minute-32-second demo video](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-task-a-b-complete-demo.mp4) covers both separate tasks and actual Azure execution. [Transcript](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/COMPLETE_TRANSCRIPT.md) and [captions](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-complete-demo.srt) accompany it. These combined assets require access to Task A's private repository.
