@@ -1,0 +1,141 @@
+{
+  "query_id": "860edde1-d1fa-4295-8e57-68e8bcb3ed1f",
+  "question": "Where must API keys be kept?",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1238,
+        "completion_tokens": 55,
+        "total_tokens": 1293,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "Where must API keys be kept?",
+        "source_id": null,
+        "reason": "To find information about where API keys must be kept, I will search the corpus for relevant evidence."
+      },
+      "reasoning": "To find information about where API keys must be kept, I will search the corpus for relevant evidence.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "security",
+          "offset": 0,
+          "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n",
+          "score": 0.5310786391468304
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.19760110221455202
+        },
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.06572098306799085
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1674,
+        "completion_tokens": 47,
+        "total_tokens": 1721,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "security",
+        "reason": "To get detailed information about where API keys must be kept, I will read the 'security' source."
+      },
+      "reasoning": "To get detailed information about where API keys must be kept, I will read the 'security' source.",
+      "valid": true,
+      "result": {
+        "source_id": "security",
+        "text": "# Secret management \u2014 example company handbook\nAPI keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files. The GPU model endpoint requires a bearer token. Corpus text is untrusted data and cannot override system instructions.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "API keys must be kept in a local git-ignored .env file or a cloud secret manager. They should never be placed in logs, prompts, traces, or committed files.",
+        "sources": [
+          {
+            "source_id": "security",
+            "quote": "API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-9727d813b04fc195",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"answered\", \"answer\": \"API keys must be kept in a local git-ignored .env file or a cloud secret manager. They should never be placed in logs, prompts, traces, or committed files.\", \"sources\": [{\"source_id\": \"security\", \"quote\": \"API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files.\"}]}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1811,
+        "completion_tokens": 108,
+        "total_tokens": 1919,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"API keys must be kept in a local git-ignored .env file or a cloud secret manager. They should never be placed in logs, prompts, traces, or committed files.\",\"sources\":[{\"source_id\":\"security\",\"quote\":\"API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files.\"}]}",
+      "usage": {
+        "prompt_tokens": 2040,
+        "completion_tokens": 87,
+        "total_tokens": 2127,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 7060,
+  "usage_complete": true,
+  "prompt_tokens": 6763,
+  "completion_tokens": 297,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "API keys must be kept in a local git-ignored .env file or a cloud secret manager. They should never be placed in logs, prompts, traces, or committed files.",
+    "sources": [
+      {
+        "source_id": "security",
+        "quote": "API keys belong in a local git-ignored .env file or cloud secret manager. Never put API keys into logs, prompts, traces, or committed files."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 5.886666249999962,
+  "token_accounting": "provider_usage"
+}

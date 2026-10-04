@@ -1,0 +1,9 @@
+{
+  "trace_path": "reports/v31/dev/trace_dev-12_r0.json",
+  "failure": "The original GPT-OSS-120B development trajectory ended provider_unavailable after a recorded daily-token HTTP 429. The all-account run also exposed a queue scheduling defect and was interrupted at the user's request. It has no qualifying native judge or promotion gate.",
+  "change": "Prepare a fresh Qwen3-14B-AWQ candidate on the user's restarted GPU endpoint, with explicit non-thinking mode for the bounded native tool loop. Preserve v31's prompt, semantic retrieval, bounded self-review, tools, repetitions, labels and gate. Record provider/model as the experimental axis and AWQ/non-thinking as disclosed model settings; omit Groq-only reasoning, tool-name repair and quota pooling because they do not apply to the GPU transport. Credentials remain in ignored .env. Queue scheduling is separately repaired infrastructure, not evidence of model quality.",
+  "execution_status": "connection_and_nine_case_development_preflight_passed",
+  "requires": "Verify exact served model ID, authenticated endpoint, actual native tools and a development preflight after the user supplies the new session credentials.",
+  "connection_evidence": "reports/qwen3_14b_connection.json",
+  "preflight_evidence": "reports/qwen3_14b_preflight/result.json"
+}

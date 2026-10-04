@@ -1,0 +1,50 @@
+{
+  "query_id": "2b987ab1-53b8-4e9b-b889-08bfd113002f",
+  "question": "For the production checklist: How should credentials be stored?",
+  "prompt_version": "v32",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1242,
+        "completion_tokens": 45,
+        "total_tokens": 1287,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "credentials stored",
+        "source_id": null,
+        "reason": "Looking for information on how credentials should be stored in the production checklist."
+      },
+      "reasoning": "Looking for information on how credentials should be stored in the production checklist.",
+      "valid": true,
+      "result": {
+        "error": "Injected tool unavailable",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 1287,
+  "usage_complete": true,
+  "prompt_tokens": 1242,
+  "completion_tokens": 45,
+  "failure_injection": "unavailable",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.824475098999983,
+  "token_accounting": "provider_usage"
+}
