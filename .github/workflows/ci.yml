@@ -61,7 +61,7 @@ jobs:
         env:
           DEMO_IMAGE: ${{ steps.images.outputs.demo }}
         run: |
-          docker run -d --name delivery-smoke -p 127.0.0.1:18080:8080 -e DEMO_PASSWORD -e AGENT_MODEL=Qwen/Qwen3-14B-AWQ "$DEMO_IMAGE:sha-$GITHUB_SHA"
+          docker run -d --name delivery-smoke -p 127.0.0.1:18080:8080 -e DEMO_PASSWORD -e AGENT_MODEL=Qwen/Qwen3-14B-AWQ -e AGENT_BASE_URL=http://127.0.0.1:9/v1 "$DEMO_IMAGE:sha-$GITHUB_SHA"
           python3 scripts/smoke_container.py --task "$TASK"
       - name: Log in to GHCR for main delivery
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
