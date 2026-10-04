@@ -348,13 +348,15 @@ def provider_for_config(config):
         raise ValueError("Unsupported experiment provider")
     namespace = "GEMINI" if config["provider"] == "gemini" else "GROQ"
     pool = None
-    if config.get("key_pool") == "reserves":
+    if config.get("key_pool") in {"reserves", "all"}:
         active = os.getenv(namespace + "_API_KEY", "")
         pool = [
             key.strip()
             for key in os.getenv(namespace + "_API_KEYS", "").split(",")
             if key.strip() and key.strip() != active
         ]
+        if config["key_pool"] == "all" and active:
+            pool.insert(0, active)
         if not pool:
             raise ValueError("No independently available reserve keys configured")
     return ChatProvider(

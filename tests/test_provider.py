@@ -4,6 +4,21 @@ import pytest
 from assistant_mlops.provider import ChatProvider, ProviderError
 
 
+@pytest.mark.asyncio
+async def test_explicit_all_account_pool_includes_active_key_without_duplicates(monkeypatch):
+    from assistant_mlops.provider import provider_for_config
+
+    monkeypatch.setenv("GROQ_API_KEY", "account-one")
+    monkeypatch.setenv("GROQ_API_KEYS", "account-one,account-two,account-two")
+    monkeypatch.setenv("GEMINI_API_KEYS", "other-provider-key")
+    provider = provider_for_config({"provider": "groq", "model": "candidate", "key_pool": "all"})
+    try:
+        assert provider.quota_pool.keys == ["account-one", "account-two"]
+        assert provider.quota_pool.used == [0, 0]
+    finally:
+        await provider.close()
+
+
 @pytest.mark.parametrize(
     "body,expected",
     [
