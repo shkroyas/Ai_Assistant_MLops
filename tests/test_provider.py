@@ -5,6 +5,50 @@ from assistant_mlops.provider import ChatProvider, ProviderError
 
 
 @pytest.mark.asyncio
+async def test_qwen3_nonthinking_option_stays_on_primary_gpu_endpoint(monkeypatch):
+    import json
+
+    from assistant_mlops.provider import provider_for_config
+
+    monkeypatch.setenv("AGENT_BASE_URL", "https://gpu.example/v1")
+    monkeypatch.setenv("AGENT_API_KEY", "gpu-fixture")
+    monkeypatch.setenv("FALLBACK_BASE_URL", "https://api.groq.com/openai/v1")
+    monkeypatch.setenv("FALLBACK_MODEL", "openai/gpt-oss-20b")
+    monkeypatch.setenv("FALLBACK_API_KEY", "fallback-fixture")
+    requests = []
+
+    def handler(request):
+        requests.append(json.loads(request.content))
+        if request.url.host == "gpu.example":
+            return httpx.Response(400)
+        return httpx.Response(
+            200, json={"choices": [{"message": {"content": "{}"}}], "usage": {"total_tokens": 9}}
+        )
+
+    provider = provider_for_config(
+        {"provider": "agent", "model": "Qwen/Qwen3-14B-AWQ", "enable_thinking": False}
+    )
+    await provider.client.aclose()
+    provider.client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
+    try:
+        _, usage = await provider.complete([], [])
+        assert requests[0]["chat_template_kwargs"] == {"enable_thinking": False}
+        assert "chat_template_kwargs" not in requests[1]
+        assert usage["fallback"] is True
+    finally:
+        await provider.close()
+
+
+def test_qwen3_thinking_option_rejects_unsupported_provider():
+    with pytest.raises(ValueError, match="Qwen3 vLLM"):
+        ChatProvider(
+            base_url="https://api.groq.com/openai/v1",
+            model="Qwen/Qwen3-14B-AWQ",
+            enable_thinking=False,
+        )
+
+
+@pytest.mark.asyncio
 async def test_upstream_failure_diagnostics_exclude_error_body_and_credentials():
     provider = ChatProvider(
         base_url="https://api.groq.com/openai/v1",
@@ -535,3 +579,28 @@ async def test_pool_returns_safely_when_all_cooldowns_exceed_wait_budget():
     pool.block(0, 90)
     with pytest.raises(ProviderError, match="cooling down"):
         await pool.acquire()
+
+
+@pytest.mark.asyncio
+async def test_pool_waits_for_busy_account_when_only_free_account_has_long_cooldown():
+    import asyncio
+
+    from assistant_mlops.provider import QuotaKeyPool
+
+    pool = QuotaKeyPool([f"account-{i}" for i in range(5)], interval=0, daily_budget=180000)
+    held = [await pool.acquire() for _ in range(4)]
+    pool.block(4, 441)
+    waiting = asyncio.create_task(pool.acquire())
+    try:
+        await asyncio.sleep(0)
+        assert not waiting.done(), "A busy account can return before the bounded wait expires"
+        await pool.release(held[0][0])
+        slot, key = await asyncio.wait_for(waiting, timeout=1)
+        assert (slot, key) == held[0]
+        assert pool.ready[4] > pool.ready[slot]
+        await pool.release(slot)
+    finally:
+        waiting.cancel()
+        await asyncio.gather(waiting, return_exceptions=True)
+        for slot, _ in held[1:]:
+            await pool.release(slot)

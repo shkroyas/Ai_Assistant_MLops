@@ -1,23 +1,29 @@
 """Check the configured endpoint without logging credentials or upstream error bodies."""
 
+import argparse
 import asyncio
 import json
 from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
+import yaml
 from dotenv import load_dotenv
 
 from assistant_mlops.agent import TOOLS
-from assistant_mlops.provider import ChatProvider
+from assistant_mlops.provider import ChatProvider, provider_for_config
 
 
-async def check():
+async def check(config_path=None):
     load_dotenv()
-    provider = ChatProvider()
+    config = yaml.safe_load(config_path.read_text()) if config_path else None
+    provider = provider_for_config(config) if config else ChatProvider()
     # Verify the selected endpoint itself; fallback success cannot prove GPU access.
     provider.fallback_url = None
     record = {"checked_at": datetime.now(timezone.utc).isoformat(), "model": provider.model}
+    if config:
+        record["configuration_version"] = config["version"]
+        record["enable_thinking"] = config.get("enable_thinking")
     try:
         response = await provider.client.get(
             provider.base_url.rstrip("/") + "/models", headers=provider.headers
@@ -66,9 +72,12 @@ async def check():
 
 
 if __name__ == "__main__":
-    result = asyncio.run(check())
-    Path("reports/provider_connection.json").write_text(
-        json.dumps(result, indent=2, ensure_ascii=False)
-    )
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, default=Path("reports/provider_connection.json"))
+    parser.add_argument("--config", type=Path)
+    args = parser.parse_args()
+    result = asyncio.run(check(args.config))
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False))
     print(json.dumps(result, indent=2, ensure_ascii=False))
     raise SystemExit(0 if result["status"] == "passed" else 1)

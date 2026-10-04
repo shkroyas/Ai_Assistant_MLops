@@ -112,6 +112,19 @@ class QuotaKeyPool:
                     self.ready[slot] = monotonic() + self.interval
                     return slot, self.keys[slot]
                 if monotonic() + delay > deadline:
+                    # A free account's long cooldown does not imply that a
+                    # currently busy account cannot return within this budget.
+                    if any(self.busy[i] for i in eligible):
+                        remaining = deadline - monotonic()
+                        if remaining <= 0:
+                            raise ProviderError("Quota queue wait exceeded the request budget")
+                        try:
+                            await asyncio.wait_for(self.condition.wait(), timeout=remaining)
+                        except asyncio.TimeoutError:
+                            raise ProviderError(
+                                "Quota queue wait exceeded the request budget"
+                            ) from None
+                        continue
                     raise ProviderError(
                         "Quota buckets are cooling down beyond the request wait budget"
                     )
@@ -141,6 +154,7 @@ class ChatProvider:
         daily_token_budget=180000,
         reasoning_effort=None,
         application_tool_validation=False,
+        enable_thinking=None,
     ):
         self.base_url = (
             base_url
@@ -149,6 +163,14 @@ class ChatProvider:
         )
         self.key = key if key is not None else os.getenv("AGENT_API_KEY", "")
         self.model = model or os.getenv("AGENT_MODEL") or "gemini-2.5-flash"
+        if enable_thinking is not None and (
+            not isinstance(enable_thinking, bool)
+            or not self.model.startswith("Qwen/Qwen3-")
+            or urlsplit(self.base_url).hostname
+            in {"api.groq.com", "generativelanguage.googleapis.com"}
+        ):
+            raise ValueError("Explicit thinking mode requires a Qwen3 vLLM endpoint and boolean")
+        self.enable_thinking = enable_thinking
         groq_reasoning = self.model.startswith("openai/gpt-oss-") and reasoning_effort in {
             "low",
             "medium",
@@ -267,6 +289,11 @@ class ChatProvider:
                             ),
                             "temperature": temperature,
                             "top_p": top_p,
+                            **(
+                                {"chat_template_kwargs": {"enable_thinking": self.enable_thinking}}
+                                if primary_endpoint and self.enable_thinking is not None
+                                else {}
+                            ),
                             "max_tokens": 1200,
                             **(
                                 {"reasoning_effort": self.reasoning_effort}
@@ -385,6 +412,7 @@ def provider_for_config(config):
         return ChatProvider(
             model=config.get("model"),
             request_interval_seconds=config.get("request_interval_seconds", 0),
+            enable_thinking=config.get("enable_thinking"),
         )
     if config["provider"] not in {"groq", "gemini"}:
         raise ValueError("Unsupported experiment provider")
