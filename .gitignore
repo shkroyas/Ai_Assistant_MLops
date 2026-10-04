@@ -14,3 +14,6 @@ data/raw/
 reports/.judge_cache/
 reports/v*/dev/.rows/
 reports/v*/golden/.rows/
+
+# Local cloud/demo credentials and CLI caches
+.demo-secrets/

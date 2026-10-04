@@ -4,7 +4,7 @@
 
 Royas Shakya's standalone W15 assistant, W16 agentic verification feature, and W17 MLOps layer. Track A is a separate repository. Built from the assignment PDFs and implementation plan, without reading or reusing existing projects.
 
-**Status:** Task B core checks pass **31/31**; **78 engineering tests** and required CI pass. Production is Qwen3-14B-AWQ v34, MLflow run `1e0bc9bd432a426ca5c4e5e76e127490`: 100% golden truth, 81.48% joint native 120B judge pass, complete usage and zero hard/provider failures. The real production API concurrency/cache/batch checks and 18/18 healthy Airflow regression pass. All 23 completed native-judged configurations and failed/partial preflights are preserved. Cloud deployment remains an optional extension requiring an account, target and budget.
+**Status:** Task B core checks pass **31/31**; **80 engineering tests** and required CI pass. Production is Qwen3-14B-AWQ v34, MLflow run `1e0bc9bd432a426ca5c4e5e76e127490`: 100% golden truth, 81.48% joint native 120B judge pass, complete usage and zero hard/provider failures. The real production API concurrency/cache/batch checks and 18/18 healthy Airflow regression pass. All 23 completed native-judged configurations and failed/partial preflights are preserved. Both optional Azure demos passed authenticated HTTPS and actual inference checks; see the temporary deployment section below.
 
 ## Week 17 deliverables and required README sections
 
@@ -60,7 +60,7 @@ docker compose up -d --build backend ui mlflow
 docker compose --profile airflow up -d --build airflow
 ```
 
-UI :8501 by default (override ASSISTANT_UI_PORT in .env); API :8000; MLflow :5000; Airflow :8080, all bound to localhost. See deploy/cloud.md for the cloud bonus procedure and required account information. No cloud deployment is claimed here.
+UI :8501 by default (override ASSISTANT_UI_PORT in .env); API :8000; MLflow :5000; Airflow :8080, all bound to localhost. See [temporary Azure deployment](docs/azure-demo.md) for the verified cloud demo, access and fixed cleanup deadline; `deploy/cloud.md` retains general deployment guidance.
 
 ## W16 — implementation write-up (approximately one page)
 
@@ -201,3 +201,12 @@ At the 2026-10-04 handoff audit, the Docker services were running with UI at htt
 ## Submission evidence
 
 [Core scorecard](reports/deliverables.md), [production gate](reports/v34/gate.json), [native Evidently report](reports/v34/evidently_judge.html), [nightly status](reports/nightly/status.json), [real screenshots](reports/screenshots/manifest.json), [production API features](reports/api_features_smoke.json), and [Qwen3 session setup](docs/qwen14b-session.md). Both tasks remain separate repositories.
+
+
+## Temporary Azure HTTPS demonstration
+
+The separate Task B image adds an authenticated Nginx gateway, FastAPI and a small MLflow instance. Azure supplies HTTPS; Qwen inference uses the existing authenticated Jupyter HTTPS server proxy. The demo uses no SSH tunnel. See [deployment instructions, cost and cleanup](docs/azure-demo.md). Cloud availability must be established by the deployment smoke report; source files alone do not establish a running deployment.
+
+Demo deployed on 2026-10-04: [Task B HTTPS gateway](https://task-b.calmflower-4280b7f7.centralindia.azurecontainerapps.io). Authentication uses the generated private `demo-access.json`; credentials are excluded from Git. Scheduled deletion: **2026-10-04 11:15 UTC / 17:00 Nepal**. [Deployment evidence](reports/cloud_demo/azure_deployment.json). Actual public HTTPS, sourced Qwen inference and zero-new-token cache reuse [passed](reports/cloud_demo/azure_https_smoke.json). The earlier [proxy outage](reports/cloud_demo/azure_provider_unavailable.json) remains recorded separately.
+
+The [complete 9-minute-32-second demo video](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-task-a-b-complete-demo.mp4) covers both separate tasks and actual Azure execution. [Transcript](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/COMPLETE_TRANSCRIPT.md) and [captions](https://github.com/shkroyas/w17-trackA-churn-mlops/releases/download/w17-trackA-final/week17-complete-demo.srt) accompany it. These combined assets require access to Task A's private repository.

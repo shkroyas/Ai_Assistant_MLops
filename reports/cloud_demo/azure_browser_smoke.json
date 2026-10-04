@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-04T07:59:00+00:00",
+  "scope": "Actual authenticated Azure browser interaction; functional inference check, not a repeated full evaluation",
+  "route": "/assistant/",
+  "ui_textbox_ready": true,
+  "verification_button_worked": true,
+  "status_shown": "answered",
+  "provider_inference_status": "passed with restored Jupyter proxy access",
+  "origin_rejection_fixed": true,
+  "final_v34_gate_http_status": 200,
+  "final_v34_judge_report_http_status": 200,
+  "recorded_clip": "12-azure-cloud.mp4",
+  "no_fresh_qwen_quality_pass_claimed": true
+}
