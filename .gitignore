@@ -8,6 +8,7 @@ mlruns/
 mlartifacts/
 data/raw/
 .qdrant/
+.models/
 .airflow/
 
 reports/.judge_cache/

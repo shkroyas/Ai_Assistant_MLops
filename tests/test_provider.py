@@ -4,6 +4,54 @@ import pytest
 from assistant_mlops.provider import ChatProvider, ProviderError
 
 
+@pytest.mark.asyncio
+async def test_upstream_failure_diagnostics_exclude_error_body_and_credentials():
+    provider = ChatProvider(
+        base_url="https://api.groq.com/openai/v1",
+        key="fixture-sensitive-key",
+        model="candidate",
+        auth_prefix="GROQ",
+        transport=httpx.MockTransport(
+            lambda request: httpx.Response(
+                400, json={"error": {"message": "Rejected fixture-sensitive-key request"}}
+            )
+        ),
+    )
+    provider.fallback_url = None
+    try:
+        with pytest.raises(ProviderError) as captured:
+            await provider.complete([], [])
+        import json
+
+        assert captured.value.diagnostics[0]["http_status"] == 400
+        assert "fixture-sensitive-key" not in json.dumps(captured.value.diagnostics)
+    finally:
+        await provider.close()
+
+
+def test_quota_scope_differentiates_short_throttle_from_daily_exhaustion():
+    from assistant_mlops.provider import quota_scope
+
+    for code, expected in [("TPM", "tokens_per_minute"), ("TPD", "tokens_per_day")]:
+        response = httpx.Response(429, json={"error": {"message": "Limit (" + code + ") exceeded"}})
+        assert quota_scope(response) == expected
+
+
+@pytest.mark.asyncio
+async def test_explicit_all_account_pool_includes_active_key_without_duplicates(monkeypatch):
+    from assistant_mlops.provider import provider_for_config
+
+    monkeypatch.setenv("GROQ_API_KEY", "account-one")
+    monkeypatch.setenv("GROQ_API_KEYS", "account-one,account-two,account-two")
+    monkeypatch.setenv("GEMINI_API_KEYS", "other-provider-key")
+    provider = provider_for_config({"provider": "groq", "model": "candidate", "key_pool": "all"})
+    try:
+        assert provider.quota_pool.keys == ["account-one", "account-two"]
+        assert provider.quota_pool.used == [0, 0]
+    finally:
+        await provider.close()
+
+
 @pytest.mark.parametrize(
     "body,expected",
     [

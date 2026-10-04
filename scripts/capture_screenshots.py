@@ -9,12 +9,13 @@ from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import urlopen
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import expect, sync_playwright
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--ui-url", default="http://localhost:18501")
+    parser.add_argument("--api-url", default="http://localhost:8000")
     parser.add_argument("--mlflow-url", default="http://localhost:5000")
     parser.add_argument("--airflow-url", default="http://localhost:8080")
     parser.add_argument("--healthy-run")
@@ -23,6 +24,10 @@ def main():
     args = parser.parse_args()
     directory = Path("reports/screenshots")
     directory.mkdir(parents=True, exist_ok=True)
+    with urlopen(args.api_url + "/health", timeout=15) as response:
+        health = json.load(response)
+    if args.healthy_run and health.get("configuration_version") != args.version:
+        raise ValueError("Healthy-run screenshots require the matching API configuration")
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(
             executable_path="/usr/bin/google-chrome", args=["--no-sandbox"]
@@ -33,11 +38,13 @@ def main():
         page.get_by_role("textbox", name="Your question").fill(
             "How many provider attempts and what retry strategy are allowed?"
         )
+        page.get_by_role("textbox", name="Your question").press("Tab")
+        expect(page.get_by_role("button", name="Verify answer")).to_be_enabled(timeout=30000)
         page.get_by_role("button", name="Verify answer").click()
         page.get_by_text("Status: answered", exact=False).wait_for(timeout=910000)
         page.locator("details").evaluate_all("items => items.forEach(item => item.open = true)")
         page.screenshot(path=str(directory / "assistant_answer.png"), full_page=True)
-        page.goto("http://localhost:8000/docs")
+        page.goto(args.api_url + "/docs")
         page.get_by_text("/ask", exact=False).first.wait_for()
         page.screenshot(path=str(directory / "api_docs.png"), full_page=True)
         with urlopen(
@@ -85,7 +92,9 @@ def main():
         json.dumps(
             {
                 "captured_at_utc": datetime.now(UTC).isoformat(),
-                "configuration_version": args.version,
+                "api_configuration_version": health.get("configuration_version"),
+                "judge_report_version": args.version,
+                "api_health": health,
                 "healthy_run_id": args.healthy_run,
                 "infra_run_id": args.infra_run,
                 "files": {

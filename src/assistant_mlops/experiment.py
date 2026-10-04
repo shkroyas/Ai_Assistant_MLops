@@ -55,7 +55,10 @@ async def run(config_path, with_judge=False, diagnosis=None):
         raise RuntimeError("Configure credentials for the selected agent provider")
     # Prompt comparisons must not silently switch models when the GPU fails.
     provider.fallback_url = None
-    corpus = Corpus()
+    corpus = Corpus(
+        embedding_model=config.get("embedding_model"),
+        embedding_revision=config.get("embedding_revision"),
+    )
     agent = Agent(corpus, provider, config)
     directory = Path("reports") / config["version"]
     try:

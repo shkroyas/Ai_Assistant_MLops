@@ -42,7 +42,11 @@ def selected_config_path():
 async def lifespan(app):
     selected = selected_config_path()
     config = yaml.safe_load(Path(selected).read_text())
-    corpus = Corpus(path=os.getenv("QDRANT_PATH") or None)
+    corpus = Corpus(
+        path=os.getenv("QDRANT_PATH") or None,
+        embedding_model=config.get("embedding_model"),
+        embedding_revision=config.get("embedding_revision"),
+    )
     provider = provider_for_config(config)
     app.state.agent = Agent(corpus, provider, config)
     app.state.query_timeout = min(

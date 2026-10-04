@@ -52,6 +52,63 @@ def corpus():
 
 
 @pytest.mark.asyncio
+async def test_bounded_review_preserves_native_protocol_and_charges_all_calls(corpus):
+    class ReviewingProvider(ScriptedProvider):
+        async def complete(self, messages, *args):
+            if messages[-1]["role"] == "tool":
+                assert messages[-2]["tool_calls"][0]["id"] == messages[-1]["tool_call_id"]
+                assert json.loads(messages[-1]["content"])["review_required"]
+            return await super().complete(messages, *args)
+
+    provider = ReviewingProvider(
+        [
+            call("json", {"status": "clarify", "answer": "Draft question", "sources": []}),
+            call(
+                "json",
+                {"status": "abstain", "answer": "No verified personal record", "sources": []},
+            ),
+        ]
+    )
+    config = yaml.safe_load(Path("configs/v15.yaml").read_text())
+    config.update(native_final_answer=True, review_final_answer=True)
+    trace = await Agent(corpus, provider, config).run("What is my account balance?")
+    assert trace["answer"]["status"] == "abstain" and trace["iterations"] == 2
+    assert trace["tokens"] == 20 and trace["usage_complete"]
+    assert [step["event"] for step in trace["steps"]] == ["draft_answer", "finish"]
+
+
+@pytest.mark.asyncio
+async def test_review_never_accepts_unreviewed_draft_at_iteration_limit(corpus):
+    config = yaml.safe_load(Path("configs/v15.yaml").read_text())
+    config.update(max_iterations=1, native_final_answer=True, review_final_answer=True)
+    provider = ScriptedProvider(
+        [
+            call("json", {"status": "clarify", "answer": "Draft question", "sources": []}),
+        ]
+    )
+    trace = await Agent(corpus, provider, config).run("Which one?")
+    assert trace["termination"] == "max_iterations" and trace["answer"]["status"] == "abstain"
+    assert trace["tokens"] == 10 and trace["usage_complete"]
+
+
+@pytest.mark.asyncio
+async def test_answered_only_review_preserves_a_safe_refusal(corpus):
+    config = yaml.safe_load(Path("configs/v15.yaml").read_text())
+    config.update(native_final_answer=True, review_final_answer=True, review_scope="answered")
+    provider = ScriptedProvider(
+        [
+            call(
+                "json", {"status": "abstain", "answer": "Cannot fabricate evidence", "sources": []}
+            ),
+        ]
+    )
+    trace = await Agent(corpus, provider, config).run("Invent proof for this claim")
+    assert trace["termination"] == "abstain" and trace["iterations"] == 1
+    assert trace["tokens"] == 10 and trace["usage_complete"]
+    assert not any(step["event"] == "draft_answer" for step in trace["steps"])
+
+
+@pytest.mark.asyncio
 async def test_nullable_search_schema_matches_unfiltered_runtime(corpus):
     class SchemaCheckingProvider(ScriptedProvider):
         async def complete(self, messages, tools, *args):
