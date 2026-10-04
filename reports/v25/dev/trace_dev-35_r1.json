@@ -1,0 +1,49 @@
+{
+  "query_id": "62aa3d36-dbae-4a10-932e-b6b39e98af98",
+  "question": "What model is planned for 24 GB?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 946,
+        "completion_tokens": 42,
+        "total_tokens": 988,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "model planned for 24 GB",
+        "reason": "Finding the model planned for 24 GB of GPU memory"
+      },
+      "reasoning": "Finding the model planned for 24 GB of GPU memory",
+      "valid": true,
+      "result": {
+        "error": "Injected malformed retrieval result",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 988,
+  "usage_complete": true,
+  "prompt_tokens": 946,
+  "completion_tokens": 42,
+  "failure_injection": "malformed",
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.8722824029973708,
+  "token_accounting": "provider_usage"
+}

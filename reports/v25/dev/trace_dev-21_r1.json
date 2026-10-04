@@ -1,0 +1,75 @@
+{
+  "query_id": "a15f260b-a039-4e32-8ee0-6fd934e41246",
+  "question": "Should I use the better one?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "invalid_answer",
+      "reasoning": "1 validation error for Answer\n  Invalid JSON: expected value at line 1 column 1 [type=json_invalid, input_value='Could you please specify...licy, tool, or process?', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.11/v/json_invalid",
+      "raw_response": {
+        "role": "assistant",
+        "content": "Could you please specify what \"the better one\" refers to in the context of the example-company MLOps handbook? Are you referring to a specific policy, tool, or process?",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 943,
+        "completion_tokens": 38,
+        "total_tokens": 981,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      }
+    },
+    {
+      "step": 2,
+      "event": "finish",
+      "reasoning": "{\"status\": \"clarify\", \"answer\": \"Could you please specify what 'the better one' refers to in the context of the example-company MLOps handbook? Are you referring to a specific policy, tool, or process?\", \"sources\": []}",
+      "usage": {
+        "prompt_tokens": 1095,
+        "completion_tokens": 79,
+        "total_tokens": 1174,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-879bb3b10de1baea",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"clarify\", \"answer\": \"Could you please specify what 'the better one' refers to in the context of the example-company MLOps handbook? Are you referring to a specific policy, tool, or process?\", \"sources\": [], \"reason\": \"Clarification needed to provide a relevant answer.\"}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 2155,
+  "usage_complete": true,
+  "prompt_tokens": 2038,
+  "completion_tokens": 117,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "Could you please specify what 'the better one' refers to in the context of the example-company MLOps handbook? Are you referring to a specific policy, tool, or process?",
+    "sources": []
+  },
+  "iterations": 2,
+  "latency_seconds": 2.4311513569991803,
+  "token_accounting": "provider_usage"
+}

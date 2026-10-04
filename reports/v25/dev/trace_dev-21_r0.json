@@ -1,0 +1,49 @@
+{
+  "query_id": "176254c6-956f-49ab-9b64-835ac40ecaa2",
+  "question": "Should I use the better one?",
+  "prompt_version": "v25",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 943,
+        "completion_tokens": 89,
+        "total_tokens": 1032,
+        "model": "Qwen/Qwen2.5-7B-Instruct",
+        "fallback": false
+      },
+      "tool": "clarify",
+      "args": {
+        "query": "Should I use the better one?",
+        "reason": "Clarifying the context of 'the better one'"
+      },
+      "reasoning": "Clarifying the context of 'the better one'",
+      "valid": false,
+      "result": {
+        "error": "Unknown tool",
+        "evidence_valid": false
+      }
+    },
+    {
+      "step": 1,
+      "event": "stop_on_tool_error",
+      "reasoning": "Stop after failed retrieval instead of spending tokens retrying without verified evidence."
+    }
+  ],
+  "tokens": 1032,
+  "usage_complete": true,
+  "prompt_tokens": 943,
+  "completion_tokens": 89,
+  "failure_injection": null,
+  "tool_errors": 1,
+  "termination": "retrieval_failure",
+  "answer": {
+    "status": "abstain",
+    "answer": "Retrieval failed; I cannot verify the requested handbook guidance safely. Please retry when the source tools are available.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 1.8055657989971223,
+  "token_accounting": "provider_usage"
+}

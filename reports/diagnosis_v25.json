@@ -1,0 +1,8 @@
+{
+  "trace_path": "reports/v24/dev/trace_dev-12_r1.json",
+  "failure": "The preceding GPT-OSS-120B development attempt failed because accepted provider capacity was exhausted; the original partial evidence is retained.",
+  "change": "Change provider/model family to the authorized available KU Qwen2.5-7B native GPU endpoint, with no fallback, quota pool or Groq-specific protocol normalization. Retain the v24 prompt, native final submission, nullable unfiltered search, safe retrieval stopping, labels and scoring.",
+  "supporting_evidence": [
+    "reports/qwen_current_availability.json"
+  ]
+}
