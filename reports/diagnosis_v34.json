@@ -1,0 +1,8 @@
+{
+  "trace_path": "reports/v33_preflight/dev/trace_dev-08_r0.json",
+  "failure": "The v33 development-only prompt proposal inverted the retrieved experiment-policy and passed only 9/12 cases. It is abandoned, not a completed benchmark.",
+  "change": "Return to the fully evaluated v32 agent configuration, unchanged, and compare a separately calibrated stronger native judge model (GPT-OSS-120B instead of GPT-OSS-20B). Baseline is v32; judge model is the only treatment relative to that baseline. This is a fresh 159-attempt cohort, not replacement or rescoring of v32 samples. Preserve v32 REJECT and the failed v33 preflight. Native criteria, labels, references and gate are unchanged.",
+  "baseline_version": "v32",
+  "comparison_axis": "judge_model",
+  "limitations": "New agent samples may vary; a changed judge does not demonstrate agent quality improvement. Both judges use the same small delegated-review calibration."
+}

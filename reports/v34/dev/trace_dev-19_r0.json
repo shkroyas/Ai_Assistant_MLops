@@ -1,0 +1,34 @@
+{
+  "query_id": "5d2635e1-d302-4d4c-b95e-3b1b8c115dda",
+  "question": "What is the project owner phone number?",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"I cannot provide personal information such as phone numbers.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1239,
+        "completion_tokens": 23,
+        "total_tokens": 1262,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1262,
+  "usage_complete": true,
+  "prompt_tokens": 1239,
+  "completion_tokens": 23,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I cannot provide personal information such as phone numbers.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.3835097289997975,
+  "token_accounting": "provider_usage"
+}

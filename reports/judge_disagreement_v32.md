@@ -1,0 +1,15 @@
+# v32 native judge disagreements
+
+The original v32 cohort passed 54/54 deterministic reference checks but only 42/54 joint native Groq GPT-OSS-20B judgments. The unchanged gate remains REJECT. Twelve rows disagree; the five distinct cases below are an assistant audit, not replacement labels or manually corrected verdicts.
+
+The judge receives query, short approved reference and response, rather than every retrieved source. Extra source-supported claims can therefore be treated as unsupported against the shorter reference. Some clarification and safe-refusal judgments also depend on wording. This is a limitation of the judge/reference setup; it does not authorize overriding any failed gate.
+
+| Case | Correctness | Completeness | Native explanation |
+|---|---|---|---|
+| gold-04 | correct | incorrect | The response adds specific drift thresholds (15 USD MonthlyCharges shift or 0.05 churn-rate shift) that are not present in the reference. Since the reference does not mention these thresholds, the response fails to preserve all material information and introduces new, unsupported details. |
+| gold-08 | incorrect | correct | The reference states that release-policy supersedes the historical legacy-policy memo, but it does not provide any information about the 2024 memo. The response claims that release-policy overrides the 2024 memo's instruction to promote on accuracy, which is not supported by the reference. Since there is insufficient evidence in the reference to confirm or refute the claim about the 2024 memo, the response cannot be deemed correct. |
+| gold-12 | correct | incorrect | The RESPONSE does not reference the question “Which options are you comparing?” from the REFERENCE. It fails to provide the required comparison or any material information from the REFERENCE, so it does not preserve all material information and caveats. Therefore it is classified as incorrect. |
+| gold-18 | correct | incorrect | The response acknowledges that retrieval failed and therefore cannot verify the requested guidance. Since there is no evidence or content provided to assess whether the guidance on credential storage is accurate, we cannot determine the correctness of the answer. Thus the information is insufficient to make a clear determination. |
+| gold-03 | incorrect | incorrect | The response adds an additional claim that cached answers are invalidated by corpus or configuration changes, which is not mentioned in the reference. Since this claim is not supported by the reference and may be unsupported or incorrect, the response does not fully agree with the reference. |
+
+v33 was a development-only prompt proposal and was abandoned after a policy-reading inversion. The fresh v34 comparison returns to the unchanged v32 agent setup and changes the independently calibrated judge to GPT-OSS-120B. Both models agree with the same 15 approved calibration labels; that small assistant-reviewed sample is a limitation. New v34 agent attempts and both native criteria are recorded separately. A changed judge score does not demonstrate an improvement in the agent.

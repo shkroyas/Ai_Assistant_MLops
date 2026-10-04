@@ -1,0 +1,34 @@
+{
+  "query_id": "3af6ed32-1b98-4108-9cc5-9d8d5bf106dd",
+  "question": "For the production checklist: How much did my provider charge last month?",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"abstain\",\"answer\":\"I cannot access financial information such as provider charges. Please consult your billing department or financial records for this information.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1245,
+        "completion_tokens": 35,
+        "total_tokens": 1280,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1280,
+  "usage_complete": true,
+  "prompt_tokens": 1245,
+  "completion_tokens": 35,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "abstain",
+  "answer": {
+    "status": "abstain",
+    "answer": "I cannot access financial information such as provider charges. Please consult your billing department or financial records for this information.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.684381805999692,
+  "token_accounting": "provider_usage"
+}

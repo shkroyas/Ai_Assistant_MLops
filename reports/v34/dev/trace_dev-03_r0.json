@@ -1,0 +1,131 @@
+{
+  "query_id": "e5e942aa-2543-49c2-86fe-c8adeba9442b",
+  "question": "How many model requests can execute concurrently?",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1239,
+        "completion_tokens": 45,
+        "total_tokens": 1284,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "concurrent model requests",
+        "source_id": null,
+        "reason": "To find information about the number of concurrent model requests allowed."
+      },
+      "reasoning": "To find information about the number of concurrent model requests allowed.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "reliability",
+          "offset": 0,
+          "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n",
+          "score": 0.4267664386864346
+        },
+        {
+          "source_id": "service-catalog",
+          "offset": 0,
+          "text": "# Service catalog \u2014 example company handbook\nThe assistant backend exposes POST /ask and POST /batch. The churn API exposes POST /predict with churn probability and model version. The assistant UI runs on port 8501; assistant API on port 8000; churn API on port 8001; MLflow on port 5000. Cached answers expire after 300 seconds and are invalidated by a corpus or configuration change.\n",
+          "score": 0.26037618458149364
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.2039536946625394
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1667,
+        "completion_tokens": 45,
+        "total_tokens": 1712,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "reliability",
+        "reason": "To confirm the exact number of concurrent model requests allowed as mentioned in the search results."
+      },
+      "reasoning": "To confirm the exact number of concurrent model requests allowed as mentioned in the search results.",
+      "valid": true,
+      "result": {
+        "source_id": "reliability",
+        "text": "# Assistant reliability \u2014 example service contract\nRetry transient provider errors up to three attempts with exponential backoff. Rate limiting allows 30 requests per minute per client. The application admits at most four concurrent model requests. On tool timeout, abstain or ask for clarification; never use invalid evidence. A fallback model uses the same output contract.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "The application allows at most four concurrent model requests.",
+        "sources": [
+          {
+            "source_id": "reliability",
+            "quote": "The application admits at most four concurrent model requests."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": "{\"status\":\"answered\",\"answer\":\"The application allows at most four concurrent model requests.\",\"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}",
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1811,
+        "completion_tokens": 41,
+        "total_tokens": 1852,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 4,
+      "event": "finish",
+      "reasoning": "{\"status\":\"answered\",\"answer\":\"The application allows at most four concurrent model requests.\",\"sources\":[{\"source_id\":\"reliability\",\"quote\":\"The application admits at most four concurrent model requests.\"}]}",
+      "usage": {
+        "prompt_tokens": 1955,
+        "completion_tokens": 41,
+        "total_tokens": 1996,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 6844,
+  "usage_complete": true,
+  "prompt_tokens": 6672,
+  "completion_tokens": 172,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "The application allows at most four concurrent model requests.",
+    "sources": [
+      {
+        "source_id": "reliability",
+        "quote": "The application admits at most four concurrent model requests."
+      }
+    ]
+  },
+  "iterations": 4,
+  "latency_seconds": 3.236025572000017,
+  "token_accounting": "provider_usage"
+}

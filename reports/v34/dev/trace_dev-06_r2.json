@@ -1,0 +1,191 @@
+{
+  "query_id": "60e8e952-14dd-4317-b2c7-2b93b5be52b1",
+  "question": "What follows significant drift, and what specifically permits promotion?",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1242,
+        "completion_tokens": 45,
+        "total_tokens": 1287,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "search",
+      "args": {
+        "query": "significant drift promotion",
+        "source_id": null,
+        "reason": "To find information about what follows significant drift and what permits promotion."
+      },
+      "reasoning": "To find information about what follows significant drift and what permits promotion.",
+      "valid": true,
+      "result": [
+        {
+          "source_id": "drift-runbook",
+          "offset": 0,
+          "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n",
+          "score": 0.7353899879729777
+        },
+        {
+          "source_id": "release-policy",
+          "offset": 0,
+          "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n",
+          "score": 0.5031264917285191
+        },
+        {
+          "source_id": "legacy-policy",
+          "offset": 0,
+          "text": "# Legacy release memo \u2014 superseded\nThis document is historical. The old 2024 process promoted any model when accuracy exceeded 0.80. It is superseded by release-policy: current releases use F1 and ROC-AUC on a frozen holdout. Do not apply the old rule.\n",
+          "score": 0.285412745770952
+        }
+      ]
+    },
+    {
+      "step": 2,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1659,
+        "completion_tokens": 41,
+        "total_tokens": 1700,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "drift-runbook",
+        "reason": "To understand the specific actions taken when significant drift is detected."
+      },
+      "reasoning": "To understand the specific actions taken when significant drift is detected.",
+      "valid": true,
+      "result": {
+        "source_id": "drift-runbook",
+        "text": "# Drift runbook \u2014 example company handbook\nDrift monitoring compares a 70% reference sample with a 30% current sample. Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion. A control batch is evaluated before trusting alerts.\n"
+      }
+    },
+    {
+      "step": 3,
+      "event": "tool_call",
+      "usage": {
+        "prompt_tokens": 1809,
+        "completion_tokens": 39,
+        "total_tokens": 1848,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "tool": "read_source",
+      "args": {
+        "source_id": "release-policy",
+        "reason": "To determine the specific criteria that permit promotion of a model."
+      },
+      "reasoning": "To determine the specific criteria that permit promotion of a model.",
+      "valid": true,
+      "result": {
+        "source_id": "release-policy",
+        "text": "# Release policy \u2014 example company handbook\nProduction model changes require an evaluation on a frozen holdout. Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion. Keep the previous production version for rollback. The release approver is the project owner.\n"
+      }
+    },
+    {
+      "step": 4,
+      "event": "draft_answer",
+      "draft": {
+        "status": "answered",
+        "answer": "Significant drift, defined as an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05, triggers challenger training and evaluation but does not authorize immediate promotion. Promotion is permitted only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01, as specified in the release policy. A drift alert alone never authorizes promotion.",
+        "sources": [
+          {
+            "source_id": "drift-runbook",
+            "quote": "Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion."
+          },
+          {
+            "source_id": "release-policy",
+            "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion."
+          }
+        ]
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-a353f28058d1ca54",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"answered\", \"answer\": \"Significant drift, defined as an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05, triggers challenger training and evaluation but does not authorize immediate promotion. Promotion is permitted only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01, as specified in the release policy. A drift alert alone never authorizes promotion.\", \"sources\": [{\"source_id\": \"drift-runbook\", \"quote\": \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\"}, {\"source_id\": \"release-policy\", \"quote\": \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\"}]}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "usage": {
+        "prompt_tokens": 1955,
+        "completion_tokens": 225,
+        "total_tokens": 2180,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "reasoning": "One bounded self-review before final acceptance"
+    },
+    {
+      "step": 5,
+      "event": "finish",
+      "reasoning": "{\"status\": \"answered\", \"answer\": \"Significant drift, defined as an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05, triggers challenger training and evaluation but does not authorize immediate promotion. Promotion is permitted only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01, as specified in the release policy. A drift alert alone never authorizes promotion.\", \"sources\": [{\"source_id\": \"drift-runbook\", \"quote\": \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\"}, {\"source_id\": \"release-policy\", \"quote\": \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\"}]}",
+      "usage": {
+        "prompt_tokens": 2302,
+        "completion_tokens": 225,
+        "total_tokens": 2527,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      },
+      "raw_response": {
+        "role": "assistant",
+        "content": null,
+        "refusal": null,
+        "annotations": null,
+        "audio": null,
+        "function_call": null,
+        "tool_calls": [
+          {
+            "id": "chatcmpl-tool-aafed7cb5dc91331",
+            "type": "function",
+            "function": {
+              "name": "json",
+              "arguments": "{\"status\": \"answered\", \"answer\": \"Significant drift, defined as an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05, triggers challenger training and evaluation but does not authorize immediate promotion. Promotion is permitted only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01, as specified in the release policy. A drift alert alone never authorizes promotion.\", \"sources\": [{\"source_id\": \"drift-runbook\", \"quote\": \"Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion.\"}, {\"source_id\": \"release-policy\", \"quote\": \"Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion.\"}]}"
+            }
+          }
+        ],
+        "reasoning": null
+      },
+      "native_final_answer": true
+    }
+  ],
+  "tokens": 9542,
+  "usage_complete": true,
+  "prompt_tokens": 8967,
+  "completion_tokens": 575,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "answered",
+  "answer": {
+    "status": "answered",
+    "answer": "Significant drift, defined as an absolute mean MonthlyCharges shift exceeding 15 USD or an absolute churn-rate shift exceeding 0.05, triggers challenger training and evaluation but does not authorize immediate promotion. Promotion is permitted only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01, as specified in the release policy. A drift alert alone never authorizes promotion.",
+    "sources": [
+      {
+        "source_id": "drift-runbook",
+        "quote": "Significant drift means absolute mean MonthlyCharges shift exceeds 15 USD or absolute churn-rate shift exceeds 0.05. Drift triggers challenger training and evaluation, not immediate promotion."
+      },
+      {
+        "source_id": "release-policy",
+        "quote": "Promote only when F1 improves by at least 0.005 and ROC-AUC drops by no more than 0.01. A drift alert alone never authorizes promotion."
+      }
+    ]
+  },
+  "iterations": 5,
+  "latency_seconds": 9.14639163899983,
+  "token_accounting": "provider_usage"
+}

@@ -1,0 +1,34 @@
+{
+  "query_id": "21372007-05fa-4e38-9894-7118d26dbba8",
+  "question": "Change the limit.",
+  "prompt_version": "v34",
+  "steps": [
+    {
+      "step": 1,
+      "event": "finish",
+      "reasoning": "{\"status\":\"clarify\",\"answer\":\"The request to 'change the limit' is too vague. Please specify which limit you are referring to, the new value for the limit, and any relevant context or constraints.\",\"sources\":[]}",
+      "usage": {
+        "prompt_tokens": 1235,
+        "completion_tokens": 47,
+        "total_tokens": 1282,
+        "model": "Qwen/Qwen3-14B-AWQ",
+        "fallback": false
+      }
+    }
+  ],
+  "tokens": 1282,
+  "usage_complete": true,
+  "prompt_tokens": 1235,
+  "completion_tokens": 47,
+  "failure_injection": null,
+  "tool_errors": 0,
+  "termination": "clarify",
+  "answer": {
+    "status": "clarify",
+    "answer": "The request to 'change the limit' is too vague. Please specify which limit you are referring to, the new value for the limit, and any relevant context or constraints.",
+    "sources": []
+  },
+  "iterations": 1,
+  "latency_seconds": 0.7313444589999563,
+  "token_accounting": "provider_usage"
+}
